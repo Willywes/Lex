@@ -184,9 +184,9 @@
                                                     <select id="roles"
                                                             class="form-control">
                                                         <option disabled selected>Seleccione Rol</option>
-                                                        <option value="2">Administrador</option>
-                                                        <option value="3">Abogado</option>
-                                                        <option value="4">Técnico Jurídico</option>
+                                                        <option value="1">Administrador</option>
+                                                        <option value="2">Abogado</option>
+                                                        <option value="3">Técnico Jurídico</option>
                                                         
                                                   
                                                     </select>
