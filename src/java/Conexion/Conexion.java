@@ -10,9 +10,7 @@ import java.util.logging.Logger;
 public class Conexion {
 
     private static final String driverClass = "oracle.jdbc.driver.OracleDriver";
-
     private static Connection con;
-
     private static final String url = "jdbc:oracle:thin:@168.232.165.127:1521:XE";
     private static final String userName = "ALE";
     private static final String password = "duoc2019";
@@ -33,10 +31,6 @@ public class Conexion {
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-    
-    public static Connection getCon(){
-        return Conexion.con;
     }
 
 }

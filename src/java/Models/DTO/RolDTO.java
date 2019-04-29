@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.DTO;
+package Models.DTO;
 
 /**
  *
@@ -14,18 +14,17 @@ public class RolDTO {
     protected int id;
     protected String nombre;
     protected boolean estado;
-    
-    public RolDTO(){
-    
+
+    public RolDTO() {
     }
-    
+
     public RolDTO(String nombre, boolean estado) {
         this.nombre = nombre;
         this.estado = estado;
     }
-    
+
     public RolDTO(int id, String nombre, boolean estado) {
-        this.id     = id;
+        this.id = id;
         this.nombre = nombre;
         this.estado = estado;
     }
@@ -33,8 +32,8 @@ public class RolDTO {
     public int getId() {
         return id;
     }
-    
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,6 +56,6 @@ public class RolDTO {
     @Override
     public String toString() {
         return "RolDTO{" + "id=" + id + ", nombre=" + nombre + ", estado=" + estado + '}';
-    } 
- 
+    }
+
 }

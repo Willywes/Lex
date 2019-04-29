@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.DAO;
+package Models.DAO;
 
 import Conexion.Conexion;
-import Model.DTO.RolDTO;
+import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,14 +21,14 @@ import oracle.jdbc.*;
  *
  * @author willywes
  */
-public class RolDAO {
+public class UsuarioDAO {
 
-    private static final String FIND_BY_ID = "{call PKG_ROLES.FIND_BY_ID(?,?)}";
-    private static final String GET_ALL = "{call PKG_ROLES.GET_ALL(?)}";
+    private static final String FIND_BY_ID = "{call PKG_USUARIOS.FIND_BY_ID(?,?)}";
+    private static final String GET_ALL = "{call PKG_USUARIOS.GET_ALL(?)}";
 
-    public static RolDTO findById(int id) {
+    public static UsuarioDTO findById(int id) {
 
-        RolDTO rol = new RolDTO();
+        UsuarioDTO user = new UsuarioDTO();
 
         try {
 
@@ -44,24 +43,24 @@ public class RolDAO {
 
             while (rs.next()) {
 
-                rol.setId(rs.getInt("IDROL"));
-                rol.setNombre(rs.getString("NOMBRE"));
-                rol.setEstado(rs.getBoolean("ESTADO"));
+                user.setId(rs.getInt("IDUSER"));
+                user.setNombres(rs.getString("NOMBRES"));
+                user.setEstado(rs.getBoolean("ESTADO"));
             }
 
         } catch (SQLException | IOException ex) {
-            Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close();
         }
 
-        return rol;
+        return user;
 
     }
 
-    public static List<RolDTO> getAll() {
+    public static List<UsuarioDTO> getAll() {
 
-        List<RolDTO> list = new ArrayList();
+        List<UsuarioDTO> list = new ArrayList();
 
         try {
 
@@ -74,17 +73,17 @@ public class RolDAO {
 
             while (rs.next()) {
 
-                RolDTO rol = new RolDTO();
+                UsuarioDTO user = new UsuarioDTO();
 
-                rol.setId(rs.getInt("IDROL"));
-                rol.setNombre(rs.getString("NOMBRE"));
-                rol.setEstado(rs.getBoolean("ESTADO"));
+                user.setId(rs.getInt("IDROL"));
+                user.setNombres(rs.getString("NOMBRES"));
+                user.setEstado(rs.getBoolean("ESTADO"));
 
-                list.add(rol);
+                list.add(user);
             }
 
         } catch (SQLException | IOException ex) {
-            Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close();
         }
