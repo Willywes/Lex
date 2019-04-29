@@ -11,24 +11,31 @@ package Model.DTO;
  */
 public class RolDTO {
 
-    private int id;
-    private String nombre;
-    private boolean estado;
+    protected int id;
+    protected String nombre;
+    protected boolean estado;
+    
+    public RolDTO(){
+    
+    }
+    
+    public RolDTO(String nombre, boolean estado) {
+        this.nombre = nombre;
+        this.estado = estado;
+    }
     
     public RolDTO(int id, String nombre, boolean estado) {
         this.id     = id;
         this.nombre = nombre;
         this.estado = estado;
     }
-    
-
-    public RolDTO(String nombre, boolean estado) {
-        this.nombre = nombre;
-        this.estado = estado;
-    }
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getNombre() {
@@ -50,9 +57,6 @@ public class RolDTO {
     @Override
     public String toString() {
         return "RolDTO{" + "id=" + id + ", nombre=" + nombre + ", estado=" + estado + '}';
-    }
-    
-    
-    
-    
+    } 
+ 
 }

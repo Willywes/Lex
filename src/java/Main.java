@@ -1,5 +1,6 @@
 
 import Conexion.Conexion;
+import Model.DAO.RolDAO;
 import Model.DTO.RolDTO;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,55 +24,21 @@ import java.util.List;
  */
 public class Main {
 
+    public static void main(String[] args) throws SQLException, IOException {
+
+        
+        System.out.println(RolDAO.findById(1).toString());
+        
+        System.out.println("Staring ...");
+        
     
 
-    public static void main(String[] args) throws SQLException, IOException {
-        
+        for (RolDTO rol : RolDAO.getAll()) {
 
-        System.out.println("iii");
-        
-        List<RolDTO> listaRoles;
-        listaRoles = readAll();
-
-        listaRoles.forEach((lista) -> {
-            lista.toString();
-        });
-    }
-
-    public static List<RolDTO> readAll() throws SQLException, IOException {
-        
-        Conexion cone = new Conexion();
-
-        PreparedStatement ps;
-        ResultSet rs;
-        ArrayList<RolDTO> listaRoles = new ArrayList();
-
-        try {
-            String SQL_READALL = "select * from roles";
-
-            cone.open();
-            Connection con = cone.getCon();
-            
-            ps = con.prepareStatement(SQL_READALL);
-
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                  listaRoles.add(new RolDTO(rs.getInt(1), rs.getString(2), rs.getBoolean(3)));
-             
-            }
-            
-            
-            
-        } catch (SQLException ex) {
-
-        } finally {
-            cone.close();
+            System.out.println(rol.toString());
         }
 
-        return listaRoles;
+        System.out.println("Finished ...");
     }
-
- 
 
 }
