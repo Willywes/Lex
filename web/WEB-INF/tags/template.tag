@@ -4,11 +4,15 @@
     Author     : willywes
 --%>
 
-<%@tag description="template"  pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@tag description="template" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@attribute name="content" fragment="true" %>
 <%@attribute name="styles" fragment="true" %>
 <%@attribute name="scripts" fragment="true" %>
+
+
 
 
 
@@ -277,7 +281,7 @@
 
 
                 <section class="content container-fluid">
-
+                    
                     <jsp:invoke fragment="content"/>
 
                 </section>

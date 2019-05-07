@@ -5,6 +5,7 @@ import Models.DTO.RolDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,13 +24,17 @@ public class Main {
         System.out.println("");
         System.out.println("Un Rol");
         
-        System.out.println(RolDAO.findById(1).toString());
+        RolDAO rol = new RolDAO();
+        
+        List<RolDTO> roles = rol.getAll();
+        
+        System.out.println(rol.findById(1).toString());
 
         System.out.println("Lista de Roles");
         
-        for (RolDTO rol : RolDAO.getAll()) {
+        for (RolDTO role : roles) {
 
-            System.out.println(rol.toString());
+            System.out.println(role.getNombre());
         }
         
         System.out.println("");
@@ -37,14 +42,14 @@ public class Main {
 
         System.out.println("Un Usuario");
 
-        System.out.println(UsuarioDAO.findById(1).toString());
-        
-        System.out.println("Lista de Usuarios");
-
-        for (UsuarioDTO usuario : UsuarioDAO.getAll()) {
-
-            System.out.println(usuario.toString());
-        }
+//        System.out.println(UsuarioDAO.findById(1).toString());
+//        
+//        System.out.println("Lista de Usuarios");
+//
+//        for (UsuarioDTO usuario : UsuarioDAO.getAll()) {
+//
+//            System.out.println(usuario.toString());
+//        }
         
         System.out.println("Finished ...");
     }

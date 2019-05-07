@@ -23,16 +23,20 @@ import oracle.jdbc.*;
  */
 public class UsuarioDAO {
 
-    private static final String FIND_BY_ID = "{call PKG_USUARIOS.FIND_BY_ID(?,?)}";
-    private static final String GET_ALL = "{call PKG_USUARIOS.GET_ALL(?)}";
+    private final String FIND_BY_ID = "{call PKG_USUARIOS.FIND_BY_ID(?,?)}";
+    private final String GET_ALL = "{call PKG_USUARIOS.GET_ALL(?)}";
 
-    public static UsuarioDTO findById(int id) {
+    Conexion con;
+    
+    public UsuarioDTO findById(int id) {
 
         UsuarioDTO user = new UsuarioDTO();
 
         try {
+            
+            con = new Conexion();
 
-            CallableStatement cs = Conexion.open().prepareCall(FIND_BY_ID);
+            CallableStatement cs = con.open().prepareCall(FIND_BY_ID);
 
             cs.setInt(1, id);
             cs.registerOutParameter(2, OracleTypes.CURSOR);
@@ -51,20 +55,22 @@ public class UsuarioDAO {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Conexion.close();
+            con.close();
         }
 
         return user;
 
     }
 
-    public static List<UsuarioDTO> getAll() {
+    public List<UsuarioDTO> getAll() {
 
         List<UsuarioDTO> list = new ArrayList();
 
         try {
+            
+            con = new Conexion();
 
-            CallableStatement cs = Conexion.open().prepareCall(GET_ALL);
+            CallableStatement cs = con.open().prepareCall(GET_ALL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.executeUpdate();
@@ -85,7 +91,7 @@ public class UsuarioDAO {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Conexion.close();
+            con.close();
         }
         
         return list;

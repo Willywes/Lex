@@ -11,9 +11,9 @@ package Models.DTO;
  */
 public class RolDTO {
 
-    protected int id;
-    protected String nombre;
-    protected boolean estado;
+    public  int id;
+    public String nombre;
+    public boolean estado;
 
     public RolDTO() {
     }

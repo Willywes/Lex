@@ -9,6 +9,7 @@ import Conexion.Conexion;
 import Models.DTO.RolDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,16 +24,21 @@ import oracle.jdbc.*;
  */
 public class RolDAO {
 
-    private static final String FIND_BY_ID = "{call PKG_ROLES.FIND_BY_ID(?,?)}";
-    private static final String GET_ALL = "{call PKG_ROLES.GET_ALL(?)}";
+    private final String FIND_BY_ID = "{call PKG_ROLES.FIND_BY_ID(?,?)}";
+    private final String GET_ALL = "{call PKG_ROLES.GET_ALL(?)}";
 
-    public static RolDTO findById(int id) {
+    Conexion con = new Conexion();
+
+
+    public RolDTO findById(int id) {
 
         RolDTO rol = new RolDTO();
 
         try {
+            
+            Connection cn = con.open();
 
-            CallableStatement cs = Conexion.open().prepareCall(FIND_BY_ID);
+            CallableStatement cs = cn.prepareCall(FIND_BY_ID);
 
             cs.setInt(1, id);
             cs.registerOutParameter(2, OracleTypes.CURSOR);
@@ -51,20 +57,22 @@ public class RolDAO {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Conexion.close();
+            con.close();
         }
 
         return rol;
 
     }
 
-    public static List<RolDTO> getAll() {
+    public List<RolDTO> getAll() {
 
-        List<RolDTO> list = new ArrayList();
+        List<RolDTO> list = new ArrayList<>();
 
         try {
 
-            CallableStatement cs = Conexion.open().prepareCall(GET_ALL);
+            Connection cn = con.open();
+
+            CallableStatement cs = cn.prepareCall(GET_ALL);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.executeUpdate();
@@ -85,9 +93,9 @@ public class RolDAO {
         } catch (SQLException | IOException ex) {
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Conexion.close();
+            con.close();
         }
-        
+
         return list;
     }
 }
