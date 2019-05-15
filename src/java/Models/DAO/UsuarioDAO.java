@@ -5,7 +5,7 @@
  */
 package Models.DAO;
 
-import Conexion.Conexion;
+import JDBC.Conexion;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
