@@ -1,4 +1,4 @@
-package Conexion;
+package JDBC;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,15 +12,16 @@ public class Conexion {
     private final String driverClass = "oracle.jdbc.driver.OracleDriver";
     private Connection con;
     private final String url = "jdbc:oracle:thin:@168.232.165.127:1521:XE";
-    private final String userName = "ALE";
-    private final String password = "duoc2019";
+    private final String userName = "LEX";
+    private final String password = "duoc.2019";
 
     public void init() throws IOException, ClassNotFoundException {
         Class.forName(driverClass);
     }
 
     public Connection open() throws SQLException, IOException {
-       return con = DriverManager.getConnection(url, userName, password);
+        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+        return con = DriverManager.getConnection(url, userName, password);
     }
 
     public void close() {

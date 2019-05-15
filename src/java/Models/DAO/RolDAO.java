@@ -5,7 +5,7 @@
  */
 package Models.DAO;
 
-import Conexion.Conexion;
+import JDBC.Conexion;
 import Models.DTO.RolDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
@@ -24,8 +24,8 @@ import oracle.jdbc.*;
  */
 public class RolDAO {
 
-    private final String FIND_BY_ID = "{call PKG_ROLES.FIND_BY_ID(?,?)}";
-    private final String GET_ALL = "{call PKG_ROLES.GET_ALL(?)}";
+    private final String FIND_BY_ID = "{call PKG_ROLES.READ_ROL(?,?)}";
+    private final String GET_ALL = "{call PKG_ROLES.READ_ALL_ROLES(?)}";
 
     Conexion con = new Conexion();
 
@@ -49,9 +49,9 @@ public class RolDAO {
 
             while (rs.next()) {
 
-                rol.setId(rs.getInt("IDROL"));
+                rol.setId(rs.getInt("ID_ROL"));
                 rol.setNombre(rs.getString("NOMBRE"));
-                rol.setEstado(rs.getBoolean("ESTADO"));
+       
             }
 
         } catch (SQLException | IOException ex) {
@@ -83,9 +83,8 @@ public class RolDAO {
 
                 RolDTO rol = new RolDTO();
 
-                rol.setId(rs.getInt("IDROL"));
+                rol.setId(rs.getInt("ID_ROL"));
                 rol.setNombre(rs.getString("NOMBRE"));
-                rol.setEstado(rs.getBoolean("ESTADO"));
 
                 list.add(rol);
             }
