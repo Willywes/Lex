@@ -59,7 +59,7 @@
                                     <div class="form-group">
 
                                         <label for="rol">Rol (*)</label>
-
+                                         ${roles}
                                         <select class="form-control" id="nombres" name="nombres" placeholder="Nombres del Usuario">
                                             <option value="">(Seleccione Rol)</option>
                                             <c:forEach var="rol" items="${roles}">

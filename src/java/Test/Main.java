@@ -2,8 +2,10 @@ package Test;
 
 
 import Models.DAO.RolDAO;
+import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.RolDTO;
+import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -43,6 +45,15 @@ public class Main {
         System.out.println("");
 
         System.out.println("Un Usuario");
+        
+        
+        SolicitudTiposDAO solicitudTipo = new SolicitudTiposDAO();
+        List<SolicitudTiposDTO> solicitudesTipos = solicitudTipo.getAll();
+        
+        for (SolicitudTiposDTO tipos : solicitudesTipos) {
+
+            System.out.println(tipos.getNombre());
+        }
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
 //        
