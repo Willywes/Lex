@@ -247,6 +247,7 @@
 
 
                         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>MEnu 1</span></a></li>
+                        <li><a href="#"><i class="fa fa-link"></i> <span>Menu Solicitud</span></a></li>
                         <li><a href="#"><i class="fa fa-link"></i> <span>MEnu 2</span></a></li>
                         <li class="treeview">
                             <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
