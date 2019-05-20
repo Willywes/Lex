@@ -23,17 +23,58 @@ import oracle.jdbc.*;
  */
 public class UsuarioDAO {
 
-    private final String FIND_BY_ID = "{call PKG_USUARIOS.FIND_BY_ID(?,?)}";
-    private final String GET_ALL = "{call PKG_USUARIOS.GET_ALL(?)}";
+    private final String CREATE = "{call PKG_USUARIOS.CREATE_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+    private final String FIND_BY_ID = "{call PKG_USUARIOS.READ_USUARIO(?,?)}";
+    private final String GET_ALL = "{call PKG_USUARIOS.READ_ALL_USUARIOS(?)}";
 
     Conexion con;
-    
+
+    public boolean create(UsuarioDTO usuario) {
+
+        try {
+
+            con = new Conexion();
+
+            CallableStatement cs = con.open().prepareCall(CREATE);
+
+            cs.setString(1, usuario.getRut());
+            cs.setString(2, usuario.getPaterno());
+            cs.setString(3, usuario.getMaterno());
+            cs.setString(4, usuario.getNombres());
+            cs.setDate(5, usuario.getfNac());
+            cs.setString(6, usuario.getEmail());
+            cs.setString(7, usuario.getClave());
+            cs.setInt(8, usuario.getCelular());
+            cs.setInt(9, usuario.getTelefono());
+            cs.setString(10, usuario.getDireccion());
+            cs.setInt(11, usuario.getId_rol());
+           
+            cs.registerOutParameter(12, OracleTypes.INTEGER);
+
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getObject(13);
+
+            while (rs.next()) {
+
+                 return rs.getBoolean("1");
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return false;
+    }
+
     public UsuarioDTO findById(int id) {
 
         UsuarioDTO user = new UsuarioDTO();
 
         try {
-            
+
             con = new Conexion();
 
             CallableStatement cs = con.open().prepareCall(FIND_BY_ID);
@@ -47,9 +88,21 @@ public class UsuarioDAO {
 
             while (rs.next()) {
 
-                user.setId(rs.getInt("IDUSER"));
+                user.setId(rs.getInt("ID_USUARIO"));
                 user.setNombres(rs.getString("NOMBRES"));
-                user.setEstado(rs.getBoolean("ESTADO"));
+                user.setPaterno(rs.getString("PARTENO"));
+                user.setMaterno(rs.getString("MATERNO"));
+                user.setRut(rs.getString("RUT"));
+                user.setfNac(rs.getDate("F_NAC"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setCelular(rs.getInt("CELULAR"));
+                user.setTelefono(rs.getInt("TELEFONO"));
+                user.setDireccion(rs.getString("DIRECCION"));
+                user.setActivo(rs.getBoolean("ACTIVO"));
+                user.setId_rol(rs.getInt("ID_ROL"));
+                user.setCreado(rs.getDate("CREADO"));
+                user.setModificado(rs.getDate("MODIFICADO"));
+
             }
 
         } catch (SQLException | IOException ex) {
@@ -67,7 +120,7 @@ public class UsuarioDAO {
         List<UsuarioDTO> list = new ArrayList();
 
         try {
-            
+
             con = new Conexion();
 
             CallableStatement cs = con.open().prepareCall(GET_ALL);
@@ -81,9 +134,20 @@ public class UsuarioDAO {
 
                 UsuarioDTO user = new UsuarioDTO();
 
-                user.setId(rs.getInt("IDROL"));
+                user.setId(rs.getInt("ID_USUARIO"));
                 user.setNombres(rs.getString("NOMBRES"));
-                user.setEstado(rs.getBoolean("ESTADO"));
+                user.setPaterno(rs.getString("PATERNO"));
+                user.setMaterno(rs.getString("MATERNO"));
+                user.setRut(rs.getString("RUT"));
+                user.setfNac(rs.getDate("F_NAC"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setCelular(rs.getInt("CELULAR"));
+                user.setTelefono(rs.getInt("TELEFONO"));
+                user.setDireccion(rs.getString("DIRECCION"));
+                user.setActivo(rs.getBoolean("ACTIVO"));
+                user.setId_rol(rs.getInt("ID_ROL"));
+                user.setCreado(rs.getDate("CREADO"));
+                user.setModificado(rs.getDate("MODIFICADO"));
 
                 list.add(user);
             }
@@ -93,7 +157,7 @@ public class UsuarioDAO {
         } finally {
             con.close();
         }
-        
+
         return list;
     }
 }
