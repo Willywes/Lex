@@ -5,7 +5,6 @@
  */
 package Models.DTO;
 
-import Utilidades.Utils;
 import java.sql.Date;
 
 /**
@@ -21,16 +20,34 @@ public class UsuarioDTO {
     protected String nombres;
     protected Date fNac;
     protected String email;
-    protected String telefono;
-    protected String celular;
-    protected String password;
+    protected String clave;
+    protected int telefono;
+    protected int celular;
     protected String direccion;
-    protected boolean estado;
+    protected boolean activo;
     protected Date creado;
     protected Date modificado;
     protected int id_rol;
 
     public UsuarioDTO() {
+    }
+
+    public UsuarioDTO(int id, String rut, String paterno, String materno, String nombres, Date fNac, String email, String clave, int telefono, int celular, String direccion, boolean activo, Date creado, Date modificado, int id_rol) {
+        this.id = id;
+        this.rut = rut;
+        this.paterno = paterno;
+        this.materno = materno;
+        this.nombres = nombres;
+        this.fNac = fNac;
+        this.email = email;
+        this.clave = clave;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.direccion = direccion;
+        this.activo = activo;
+        this.creado = creado;
+        this.modificado = modificado;
+        this.id_rol = id_rol;
     }
 
     public int getId() {
@@ -89,28 +106,28 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    public String getTelefono() {
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = Utils.encriptarMD5(password);
     }
 
     public String getDireccion() {
@@ -121,12 +138,12 @@ public class UsuarioDTO {
         this.direccion = direccion;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public Date getCreado() {
@@ -155,10 +172,8 @@ public class UsuarioDTO {
 
     @Override
     public String toString() {
-        return "UsuarioDTO{" + "id=" + id + ", rut=" + rut + ", paterno=" + paterno + ", materno=" + materno + ", nombres=" + nombres + ", fNac=" + fNac + ", email=" + email + ", telefono=" + telefono + ", celular=" + celular + ", password=" + password + ", direccion=" + direccion + ", estado=" + estado + ", creado=" + creado + ", modificado=" + modificado + ", id_rol=" + id_rol + '}';
+        return "UsuarioDTO{" + "id=" + id + ", rut=" + rut + ", paterno=" + paterno + ", materno=" + materno + ", nombres=" + nombres + ", fNac=" + fNac + ", email=" + email + ", clave=" + clave + ", telefono=" + telefono + ", celular=" + celular + ", direccion=" + direccion + ", activo=" + activo + ", creado=" + creado + ", modificado=" + modificado + ", id_rol=" + id_rol + '}';
     }
-    
-    
-    
 
+    
 }

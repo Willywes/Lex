@@ -15,8 +15,8 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <div  class="btn-group">
-                            <a class="btn btn-success" href="/Lex/CrearUsuario"> <!--data-toggle="modal" data-target="#modal-create"--><i
-                                    class="fa fa-plus"></i> Nuevo Usuario
+                            <a href="create" class="btn btn-success"> 
+                               <i class="fa fa-plus"></i> Nuevo Usuario
                             </a>
                         </div>
                     </div>
