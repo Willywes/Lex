@@ -101,13 +101,13 @@ public class CitaServlet extends HttpServlet {
                     int id=10;
                     String fechaHora =request.getParameter("txtfechaHora");
                     int idNotaria=Integer.parseInt(request.getParameter("txtidnotaria"));
-                    int estadoNotaria = Integer.parseInt(request.getParameter("txtestadonotaria"));
+                    int estadoCita = Integer.parseInt(request.getParameter("txtestadonotaria"));
                     
                     CitaDTO citaDTO = new CitaDTO();
                     citaDTO.setId_cita(id);
                     citaDTO.setFecha_hora(fechaHora);
-                    citaDTO.setId_estado_notaria(idNotaria); 
-                    citaDTO.setId_notaria(estadoNotaria);
+                    citaDTO.setId_estado_cita(estadoCita); 
+                    citaDTO.setId_notaria(idNotaria);
                    
                     
                     citaDAO.create(citaDTO);
@@ -150,12 +150,11 @@ public class CitaServlet extends HttpServlet {
                     request.getRequestDispatcher("Controlador?accion=Listar").forward(request, response);
                 break;
                 
-            case "Delete":
-                    
-                    int idEliminar =Integer.parseInt(request.getParameter("id"));  
-                    
-              //      dao.delete(idEliminar);
-                    request.getRequestDispatcher("Controlador?accion=Listar").forward(request, response);
+            case "Eliminar":
+                    System.out.println("Entro al SERVLET");
+                    int idEliminar =Integer.parseInt(request.getParameter("id")); //rescato id desde index 
+                     citaDAO.delete(idEliminar);//llamo a metodo y envio ID
+                    request.getRequestDispatcher("/modules/citas/index.jsp").forward(request, response);
                     break;
             case "Cambiar estado":
                 

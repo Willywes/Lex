@@ -13,16 +13,16 @@ public class CitaDTO {
     int id_cita;
     String fecha_hora;
     int id_notaria;
-    int id_estado_notaria;
+    int id_estado_cita;
 
     public CitaDTO() {
     }
 
-    public CitaDTO(int id_cita, String fecha_hora, int id_notaria, int id_estado_notaria) {
+    public CitaDTO(int id_cita, String fecha_hora, int id_notaria, int id_estado_cita) {
         this.id_cita = id_cita;
         this.fecha_hora = fecha_hora;
         this.id_notaria = id_notaria;
-        this.id_estado_notaria = id_estado_notaria;
+        this.id_estado_cita = id_estado_cita;
     }
 
     public int getId_cita() {
@@ -49,17 +49,17 @@ public class CitaDTO {
         this.id_notaria = id_notaria;
     }
 
-    public int getId_estado_notaria() {
-        return id_estado_notaria;
+    public int getId_estado_cita() {
+        return id_estado_cita;
     }
 
-    public void setId_estado_notaria(int id_estado_notaria) {
-        this.id_estado_notaria = id_estado_notaria;
+    public void setId_estado_cita(int id_estado_cita) {
+        this.id_estado_cita = id_estado_cita;
     }
 
     @Override
     public String toString() {
-        return "CitaDTO{" + "id_cita=" + id_cita + ", fecha_hora=" + fecha_hora + ", id_notaria=" + id_notaria + ", id_estado_notaria=" + id_estado_notaria + '}';
+        return "CitaDTO{" + "id_cita=" + id_cita + ", fecha_hora=" + fecha_hora + ", id_notaria=" + id_notaria + ", id_estado_notaria=" + id_estado_cita + '}';
     }
     
 }
