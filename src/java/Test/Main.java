@@ -40,22 +40,21 @@ public class Main {
         
        // for (RolDTO role : roles) {
 
-   //         System.out.println(role.getNombre());
-     //   }
+        //         System.out.println(role.getNombre());
+        //   }
         
-        System.out.println("");
         System.out.println("");
 
      //   System.out.println("Un Usuario");
         
         
-        SolicitudTiposDAO solicitudTipo = new SolicitudTiposDAO();
-        List<SolicitudTiposDTO> solicitudesTipos = solicitudTipo.getAll();
+        //SolicitudTiposDAO solicitudTipo = new SolicitudTiposDAO();
+        //List<SolicitudTiposDTO> solicitudesTipos = solicitudTipo.getAll();
         
-        for (SolicitudTiposDTO tipos : solicitudesTipos) {
+        //for (SolicitudTiposDTO tipos : solicitudesTipos) {
 
-            System.out.println(tipos.getNombre());
-        }
+        //    System.out.println(tipos.getNombre());
+        //}
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
 //        
@@ -66,24 +65,14 @@ public class Main {
 //            System.out.println(usuario.toString());
 //        }
         
-        System.out.println("Finished ...");
         
-         String fecha_hora= "23/3/2019";
-         
-        CitaDAO cita = new CitaDAO();
-        CitaDTO citaNew = new CitaDTO();
-        
-        citaNew.setId_cita(10);
-        citaNew.setFecha_hora(fecha_hora);
-         citaNew.setId_notaria(1);
-        citaNew.setId_estado_cita(1);
-        
-        cita.create(citaNew);
-        
-        System.out.println("Borrando");
-       // cita.delete(1);
      
+        CitaDAO citaDAO = new CitaDAO();
+        List<CitaDTO> citas = citaDAO.getAll();
+        
+        for(CitaDTO cita: citas){
+            System.out.println(cita.toString());
+        }
         
     }
-
 }

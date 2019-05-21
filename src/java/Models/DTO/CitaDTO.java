@@ -5,20 +5,22 @@
  */
 package Models.DTO;
 
+import java.sql.Date;
+
 /**
  *
  * @author claudio
  */
 public class CitaDTO {
     int id_cita;
-    String fecha_hora;
+    Date fecha_hora;
     int id_notaria;
     int id_estado_cita;
 
     public CitaDTO() {
     }
 
-    public CitaDTO(int id_cita, String fecha_hora, int id_notaria, int id_estado_cita) {
+    public CitaDTO(int id_cita, Date fecha_hora, int id_notaria, int id_estado_cita) {
         this.id_cita = id_cita;
         this.fecha_hora = fecha_hora;
         this.id_notaria = id_notaria;
@@ -33,11 +35,11 @@ public class CitaDTO {
         this.id_cita = id_cita;
     }
 
-    public String getFecha_hora() {
+    public Date getFecha_hora() {
         return fecha_hora;
     }
 
-    public void setFecha_hora(String fecha_hora) {
+    public void setFecha_hora(Date fecha_hora) {
         this.fecha_hora = fecha_hora;
     }
 

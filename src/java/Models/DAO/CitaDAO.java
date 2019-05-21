@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +56,7 @@ public class CitaDAO {
             while (rs.next()) {
 
                 cita.setId_cita(rs.getInt("ID_CITA"));
-                cita.setFecha_hora(rs.getString("FECHA_HORA"));
+                cita.setFecha_hora(rs.getDate("FECHA_HORA"));
                 cita.setId_notaria(rs.getInt("ID_NOTARIA"));
                 cita.setId_estado_cita(rs.getInt("ID_ESTADO_CITA"));
                
@@ -79,27 +80,19 @@ public class CitaDAO {
         try {
 
             Connection cn = con.open();
-
             CallableStatement cs = cn.prepareCall(GET_ALL);
-
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.executeUpdate();
 
             ResultSet rs = (ResultSet) cs.getObject(1);
-
-          
-           
-           
             while (rs.next()) {
 
                 CitaDTO cita = new CitaDTO();
-                 
                 cita.setId_cita(rs.getInt("ID_CITA"));
-                cita.setFecha_hora(rs.getString("FECHA_HORA"));
+                cita.setFecha_hora(rs.getDate("FECHA_HORA"));
                 cita.setId_notaria(rs.getInt("ID_NOTARIA"));
                 cita.setId_estado_cita(rs.getInt("ID_ESTADO_CITA"));
                
-                
                 list.add(cita);
             }
 
@@ -113,40 +106,29 @@ public class CitaDAO {
         return list;
     }
     
-    public CitaDTO create (CitaDTO cita){
-        
-        try {
-
-            Connection cn = con.open();
-
-            CallableStatement cs = cn.prepareCall(CREATE);
-           
-            // System.out.println("VALOREs "+cita.getId_cita()+" "+cita.getFecha_hora()+" "+cita.getId_notaria()+" "+cita.getId_estado_notaria());
+    public int create (CitaDTO cita){
+        int resultadoOperacion = 0;
             
-            cs.setInt("ID_CITA",cita.getId_cita());
-            cs.setString("FECHA_HORA", cita.getFecha_hora());
-            cs.setInt("ID_NOTARIA", cita.getId_notaria());
-            cs.setInt("ID_ESTADO_CITA",cita.getId_estado_cita());
+        try {
+            Connection cn = con.open();
+            CallableStatement cs = cn.prepareCall(CREATE);
+            cs.setInt(1,cita.getId_cita());
+            cs.setDate(2, cita.getFecha_hora());
+            cs.setInt(3, cita.getId_notaria());
+            cs.setInt(4,cita.getId_estado_cita());
 
-            System.out.println(" Registros paso antes de ir a cursor");
-            cs.registerOutParameter(5, OracleTypes.CURSOR);// salida de parametro 5
-            cs.executeUpdate();
-          // cs.registerOutParameter(5, OracleTypes.CURSOR);// salida de parametro 5
-         //   
-         //   cs.executeUpdate();
-
-       //     ResultSet rs = (ResultSet) cs.getObject(1);
-
-         
-
+            cs.registerOutParameter(5, Types.INTEGER);// salida de parametro 5
+            cs.execute();
+            
+            resultadoOperacion = cs.getInt(5);
+            
         } catch (SQLException | IOException ex) {
             Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             con.close();
         }
-
         
-        return cita;
+        return resultadoOperacion;
     }
     
     public CitaDTO delete(int id) {

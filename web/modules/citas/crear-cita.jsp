@@ -35,9 +35,32 @@
             <h3>Agregar Cita</h3>
         </div>
         <div>
-            <form action="CitaServelet" method="POST">
-                 Fecha y hora:
+            <form action="crear-cita" method="POST">
+                 Fecha:
                 <input type="date" required name="txtfechaHora"><br>
+                
+                Hora:
+                
+                <select name="txthora" required>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                </select> 
+                :
+                <select name="txtminutos" required>
+                    <option value="00">00</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                </select>
+                <br>
+                
                 ID Notaria
                 <input type="text" required name="txtidnotaria"><br>
                  ID estado notaria:

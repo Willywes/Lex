@@ -25,7 +25,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <div  class="btn-group">
-                            <a class="btn btn-success" href="/Lex/modules/citas/crearcita.jsp"> <!--data-toggle="modal" data-target="#modal-create"--><i
+                            <a class="btn btn-success" href="citas/crear-cita"> <!--data-toggle="modal" data-target="#modal-create"--><i
                                     class="fa fa-plus"></i> Nueva Cita
                             </a>
                         </div>
@@ -47,7 +47,7 @@
                                     <td>${cita.getId_cita()}</td>
                                     <td>${cita.getFecha_hora()}</td>
                                     <td>${cita.getId_notaria()}</td>
-                                    <td>${cita.getId_estado_notaria()}</td>
+                                    <td>${cita.getId_estado_cita()}</td>
                                     <td style="width:1%;white-space: nowrap;">
                                         
                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
