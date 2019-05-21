@@ -35,30 +35,32 @@
                             <thead>
                                 <tr>
                                     <th style="width:1%;white-space: nowrap;">Numero de Cita</th>
-                                   <th style="width:1%;white-space: nowrap;">Fecha y hora</th>
+                                    <th style="width:1%;white-space: nowrap;">Fecha y hora</th>
                                     <th style="width:1%;white-space: nowrap;">Id notaria</th>
                                     <th style="width:1%;white-space: nowrap;">ID Estado notaria</th>
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
+                                
                                 <c:forEach var="cita" items="${citas}">
-                                    <form action="CitaServlet" method="POST">
+                                   
                                     <tr>
                                     <td>${cita.getId_cita()}</td>
                                     <td>${cita.getFecha_hora()}</td>
                                     <td>${cita.getId_notaria()}</td>
                                     <td>${cita.getId_estado_cita()}</td>
                                     <td style="width:1%;white-space: nowrap;">
-                                        
+                                        <form action="citas/borrar-cita" method="POST"> 
                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
                                         <input type="hidden" name="id" value="${cita.getId_cita()}" />
                                         <input type="submit" name="accion" value="Eliminar">
                                         <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
-                                      </form>
                                     </td>
                                 </tr>
+                             </form>
+
                                 </c:forEach>
-                                
+
 
                             </tbody>
 
