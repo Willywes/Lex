@@ -3,10 +3,12 @@ package Test;
 
 import Models.DAO.CitaDAO;
 import Models.DAO.RolDAO;
+import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.CitaDTO;
 import Models.DTO.RolDTO;
+import Models.DTO.SolicitudEstadoDTO;
 import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
@@ -48,12 +50,12 @@ public class Main {
      //   System.out.println("Un Usuario");
         
         
-        //SolicitudTiposDAO solicitudTipo = new SolicitudTiposDAO();
-        //List<SolicitudTiposDTO> solicitudesTipos = solicitudTipo.getAll();
+        SolicitudEstadoDAO solicitudEstado = new SolicitudEstadoDAO();
+        List<SolicitudEstadoDTO> solicitudesEstados = solicitudEstado.getAll();
         
-        //for (SolicitudTiposDTO tipos : solicitudesTipos) {
-
-        //    System.out.println(tipos.getNombre());
+        for (SolicitudEstadoDTO tipos : solicitudesEstados) {
+          System.out.println(tipos.getNombre());
+        }
         //}
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
@@ -67,12 +69,12 @@ public class Main {
         
         
      
-        CitaDAO citaDAO = new CitaDAO();
-        List<CitaDTO> citas = citaDAO.getAll();
-        
-        for(CitaDTO cita: citas){
-            System.out.println(cita.toString());
-        }
+//        CitaDAO citaDAO = new CitaDAO();
+//        List<CitaDTO> citas = citaDAO.getAll();
+//        
+//        for(CitaDTO cita: citas){
+//            System.out.println(cita.toString());
+//        }
         
     }
 }

@@ -17,29 +17,22 @@
         <div class="row">
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <div  class="btn-group">
-                            <a class="btn btn-success" href="/Lex/CrearSolicitud"> <!--data-toggle="modal" data-target="#modal-create"--><i
-                                    class="fa fa-plus"></i> Nueva Solicitud
-                            </a>
-                        </div>
-                    </div>
                     <div class="box-body">
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th style="width:1%;white-space: nowrap;">Id</th>
-                                    <th>Nombre</th>
+                                    <th style="width:1%;white-space: nowrap;">Número de Estado</th>
+                                    <th>Estado</th>
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
-                                <c:forEach var="solicitud" items="${solicitudes}">
+                                <c:forEach var="estado" items="${estados}">
                                     <tr>
-                                    <td>${solicitud.id}</td>
-                                    <td>${solicitud.nombre}</td>
+                                    <td>${estado.id_estado_solicitud}</td>
+                                    <td>${estado.nombre}</td>
                                     <td style="width:1%;white-space: nowrap;">
-                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
-                                        <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                      <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
+                                      <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                                 </c:forEach>
@@ -49,8 +42,8 @@
 
                             <tfoot>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
+                                    <th>Número de Estado</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
