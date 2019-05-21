@@ -12,11 +12,6 @@
 <%@attribute name="styles" fragment="true" %>
 <%@attribute name="scripts" fragment="true" %>
 
-
-
-
-
-
 <%-- 
     Document   : index
     Created on : 09-04-2019, 21:43:45
@@ -29,26 +24,19 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Abogados Lex</title>
-
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="/Lex/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
-
         <link rel="stylesheet" href="/Lex/assets/bower_components/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/Lex/assets/bower_components/Ionicons/css/ionicons.min.css">
         <link rel="stylesheet" href="/Lex/assets/dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="/Lex/assets/dist/css/skins/skin-purple.min.css">
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <jsp:invoke fragment="styles"/>
     </head>
-
     <body class="hold-transition skin-purple sidebar-mini">
         <div class="wrapper">
-
             <!-- Main Header -->
             <header class="main-header">
-
                 <!-- Logo -->
                 <a href="index2.html" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -56,7 +44,6 @@
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg"><b>Admin</b>LTE</span>
                 </a>
-
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
@@ -174,8 +161,6 @@
                                 <ul class="dropdown-menu">
                                     <!-- The user image in the menu -->
                                     <li class="user-header">
-                                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                         <p>
                                             Alexander Pierce - Web Developer
                                             <small>Member since Nov. 2012</small>
@@ -217,47 +202,39 @@
             </header>
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">
-
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
 
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Alexander Pierce</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
+                        <p style="color:white;padding-top:10px;padding-left:10px;">Bienvenido<br><strong>Alexander Pierce</strong></p>
                     </div>
 
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header">HEADER</li>
-                        <!-- Optionally, you can add icons to the links -->
-
-
+                        <li class="header">Navegación</li>
                         <!-- Menus-->
-
-                        <li class="active">
-                            <a href="<c:url value = "modules/usuarios/index.jsp"/>"><i class="fa fa-users"></i><span>Usuarios</span>
-                            </a>
-                        </li>
-
-
-                        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>MEnu 1</span></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i> <span>Menu Solicitud</span></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i> <span>MEnu 2</span></a></li>
+                        <li><a href="<c:url value = "CrearUsuario"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
                         <li class="treeview">
-                            <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                            <a href="<c:url value = "/citas"/>"><i class="fa fa-link"></i> <span>Citas</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#">Link in level 2</a></li>
-                                <li><a href="#">Link in level 2</a></li>
+                                <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
+                                <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-link"></i> <span>Tipo Solicitudes</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/tipos-solicitud"/>">Ver tipos</a></li>
+                                <li><a href="<c:url value = "/tipos-solicitud/crear"/>">Añadir tipo solicitud</a></li>
                             </ul>
                         </li>
                     </ul>
