@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets.SolicitudTipos;
+package Servlets.Solicitud;
 
 import Models.DAO.SolicitudTiposDAO;
 import Models.DTO.SolicitudTiposDTO;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Claudio 
  */
-@WebServlet(name = "SolicitudTipos", urlPatterns = {"/tipos-solicitud"})
+@WebServlet(name = "SolicitudTipos", urlPatterns = {"/solicitudes/tipos"})
 public class SolicitudTipos extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
@@ -49,7 +49,7 @@ public class SolicitudTipos extends HttpServlet {
         
         List<SolicitudTiposDTO> solicitudes = solicitudTiposDAO.getAll();
         request.setAttribute("solicitudes", solicitudes);        
-        request.getRequestDispatcher("/modules/solicitud-tipo/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/solicitudes/tipos.jsp").forward(request, response);
     }
 
 }
