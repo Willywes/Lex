@@ -34,42 +34,44 @@
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th style="width:1%;white-space: nowrap;">Numero de Cita</th>
+                                    <th style="width:1%;white-space: nowrap;">Número de Cita</th>
                                     <th style="width:1%;white-space: nowrap;">Fecha y hora</th>
-                                    <th style="width:1%;white-space: nowrap;">Id notaria</th>
-                                    <th style="width:1%;white-space: nowrap;">ID Estado notaria</th>
+                                    <th style="width:1%;white-space: nowrap;">Número notaria</th>
+                                    <th style="width:1%;white-space: nowrap;">Número estado notaria</th>
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
-                                
+
                                 <c:forEach var="cita" items="${citas}">
-                                   
+
                                     <tr>
-                                    <td>${cita.getId_cita()}</td>
-                                    <td>${cita.getFecha_hora()}</td>
-                                    <td>${cita.getId_notaria()}</td>
-                                    <td>${cita.getId_estado_cita()}</td>
-                                    <td style="width:1%;white-space: nowrap;">
-                                        <form action="citas/borrar-cita" method="POST"> 
-                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
-                                        <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                        <input type="submit" name="accion" value="Eliminar">
-                                        <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                             </form>
+                                        <td>${cita.getId_cita()}</td>
+                                        <td>${cita.getFecha_hora()}</td>
+                                        <td>${cita.getId_notaria()}</td>
+                                        <td>${cita.getId_estado_cita()}</td>
+                                        <td style="width:1%;white-space: nowrap;">
+
+                                            <%--<form action="citas/editar" method="POST"> --%>
+                                             <form action="citas/editar" method="POST">   
+                                               <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
+                                                <input type="hidden" name="id" value="${cita.getId_cita()}" />
+                                            </form>       
+                                            <form action="citas/borrar" method="POST">
+                                                <input type="hidden" name="id" value="${cita.getId_cita()}" />
+                                                <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
 
                                 </c:forEach>
-
-
                             </tbody>
 
                             <tfoot>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Fecha hora</th>
-                                    <th>Id notaria</th>
-                                    <th>id estado notaria</th>
+                                    <th>Número de Cita</th>
+                                    <th>Fecha y hora</th>
+                                    <th>Número notaria</th>
+                                    <th>Número estado notaria</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

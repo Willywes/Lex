@@ -35,7 +35,7 @@
             <h3>Agregar Cita</h3>
         </div>
         <div>
-            <form action="crear-cita" method="POST">
+            <form action="crear" method="POST">
                  Fecha:
                 <input type="date" required name="txtfechaHora"><br>
                 
@@ -67,7 +67,8 @@
                 <input type="text" required name="txtestadonotaria"><br>
                 
                 <input type="submit" name="accion" value="Guardar">
-                <input type="button" name="Cancelar" value="Cancelar" onClick="location.href='/Lex/modules/citas'">
+                
+                <input type="button" name="Cancelar" value="Cancelar" onClick="location.href='/Lex/citas'">
                 
             </form>
         </div>

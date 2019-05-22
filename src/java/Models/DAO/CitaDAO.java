@@ -144,10 +144,11 @@ public class CitaDAO {
             CallableStatement cs = cn.prepareCall(DELETE);
             
             
-            
+            int idTest=4;
            // cs.setInt("ID_CITA",cita.getId_cita());
-            cs.setInt("ID_CITA", id);
-            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(1, id);
+            cs.registerOutParameter(2, Types.INTEGER);
+            //cs.registerOutParameter(2, OracleTypes.CURSOR);
             System.out.println("ANTES DE EJECUTAR");
             cs.execute();
            // cs.executeUpdate();
