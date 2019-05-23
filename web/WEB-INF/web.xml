@@ -8,14 +8,6 @@
         <servlet-name>Borrar</servlet-name>
         <servlet-class>Servlets.Cita.BorrarCita</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>EditarCita</servlet-name>
-        <servlet-class>Servlets.Cita.EditarCita</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Editarcita</servlet-name>
-        <servlet-class>Servlets.Cita.Editarcita</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>CrearCitaServlet</servlet-name>
         <url-pattern>/CrearCitaServlet</url-pattern>
@@ -23,10 +15,6 @@
     <servlet-mapping>
         <servlet-name>Borrar</servlet-name>
         <url-pattern>/Borrar</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditarCita</servlet-name>
-        <url-pattern>/EditarCita</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Editarcita</servlet-name>
