@@ -50,15 +50,13 @@
                                         <td>${cita.getId_notaria()}</td>
                                         <td>${cita.getId_estado_cita()}</td>
                                         <td style="width:1%;white-space: nowrap;">
-
                                             <%--<form action="citas/editar" method="POST"> --%>
-                                             <form action="citas/editar" method="POST">   
-                                               <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
-                                                <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                            </form>       
+                                            <a href="citas/editar?id=${cita.getId_cita()}">
+                                              <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>    
                                             <form action="citas/borrar" method="POST">
                                                 <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                                <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
+                                                <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
+                                                  <i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
