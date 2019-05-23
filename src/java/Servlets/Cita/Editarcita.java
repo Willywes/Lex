@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claudio
  */
-@WebServlet(name = "EditarCita", urlPatterns = {"/citas/editar"})
-public class EditarCita extends HttpServlet {
+@WebServlet(name = "Editarcita", urlPatterns = {"/citas/editar"})
+public class Editarcita extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class EditarCita extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditarCita</title>");            
+            out.println("<title>Servlet Editarcita</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditarCita at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Editarcita at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,9 +58,7 @@ public class EditarCita extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        request.getRequestDispatcher("/modules/citas/editar.jsp").forward(request, response);
-        
+       request.getRequestDispatcher("/modules/citas/editar.jsp").forward(request, response);
     }
 
     /**
@@ -74,7 +72,8 @@ public class EditarCita extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        int id=Integer.parseInt(request.getParameter("id"));
+        request.getRequestDispatcher("/modules/citas/editar.jsp").forward(request, response);
     }
 
     /**
