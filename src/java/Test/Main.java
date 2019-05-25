@@ -59,13 +59,12 @@ public class Main {
         //}
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
-//        
-//        System.out.println("Lista de Usuarios");
-//
-//        for (UsuarioDTO usuario : UsuarioDAO.getAll()) {
-//
-//            System.out.println(usuario.toString());
-//        }
+        
+        System.out.println("Lista de Usuarios");
+
+        new UsuarioDAO().getAll().forEach((usuario) -> {
+            System.out.println(usuario.toString());
+        });
         
         
      
