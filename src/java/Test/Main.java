@@ -60,6 +60,7 @@ public class Main {
         //}
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
+<<<<<<< HEAD
 //        
 //        System.out.println("Lista de Usuarios");
 //
@@ -83,6 +84,14 @@ public class Main {
      //   citas.setId_estado_cita(2);
     //    citaDAO.update(citas);
             
+=======
+        
+        System.out.println("Lista de Usuarios");
+
+        new UsuarioDAO().getAll().forEach((usuario) -> {
+            System.out.println(usuario.toString());
+        });
+>>>>>>> claudiodev
         
         
             System.out.println(citas.toString());

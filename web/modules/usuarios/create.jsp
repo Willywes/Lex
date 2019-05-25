@@ -22,7 +22,7 @@
                         <h3 class="box-title">Crear Usuarios ${hola}</h3>
                     </div>
                     <div class="box-body">
-                        <form action="action">
+                        <form action="<c:url value = "/modulo/usuarios/store"/>" method="POST">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
