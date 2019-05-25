@@ -24,60 +24,62 @@
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        
+
                     </div>
                     <div class="box-body">
                         <table id="table" class="table table-bordered table-hover">
-                            
+
                             <tbody>
-                                 <center>
-        <div>
-            <h3>Editar Cita nº ${id_cita}</h3>
-        </div>
-        <div>
-            <form action="crear" method="POST">
-                 Fecha:
-                <input type="date" required name="txtfechaHora"><br>
-                
-                Hora:
-                
-                <select name="txthora" required>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                </select> 
-                :
-                <select name="txtminutos" required>
-                    <option value="00">00</option>
-                    <option value="15">15</option>
-                    <option value="30">30</option>
-                    <option value="45">45</option>
-                </select>
-                <br>
-                
-                ID Notaria
-                <input type="text" required name="txtidnotaria"><br>
-                 ID estado notaria:
-                <input type="text" required name="txtestadonotaria"><br>
-                
-                <input type="submit" name="accion" value="Guardar">
-                
-                <input type="button" name="Cancelar" value="Cancelar" onClick="location.href='/Lex/citas'">
-                
-            </form>
-        </div>
-    </center>
-                                
+                            <center>
+                                <div>
+                                    <h3>Editar Cita nº ${id_cita} </h3>
+
+                                </div>
+                                <div>
+                                    <form action="editar" method="POST">
+                                        Fecha:
+                                        <%--  <input type="number" name="txtid" value="${solicitud.getIdSolicitud()}"><br>  --%>
+                                        <input type="date" required name="txtfechaHora" value="${cita.getFecha_hora()}"><br>
+
+                                        Hora:
+
+                                        <select name="txthora" required>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                        </select> 
+                                        :
+                                        <select name="txtminutos" required>
+                                            <option value="00">00</option>
+                                            <option value="15">15</option>
+                                            <option value="30">30</option>
+                                            <option value="45">45</option>
+                                        </select>
+                                        <br>
+
+                                        ID Notaria
+                                        <input type="text" required name="txtidnotaria" value="${cita.getId_notaria()}"><br>
+                                        ID estado notaria:
+                                        <input type="text" required name="txtestadonotaria" value="${cita.getId_estado_cita()}"><br>
+                                        <input type="hidden" name="id" value="${cita.getId_cita()}" />   
+                                        <input type="submit" name="accion" value="Guardar">
+
+                                        <input type="button" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/citas'">
+
+                                    </form>
+                                </div>
+                            </center>
+
 
                             </tbody>
 
-                           
+
                         </table>
                     </div>
                 </div>

@@ -5,8 +5,15 @@
  */
 package Servlets.Cita;
 
+import Models.DAO.CitaDAO;
+import Models.DTO.CitaDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author luisponce
+ * @author claudio
  */
 @WebServlet(name = "ModificarCita", urlPatterns = {"/citas/editar"})
 public class ModificarCita extends HttpServlet {
-
+ private final CitaDAO citaDAO = new CitaDAO();
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
    * methods.
@@ -60,6 +67,10 @@ public class ModificarCita extends HttpServlet {
           throws ServletException, IOException {
     int id_cita = Integer.parseInt(request.getParameter("id"));
     request.setAttribute("id_cita", id_cita); 
+    CitaDTO cita = new CitaDTO();
+    cita=citaDAO.findById(id_cita);//buscar por un ID
+      System.out.println("Fecha servlet "+cita.getFecha_hora());
+    request.setAttribute("cita",cita);
     request.getRequestDispatcher("/modules/citas/modificar.jsp").forward(request, response);
   }
 
@@ -74,7 +85,52 @@ public class ModificarCita extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
+        
+      
+        String fechaCita =request.getParameter("txtfechaHora");
+        String horaCita = request.getParameter("txthora");
+        String minutosCita = request.getParameter("txtminutos");
+        String fechaHora = fechaCita+" "+horaCita+":"+minutosCita+":00";
+        //System.out.println(fechaHora);
+        
+        int id=Integer.parseInt(request.getParameter("id"));//enviado por parametro oculto
+        int idNotaria=Integer.parseInt(request.getParameter("txtidnotaria"));
+        int estadoCita = Integer.parseInt(request.getParameter("txtestadonotaria"));
+             
+        CitaDTO citaDTO = new CitaDTO();
+        
+        try {
+            
+            
+            String startDate= fechaHora;
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            java.util.Date date = sdf1.parse(startDate);
+            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime()); 
+            
+            System.out.println(sqlStartDate.toString());
+            
+            
+            System.out.println(fechaHora);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            Date dateCita = formatter.parse(fechaHora);
+            java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
+            System.out.println(sqlDate.toString());
+            
+            citaDTO.setId_cita(Integer.parseInt(request.getParameter("id")));
+            citaDTO.setFecha_hora(sqlDate);
+            citaDTO.setId_estado_cita(estadoCita); 
+            citaDTO.setId_notaria(idNotaria);
+            
+            System.out.println(citaDTO.toString());// test  borrar
+            
+            int resultadoOperacion = citaDAO.update(citaDTO);
+            
+            System.out.println(" el valor es "+resultadoOperacion);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(CitaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+        request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
   }
 
   /**

@@ -60,7 +60,7 @@ public class CrearCita extends HttpServlet {
         String horaCita = request.getParameter("txthora");
         String minutosCita = request.getParameter("txtminutos");
         String fechaHora = fechaCita+" "+horaCita+":"+minutosCita+":00";
-        System.out.println(fechaHora);
+        //System.out.println(fechaHora);
         
         int idNotaria=Integer.parseInt(request.getParameter("txtidnotaria"));
         int estadoCita = Integer.parseInt(request.getParameter("txtestadonotaria"));
@@ -90,8 +90,7 @@ public class CrearCita extends HttpServlet {
             
         } catch (ParseException ex) {
             Logger.getLogger(CitaServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        
+        }       
         request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
     }
 

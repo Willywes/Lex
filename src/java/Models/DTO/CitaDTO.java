@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class CitaDTO {
     int id_cita;
-    Date fecha_hora;
+    Date fecha_hora; 
     int id_notaria;
     int id_estado_cita;
 

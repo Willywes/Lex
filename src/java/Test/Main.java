@@ -12,6 +12,7 @@ import Models.DTO.SolicitudEstadoDTO;
 import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -66,15 +67,26 @@ public class Main {
 //
 //            System.out.println(usuario.toString());
 //        }
+         CitaDAO citaDAO = new CitaDAO();
+         CitaDTO citas = new CitaDTO();
+         citas = citaDAO.findById(52);
+            
+               int status= citas.getId_estado_cita();
+               status = citaDAO.cambiarStatus(status);
+               citas.setId_estado_cita(status);
+               citaDAO.update(citas);     
+
+      
+      
+     //   citas=citaDAO.findById(52);
+       
+     //   citas.setId_estado_cita(2);
+    //    citaDAO.update(citas);
+            
         
         
-     
-//        CitaDAO citaDAO = new CitaDAO();
-//        List<CitaDTO> citas = citaDAO.getAll();
-//        
-//        for(CitaDTO cita: citas){
-//            System.out.println(cita.toString());
-//        }
+            System.out.println(citas.toString());
+        
         
     }
 }
