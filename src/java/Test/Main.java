@@ -1,9 +1,15 @@
 package Test;
 
 
+import Models.DAO.CitaDAO;
 import Models.DAO.RolDAO;
+import Models.DAO.SolicitudEstadoDAO;
+import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
+import Models.DTO.CitaDTO;
 import Models.DTO.RolDTO;
+import Models.DTO.SolicitudEstadoDTO;
+import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,25 +30,33 @@ public class Main {
 
         System.out.println("Staring ...");
         System.out.println("");
-        System.out.println("Un Rol");
+      //  System.out.println("Un Rol");
         
-        RolDAO rol = new RolDAO();
+      //  RolDAO rol = new RolDAO();
         
-        List<RolDTO> roles = rol.getAll();
+      //  List<RolDTO> roles = rol.getAll();
         
-        System.out.println(rol.findById(1).toString());
+      //  System.out.println(rol.findById(1).toString());
 
-        System.out.println("Lista de Roles");
+       // System.out.println("Lista de Roles");
         
-        for (RolDTO role : roles) {
+       // for (RolDTO role : roles) {
 
-            System.out.println(role.getNombre());
+        //         System.out.println(role.getNombre());
+        //   }
+        
+        System.out.println("");
+
+     //   System.out.println("Un Usuario");
+        
+        
+        SolicitudEstadoDAO solicitudEstado = new SolicitudEstadoDAO();
+        List<SolicitudEstadoDTO> solicitudesEstados = solicitudEstado.getAll();
+        
+        for (SolicitudEstadoDTO tipos : solicitudesEstados) {
+          System.out.println(tipos.getNombre());
         }
-        
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("Un Usuario");
+        //}
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
         
@@ -52,7 +66,14 @@ public class Main {
             System.out.println(usuario.toString());
         });
         
-        System.out.println("Finished ...");
+        
+     
+//        CitaDAO citaDAO = new CitaDAO();
+//        List<CitaDTO> citas = citaDAO.getAll();
+//        
+//        for(CitaDTO cita: citas){
+//            System.out.println(cita.toString());
+//        }
+        
     }
-
 }

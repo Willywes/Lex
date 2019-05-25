@@ -232,34 +232,43 @@
                         </div>
                     </div>
 
-                    <!-- Sidebar Menu -->
-                    <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header">HEADER</li>
-                        <!-- Optionally, you can add icons to the links -->
 
 
-                        <!-- Menus-->
-
-                        <li class="active">
-                            <a href="<c:url value = "/modulo/usuarios/index"/>"><i class="fa fa-users"></i><span>Usuarios</span>
-                            </a>
-                        </li>
+<!-- AQUI VA EL MENÚ-->
 
 
-                        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>MEnu 1</span></a></li>
-                        <li><a href="#"><i class="fa fa-link"></i> <span>MEnu 2</span></a></li>
-                        <li class="treeview">
-                            <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#">Link in level 2</a></li>
-                                <li><a href="#">Link in level 2</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+
+                              <ul class="sidebar-menu" data-widget="tree">
+                                <li class="header">Navegación</li>
+                                <!-- Menus-->
+                                <li><a href="<c:url value = "CrearUsuario"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
+                                <li class="treeview">
+                                  <a href="<c:url value = "/citas"/>"><i class="fa fa-link"></i> <span>Citas</span>
+                                    <span class="pull-right-container">
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                  </a>
+                                  <ul class="treeview-menu">
+                                    <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
+                                    <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
+                                  </ul>
+                                </li>
+                                <li class="treeview">
+                                  <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-link"></i> <span>Solicitudes</span>
+                                    <span class="pull-right-container">
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                  </a>
+                                  <ul class="treeview-menu">
+                                    <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
+                                    <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
+                                  </ul>
+                                </li>
+                              </ul>
+
+
+
+
 
                 </section>
                 <!-- /.sidebar -->
