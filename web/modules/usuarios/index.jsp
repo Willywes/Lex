@@ -12,7 +12,12 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
+
         <div class="row">
+            
+            <%@include file="/modules/globals/alerts.jsp" %>
+
+
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">

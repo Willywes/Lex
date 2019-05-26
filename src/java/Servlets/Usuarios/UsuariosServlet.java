@@ -9,15 +9,17 @@ import Models.DAO.RolDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.RolDTO;
 import Models.DTO.UsuarioDTO;
+import Utilidades.Validator;
+import Utilidades.Utils;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,7 +42,6 @@ public class UsuariosServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String route = request.getPathInfo().substring(1);
-        System.out.println(route);
 
 // este metodo ql recibe solo las peticiones get
 // index el la venana principal solo la tabla con todos los datos
@@ -48,8 +49,6 @@ public class UsuariosServlet extends HttpServlet {
 // edit retorna un formulatio similar al de crear pero con los datos del objeto, ejemplo usuario
 // show muestra el detalle del ojbeto, 
 // el edit es una mezcla del show y create
-
-
         if (route.equals("index")) {
 
             index(request, response);
@@ -63,9 +62,9 @@ public class UsuariosServlet extends HttpServlet {
             edit(request, response);
         } else if (route.equals("show")) {
 
-            edit(request, response);
+            show(request, response);
         } else {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);;
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
 
     }
@@ -87,14 +86,9 @@ public class UsuariosServlet extends HttpServlet {
 // el upate guarda todo lo que el edit envia
 // el delete elimina segun un parametro id por ejemplo. 
 // el change status cambia el estado de un ojeto mediante un id
-
-
-        
-        
-        String route = (String) request.getParameter("route");
+        String route = request.getPathInfo().substring(1);
 
         if (route.equals("store")) {
-
             store(request, response);
 
         } else if (route.equals("update")) {
@@ -105,13 +99,13 @@ public class UsuariosServlet extends HttpServlet {
 
             delete(request, response);
 
-        }else if (route.equals("change-status")) {
+        } else if (route.equals("change-status")) {
 
             changeStatus(request, response);
 
         } else {
 
-            request.getRequestDispatcher("/").forward(request, response);;
+            request.getRequestDispatcher("/").forward(request, response);
 
         }
     }
@@ -141,24 +135,62 @@ public class UsuariosServlet extends HttpServlet {
     public void store(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String rut = request.getParameter("rut").toUpperCase();
+        String redirect = "/modules/usuarios/create.jsp";
 
-        String paterno = request.getParameter("paterno").toUpperCase();
-        String materno = request.getParameter("materno").toUpperCase();
-        String nombres = request.getParameter("nombres").toUpperCase();
+        Validator validator = new Validator();
+        validator.addRule("rut", "required|min:8|max:13");
+        validator.addRule("nombres", "required|min:4|max:30");
+        validator.addRule("paterno", "required|min:4|max:30");
+        validator.addRule("materno", "required|min:4|max:30");
+        validator.addRule("email", "required|email|unique:usuarios,email");
+        validator.addRule("clave", "required|min:4|max:30");
+        validator.addRule("rol_id", "required");
 
-        Date f_nac = new Date(request.getParameter("f_nac"));
+        validator.addMessage("rol_id.required", "Seleccione un rol");
 
-        String email = request.getParameter("email").toLowerCase();
-        String clave = request.getParameter("clave");
+        validator.validar(request);
 
-        int telefono = Integer.parseInt(request.getParameter("telefono"));
-        int celular = Integer.parseInt(request.getParameter("celular"));
+        Map<String, String> errors = validator.getErrors();
 
-        String direccion = request.getParameter("direccion");
-        int id_rol = Integer.parseInt(request.getParameter("id_rol"));
+        if (errors.isEmpty()) {
+
+            UsuarioDTO usuario = new UsuarioDTO();
+            usuario.setRut(request.getParameter("rut").toUpperCase());
+            usuario.setNombres(request.getParameter("nombres").toUpperCase());
+            usuario.setPaterno(request.getParameter("paterno").toUpperCase());
+            usuario.setMaterno(request.getParameter("materno").toUpperCase());
+            usuario.setEmail(request.getParameter("email").toLowerCase());
+
+            usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
+            usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
+
+            UsuarioDAO u = new UsuarioDAO();
+
+            if (u.create(usuario)) {
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("success", "Usuario creado correctamente");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+                
+            } else {
+                request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");   
+            }
+
+        } else {
+            request.setAttribute("error", "Error de validación");
+            request.setAttribute("inputs", validator.getInputs());
+            request.setAttribute("errors", errors);
+            
+            List<RolDTO> roles = new RolDAO().getAll();
+            request.setAttribute("roles", roles);
+
+        }
+        request.getRequestDispatcher(redirect).forward(request, response);
 
     }
+    
+   
 
     public void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
