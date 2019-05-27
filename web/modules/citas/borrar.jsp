@@ -30,7 +30,7 @@
                     </div>
                     <div class="box-body">
                         <div class="alert alert-success">
-                            La cita ya ha sido eliminada.
+                            Su peticion ha sido efectuada
                            <a class="btn btn-success" onClick="location.href='/Lex/citas'">Volver Atrás</a>
                            
                         </div>

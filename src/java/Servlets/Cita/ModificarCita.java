@@ -130,7 +130,8 @@ public class ModificarCita extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(CitaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }       
-        request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/citas/borrar.jsp").forward(request, response);
+       // request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
   }
 
   /**

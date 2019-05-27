@@ -63,7 +63,7 @@
                 
                 ID Notaria
                 <input type="text" required name="txtidnotaria"><br>
-                 ID estado notaria:
+                 numero estado notaria:
                 <input type="text" required name="txtestadonotaria"><br>
                 
                 <input type="submit" name="accion" value="Guardar">
