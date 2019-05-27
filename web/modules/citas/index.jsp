@@ -36,8 +36,9 @@
                                 <tr>
                                     <th style="width:1%;white-space: nowrap;">Número de Cita</th>
                                     <th style="width:1%;white-space: nowrap;">Fecha y hora</th>
+                                 <%--   <th style="width:1%;white-space: nowrap;"> hora</th> --%>
                                     <th style="width:1%;white-space: nowrap;">Número notaria</th>
-                                    <th style="width:1%;white-space: nowrap;">Número estado notaria</th>
+                                    <th style="width:1%;white-space: nowrap;">Estado cita</th>
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
@@ -73,7 +74,7 @@
                                     <th>Número de Cita</th>
                                     <th>Fecha y hora</th>
                                     <th>Número notaria</th>
-                                    <th>Número estado notaria</th>
+                                    <th>Estado Cita</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

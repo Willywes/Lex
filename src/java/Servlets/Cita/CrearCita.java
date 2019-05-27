@@ -63,7 +63,8 @@ public class CrearCita extends HttpServlet {
         //System.out.println(fechaHora);
         
         int idNotaria=Integer.parseInt(request.getParameter("txtidnotaria"));
-        int estadoCita = Integer.parseInt(request.getParameter("txtestadonotaria"));
+        int estadoCita = 1;
+                //Integer.parseInt(request.getParameter("txtestadonotaria"));
              
         CitaDTO citaDTO = new CitaDTO();
         
@@ -91,7 +92,7 @@ public class CrearCita extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(CitaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }       
-        request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/citas/borrar.jsp").forward(request, response);
     }
 
     @Override

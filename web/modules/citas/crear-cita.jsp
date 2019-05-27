@@ -37,7 +37,7 @@
         <div>
             <form action="crear" method="POST">
                  Fecha:
-                <input type="date" required name="txtfechaHora"><br>
+                <input type="date" required name="txtfechaHora" min="2019-05-28"><br>
                 
                 Hora:
                 
@@ -61,11 +61,11 @@
                 </select>
                 <br>
                 
-                ID Notaria
-                <input type="text" required name="txtidnotaria"><br>
-                 numero estado notaria:
-                <input type="text" required name="txtestadonotaria"><br>
-                
+                Número Notaria
+                <input type="number" required name="txtidnotaria"><br>
+               <%--  numero estado notaria:
+                <input type="number" required name="txtestadonotaria"><br>
+                --%>
                 <input type="submit" name="accion" value="Guardar">
                 
                 <input type="button" name="Cancelar" value="Cancelar" onClick="location.href='/Lex/citas'">

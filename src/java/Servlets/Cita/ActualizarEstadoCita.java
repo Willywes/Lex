@@ -55,7 +55,7 @@ public class ActualizarEstadoCita extends HttpServlet {
        citaDAO.update(citaDTO);
 
        request.getRequestDispatcher("/modules/citas/borrar.jsp").forward(request, response);
-       // Aquí tienes que o hacer una redirección al index de las citas o crear una vista nueva y llevar al usuario ahí.
+       
         //request.getRequestDispatcher("/modules/citas/index.jsp").forward(request, response);
     }
 

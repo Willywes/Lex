@@ -63,10 +63,10 @@
                                         </select>
                                         <br>
 
-                                        ID Notaria
-                                        <input type="text" required name="txtidnotaria" value="${cita.getId_notaria()}"><br>
-                                        ID estado notaria:
-                                        <input type="text" required name="txtestadonotaria" value="${cita.getId_estado_cita()}"><br>
+                                        número Notaria
+                                        <input type="number" required name="txtidnotaria" value="${cita.getId_notaria()}"><br>
+                                        número estado notaria:
+                                        <input type="number" required name="txtestadonotaria" value="${cita.getId_estado_cita()}"><br>
                                         <input type="hidden" name="id" value="${cita.getId_cita()}" />   
                                         <input type="submit" name="accion" value="Guardar">
 
