@@ -21,21 +21,39 @@
             <table id="table" class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th style="width:1%;white-space: nowrap;">Número de tipo</th>
-                  <th>Nombre de tipo de solicitud</th>
+                  <th style="width:1%;white-space: nowrap;">Nº de solicitud</th>
+                  <th>Fecha</th>
+                  <th>Descripción</th>
+                  <th>Tipo de solicitud</th>
+                  <th>Estado</th>
+                  <th>Fecha de creación</th>
+                  <th>Cliente</th>
+                  <th>Técnico</th>
               </thead>
               <tbody>
                 <c:forEach var="solicitud" items="${solicitudes}">
                   <tr>
-                    <td>${solicitud.id}</td>
-                    <td>${solicitud.nombre}</td>
+                    <td>${solicitud.id_solicitud}</td>
+                    <td>${solicitud.fecha_hora}</td>
+                    <td>${solicitud.descripcion}</td>
+                    <td>${solicitud.tipoSolicitud.nombre}</td>
+                    <td>${solicitud.estadoSolicitud.nombre}</td>
+                    <td>${solicitud.creado}</td>
+                    <td>${solicitud.cliente.rut} | ${solicitud.cliente.nombres} ${solicitud.cliente.paterno}</td>
+                    <td>${solicitud.tecnico.rut} | ${solicitud.tecnico.nombres} ${solicitud.tecnico.paterno}</td>
                   </tr>
                 </c:forEach>
               </tbody>
               <tfoot>
                 <tr>
-                  <th>Número de tipo</th>
-                  <th>Nombre de tipo de solicitud</th>
+                  <th style="width:1%;white-space: nowrap;">Nº de solicitud</th>
+                  <th>Fecha</th>
+                  <th>Descripción</th>
+                  <th>Tipo de solicitud</th>
+                  <th>Estado</th>
+                  <th>Fecha de creación</th>
+                  <th>Cliente</th>
+                  <th>Técnico</th>
                 </tr>
               </tfoot>
             </table>

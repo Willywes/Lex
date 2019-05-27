@@ -23,17 +23,12 @@
                                 <tr>
                                     <th style="width:1%;white-space: nowrap;">Número de Estado</th>
                                     <th>Estado</th>
-                                    <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
                                 <c:forEach var="estado" items="${estados}">
                                     <tr>
                                     <td>${estado.id_estado_solicitud}</td>
                                     <td>${estado.nombre}</td>
-                                    <td style="width:1%;white-space: nowrap;">
-                                      <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
-                                      <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash"></i></button>
-                                    </td>
                                 </tr>
                                 </c:forEach>
                                 
@@ -44,7 +39,6 @@
                                 <tr>
                                     <th>Número de Estado</th>
                                     <th>Estado</th>
-                                    <th>Acciones</th>
                                 </tr>
                             </tfoot>
                         </table>

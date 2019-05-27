@@ -24,7 +24,7 @@ import oracle.jdbc.*;
  */
 public class SolicitudTiposDAO {
 
-    private final String FIND_BY_ID = "{call PKG_SOLICITUD_TIPOS.READ_SOLICITUD_TIPOS(?)}";
+    private final String FIND_BY_ID = "{call PKG_SOLICITUD_TIPOS.READ_SOLICITUD_TIPOS(?,?)}";
     private final String GET_ALL = "{call PKG_SOLICITUD_TIPOS.READ_ALL_SOLICITUDES_TIPOS(?)}";
 
     Conexion con = new Conexion();

@@ -89,10 +89,10 @@ public class UsuarioDAO {
             while (rs.next()) {
 
                 user.setId(rs.getInt("ID_USUARIO"));
-                user.setNombres(rs.getString("NOMBRES"));
-                user.setPaterno(rs.getString("PARTENO"));
-                user.setMaterno(rs.getString("MATERNO"));
                 user.setRut(rs.getString("RUT"));
+                user.setPaterno(rs.getString("PATERNO"));
+                user.setMaterno(rs.getString("MATERNO"));
+                user.setNombres(rs.getString("NOMBRES"));
                 user.setfNac(rs.getDate("F_NAC"));
                 user.setEmail(rs.getString("EMAIL"));
                 user.setCelular(rs.getInt("CELULAR"));
