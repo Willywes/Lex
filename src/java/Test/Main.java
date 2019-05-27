@@ -27,10 +27,12 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException, IOException {
+        
+        
 
-        System.out.println("Staring ...");
-        System.out.println("");
-      //  System.out.println("Un Rol");
+//        System.out.println("Staring ...");
+//        System.out.println("");
+//      //  System.out.println("Un Rol");
         
       //  RolDAO rol = new RolDAO();
         
@@ -45,26 +47,26 @@ public class Main {
         //         System.out.println(role.getNombre());
         //   }
         
-        System.out.println("");
+//        System.out.println("");
 
      //   System.out.println("Un Usuario");
         
         
-        SolicitudEstadoDAO solicitudEstado = new SolicitudEstadoDAO();
-        List<SolicitudEstadoDTO> solicitudesEstados = solicitudEstado.getAll();
-        
-        for (SolicitudEstadoDTO tipos : solicitudesEstados) {
-          System.out.println(tipos.getNombre());
-        }
+//        SolicitudEstadoDAO solicitudEstado = new SolicitudEstadoDAO();
+//        List<SolicitudEstadoDTO> solicitudesEstados = solicitudEstado.getAll();
+//        
+//        for (SolicitudEstadoDTO tipos : solicitudesEstados) {
+//          System.out.println(tipos.getNombre());
+//        }
         //}
 
 //        System.out.println(UsuarioDAO.findById(1).toString());
         
-        System.out.println("Lista de Usuarios");
-
-        new UsuarioDAO().getAll().forEach((usuario) -> {
-            System.out.println(usuario.toString());
-        });
+//        System.out.println("Lista de Usuarios");
+//
+//        new UsuarioDAO().getAll().forEach((usuario) -> {
+//            System.out.println(usuario.toString());
+//        });
         
         
      

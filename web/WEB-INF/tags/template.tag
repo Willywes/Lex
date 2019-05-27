@@ -234,37 +234,37 @@
 
 
 
-<!-- AQUI VA EL MENÚ-->
+                    <!-- AQUI VA EL MENÚ-->
 
 
 
-                              <ul class="sidebar-menu" data-widget="tree">
-                                <li class="header">Navegación</li>
-                                <!-- Menus-->
-                                <li><a href="<c:url value = "CrearUsuario"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
-                                <li class="treeview">
-                                  <a href="<c:url value = "/citas"/>"><i class="fa fa-link"></i> <span>Citas</span>
-                                    <span class="pull-right-container">
-                                      <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                  </a>
-                                  <ul class="treeview-menu">
-                                    <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
-                                    <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
-                                  </ul>
-                                </li>
-                                <li class="treeview">
-                                  <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-link"></i> <span>Solicitudes</span>
-                                    <span class="pull-right-container">
-                                      <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                  </a>
-                                  <ul class="treeview-menu">
-                                    <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
-                                    <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
-                                  </ul>
-                                </li>
-                              </ul>
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header">Navegación</li>
+                        <!-- Menus-->
+                        <li><a href="<c:url value = "/modulo/usuarios/index"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
+                        <li class="treeview">
+                            <a href="<c:url value = "/citas"/>"><i class="fa fa-link"></i> <span>Citas</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
+                                <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-link"></i> <span>Solicitudes</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
+                                <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
+                            </ul>
+                        </li>
+                    </ul>
 
 
 
@@ -290,7 +290,9 @@
 
 
                 <section class="content container-fluid">
-                    
+
+                   
+
                     <jsp:invoke fragment="content"/>
 
                 </section>
@@ -311,7 +313,18 @@
         <script src="/Lex/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/Lex/assets/dist/js/adminlte.min.js"></script>
 
-
+ <%
+                        session = request.getSession();
+                        String success = null;
+                        
+                        if (session.getAttribute("success") == null) {
+                            success = (String) session.getAttribute("success");
+                        }else{
+                            session.removeAttribute("success");
+                        }
+                 
+                   
+                    %>
         <jsp:invoke fragment="scripts"/>
     </body>
 </html>

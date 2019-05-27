@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +24,7 @@ import oracle.jdbc.*;
  */
 public class UsuarioDAO {
 
-    private final String CREATE = "{call PKG_USUARIOS.CREATE_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+    private final String CREATE = "{call PKG_USUARIOS.CREATE_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?)}";
     private final String FIND_BY_ID = "{call PKG_USUARIOS.READ_USUARIO(?,?)}";
     private final String GET_ALL = "{call PKG_USUARIOS.READ_ALL_USUARIOS(?)}";
 
@@ -48,17 +49,11 @@ public class UsuarioDAO {
             cs.setInt(9, usuario.getTelefono());
             cs.setString(10, usuario.getDireccion());
             cs.setInt(11, usuario.getId_rol());
-           
+
             cs.registerOutParameter(12, OracleTypes.INTEGER);
+            cs.execute();
 
-            cs.executeUpdate();
-
-            ResultSet rs = (ResultSet) cs.getObject(13);
-
-            while (rs.next()) {
-
-                 return rs.getBoolean("1");
-            }
+            return cs.getInt(12) == 1;
 
         } catch (SQLException | IOException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
