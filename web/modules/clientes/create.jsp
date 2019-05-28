@@ -8,11 +8,12 @@
 
 <t:template>
     <jsp:attribute name="title">
-        Gestión de Usuarios
+        Gestión de Clientes
     </jsp:attribute>
     <jsp:attribute name="subtitle">
-        Crear Usuario
+        Todos los Clientes
     </jsp:attribute>
+        
     <jsp:attribute name="styles">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/dragtable.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-reorder-rows.css">
@@ -28,7 +29,7 @@
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body">
-                        <form action="<c:url value = "/modulo/usuarios/store"/>" method="POST">
+                        <form action="<c:url value = "/modulo/clientes/store"/>" method="POST">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -67,19 +68,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-
-                                        <label for="rol">Rol (*)</label>
-
-                                        <select class="form-control" id="id_rol" name="id_rol">
-                                            <option value="">(Seleccione Rol)</option>
-                                            <c:forEach var="rol" items="${roles}">
-                                                <option value="${rol.id}" ${inputs['id_rol'] == rol.id ? "selected" : "" }>${rol.nombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">Email (*)</label>

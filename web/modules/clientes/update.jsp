@@ -8,11 +8,12 @@
 
 <t:template>
     <jsp:attribute name="title">
-        Gestión de Usuarios
+        Gestión de Clientes
     </jsp:attribute>
     <jsp:attribute name="subtitle">
-        Crear Usuario
+        Todos los Clientes
     </jsp:attribute>
+        
     <jsp:attribute name="styles">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/dragtable.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-reorder-rows.css">
@@ -22,19 +23,20 @@
 
     <jsp:attribute name="content">
         <div class="row">
-
+            
             <%@include file="/modules/globals/alerts.jsp" %>
-
+            
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body">
-                        <form action="<c:url value = "/modulo/usuarios/store"/>" method="POST">
+                        <form action="<c:url value = "/modulo/clientes/update"/>" method="POST">
+                            <input type="hidden" value="${usuario.id}" name="id">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="rut">RUT</label>
                                         <input type="text" class="form-control" id="rut" name="rut" placeholder="11.222.333-K" 
-                                               value="<c:out value="${inputs['rut']}"/>"
+                                               value="<c:out value="${inputs['rut'] ? inputs['rut'] : usuario.rut}"/>"
                                                onkeyup="formarteandoRut($(this));"
                                                onchange="validandoRut($(this));">
                                     </div>
@@ -46,54 +48,37 @@
                                     <div class="form-group">
                                         <label for="nombres">Nombres (*)</label>
                                         <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres del Usuario" 
-                                               value="<c:out value="${inputs['nombres']}"/>">
+                                               value="<c:out value="${inputs['nombres'] ? inputs['nombres'] : usuario.nombres}"/>">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="paterno">Apellido Paterno (*)</label>
                                         <input type="text" class="form-control" id="paterno" name="paterno" placeholder="Apellido Paterno del Usuario" 
-                                               value="<c:out value="${inputs['paterno']}"/>">
+                                               value="<c:out value="${inputs['paterno'] ? inputs['paterno'] : usuario.paterno}"/>">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="materno">Apellido Materno</label>
                                         <input type="text" class="form-control" id="materno" name="materno" placeholder="Apellido Materno del Usuario" 
-                                               value="<c:out value="${inputs['materno']}"/>">
+                                               value="<c:out value="${inputs['materno'] ? inputs['materno'] : usuario.materno}"/>">
                                     </div>
                                 </div>
                                 <div class="col-md-12"><hr></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-
-                                        <label for="rol">Rol (*)</label>
-
-                                        <select class="form-control" id="id_rol" name="id_rol">
-                                            <option value="">(Seleccione Rol)</option>
-                                            <c:forEach var="rol" items="${roles}">
-                                                <option value="${rol.id}" ${inputs['id_rol'] == rol.id ? "selected" : "" }>${rol.nombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
+                              
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">Email (*)</label>
                                         <input type="text" class="form-control" id="email" name="email" placeholder="Email del Usuario" 
-                                               value="<c:out value="${inputs['email']}"/>">
+                                               value="<c:out value="${inputs['email'] ? inputs['email'] : usuario.email}"/>">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="clave">Contraseña (*)</label>
-                                        <input type="text" class="form-control" id="clave" name="clave" placeholder="Clave del Usuario">
-                                    </div>
-                                </div>
-
+                               
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><hr>

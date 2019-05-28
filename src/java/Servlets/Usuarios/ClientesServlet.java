@@ -25,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author willywes
  */
-@WebServlet(name = "UsuariosServlet", urlPatterns = {"/modulo/usuarios/*"})
-public class UsuariosServlet extends HttpServlet {
+@WebServlet(name = "ClientesServlet", urlPatterns = {"/modulo/clientes/*"})
+public class ClientesServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -113,29 +113,24 @@ public class UsuariosServlet extends HttpServlet {
     public void index(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<RolDTO> roles = new RolDAO().getAll();
-        List<UsuarioDTO> usuarios = new UsuarioDAO().getAll();
+        List<UsuarioDTO> usuarios = new UsuarioDAO().getAllClients();
         
-        request.setAttribute("roles", roles);
         request.setAttribute("usuarios", usuarios);
         
-        request.getRequestDispatcher("/modules/usuarios/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/clientes/index.jsp").forward(request, response);
     }
     
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<RolDTO> roles = new RolDAO().getAllRoleUsers();
-        request.setAttribute("roles", roles);
-        
-        request.getRequestDispatcher("/modules/usuarios/create.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/clientes/create.jsp").forward(request, response);
         
     }
     
     public void store(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String redirect = "/modules/usuarios/create.jsp";
+        String redirect = "/modules/clientes/create.jsp";
         
         Validator validator = new Validator();
         validator.addRule("rut", "required|min:8|max:13");
@@ -143,9 +138,6 @@ public class UsuariosServlet extends HttpServlet {
         validator.addRule("paterno", "required|min:4|max:30");
         validator.addRule("email", "required|email|unique:usuarios,email");
         validator.addRule("clave", "required|min:4|max:30");
-        validator.addRule("rol_id", "required");
-        
-        validator.addMessage("rol_id.required", "Seleccione un rol");
         
         validator.validar(request);
         
@@ -162,7 +154,7 @@ public class UsuariosServlet extends HttpServlet {
             usuario.setEmail(request.getParameter("email").toLowerCase());
             
             usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
-            usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
+            usuario.setId_rol(5);
             
             UsuarioDAO u = new UsuarioDAO();
             
@@ -170,13 +162,13 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("success", "Usuario creado correctamente.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("success", "Cliente creado correctamente.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
                 
             } else {
                 
-                request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");
+                request.setAttribute("error", "Error al crear al cliente, inténtelo denuevo.");
                 
             }
             
@@ -185,9 +177,6 @@ public class UsuariosServlet extends HttpServlet {
             request.setAttribute("error", "Error de validación");
             request.setAttribute("inputs", validator.getInputs());
             request.setAttribute("errors", errors);
-            
-            List<RolDTO> roles = new RolDAO().getAllRoleUsers();
-            request.setAttribute("roles", roles);
             
         }
         
@@ -205,8 +194,8 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("warning", "Usuario no encontrado.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("warning", "Cliente no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
                 
             }
@@ -217,24 +206,22 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("warning", "Usuario no encontrado.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("warning", "Cliente no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
                 
             }
             
-            List<RolDTO> roles = new RolDAO().getAllRoleUsers();
-            request.setAttribute("roles", roles);
             request.setAttribute("usuario", usuario);
             
-            request.getRequestDispatcher("/modules/usuarios/update.jsp").forward(request, response);
+            request.getRequestDispatcher("/modules/clientes/update.jsp").forward(request, response);
             
         } catch (Exception e) {
             
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(1);
-            session.setAttribute("warning", "Usuario no encontrado.");
-            response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+            session.setAttribute("warning", "Cliente no encontrado.");
+            response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
             return;
         }
     }
@@ -242,16 +229,13 @@ public class UsuariosServlet extends HttpServlet {
     public void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String redirect = "/modules/usuarios/update.jsp";
+        String redirect = "/modules/clientes/update.jsp";
         
         Validator validator = new Validator();
         validator.addRule("rut", "required|min:8|max:13");
         validator.addRule("nombres", "required|min:4|max:30");
         validator.addRule("paterno", "required|min:4|max:30");
         validator.addRule("email", "required|email|unique:usuarios,email");
-        validator.addRule("rol_id", "required");
-        
-        validator.addMessage("rol_id.required", "Seleccione un rol");
         
         validator.validar(request);
         
@@ -266,7 +250,7 @@ public class UsuariosServlet extends HttpServlet {
             usuario.setPaterno(request.getParameter("paterno").toUpperCase());
             usuario.setMaterno(request.getParameter("materno").toUpperCase());
             usuario.setEmail(request.getParameter("email").toLowerCase());
-            usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
+            usuario.setId_rol(5);
             
             UsuarioDAO u = new UsuarioDAO();
             
@@ -274,13 +258,13 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("success", "Usuario modificado correctamente.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("success", "Cliente modificado correctamente.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
                 
             } else {
                 
-                request.setAttribute("error", "Error al modificar al usuario, inténtelo denuevo.");
+                request.setAttribute("error", "Error al modificar al cliente, inténtelo denuevo.");
                 
             }
             
@@ -290,9 +274,6 @@ public class UsuariosServlet extends HttpServlet {
             request.setAttribute("inputs", validator.getInputs());
             request.setAttribute("usuario", usuario);
             request.setAttribute("errors", errors);
-            
-            List<RolDTO> roles = new RolDAO().getAllRoleUsers();
-            request.setAttribute("roles", roles);
             
         }
         
@@ -319,8 +300,8 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("warning", "Usuario no encontrado.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("warning", "Cliente no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
             }
             
@@ -330,8 +311,8 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("warning", "Usuario no encontrado.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("warning", "Cliente no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
             }
             
@@ -339,16 +320,16 @@ public class UsuariosServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("success", "Estado del usuario cambiado correctamente.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("success", "Estado del cliente cambiado correctamente.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
                 
             } else {
                 
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("errr", "Error al cambiar el estado del usuario.");
-                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                session.setAttribute("errr", "Error al cambiar el estado del cliente.");
+                response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
                 return;
                 
             }
@@ -357,8 +338,8 @@ public class UsuariosServlet extends HttpServlet {
             
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(1);
-            session.setAttribute("warning", "Usuario no encontrado.");
-            response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+            session.setAttribute("warning", "Cliente no encontrado.");
+            response.sendRedirect(request.getContextPath() + "/modulo/clientes/index");
             return;
             
         }
