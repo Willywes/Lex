@@ -1,5 +1,5 @@
 <%-- 
-    Document   : cita index
+    Document   : cita modificar
     Created on : 15-05-2019, 22:34:03
     Author     : claudio
 --%>
@@ -31,11 +31,11 @@
 
                             <tbody>
                             <center>
-                                <div>
+                                <div class="form-group">
                                     <h3>Editar Cita nº ${id_cita} </h3>
 
                                 </div>
-                                <div>
+                                <div class="form-group">
                                     <form action="editar" method="POST">
                                         Fecha:
                                         <%--  <input type="number" name="txtid" value="${solicitud.getIdSolicitud()}"><br>  --%>

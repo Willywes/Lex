@@ -28,6 +28,10 @@
         <servlet-name>EstadoCita</servlet-name>
         <servlet-class>Servlets.Cita.EstadoCita</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarCita</servlet-name>
+        <servlet-class>Servlets.Cita.BuscarCita</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CrearCitaServlet</servlet-name>
         <url-pattern>/CrearCitaServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>EstadoCita</servlet-name>
         <url-pattern>/citas/estado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarCita</servlet-name>
+        <url-pattern>/citas/buscar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
