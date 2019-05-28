@@ -41,6 +41,20 @@
                     <td>${solicitud.creado}</td>
                     <td>${solicitud.cliente.rut} | ${solicitud.cliente.nombres} ${solicitud.cliente.paterno}</td>
                     <td>${solicitud.tecnico.rut} | ${solicitud.tecnico.nombres} ${solicitud.tecnico.paterno}</td>
+                    <td style="width:1%;white-space: nowrap;">
+                                            <%--<form action="citas/editar" method="POST"> --%>
+                                            <a href="solicitudes/editar?id=${solicitud.id_solicitud}">
+                                              <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>
+                                              
+                                              <a href="citas/cambiar?id=${solicitud.id_solicitud}">
+                                              <button class="btn btn-success" title="Cambiar Status"><i class="fa fa-toggle-on"></i></button></a>
+                                           
+                                              <form action="solicitudes/borrar" method="POST">
+                                                <input type="hidden" name="id" value="${solicitud.id_solicitud}" />
+                                                <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
+                                                  <i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
                   </tr>
                 </c:forEach>
               </tbody>

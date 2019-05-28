@@ -49,6 +49,9 @@ public class CrearCita extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //codigo para rellenar el select 
+        
+        //
         request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
     }
 
@@ -97,6 +100,6 @@ public class CrearCita extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short descript  ion";
+        return "Short description";
     }// </editor-fold>
 }

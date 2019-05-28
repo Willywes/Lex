@@ -20,6 +20,14 @@
         <servlet-name>CambiarEstado</servlet-name>
         <servlet-class>Servlets.Cita.CambiarEstado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitudBorrar</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudBorrar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EstadoCita</servlet-name>
+        <servlet-class>Servlets.Cita.EstadoCita</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CrearCitaServlet</servlet-name>
         <url-pattern>/CrearCitaServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>CambiarEstado</servlet-name>
         <url-pattern>/CambiarEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudBorrar</servlet-name>
+        <url-pattern>/solicitudes/borrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EstadoCita</servlet-name>
+        <url-pattern>/citas/estado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

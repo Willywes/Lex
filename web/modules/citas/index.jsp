@@ -47,7 +47,7 @@
                                       
                                     <tr>
                                         <td>${cita.getId_cita()}</td>
-                                        <td>${cita.getFecha_hora()}</td>
+                                        <td>${cita.getFecha_hora()} ${cita.getHora()}</td>
                                         <td>${cita.getId_notaria()}</td>
                                         <c:set var="estado" value=""/>
                                         <c:if test="${cita.getId_estado_cita()==1}">

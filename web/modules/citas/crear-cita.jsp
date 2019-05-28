@@ -66,6 +66,25 @@
                <%--  numero estado notaria:
                 <input type="number" required name="txtestadonotaria"><br>
                 --%>
+                
+                <%--  para crear el select de la notaria
+                <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <label for="rol">Rol (*)</label>
+                                         ${roles}
+                                        <select class="form-control" id="nombres" name="nombres" placeholder="Nombres del Usuario">
+                                            <option value="">(Seleccione Rol)</option>
+                                            <c:forEach var="rol" items="${roles}">
+                                                <option value="${rol.id}">${rol.nombre}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                
+                
+                --%>
                 <input type="submit" name="accion" value="Guardar">
                 
                 <input type="button" name="Cancelar" value="Cancelar" onClick="location.href='/Lex/citas'">

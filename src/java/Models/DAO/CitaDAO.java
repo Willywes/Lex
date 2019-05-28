@@ -91,6 +91,7 @@ public class CitaDAO {
                 CitaDTO cita = new CitaDTO();
                 cita.setId_cita(rs.getInt("ID_CITA"));
                 cita.setFecha_hora(rs.getDate("FECHA_HORA"));
+                cita.setHora(rs.getTime("FECHA_HORA"));
                 cita.setId_notaria(rs.getInt("ID_NOTARIA"));
                 cita.setId_estado_cita(rs.getInt("ID_ESTADO_CITA"));
                

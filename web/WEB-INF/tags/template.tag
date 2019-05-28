@@ -250,7 +250,8 @@
                                   </a>
                                   <ul class="treeview-menu">
                                     <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
-                                    <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
+                                    <li><a href="<c:url value = "/citas/crear"/>">Crear Cita</a></li>
+                                    <li><a href="<c:url value = "/citas/estado"/>">Ver Estado Citas</a></li>
                                   </ul>
                                 </li>
                                 <li class="treeview">
