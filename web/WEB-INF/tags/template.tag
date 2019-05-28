@@ -159,6 +159,18 @@
                             </ul>
                         </li>
                         <li class="treeview">
+                            <a href="<c:url value = "/contratos"/>"><i class="fa fa-link"></i> <span>Contratos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/contratos"/>">Ver Contratos</a></li>
+                                <li><a href="<c:url value = "/contratos/crear"/>">Crear contrato</a></li>
+                                <li><a href="<c:url value = "/contratos/modificar"/>">Modificar contrato</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
                             <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-link"></i> <span>Solicitudes</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
