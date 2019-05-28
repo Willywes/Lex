@@ -14,7 +14,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
-        <url-pattern>/ContratoServlet</url-pattern>
+        <url-pattern>/contratos</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CrearContratoServlet</servlet-name>

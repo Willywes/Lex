@@ -172,7 +172,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/contratos"/>">Ver Contratos</a></li>
                                 <li><a href="<c:url value = "/contratos/crear"/>">Crear contrato</a></li>
-                                <li><a href="<c:url value = "/contratos/modificar"/>">Modificar contrato</a></li>
+                                <!--<li><a href="">Modificar contrato</a></li>-->
                             </ul>
                         </li>
                         <li class="treeview">
