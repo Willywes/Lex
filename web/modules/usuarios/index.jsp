@@ -43,7 +43,7 @@
                                     <th>Paterno</th>
                                     <th>Materno</th>
                                     <th>Nombres</th>
-                           ¡
+                                    <th>Rol</th>
                                     <th style="width:1%;white-space: nowrap;">Estado</th>
                                     <th style="white-space: nowrap;">Acciones</th>
                             </thead>
@@ -61,7 +61,7 @@
                                         <td style="vertical-align: middle;">${usuario.paterno}</td>
                                         <td style="vertical-align: middle;">${usuario.materno}</td>
                                         <td style="vertical-align: middle;">${usuario.nombres}</td>
-                                        
+                                        <td style="vertical-align: middle;">${roleName}</td>
                                         <td style="width:1%;white-space: nowrap;">
 
                                             <c:choose>
@@ -117,7 +117,7 @@
                                     <th>Paterno</th>
                                     <th>Materno</th>
                                     <th>Nombres</th>
-                                
+                                    <th>Rol</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
