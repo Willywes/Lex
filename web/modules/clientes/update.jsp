@@ -11,7 +11,7 @@
         Gestión de Clientes
     </jsp:attribute>
     <jsp:attribute name="subtitle">
-        Todos los Clientes
+        Actualizar Cliente
     </jsp:attribute>
         
     <jsp:attribute name="styles">
