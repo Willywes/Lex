@@ -11,6 +11,7 @@ import Models.DTO.SolicitudDTO;
 import Models.DTO.SolicitudTiposDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,7 +56,9 @@ public class Solicitudes extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
+    
+    
+    
   }
 
   @Override

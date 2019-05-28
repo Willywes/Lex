@@ -35,6 +35,7 @@ public class SolicitudDAO {
   private final String DELETE = "{call PKG_SOLICITUDES.DELETE_SOLICITUD(?,?)}";
   private final String UPDATE = "{call PKG_SOLICITUDES.UPDATE_SOLICITUD(?,?,?,?,?,?,?,?,?,?)}";
 
+  
   Conexion con = new Conexion();
 
   public SolicitudDTO findById(int id) {
@@ -44,7 +45,8 @@ public class SolicitudDAO {
     try {
       Connection cn = con.open();
       CallableStatement cs = cn.prepareCall(FIND_BY_ID);
-
+      
+      
       cs.setInt(1, id);
       cs.registerOutParameter(2, OracleTypes.CURSOR);
       cs.executeUpdate();
@@ -71,7 +73,7 @@ public class SolicitudDAO {
     return solicitud;
 
   }
-
+  
   public List<SolicitudDTO> getAll() {
 
     List<SolicitudDTO> list = new ArrayList<>();
@@ -121,28 +123,34 @@ public class SolicitudDAO {
     return list;
   }
 
-  public int create(CitaDTO cita) {
+  public int create(SolicitudDTO solicitud) {
     int resultadoOperacion = 0;
 
     try {
       Connection cn = con.open();
       CallableStatement cs = cn.prepareCall(CREATE);
-      cs.setInt(1, cita.getId_cita());
-      cs.setDate(2, cita.getFecha_hora());
-      cs.setInt(3, cita.getId_notaria());
-      cs.setInt(4, cita.getId_estado_cita());
-
-      cs.registerOutParameter(5, Types.INTEGER);// salida de parametro 5
+  
+      cs.setInt(1, solicitud.getId_solicitud());
+      cs.setDate(2, solicitud.getFecha_hora());
+      cs.setString(3, solicitud.getDescripcion());
+      cs.setInt(4, solicitud.getTipoSolicitud().getId());
+      cs.setInt(5, solicitud.getEstadoSolicitud().getId_estado_solicitud());
+      cs.setDate(6, solicitud.getCreado());
+      cs.setDate(7, solicitud.getModificado());
+      cs.setInt(8, solicitud.getCliente().getId());
+      cs.setInt(9, solicitud.getTecnico().getId());
+      
+      cs.registerOutParameter(10, Types.INTEGER);
       cs.execute();
 
-      resultadoOperacion = cs.getInt(5);
+      resultadoOperacion = cs.getInt(10);
 
     } catch (SQLException | IOException ex) {
       Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       con.close();
     }
-
+    
     return resultadoOperacion;
   }
 
