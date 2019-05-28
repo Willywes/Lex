@@ -64,12 +64,23 @@
                                         <td>${usuario.materno}</td>
                                         <td>${usuario.nombres}</td>
                                         <td>${roleName}</td>
-                                        <td style="width:1%;white-space: nowrap;"><span class="badge bg-green">Activado</span></td>
+                                        <td style="width:1%;white-space: nowrap;">
+
+                                            <c:choose>
+                                                <c:when test="${usuario.activo == true}">
+                                                    <span class="badge bg-green">Activado</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge bg-red">Desactivado</span>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                        </td>
                                         <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
                                             <div style="width: max-content; float: left;">
                                                 <div style="width: max-content; float: left;">
                                                     <form action="edit" method="get">
-                                                        <input type="hidden" name="usuario" value="${usuario.id}">
+                                                        <input type="hidden" name="id" value="${usuario.id}">
                                                         <button type="submit" class="btn btn-warning btn-sm" title="Editar">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
@@ -77,10 +88,20 @@
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <form action="change-status" method="post">
-                                                        <input type="hidden" name="usuario" value="${usuario.id}">
-                                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        <input type="hidden" name="id" value="${usuario.id}">
+                                                        <c:choose>
+                                                            <c:when test="${usuario.activo == true}">
+                                                                <button type="submit" class="btn btn-danger btn-sm" title="Desactivar">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <button type="submit" class="btn btn-success btn-sm" title="Activar">
+                                                                    <i class="fa fa-check"></i>
+                                                                </button>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -115,7 +136,7 @@
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <script>
-        
+
         </script>
     </jsp:attribute>
 </t:template>

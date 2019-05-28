@@ -40,7 +40,7 @@ public class UsuariosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         String route = request.getPathInfo().substring(1);
 
 // este metodo ql recibe solo las peticiones get
@@ -50,23 +50,23 @@ public class UsuariosServlet extends HttpServlet {
 // show muestra el detalle del ojbeto, 
 // el edit es una mezcla del show y create
         if (route.contains("index")) {
-
+            
             index(request, response);
-
+            
         } else if (route.contains("create")) {
-
+            
             create(request, response);
-
+            
         } else if (route.contains("edit")) {
-
+            
             edit(request, response);
         } else if (route.contains("show")) {
-
+            
             show(request, response);
         } else {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
-
+        
     }
 
     /**
@@ -87,56 +87,56 @@ public class UsuariosServlet extends HttpServlet {
 // el delete elimina segun un parametro id por ejemplo. 
 // el change status cambia el estado de un ojeto mediante un id
         String route = request.getPathInfo().substring(1);
-
+        
         if (route.contains("store")) {
             store(request, response);
-
+            
         } else if (route.contains("update")) {
-
+            
             update(request, response);
-
+            
         } else if (route.contains("delete")) {
-
+            
             delete(request, response);
-
+            
         } else if (route.contains("change-status")) {
-
+            
             changeStatus(request, response);
-
+            
         } else {
-
+            
             request.getRequestDispatcher("/").forward(request, response);
-
+            
         }
     }
-
+    
     public void index(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         List<RolDTO> roles = new RolDAO().getAll();
         List<UsuarioDTO> usuarios = new UsuarioDAO().getAll();
-
+        
         request.setAttribute("roles", roles);
         request.setAttribute("usuarios", usuarios);
-
+        
         request.getRequestDispatcher("/modules/usuarios/index.jsp").forward(request, response);
     }
-
+    
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         List<RolDTO> roles = new RolDAO().getAll();
         request.setAttribute("roles", roles);
-
+        
         request.getRequestDispatcher("/modules/usuarios/create.jsp").forward(request, response);
-
+        
     }
-
+    
     public void store(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         String redirect = "/modules/usuarios/create.jsp";
-
+        
         Validator validator = new Validator();
         validator.addRule("rut", "required|min:8|max:13");
         validator.addRule("nombres", "required|min:4|max:30");
@@ -145,150 +145,225 @@ public class UsuariosServlet extends HttpServlet {
         validator.addRule("email", "required|email|unique:usuarios,email");
         validator.addRule("clave", "required|min:4|max:30");
         validator.addRule("rol_id", "required");
-
+        
         validator.addMessage("rol_id.required", "Seleccione un rol");
-
+        
         validator.validar(request);
-
+        
         Map<String, String> errors = validator.getErrors();
-
+        
         if (errors.isEmpty()) {
-
+            
             UsuarioDTO usuario = new UsuarioDTO();
+            
             usuario.setRut(request.getParameter("rut").toUpperCase());
             usuario.setNombres(request.getParameter("nombres").toUpperCase());
             usuario.setPaterno(request.getParameter("paterno").toUpperCase());
             usuario.setMaterno(request.getParameter("materno").toUpperCase());
             usuario.setEmail(request.getParameter("email").toLowerCase());
-
+            
             usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
             usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
-
+            
             UsuarioDAO u = new UsuarioDAO();
-
+            
             if (u.create(usuario)) {
+                
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("success", "Usuario creado correctamente");
+                session.setAttribute("success", "Usuario creado correctamente.");
                 response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
                 return;
-
+                
             } else {
+                
                 request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");
+                
             }
-
+            
         } else {
+            
             request.setAttribute("error", "Error de validación");
             request.setAttribute("inputs", validator.getInputs());
             request.setAttribute("errors", errors);
-
+            
             List<RolDTO> roles = new RolDAO().getAll();
             request.setAttribute("roles", roles);
-
+            
         }
+        
         request.getRequestDispatcher(redirect).forward(request, response);
-
+        
     }
-
+    
     public void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String id = request.getParameter("usuario");
-        if (id == null) {
+        
+        try {
+            
+            String id = request.getParameter("id");
+            if (id == null) {
+                
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("warning", "Usuario no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+                
+            }
+            
+            UsuarioDTO usuario = new UsuarioDAO().findById(Integer.parseInt(id));
+            
+            if (usuario.getId() == 0) {
+                
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("warning", "Usuario no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+                
+            }
+            
+            List<RolDTO> roles = new RolDAO().getAll();
+            request.setAttribute("roles", roles);
+            request.setAttribute("usuario", usuario);
+            
+            request.getRequestDispatcher("/modules/usuarios/update.jsp").forward(request, response);
+            
+        } catch (Exception e) {
+            
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(1);
-            session.setAttribute("warning", "Usuario no encontrado");
+            session.setAttribute("warning", "Usuario no encontrado.");
             response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
             return;
-        } 
-
-        UsuarioDTO usuario = new UsuarioDAO().findById(Integer.parseInt(id));
-        System.out.println(usuario.toString());
-        
-        if (usuario.getId() == 0) {
-            HttpSession session = request.getSession();
-            session.setMaxInactiveInterval(1);
-            session.setAttribute("warning", "Usuario no encontrado");
-            response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
-            return;
-        } 
-        
-        List<RolDTO> roles = new RolDAO().getAll();
-        request.setAttribute("roles", roles);
-        request.setAttribute("usuario", usuario);
-
-        request.getRequestDispatcher("/modules/usuarios/update.jsp").forward(request, response);
+        }
     }
-
+    
     public void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String redirect = "/modules/usuarios/create.jsp";
-
+        
+        String redirect = "/modules/usuarios/update.jsp";
+        
         Validator validator = new Validator();
         validator.addRule("rut", "required|min:8|max:13");
         validator.addRule("nombres", "required|min:4|max:30");
         validator.addRule("paterno", "required|min:4|max:30");
         validator.addRule("materno", "required|min:4|max:30");
         validator.addRule("email", "required|email|unique:usuarios,email");
-        validator.addRule("clave", "required|min:4|max:30");
         validator.addRule("rol_id", "required");
-
+        
         validator.addMessage("rol_id.required", "Seleccione un rol");
-
+        
         validator.validar(request);
-
+        
         Map<String, String> errors = validator.getErrors();
-
+        
+        UsuarioDTO usuario = new UsuarioDAO().findById(Integer.parseInt(request.getParameter("id")));
+        
         if (errors.isEmpty()) {
-
-            int id = Integer.parseInt(request.getParameter("id"));
-
-            UsuarioDTO usuario = new UsuarioDAO().findById(id);
-
+            
             usuario.setRut(request.getParameter("rut").toUpperCase());
             usuario.setNombres(request.getParameter("nombres").toUpperCase());
             usuario.setPaterno(request.getParameter("paterno").toUpperCase());
             usuario.setMaterno(request.getParameter("materno").toUpperCase());
             usuario.setEmail(request.getParameter("email").toLowerCase());
-
-            usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
             usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
-
+            
             UsuarioDAO u = new UsuarioDAO();
-
-            if (u.create(usuario)) {
+            
+            if (u.update(usuario)) {
+                
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(1);
-                session.setAttribute("success", "Usuario creado correctamente");
+                session.setAttribute("success", "Usuario modificado correctamente.");
                 response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
                 return;
-
+                
             } else {
-                request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");
+                
+                request.setAttribute("error", "Error al modificar al usuario, inténtelo denuevo.");
+                
             }
-
+            
         } else {
+            
             request.setAttribute("error", "Error de validación");
             request.setAttribute("inputs", validator.getInputs());
+            request.setAttribute("usuario", usuario);
             request.setAttribute("errors", errors);
-
+            
             List<RolDTO> roles = new RolDAO().getAll();
             request.setAttribute("roles", roles);
-
+            
         }
+        
         request.getRequestDispatcher(redirect).forward(request, response);
+        
     }
-
+    
     public void show(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-
+    
     public void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-
+    
     public void changeStatus(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try {
+            
+            String id = request.getParameter("id");
+            
+            if (id == null) {
+                
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("warning", "Usuario no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+            }
+            
+            UsuarioDTO usuario = new UsuarioDAO().findById(Integer.parseInt(id));
+            
+            if (usuario.getId() == 0) {
+                
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("warning", "Usuario no encontrado.");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+            }
+            
+            if (new UsuarioDAO().changeStatus(usuario)) {
+                
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("success", "Estado del usuario cambiado correctamente.");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+                
+            } else {
+                
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("errr", "Error al cambiar el estado del usuario.");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+                
+            }
+            
+        } catch (Exception e) {
+            
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(1);
+            session.setAttribute("warning", "Usuario no encontrado.");
+            response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+            return;
+            
+        }
+        
     }
 }

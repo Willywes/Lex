@@ -25,9 +25,12 @@ import oracle.jdbc.*;
 public class UsuarioDAO {
 
     private final String CREATE = "{call PKG_USUARIOS.CREATE_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?)}";
+    private final String UPDATE = "{call PKG_USUARIOS.UPDATE_USUARIO(?,?,?,?,?,?,?,?,?,?,?,?)}";
+    private final String CHANGE_STATUS = "{call PKG_USUARIOS.CHANGE_STATUS_USUARIO(?,?)}";
     private final String FIND_BY_ID = "{call PKG_USUARIOS.READ_USUARIO(?,?)}";
     private final String GET_ALL = "{call PKG_USUARIOS.READ_ALL_USUARIOS(?)}";
 
+    
     Conexion con;
 
     public boolean create(UsuarioDTO usuario) {
@@ -51,7 +54,7 @@ public class UsuarioDAO {
             cs.setInt(11, usuario.getId_rol());
 
             cs.registerOutParameter(12, OracleTypes.INTEGER);
-            cs.execute();
+            boolean execute = cs.execute();
 
             return cs.getInt(12) == 1;
 
@@ -64,6 +67,64 @@ public class UsuarioDAO {
         return false;
     }
 
+    public boolean update(UsuarioDTO usuario) {
+
+        try {
+
+            con = new Conexion();
+
+            CallableStatement cs = con.open().prepareCall(UPDATE);
+
+            cs.setInt(1, usuario.getId());
+            cs.setString(2, usuario.getRut());
+            cs.setString(3, usuario.getPaterno());
+            cs.setString(4, usuario.getMaterno());
+            cs.setString(5, usuario.getNombres());
+            cs.setDate(6, usuario.getfNac());
+            cs.setString(7, usuario.getEmail());
+            cs.setInt(8, usuario.getCelular());
+            cs.setInt(9, usuario.getTelefono());
+            cs.setString(10, usuario.getDireccion());
+            cs.setInt(11, usuario.getId_rol());
+
+            cs.registerOutParameter(12, OracleTypes.INTEGER);
+            boolean execute = cs.execute();
+
+            return cs.getInt(12) == 1;
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return false;
+    }
+
+    public boolean changeStatus(UsuarioDTO usuario) {
+
+        try {
+
+            con = new Conexion();
+
+            CallableStatement cs = con.open().prepareCall(CHANGE_STATUS);
+
+            cs.setInt(1, usuario.getId());
+            cs.registerOutParameter(2, OracleTypes.INTEGER);
+            
+            boolean execute = cs.execute();
+
+            return cs.getInt(2) == 1;
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return false;
+    }
+    
     public UsuarioDTO findById(int id) {
 
         UsuarioDTO user = new UsuarioDTO();

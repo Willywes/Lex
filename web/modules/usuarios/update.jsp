@@ -29,6 +29,7 @@
                 <div class="box box-primary">
                     <div class="box-body">
                         <form action="<c:url value = "/modulo/usuarios/update"/>" method="POST">
+                            <input type="hidden" value="${usuario.id}" name="id">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -87,12 +88,7 @@
                                                value="<c:out value="${inputs['email'] ? inputs['email'] : usuario.email}"/>">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="clave">Contraseña (*)</label>
-                                        <input type="text" class="form-control" id="clave" name="clave" placeholder="Clave del Usuario">
-                                    </div>
-                                </div>
+                               
                                 
                             </div>
                             <div class="row">
