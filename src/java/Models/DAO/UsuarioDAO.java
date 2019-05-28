@@ -29,7 +29,7 @@ public class UsuarioDAO {
     private final String CHANGE_STATUS = "{call PKG_USUARIOS.CHANGE_STATUS_USUARIO(?,?)}";
     private final String FIND_BY_ID = "{call PKG_USUARIOS.READ_USUARIO(?,?)}";
     private final String GET_ALL = "{call PKG_USUARIOS.READ_ALL_USUARIOS(?)}";
-
+    private final String GET_ALL_CLIENTS = "{call PKG_USUARIOS.READ_ALL_CLIENTES(?)}";
     
     Conexion con;
 
@@ -180,6 +180,52 @@ public class UsuarioDAO {
             con = new Conexion();
 
             CallableStatement cs = con.open().prepareCall(GET_ALL);
+
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+
+                UsuarioDTO user = new UsuarioDTO();
+
+                user.setId(rs.getInt("ID_USUARIO"));
+                user.setNombres(rs.getString("NOMBRES"));
+                user.setPaterno(rs.getString("PATERNO"));
+                user.setMaterno(rs.getString("MATERNO"));
+                user.setRut(rs.getString("RUT"));
+                user.setfNac(rs.getDate("F_NAC"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setCelular(rs.getInt("CELULAR"));
+                user.setTelefono(rs.getInt("TELEFONO"));
+                user.setDireccion(rs.getString("DIRECCION"));
+                user.setActivo(rs.getBoolean("ACTIVO"));
+                user.setId_rol(rs.getInt("ID_ROL"));
+                user.setCreado(rs.getDate("CREADO"));
+                user.setModificado(rs.getDate("MODIFICADO"));
+
+                list.add(user);
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return list;
+    }
+    
+    public List<UsuarioDTO> getAllClients() {
+
+        List<UsuarioDTO> list = new ArrayList();
+
+        try {
+
+            con = new Conexion();
+
+            CallableStatement cs = con.open().prepareCall(GET_ALL_CLIENTS);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.executeUpdate();

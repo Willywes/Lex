@@ -5,10 +5,10 @@
 
 <t:template>
     <jsp:attribute name="title">
-        Gestión de Usuarios
+        Gestión de Clientes
     </jsp:attribute>
     <jsp:attribute name="subtitle">
-        Todos los Usuarios
+        Todos los Clientes
     </jsp:attribute>
 
     <jsp:attribute name="styles">
@@ -30,7 +30,7 @@
                     <div class="box-header with-border">
                         <div  class="btn-group">
                             <a href="create" class="btn btn-success"> 
-                                <i class="fa fa-plus"></i> Nuevo Usuario
+                                <i class="fa fa-plus"></i> Nuevo Cliente
                             </a>
                         </div>
                     </div>
@@ -43,25 +43,20 @@
                                     <th>Paterno</th>
                                     <th>Materno</th>
                                     <th>Nombres</th>
-                           ¡
+                             
                                     <th style="width:1%;white-space: nowrap;">Estado</th>
                                     <th style="white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
 
                                 <c:forEach var="usuario" items="${usuarios}">
-                                    <c:set var="roleName" value="" />
-                                    <c:forEach var="rol" items="${roles}">
-                                        <c:if test="${rol.id == usuario.id_rol}">
-                                            <c:set var="roleName" value="${rol.nombre}" />
-                                        </c:if>
-                                    </c:forEach>
+                                    
                                     <tr>
                                         <td style="vertical-align: middle;">${usuario.rut}</td>
                                         <td style="vertical-align: middle;">${usuario.paterno}</td>
                                         <td style="vertical-align: middle;">${usuario.materno}</td>
                                         <td style="vertical-align: middle;">${usuario.nombres}</td>
-                                        
+                                       
                                         <td style="width:1%;white-space: nowrap;">
 
                                             <c:choose>
@@ -117,7 +112,7 @@
                                     <th>Paterno</th>
                                     <th>Materno</th>
                                     <th>Nombres</th>
-                                
+                         
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>

@@ -26,6 +26,8 @@ public class RolDAO {
 
     private final String FIND_BY_ID = "{call PKG_ROLES.READ_ROL(?,?)}";
     private final String GET_ALL = "{call PKG_ROLES.READ_ALL_ROLES(?)}";
+    private final String GET_ALL_ROLE_USERS = "{call PKG_ROLES.READ_ALL_ROLES_USUARIOS(?)}";
+
 
     Conexion con = new Conexion();
 
@@ -73,6 +75,40 @@ public class RolDAO {
             Connection cn = con.open();
 
             CallableStatement cs = cn.prepareCall(GET_ALL);
+
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+
+            while (rs.next()) {
+
+                RolDTO rol = new RolDTO();
+
+                rol.setId(rs.getInt("ID_ROL"));
+                rol.setNombre(rs.getString("NOMBRE"));
+
+                list.add(rol);
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return list;
+    }
+    
+    public List<RolDTO> getAllRoleUsers() {
+
+        List<RolDTO> list = new ArrayList<>();
+
+        try {
+
+            Connection cn = con.open();
+
+            CallableStatement cs = cn.prepareCall(GET_ALL_ROLE_USERS);
 
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.executeUpdate();
