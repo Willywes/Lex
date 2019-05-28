@@ -4,6 +4,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:template>
+    <jsp:attribute name="title">
+        Gestión de Usuarios
+    </jsp:attribute>
+    <jsp:attribute name="subtitle">
+        Todos los Usuarios
+    </jsp:attribute>
+
     <jsp:attribute name="styles">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/dragtable.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-reorder-rows.css">
@@ -11,10 +18,12 @@
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table.min.css">
     </jsp:attribute>
 
+
+
     <jsp:attribute name="content">
 
         <div class="row">
-            
+
             <%@include file="/modules/globals/alerts.jsp" %>
 
 
@@ -31,14 +40,14 @@
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th style="width:1%;white-space: nowrap;">Id</th>
+
                                     <th>Rut</th>
                                     <th>Paterno</th>
                                     <th>Materno</th>
                                     <th>Nombres</th>
                                     <th>Rol</th>
                                     <th style="width:1%;white-space: nowrap;">Estado</th>
-                                    <th style="width:1%;white-space: nowrap;">Acciones</th>
+                                    <th style="white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
 
@@ -50,16 +59,31 @@
                                         </c:if>
                                     </c:forEach>
                                     <tr>
-                                        <td>${usuario.id}</td>
                                         <td>${usuario.rut}</td>
                                         <td>${usuario.paterno}</td>
                                         <td>${usuario.materno}</td>
                                         <td>${usuario.nombres}</td>
                                         <td>${roleName}</td>
                                         <td style="width:1%;white-space: nowrap;"><span class="badge bg-green">Activado</span></td>
-                                        <td style="width:1%;white-space: nowrap;">
-                                            <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                        <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
+                                            <div style="width: max-content; float: left;">
+                                                <div style="width: max-content; float: left;">
+                                                    <form action="edit" method="get">
+                                                        <input type="hidden" name="usuario" value="${usuario.id}">
+                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div style="width: max-content; float: left; margin-left: 5px">
+                                                    <form action="change-status" method="post">
+                                                        <input type="hidden" name="usuario" value="${usuario.id}">
+                                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
 
@@ -70,7 +94,6 @@
 
                             <tfoot>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Rut</th>
                                     <th>Paterno</th>
                                     <th>Materno</th>
@@ -91,6 +114,9 @@
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script>
+        
+        </script>
     </jsp:attribute>
 </t:template>
 

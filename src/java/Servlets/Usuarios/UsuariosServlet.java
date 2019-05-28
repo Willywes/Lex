@@ -49,18 +49,18 @@ public class UsuariosServlet extends HttpServlet {
 // edit retorna un formulatio similar al de crear pero con los datos del objeto, ejemplo usuario
 // show muestra el detalle del ojbeto, 
 // el edit es una mezcla del show y create
-        if (route.equals("index")) {
+        if (route.contains("index")) {
 
             index(request, response);
 
-        } else if (route.equals("create")) {
+        } else if (route.contains("create")) {
 
             create(request, response);
 
-        } else if (route.equals("edit")) {
+        } else if (route.contains("edit")) {
 
             edit(request, response);
-        } else if (route.equals("show")) {
+        } else if (route.contains("show")) {
 
             show(request, response);
         } else {
@@ -88,18 +88,18 @@ public class UsuariosServlet extends HttpServlet {
 // el change status cambia el estado de un ojeto mediante un id
         String route = request.getPathInfo().substring(1);
 
-        if (route.equals("store")) {
+        if (route.contains("store")) {
             store(request, response);
 
-        } else if (route.equals("update")) {
+        } else if (route.contains("update")) {
 
             update(request, response);
 
-        } else if (route.equals("delete")) {
+        } else if (route.contains("delete")) {
 
             delete(request, response);
 
-        } else if (route.equals("change-status")) {
+        } else if (route.contains("change-status")) {
 
             changeStatus(request, response);
 
@@ -172,16 +172,16 @@ public class UsuariosServlet extends HttpServlet {
                 session.setAttribute("success", "Usuario creado correctamente");
                 response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
                 return;
-                
+
             } else {
-                request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");   
+                request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");
             }
 
         } else {
             request.setAttribute("error", "Error de validación");
             request.setAttribute("inputs", validator.getInputs());
             request.setAttribute("errors", errors);
-            
+
             List<RolDTO> roles = new RolDAO().getAll();
             request.setAttribute("roles", roles);
 
@@ -189,15 +189,95 @@ public class UsuariosServlet extends HttpServlet {
         request.getRequestDispatcher(redirect).forward(request, response);
 
     }
-    
-   
 
     public void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String id = request.getParameter("usuario");
+        if (id == null) {
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(1);
+            session.setAttribute("warning", "Usuario no encontrado");
+            response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+            return;
+        } 
+
+        UsuarioDTO usuario = new UsuarioDAO().findById(Integer.parseInt(id));
+        System.out.println(usuario.toString());
+        
+        if (usuario.getId() == 0) {
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(1);
+            session.setAttribute("warning", "Usuario no encontrado");
+            response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+            return;
+        } 
+        
+        List<RolDTO> roles = new RolDAO().getAll();
+        request.setAttribute("roles", roles);
+        request.setAttribute("usuario", usuario);
+
+        request.getRequestDispatcher("/modules/usuarios/update.jsp").forward(request, response);
     }
 
     public void update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String redirect = "/modules/usuarios/create.jsp";
+
+        Validator validator = new Validator();
+        validator.addRule("rut", "required|min:8|max:13");
+        validator.addRule("nombres", "required|min:4|max:30");
+        validator.addRule("paterno", "required|min:4|max:30");
+        validator.addRule("materno", "required|min:4|max:30");
+        validator.addRule("email", "required|email|unique:usuarios,email");
+        validator.addRule("clave", "required|min:4|max:30");
+        validator.addRule("rol_id", "required");
+
+        validator.addMessage("rol_id.required", "Seleccione un rol");
+
+        validator.validar(request);
+
+        Map<String, String> errors = validator.getErrors();
+
+        if (errors.isEmpty()) {
+
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            UsuarioDTO usuario = new UsuarioDAO().findById(id);
+
+            usuario.setRut(request.getParameter("rut").toUpperCase());
+            usuario.setNombres(request.getParameter("nombres").toUpperCase());
+            usuario.setPaterno(request.getParameter("paterno").toUpperCase());
+            usuario.setMaterno(request.getParameter("materno").toUpperCase());
+            usuario.setEmail(request.getParameter("email").toLowerCase());
+
+            usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
+            usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
+
+            UsuarioDAO u = new UsuarioDAO();
+
+            if (u.create(usuario)) {
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("success", "Usuario creado correctamente");
+                response.sendRedirect(request.getContextPath() + "/modulo/usuarios/index");
+                return;
+
+            } else {
+                request.setAttribute("error", "Error al crear al usuario, inténtelo denuevo.");
+            }
+
+        } else {
+            request.setAttribute("error", "Error de validación");
+            request.setAttribute("inputs", validator.getInputs());
+            request.setAttribute("errors", errors);
+
+            List<RolDTO> roles = new RolDAO().getAll();
+            request.setAttribute("roles", roles);
+
+        }
+        request.getRequestDispatcher(redirect).forward(request, response);
     }
 
     public void show(HttpServletRequest request, HttpServletResponse response)

@@ -85,7 +85,7 @@ public class UsuarioDAO {
 
                 user.setId(rs.getInt("ID_USUARIO"));
                 user.setNombres(rs.getString("NOMBRES"));
-                user.setPaterno(rs.getString("PARTENO"));
+                user.setPaterno(rs.getString("PATERNO"));
                 user.setMaterno(rs.getString("MATERNO"));
                 user.setRut(rs.getString("RUT"));
                 user.setfNac(rs.getDate("F_NAC"));

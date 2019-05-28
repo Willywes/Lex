@@ -11,6 +11,8 @@
 <%@attribute name="content" fragment="true" %>
 <%@attribute name="styles" fragment="true" %>
 <%@attribute name="scripts" fragment="true" %>
+<%@attribute name="title" fragment="true" %>
+<%@attribute name="subtitle" fragment="true" %>
 
 
 
@@ -28,7 +30,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Abogados Lex</title>
+        <title>Abogados Lex | <jsp:invoke fragment="title"/></title>
 
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="/Lex/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -37,6 +39,8 @@
         <link rel="stylesheet" href="/Lex/assets/bower_components/Ionicons/css/ionicons.min.css">
         <link rel="stylesheet" href="/Lex/assets/dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="/Lex/assets/dist/css/skins/skin-purple.min.css">
+        <link rel="stylesheet" href="/Lex/assets/plugins/toastr/toastr.min.css">
+
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
@@ -52,9 +56,9 @@
                 <!-- Logo -->
                 <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>A</b>LT</span>
+                    <span class="logo-mini"><b>A</b>L</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><b>Admin</b>LTE</span>
+                    <span class="logo-lg"><b>Abogados</b>LEX</span>
                 </a>
 
                 <!-- Header Navbar -->
@@ -279,8 +283,8 @@
                 <!-- NO ELIMINAR -->
                 <section class="content-header">
                     <h1>
-                        Titutlo dinamico
-                        <small>Optional titulo dinamico</small>
+                        <jsp:invoke fragment="title"/>
+                        <small><jsp:invoke fragment="subtitle"/></small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -291,7 +295,7 @@
 
                 <section class="content container-fluid">
 
-                   
+
 
                     <jsp:invoke fragment="content"/>
 
@@ -312,19 +316,42 @@
         <script src="/Lex/assets/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/Lex/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/Lex/assets/dist/js/adminlte.min.js"></script>
+        <script src="/Lex/assets/plugins/toastr/toastr.min.js"></script>
+        <script src="/Lex/assets/custom/app.js"></script>
 
- <%
-                        session = request.getSession();
-                        String success = null;
-                        
-                        if (session.getAttribute("success") == null) {
-                            success = (String) session.getAttribute("success");
-                        }else{
-                            session.removeAttribute("success");
-                        }
-                 
-                   
-                    %>
+        <%
+            session = request.getSession();
+            String success = null;
+
+            if (session.getAttribute("success") == null) {
+                success = (String) session.getAttribute("success");
+            } else {
+                session.removeAttribute("success");
+            }
+        %>
+
+        <%
+            session = request.getSession();
+            String warning = null;
+
+            if (session.getAttribute("warning") == null) {
+                warning = (String) session.getAttribute("warning");
+            } else {
+                session.removeAttribute("warning");
+            }
+        %>
+
+        <%
+            session = request.getSession();
+            String error = null;
+
+            if (session.getAttribute("error") == null) {
+                error = (String) session.getAttribute("error");
+            } else {
+                session.removeAttribute("error");
+            }
+        %>
+
         <jsp:invoke fragment="scripts"/>
     </body>
 </html>
