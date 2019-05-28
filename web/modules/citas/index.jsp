@@ -44,12 +44,20 @@
                             <tbody>
 
                                 <c:forEach var="cita" items="${citas}">
-
+                                      
                                     <tr>
                                         <td>${cita.getId_cita()}</td>
                                         <td>${cita.getFecha_hora()}</td>
                                         <td>${cita.getId_notaria()}</td>
-                                        <td>${cita.getId_estado_cita()}</td>
+                                        <c:set var="estado" value=""/>
+                                        <c:if test="${cita.getId_estado_cita()==1}">
+                                            <c:set var="estado" value="Aceptada"/>
+                                            </c:if>
+                                        <c:if test="${cita.getId_estado_cita()==2}">
+                                            <c:set var="estado" value="Denegado"/>
+                                            </c:if>
+                                        <%--<td>${cita.getId_estado_cita()}</td>--%>
+                                        <td>${estado}</td>
                                         <td style="width:1%;white-space: nowrap;">
                                             <%--<form action="citas/editar" method="POST"> --%>
                                             <a href="citas/editar?id=${cita.getId_cita()}">
