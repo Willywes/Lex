@@ -32,13 +32,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author claudio
  */
-@WebServlet(name = "CrearContratoServlet", urlPatterns = {"/contratos/crear"})
-public class CrearContratoServlet extends HttpServlet {
+@WebServlet(name = "GuardarContratoServlet", urlPatterns = {"/contratos/guardar"})
+public class GuardarContratoServlet extends HttpServlet {
     
     private final ContratoDAO contratoDAO = new ContratoDAO();
     private final ContratoEstadoDAO contratoEstadoDAO = new ContratoEstadoDAO();
@@ -68,20 +69,6 @@ public class CrearContratoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<ContratoEstadoDTO> estados = contratoEstadoDAO.getAll();
-        List<ContratoDetalleDTO> detalles = contratoDetalleDAO.getAll();
-        List<PresupuestoIDDTO> presupuestos = presupuestoIDDAO.getAll();
-        List<UsuarioDTO> usuarios = usuarioDAO.getAll();
-        List<PlanPagoDTO> ppagos = planPagoDAO.getAll();
-        //List<FormaPagoDTO> fpagos = planPagoDAO.getAll();
-        
-        request.setAttribute("estados", estados);
-        request.setAttribute("detalles", detalles);
-        request.setAttribute("presupuestos", presupuestos);
-        request.setAttribute("usuarios", usuarios);
-        request.setAttribute("ppagos", ppagos);
-        request.getRequestDispatcher("/modules/contratos/crear-contrato.jsp").forward(request, response);
     }
 
     @Override
@@ -133,7 +120,7 @@ public class CrearContratoServlet extends HttpServlet {
             mysqldate2 = new java.sql.Date(date.getTime());
             System.out.println(mysqldate2);
         } catch (ParseException ex) {
-            Logger.getLogger(CrearContratoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GuardarContratoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             
@@ -149,6 +136,14 @@ public class CrearContratoServlet extends HttpServlet {
             contratoDTO.setAprobado_cliente(cliente);
             contratoDTO.setAprobado_abogado(abogado);
             int resultadoOperacion = contratoDAO.create(contratoDTO);
+            
+            if (resultadoOperacion == 0) {
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1);
+                session.setAttribute("success", "Contrato creada correctamente.");
+                response.sendRedirect(request.getContextPath() + "/contratos");
+                return;
+            }
             request.getRequestDispatcher("/modules/contratos/index.jsp").forward(request, response);
     }
 

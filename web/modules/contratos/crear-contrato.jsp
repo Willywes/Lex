@@ -32,7 +32,7 @@
                                 </div>
 
                                 <div>
-                                    <form action="crear" method="POST">
+                                    <form action="/Lex/contratos/guardar" method="POST">
 
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
