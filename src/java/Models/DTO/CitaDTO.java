@@ -6,6 +6,7 @@
 package Models.DTO;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -13,18 +14,20 @@ import java.sql.Date;
  */
 public class CitaDTO {
     int id_cita;
-    Date fecha_hora;
+    Date fecha_hora; 
     int id_notaria;
     int id_estado_cita;
+    Time hora;
 
     public CitaDTO() {
     }
 
-    public CitaDTO(int id_cita, Date fecha_hora, int id_notaria, int id_estado_cita) {
+    public CitaDTO(int id_cita, Date fecha_hora, int id_notaria, int id_estado_cita,Time hora) {
         this.id_cita = id_cita;
         this.fecha_hora = fecha_hora;
         this.id_notaria = id_notaria;
         this.id_estado_cita = id_estado_cita;
+        this.hora=hora;
     }
 
     public int getId_cita() {
@@ -57,6 +60,14 @@ public class CitaDTO {
 
     public void setId_estado_cita(int id_estado_cita) {
         this.id_estado_cita = id_estado_cita;
+    }
+
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
     @Override
