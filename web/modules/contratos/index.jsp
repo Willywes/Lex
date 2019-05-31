@@ -26,7 +26,7 @@
                             </a>
                         </div>
                     </div>
-                    ${estados.getClass()}
+                   
                     <div class="box-body">
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
@@ -80,19 +80,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <c:forEach var="estado" items="${estados}">
-                                              ${estado.id_contrato_estado} <br>${estado.nombre}
-                                                </c:forEach>
-                        <div class="form-group col-md-4">
-                                            <label for="Estado">Estado</label>
-                                           
-                                            <select id="selectEstados" name="selectEstados" class="form-control">
-                                                <option selected>Seleccione...</option>                                                
-                                                <c:forEach var="estado" items="${estados}">
-                                                <option value="${estado.id_contrato_estado}">${estado.nombre}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
+                      
                     </div>
                 </div>
             </div>

@@ -9,16 +9,9 @@ import Models.DAO.ContratoDAO;
 import Models.DTO.ContratoDTO;
 import Models.DAO.ContratoEstadoDAO;
 import Models.DTO.ContratoEstadoDTO;
-import Models.DTO.RolDTO;
-import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,10 +57,7 @@ public class ContratoServlet extends HttpServlet {
         request.setAttribute("estados", estados);
         request.setAttribute("nombre", "miguel");
         request.getRequestDispatcher("/modules/contratos/index.jsp").forward(request, response);
-        request.getRequestDispatcher("/modules/contratos/crear-contrato.jsp").forward(request, response);
-        
-        
-       
+         
     }
 
     @Override

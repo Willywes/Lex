@@ -6,7 +6,9 @@
 package Servlets.Cita;
 
 import Models.DAO.CitaDAO;
+import Models.DAO.NotariaDAO;
 import Models.DTO.CitaDTO;
+import Models.DTO.NotariaDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -54,6 +56,8 @@ public class CitaServlet extends HttpServlet {
         
         List<CitaDTO> citas = citaDAO.getAll();
         request.setAttribute("citas", citas);        
+        List<NotariaDTO> notarias = new NotariaDAO().getAll();
+        request.setAttribute("notarias", notarias);
         request.getRequestDispatcher("/modules/citas/index.jsp").forward(request, response);
        
     }

@@ -12,6 +12,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:template>
+
+    <jsp:attribute name="title">
+        Gestión de Notarias
+    </jsp:attribute>
+    <jsp:attribute name="subtitle">
+        Crear Cita
+    </jsp:attribute>
+
+
     <jsp:attribute name="styles">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/dragtable.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-reorder-rows.css">
@@ -23,62 +32,87 @@
         <div class="row">
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
-                    <div class="box-header with-border">
-                        
-                    </div>
+
                     <div class="box-body">
-                        <table id="table" class="table table-bordered table-hover">
-                            
-                            <tbody>
-                                 <center>
-        <div>
-            <h3>Agregar Cita</h3>
-        </div>
-        <div>
-            <form action="crear" method="POST">
-                 Fecha:
-                <input type="date" required name="txtfechaHora"><br>
-                
-                Hora:
-                
-                <select name="txthora" required>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                </select> 
-                :
-                <select name="txtminutos" required>
-                    <option value="00">00</option>
-                    <option value="15">15</option>
-                    <option value="30">30</option>
-                    <option value="45">45</option>
-                </select>
-                <br>
-                
-                ID Notaria
-                <input type="text" required name="txtidnotaria"><br>
-                 ID estado notaria:
-                <input type="text" required name="txtestadonotaria"><br>
-                
-                <input type="submit" name="accion" value="Guardar">
-                
-                <input type="button" name="Cancelar" value="Cancelar" onClick="location.href='/Lex/citas'">
-                
-            </form>
-        </div>
-    </center>
-                                
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <form action="crear" method="POST">
 
-                            </tbody>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="txtfechaHora">Fecha</label>
+                                                    <input type="date" required name="txtfechaHora" class="form-control">
+                                                </div>
 
-                           
-                        </table>
+                                            </div>
+
+
+                                            <div class="col-md-3">
+
+                                                <div class="form-group">
+                                                    <label for="">Hora</label>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <select name="txthora" class="form-control" required>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                                <option value="13">13</option>
+                                                                <option value="15">15</option>
+                                                                <option value="16">16</option>
+                                                                <option value="17">17</option>
+                                                            </select> 
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select name="txtminutos" class="form-control" required>
+                                                                <option value="00">00</option>
+                                                                <option value="15">15</option>
+                                                                <option value="30">30</option>
+                                                                <option value="45">45</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="txtidnotaria">Notaria</label>
+                                                    <select name="txtidnotaria" class="form-control" required>
+                                                        <option value="">(Seleccion Notaria)</option>
+                                                        <c:forEach var="notaria" items="${notarias}">
+                                                            <option value="${notaria.id}">${notaria.nombre} | ${notaria.razonSocial}</option>
+
+
+                                                        </c:forEach>
+
+
+                                                    </select> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="submit" name="accion" value="Guardar" class="btn btn-primary">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="button" name="Cancelar" value="Cancelar" class="btn btn-danger" onClick="location.href = '/Lex/citas'">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

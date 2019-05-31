@@ -140,15 +140,17 @@
 
 
                     <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header">Navegación</li>
+                        <li class="header">Gestión de Usuarios</li>
                         <!-- Menus-->
                         
                         <li><a href="<c:url value = "/modulo/usuarios/index"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
                         
                         <li><a href="<c:url value = "/modulo/clientes/index"/>"><i class="fa fa-users"></i><span>Clientes</span></a></li>
                         
+                        <li class="header">Gestión de Notarias </li>
+                        <li><a href="<c:url value = "/modulo/notarias/index"/>"><i class="fa fa-university"></i><span>Notarias</span></a></li>
                         <li class="treeview">
-                            <a href="<c:url value = "/citas"/>"><i class="fa fa-link"></i> <span>Citas</span>
+                            <a href="<c:url value = "/citas"/>"><i class="fa fa-calendar"></i> <span>Citas</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -158,8 +160,11 @@
                                 <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
                             </ul>
                         </li>
+                        
+                        <li class="header">Gestión de Contratos </li>
+                        
                         <li class="treeview">
-                            <a href="<c:url value = "/contratos"/>"><i class="fa fa-link"></i> <span>Contratos</span>
+                            <a href="<c:url value = "/contratos"/>"><i class="fa fa-book"></i> <span>Contratos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -167,11 +172,11 @@
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/contratos"/>">Ver Contratos</a></li>
                                 <li><a href="<c:url value = "/contratos/crear"/>">Crear contrato</a></li>
-                                <li><a href="<c:url value = "/contratos/modificar"/>">Modificar contrato</a></li>
+                                <!--<li><a href="">Modificar contrato</a></li>-->
                             </ul>
                         </li>
                         <li class="treeview">
-                            <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-link"></i> <span>Solicitudes</span>
+                            <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-list-ul"></i> <span>Solicitudes</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
