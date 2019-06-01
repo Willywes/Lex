@@ -12,6 +12,10 @@
         <servlet-name>ModificarContratoServlet</servlet-name>
         <servlet-class>Servlet.Contrato.ModificarContratoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitudListar</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudListar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ModificarContratoServlet</servlet-name>
         <url-pattern>/ModificarContratoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudListar</servlet-name>
+        <url-pattern>/solicitudes/listar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

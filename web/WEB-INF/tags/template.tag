@@ -182,8 +182,10 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
                                 <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
                                 <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
+                                <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
                             </ul>
                         </li>
                     </ul>
