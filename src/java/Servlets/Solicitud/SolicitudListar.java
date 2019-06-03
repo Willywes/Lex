@@ -61,6 +61,7 @@ public class SolicitudListar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
            List<SolicitudDTO> solicitudes = solicitudDAO.getAll();
+           
         request.setAttribute("solicitudes", solicitudes);        
        
         request.getRequestDispatcher("/modules/solicitudes/index.jsp").forward(request, response);

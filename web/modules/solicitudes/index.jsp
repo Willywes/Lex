@@ -58,11 +58,7 @@
                                    <tr>
                                         <td>${solicitudes.getId_solicitud()}</td>
                                         <td>${solicitudes.getFecha_hora()}</td>
-                                        <td>
-                                            
-                                          nada aca
-                                        
-                                        </td>
+                                        <td>${solicitudes.getDescripcion()}</td>          
                                         <td>
                                             <%--         <c:choose>
                                                 <c:when test="${solicitudes.getEstadoSolicitud() == 1}">
@@ -72,11 +68,13 @@
                                                     <span class="badge bg-red">Desactivado</span>
                                                 </c:otherwise>
                                             </c:choose>  --%>
-                                            ${solicitudes.getEstadoSolicitud()}
+                                            ${solicitudes.getTipoSolicitud()} <%-- no entrega valor, null --%>
                                         </td>
-                                        <td>${solicitudes.getEstadoSolicitud()}</td>
-                                        <td>${solicitudes.getTecnico()}</td>
-                                        <td>${solicitudes.getCliente()}</td>
+                                    <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
+                                    <td>${solicitudes.getEstadoSolicitud()}</td>
+                                       
+                                        <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
+                                        <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
 
                                         <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
                                             <div style="width: max-content; float: left;">
