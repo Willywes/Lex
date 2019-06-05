@@ -98,6 +98,7 @@ public class SolicitudDAO {
         // revisar mañana esto!! esta devolviendo null
      //   SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
      SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt(1));
+        
         solicitud.setTipoSolicitud(solicitudTiposDTO);
         
         SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));

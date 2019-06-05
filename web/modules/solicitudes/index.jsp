@@ -68,10 +68,10 @@
                                                     <span class="badge bg-red">Desactivado</span>
                                                 </c:otherwise>
                                             </c:choose>  --%>
-                                            ${solicitudes.getTipoSolicitud()} <%-- no entrega valor, null --%>
+                                            ${solicitudes.getTipoSolicitud().getNombre()} <%-- no entrega valor, null --%>
                                         </td>
                                     <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
-                                    <td>${solicitudes.getEstadoSolicitud()}</td>
+                                    <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
                                        
                                         <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
                                         <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
