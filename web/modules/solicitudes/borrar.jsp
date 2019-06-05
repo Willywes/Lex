@@ -32,8 +32,8 @@
                         <div class="alert alert-success">
                             Su petición ha sido Procesada.
                         </div>
-                        <di>
-                           <a class="btn btn-success" onClick="location.href='/Lex/citas'">Volver Atrás</a>
+                            <div>
+                           <a class="btn btn-success" onClick="location.href='/Lex/solicitudes/listar'">Volver Atrás</a>
                            
                         </div>
               

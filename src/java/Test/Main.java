@@ -76,11 +76,6 @@ public class Main {
 //        for(CitaDTO cita: citas){
 //            System.out.println(cita.toString());
 //        }
-        SolicitudTiposDAO soliTipo = new SolicitudTiposDAO();
-        SolicitudTiposDTO soliDTO = new SolicitudTiposDTO();
         
-       
-        soliTipo.findById(1);
-        System.out.println("tipo es : "+soliTipo);
     }
 }

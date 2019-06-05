@@ -122,7 +122,8 @@ public class SolicitudesCrear extends HttpServlet {
     //id tecnico 3
     List<UsuarioDTO> tecnicos = usuarioDAO.getAllByIdRol(3);
     request.setAttribute("tecnicos", tecnicos);
-    request.getRequestDispatcher("/modules/solicitudes/crear.jsp").forward(request, response);
+    request.getRequestDispatcher("/modules/solicitudes/borrar.jsp").forward(request, response);
+    //request.getRequestDispatcher("/modules/solicitudes/crear.jsp").forward(request, response);
     
   }
 

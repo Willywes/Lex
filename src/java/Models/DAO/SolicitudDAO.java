@@ -96,8 +96,8 @@ public class SolicitudDAO {
         solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
         solicitud.setDescripcion(rs.getString("DESCRIPCION"));
         // revisar mañana esto!! esta devolviendo null
-     //   SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
-     SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt(1));
+        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+     //SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt(1));
         
         solicitud.setTipoSolicitud(solicitudTiposDTO);
         

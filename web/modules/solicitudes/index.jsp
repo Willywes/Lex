@@ -34,7 +34,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <div  class="btn-group">
-                            <a class="btn btn-success" href="solicitudes/crear"> <!--data-toggle="modal" data-target="#modal-create"--><i
+                            <a class="btn btn-success" href="/solicitudes/crear"> <!--data-toggle="modal" data-target="#modal-create"--><i
                                     class="fa fa-plus"></i> Nueva Solicitud
                             </a>
                         </div>
