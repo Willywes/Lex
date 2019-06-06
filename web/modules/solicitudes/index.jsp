@@ -14,7 +14,7 @@
 <t:template>
 
     <jsp:attribute name="title">
-        Gestión de Notarias
+        Gestión de Solicitudes
     </jsp:attribute>
     <jsp:attribute name="subtitle">
         Todas las Solicitudes
@@ -80,12 +80,13 @@
                                             <div style="width: max-content; float: left;">
                                                 <div style="width: max-content; float: left;">
                                                     <%--<form action="citas/editar" method="POST"> --%>
-                                                    <a href="citas/editar?id=${solicitudes.getId_solicitud()}">
-                                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>    
+                                                    <a href="actualizar?id=${solicitudes.getId_solicitud()}">
+                                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
+                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <form action="citas/borrar" method="POST">
-                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                        
                                                         <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
                                                             <i class="fa fa-trash"></i></button>
                                                     </form>

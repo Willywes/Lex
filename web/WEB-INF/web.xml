@@ -16,6 +16,10 @@
         <servlet-name>SolicitudListar</servlet-name>
         <servlet-class>Servlets.Solicitud.SolicitudListar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitudModificar</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudModificar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>SolicitudListar</servlet-name>
         <url-pattern>/solicitudes/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudModificar</servlet-name>
+        <url-pattern>/solicitudes/actualizar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

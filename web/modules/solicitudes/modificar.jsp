@@ -28,11 +28,11 @@
                             <tbody>
                             <center>
                                 <div>
-                                    <h3>Crear Solicitud</h3>
+                                    <h3>Modificar Solicitud</h3>
                                 </div>
 
                                 <div>
-                                    <form action="/Lex/solicitudes/crear" method="POST">
+                                    <form action="/Lex/solicitudes/actualizar" method="POST">
 
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
@@ -42,7 +42,9 @@
 
                                             <label for="Descripcion">Descripcion</label>
                                             <div class="form-group col-md-4">
-                                                <textarea name="txtDescripcion" rows="4" cols="50">Escriba aquí tus comentarios</textarea>      
+                                                <textarea name="txtDescripcion" rows="4" cols="50">${solicitud.getDescripcion()} </textarea>   
+                                                
+                                                  
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -79,8 +81,9 @@
 
                                         <div class="form-group col-md-12">
                                             <input type="submit" class="btn btn-primary" name="accion" value="Guardar">
-
-                                            <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/contratos'">
+                                            <input type="hidden" name="id" value="${solicitud.getId_solicitud()}"/>
+                                            
+                                            <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes'">
                                         </div>
                                     </form>
                                 </div>

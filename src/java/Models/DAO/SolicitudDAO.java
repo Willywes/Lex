@@ -184,21 +184,26 @@ public class SolicitudDAO {
 
   }
 
-  public int update(CitaDTO cita) {
+  public int update(SolicitudDTO solicitud) {
     int resultadoOperacion = 0;
 
     try {
       Connection cn = con.open();
       CallableStatement cs = cn.prepareCall(UPDATE);
-      cs.setInt(1, cita.getId_cita());
-      cs.setDate(2, cita.getFecha_hora());
-      cs.setInt(3, cita.getId_notaria());
-      cs.setInt(4, cita.getId_estado_cita());
+      cs.setInt(1, solicitud.getId_solicitud());//no null
+      cs.setDate(2, solicitud.getFecha_hora());//no null si
+      cs.setString(3, solicitud.getDescripcion());//no null si
+      cs.setInt(4, solicitud.getTipoSolicitud().getId());//no null si
+      cs.setInt(5, solicitud.getEstadoSolicitud().getId_estado_solicitud());//no null si
+      cs.setDate(6, solicitud.getCreado());//no null
+      cs.setDate(7, solicitud.getModificado());// null
+      cs.setInt(8, solicitud.getCliente().getId());//no null
+      cs.setInt(9, solicitud.getTecnico().getId());//null
 
-      cs.registerOutParameter(5, Types.INTEGER);// salida de parametro 5
+      cs.registerOutParameter(10, Types.INTEGER);// salida de parametro 10
       cs.execute();
 
-      resultadoOperacion = cs.getInt(5);
+      resultadoOperacion = cs.getInt(10);
 
     } catch (SQLException | IOException ex) {
       Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
