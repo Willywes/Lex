@@ -34,6 +34,7 @@ public class SolicitudDAO {
   private final String CREATE = "{call PKG_SOLICITUDES.CREATE_SOLICITUD(?,?,?,?,?,?,?,?,?,?)}";
   private final String DELETE = "{call PKG_SOLICITUDES.DELETE_SOLICITUD(?,?)}";
   private final String UPDATE = "{call PKG_SOLICITUDES.UPDATE_SOLICITUD(?,?,?,?,?,?,?,?,?,?)}";
+  private final String BUSCAR = "{call PKG_SOLICITUDES.BUSCAR_SOLICITUD_CLIENTE(?,?)}";
 
   
   Conexion con = new Conexion();
@@ -224,5 +225,41 @@ public class SolicitudDAO {
     }
 
     return estado;
+  }
+  
+  public SolicitudDTO buscarPorCliente(int id) { //Id de Cliente.
+    
+    SolicitudDTO solicitud = new SolicitudDTO();
+
+    try {
+      Connection cn = con.open();
+      CallableStatement cs = cn.prepareCall(BUSCAR);
+      
+      
+      cs.setInt(1, id);
+      cs.registerOutParameter(2, OracleTypes.CURSOR);
+      cs.executeUpdate();
+
+      ResultSet rs = (ResultSet) cs.getObject(2);
+      while (rs.next()) {
+        solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
+        solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
+        solicitud.setDescripcion(rs.getString("DESCRIPCION"));
+//        solicitud.setId_tipo_solicitud(rs.getInt("ID_TIPO_SOLICITUD"));
+//        solicitud.setId_estado_solicitud(rs.getInt("ID_ESTADO_SOLICITUD"));
+        solicitud.setCreado(rs.getDate("CREADO"));
+        solicitud.setModificado(rs.getDate("MODIFICADO"));
+//        solicitud.setId_cliente(rs.getInt("ID_CLIENTE"));
+//        solicitud.setId_tecnico(rs.getInt("ID_TECNICO"));
+      }
+
+    } catch (SQLException | IOException ex) {
+      Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      con.close();
+    }
+
+    return solicitud;
+
   }
 }
