@@ -1,8 +1,9 @@
 <%-- 
-    Document   : buscar
-    Created on : 07-06-2019, 18:17:45
+    Document   : lista
+    Created on : 09-06-2019, 10:26:38
     Author     : claudio
 --%>
+
 
 <%@page import="Models.DTO.CitaDTO"%>
 <%@page import="Models.DAO.CitaDAO"%>
@@ -35,6 +36,7 @@
                     <div class="box-header with-border">
                         
                     </div>
+
                     <form action="/Lex/solicitudes/buscar" method="POST">
                     <div class="form-group col-md-6">
                                             <label for="Detalle">Cliente</label>
@@ -64,7 +66,49 @@
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
-                               
+
+                        <c:forEach var="solicitudes" items="${solicitudes}"> 
+                                   <tr>
+                                        <td>${solicitudes.getId_solicitud()}</td>
+                                        <td>${solicitudes.getFecha_hora()}</td>
+                                        <td>${solicitudes.getDescripcion()}</td>          
+                                        <td>
+                                            <%--         <c:choose>
+                                                <c:when test="${solicitudes.getEstadoSolicitud() == 1}">
+                                                    <span class="badge bg-green">Activado</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge bg-red">Desactivado</span>
+                                                </c:otherwise>
+                                            </c:choose>  --%>
+                                            ${solicitudes.getTipoSolicitud().getNombre()} <%-- no entrega valor, null --%>
+                                        </td>
+                                    <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
+                                    <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
+                                       
+                                        <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
+                                        <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
+
+                                        <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
+                                            <div style="width: max-content; float: left;">
+                                                <div style="width: max-content; float: left;">
+                                                    <%--<form action="citas/editar" method="POST"> --%>
+                                                    <a href="actualizar?id=${solicitudes.getId_solicitud()}">
+                                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
+                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                </div>
+                                                <div style="width: max-content; float: left; margin-left: 5px">
+                                                    <form action="solicitudes/listar" method="POST">
+                                                        
+                                                        <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
+                                                            <i class="fa fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                         </c:forEach>  
                             </tbody>
 
                             <tfoot>
@@ -92,6 +136,3 @@
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     </jsp:attribute>
 </t:template>
-
-
-

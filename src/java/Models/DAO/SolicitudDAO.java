@@ -74,7 +74,7 @@ public class SolicitudDAO {
     return solicitud;
 
   }
-  
+  ////   Buscar todos!
   public List<SolicitudDTO> getAll() {
 
     List<SolicitudDTO> list = new ArrayList<>();
@@ -226,10 +226,13 @@ public class SolicitudDAO {
 
     return estado;
   }
-  
-  public SolicitudDTO buscarPorCliente(int id) { //Id de Cliente.
+  // buscar por id
+  public List<SolicitudDTO> buscarPorCliente(int id) { //Id de Cliente.
     
-    SolicitudDTO solicitud = new SolicitudDTO();
+    List<SolicitudDTO> list = new ArrayList<>();
+    SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
+    SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     try {
       Connection cn = con.open();
@@ -242,15 +245,29 @@ public class SolicitudDAO {
 
       ResultSet rs = (ResultSet) cs.getObject(2);
       while (rs.next()) {
+        SolicitudDTO solicitud = new SolicitudDTO();
         solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
         solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
         solicitud.setDescripcion(rs.getString("DESCRIPCION"));
-//        solicitud.setId_tipo_solicitud(rs.getInt("ID_TIPO_SOLICITUD"));
-//        solicitud.setId_estado_solicitud(rs.getInt("ID_ESTADO_SOLICITUD"));
+
+        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+     //SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt(1));
+        
+        solicitud.setTipoSolicitud(solicitudTiposDTO);
+        
+        SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));
+        solicitud.setEstadoSolicitud(solicitudEstadoDTO);
+        
         solicitud.setCreado(rs.getDate("CREADO"));
         solicitud.setModificado(rs.getDate("MODIFICADO"));
-//        solicitud.setId_cliente(rs.getInt("ID_CLIENTE"));
-//        solicitud.setId_tecnico(rs.getInt("ID_TECNICO"));
+        
+        UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
+        solicitud.setCliente(cliente);
+        
+        UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
+        solicitud.setTecnico(tecnico);
+
+        list.add(solicitud);
       }
 
     } catch (SQLException | IOException ex) {
@@ -259,7 +276,7 @@ public class SolicitudDAO {
       con.close();
     }
 
-    return solicitud;
+    return list;
 
   }
 }

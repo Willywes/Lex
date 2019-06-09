@@ -9,6 +9,7 @@ import Models.DAO.SolicitudDAO;
 import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
+import Models.DTO.SolicitudDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,20 +25,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author claudio
  */ @WebServlet(name = "SolicitudBuscar", urlPatterns = {"/solicitudes/buscar"})
 public class SolicitudBuscar extends HttpServlet {
+    
     private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
     private final SolicitudEstadoDAO estadoSolicitudDAO = new SolicitudEstadoDAO();
     private final SolicitudDAO solicitudDAO = new SolicitudDAO();
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -55,15 +49,7 @@ public class SolicitudBuscar extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,30 +57,35 @@ public class SolicitudBuscar extends HttpServlet {
         //id clientes 5 cliente
         List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
         request.setAttribute("clientes", clientes);
-        processRequest(request, response);
         
         request.getRequestDispatcher("/modules/solicitudes/buscar.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/modules/solicitudes/buscar.jsp").forward(request, response);
+        
+        
+        //id clientes 5 cliente
+        
+        List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
+        request.setAttribute("clientes", clientes);
+        
+        System.out.println("entro a DO POST");
+         int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
+        request.setAttribute("id_cliente", id_cliente);
+        
+       // SolicitudDTO solicitudes = new SolicitudDTO();
+        List<SolicitudDTO> solicitudes = solicitudDAO.buscarPorCliente(id_cliente);
+       // solicitudes = solicitudDAO.//buscar por un ID    
+        
+        request.setAttribute("solicitudes", solicitudes);
+        
+        request.getRequestDispatcher("/modules/solicitudes/lista.jsp").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+   
     @Override
     public String getServletInfo() {
         return "Short description";
