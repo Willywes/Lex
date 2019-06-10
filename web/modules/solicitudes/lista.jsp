@@ -97,6 +97,13 @@
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
                                                         <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                 </div>
+                                                <div style="width: max-content; float: left;">
+                                                    <%-- Boton para generar Cotizacion --%>
+                                                    <a href="SERVLET/COTIZACION?id=${solicitudes.getId_solicitud()}">
+                                                        <button class="btn btn-info" title="Cotizar"><i class="fa fa-bookmark"></i></button></a> 
+                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                </div>
+                                                   
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <form action="solicitudes/listar" method="POST">
                                                         
