@@ -55,7 +55,7 @@
                             <tbody>
 
                                 <c:forEach var="solicitudes" items="${solicitudes}">
-                                   <tr>
+                                    <tr>
                                         <td>${solicitudes.getId_solicitud()}</td>
                                         <td>${solicitudes.getFecha_hora()}</td>
                                         <td>${solicitudes.getDescripcion()}</td>          
@@ -70,9 +70,9 @@
                                             </c:choose>  --%>
                                             ${solicitudes.getTipoSolicitud().getNombre()} <%-- no entrega valor, null --%>
                                         </td>
-                                    <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
-                                    <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
-                                       
+                                        <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
+                                        <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
+
                                         <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
                                         <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
 
@@ -82,17 +82,17 @@
                                                     <%--<form action="citas/editar" method="POST"> --%>
                                                     <a href="actualizar?id=${solicitudes.getId_solicitud()}">
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
-                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                    <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                 </div>
-                                                <div style="width: max-content; float: left;">
-                                                    <%-- Boton para generar Cotizacion --%>
-                                                    <a href="SERVLET/COTIZACION?id=${solicitudes.getId_solicitud()}">
-                                                        <button class="btn btn-info" title="Cotizar"><i class="fa fa-bookmark"></i></button></a> 
-                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                <div style="width: max-content; float: left;margin-left: 5px;">
+                                                    <form action="../presupuestos/crear" method="GET">
+                                                        <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
+                                                        <button class="btn btn-success" title="Cotizar"><i class="fa fa-dollar"></i></button>
+                                                    </form>
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <form action="citas/borrar" method="POST">
-                                                        
+
                                                         <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
                                                             <i class="fa fa-trash"></i></button>
                                                     </form>

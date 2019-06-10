@@ -34,24 +34,24 @@
             <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        
+
                     </div>
 
                     <form action="/Lex/solicitudes/buscar" method="POST">
-                    <div class="form-group col-md-6">
-                                            <label for="Detalle">Cliente</label>
+                        <div class="form-group col-md-6">
+                            <label for="Detalle">Cliente</label>
 
-                                            <select id="selectCliente" name="selectCliente" class="form-control">
-                                                <option selected>Seleccione...</option>                                                
-                                                <c:forEach var="clientes" items="${clientes}">
-                                                    <option value="${clientes.getId()}">${clientes.nombres}  ${clientes.paterno} </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                    <div class="col-md-6">
-                                                <input type="submit" name="accion" value="Buscar" class="btn btn-primary">
-                                            </div>
-                        </form>
+                            <select id="selectCliente" name="selectCliente" class="form-control">
+                                <option selected>Seleccione...</option>                                                
+                                <c:forEach var="clientes" items="${clientes}">
+                                    <option value="${clientes.getId()}">${clientes.nombres}  ${clientes.paterno} </option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" name="accion" value="Buscar" class="btn btn-primary">
+                        </div>
+                    </form>
                     <div class="box-body">
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
@@ -67,8 +67,8 @@
                             </thead>
                             <tbody>
 
-                        <c:forEach var="solicitudes" items="${solicitudes}"> 
-                                   <tr>
+                                <c:forEach var="solicitudes" items="${solicitudes}"> 
+                                    <tr>
                                         <td>${solicitudes.getId_solicitud()}</td>
                                         <td>${solicitudes.getFecha_hora()}</td>
                                         <td>${solicitudes.getDescripcion()}</td>          
@@ -83,9 +83,9 @@
                                             </c:choose>  --%>
                                             ${solicitudes.getTipoSolicitud().getNombre()} <%-- no entrega valor, null --%>
                                         </td>
-                                    <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
-                                    <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
-                                       
+                                        <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
+                                        <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
+
                                         <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
                                         <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
 
@@ -95,18 +95,18 @@
                                                     <%--<form action="citas/editar" method="POST"> --%>
                                                     <a href="actualizar?id=${solicitudes.getId_solicitud()}">
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
-                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                    <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                 </div>
-                                                <div style="width: max-content; float: left;">
-                                                    <%-- Boton para generar Cotizacion --%>
-                                                    <a href="SERVLET/COTIZACION?id=${solicitudes.getId_solicitud()}">
-                                                        <button class="btn btn-info" title="Cotizar"><i class="fa fa-bookmark"></i></button></a> 
-                                                        <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                <div style="width: max-content; float: left;margin-left: 5px;">
+                                                    <form action="../presupuestos/crear" method="GET">
+                                                        <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
+                                                        <button class="btn btn-success" title="Cotizar"><i class="fa fa-dollar"></i></button>
+                                                    </form>
                                                 </div>
-                                                   
+
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <form action="solicitudes/listar" method="POST">
-                                                        
+
                                                         <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
                                                             <i class="fa fa-trash"></i></button>
                                                     </form>
@@ -115,7 +115,7 @@
                                         </td>
                                     </tr>
 
-                         </c:forEach>  
+                                </c:forEach>  
                             </tbody>
 
                             <tfoot>
