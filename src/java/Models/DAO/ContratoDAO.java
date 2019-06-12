@@ -28,13 +28,47 @@ import oracle.jdbc.OracleTypes;
  * @author Tecmar
  */
 public class ContratoDAO {
-    private final String FIND_BY_ID = "{call PKG_CONTRATO.READ_CONTRATO(?)}";
+    private final String FIND_BY_ID = "{call PKG_CONTRATOS.READ_CONTRATO(?,?)}";
     private final String GET_ALL = "{call LEX.PKG_CONTRATOS.READ_ALL_CONTRATOS(?)}";
     //{call LEX.PKG_CONTRATOS.READ_ALL_CONTRATOS(?)}
     private final String CREATE = "{call LEX.PKG_CONTRATOS.CREATE_CONTRATO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     private final String DELETE = "{call PKG_CONTRATO.DELETE_CONTRATO(?)}" ;
+    private final String UPDATE = "{call LEX.PKG_CONTRATOS.UPDATE_CONTRATO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
     Conexion con = new Conexion();
+    
+    public int update (ContratoDTO contrato){
+        int resultadoOperacion = 0;
+            
+        try {
+            Connection cn = con.open();
+            CallableStatement cs = cn.prepareCall(UPDATE);
+            
+            cs.setLong( 1, contrato.getId_contrato());
+			cs.setDate(2, contrato.getFecha_inicio()==null ? null : new java.sql.Date( contrato.getFecha_inicio().getTime()) );
+			cs.setDate(3, contrato.getFecha_termino()==null ? null : new java.sql.Date( contrato.getFecha_termino().getTime() ) );
+			cs.setLong( 4, contrato.getId_contrato_estado());
+			cs.setLong( 5, contrato.getId_detalle_contrato());
+			cs.setLong( 6, contrato.getId_presupuesto());
+			cs.setLong( 7, contrato.getId_abogado());
+			cs.setLong( 8, contrato.getId_plan_pago());
+			cs.setInt( 9, contrato.getAprobado_abogado());
+			cs.setInt( 10, contrato.getAprobado_cliente());
+			cs.setLong( 11, contrato.getId_forma_pago());
+			cs.registerOutParameter( 12, java.sql.Types.NUMERIC);
+			cs.execute();
+			resultadoOperacion = ( cs.getInt( 12 ) );
+            
+          
+            
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(ContratoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+        
+        return resultadoOperacion;
+    }
 
 
     public ContratoDTO findById(int id) {

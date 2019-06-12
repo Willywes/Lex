@@ -2,6 +2,8 @@ package Test;
 
 
 import Models.DAO.CitaDAO;
+import Models.DAO.ContratoDAO;
+import Models.DTO.ContratoDTO;
 import Models.DAO.RolDAO;
 import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
@@ -30,22 +32,25 @@ public class Main {
         
         
 
-//        System.out.println("Staring ...");
-//        System.out.println("");
-//      //  System.out.println("Un Rol");
+        System.out.println("Staring ...");
+        System.out.println("");
+      //  System.out.println("Un Rol");
         
-      //  RolDAO rol = new RolDAO();
+        RolDAO rol = new RolDAO();
+        ContratoDAO contrato = new  ContratoDAO();
         
-      //  List<RolDTO> roles = rol.getAll();
+        //List<RolDTO> roles = rol.getAll();
         
-      //  System.out.println(rol.findById(1).toString());
+        System.out.println(rol.findById(1).toString());
+        
+        System.out.println(contrato.findById(1).toString());
 
-       // System.out.println("Lista de Roles");
+        System.out.println("Lista de Roles");
         
-       // for (RolDTO role : roles) {
-
-        //         System.out.println(role.getNombre());
-        //   }
+//        for (RolDTO role : roles) {
+//
+//                 System.out.println(role.getNombre());
+//           }
         
 //        System.out.println("");
 

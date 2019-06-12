@@ -26,7 +26,7 @@
                             </a>
                         </div>
                     </div>
-                   
+
                     <div class="box-body">
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
@@ -38,34 +38,41 @@
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
-                                
+
                                 <c:forEach var="contrato" items="${contratos}">
-                                    
-                                    
+
+
                                     <c:set var="estadoNombre" value="" />
                                     <c:forEach var="estado" items="${estados}">
                                         <c:if test="${estado.id_contrato_estado == contrato.getId_contrato_estado()}">
                                             <c:set var="estadoNombre" value="${estado.nombre}" />
                                         </c:if>
                                     </c:forEach>
-                                   
+
                                     <tr>
-                                    <td>${contrato.getId_contrato()}</td>
-                                    <td>${contrato.getFecha_inicio()}</td>
-                                    <td>${contrato.getFecha_termino()}</td>
-                                    
-                                    <td>${estadoNombre}</td>
-                                    <td style="width:1%;white-space: nowrap;">
-                                        
-                                        <form action="contratos/borrar" method="POST"> 
-                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button>
-                                        <input type="hidden" name="id" value="${contrato.getId_contrato()}" />
-                                        <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
-                 
-                                 
+                                        <td>${contrato.getId_contrato()}</td>
+                                        <td>${contrato.getFecha_inicio()}</td>
+                                        <td>${contrato.getFecha_termino()}</td>
+
+                                        <td>${estadoNombre}</td>
+                                        <td style="width:1%;white-space: nowrap;">
+
+                                            <div>
+                                                <a href="ModificarContrato?id=${contrato.getId_contrato()}">
+                                                <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>  </div>  
+                                            <div>
+                                                <form action="contratos/borrar" method="POST"> 
+                                                    
+                                                    <input type="hidden" name="id" value="${contrato.getId_contrato()}" />
+                                                    <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
+                                                    </form>
+                                            </div>
+                                                    
+
+
                                         </td>
-                                </tr>
-                             </form>
+                                    </tr>
+                                    
 
                                 </c:forEach>
                             </tbody>
@@ -80,7 +87,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                      
+
                     </div>
                 </div>
             </div>
