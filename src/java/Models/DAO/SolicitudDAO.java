@@ -251,7 +251,6 @@ public class SolicitudDAO {
         solicitud.setDescripcion(rs.getString("DESCRIPCION"));
 
         SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
-     //SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt(1));
         
         solicitud.setTipoSolicitud(solicitudTiposDTO);
         
