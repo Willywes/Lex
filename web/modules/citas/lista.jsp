@@ -58,20 +58,18 @@
                                     <th style="width:1%;white-space: nowrap;">Nº Cita</th>
                                     <th style="width:1%;white-space: nowrap;">Fecha</th>
                                     <th style="width:15%;white-space: nowrap;">Nombre Notaria</th>
-                                    <th style="width:1%;white-space: nowrap;">Tipo</th>
+                                    <th style="width:1%;white-space: nowrap;">Direccion</th>
                                     <th style="width:1%;white-space: nowrap;">Cliente</th>
-                                    <th style="width:1%;white-space: nowrap;">Cliente</th>
-                                    <th style="width:1%;white-space: nowrap;">técnico</th>
-                                    <th style="width:1%;white-space: nowrap;">Acciones</th>
+                                  
                             </thead>
                             <tbody>
 
                         <c:forEach var="cita" items="${cita}"> 
                                    <tr>
                                         <td>${cita.getId_cita()}</td>
-                                        <td>${cita.getFecha_hora()}</td>
+                                        <td>${cita.getFecha_hora()} ${cita.getHora()}</td>
                                         <td>${cita.getNotaria().getNombre()}</td>          
-                                        <td>
+                                        <td>${cita.getNotaria().getDireccion()}
                                             <%--         <c:choose>
                                                 <c:when test="${solicitudes.getEstadoSolicitud() == 1}">
                                                     <span class="badge bg-green">Activado</span>
@@ -88,30 +86,7 @@
                                         <td>${cita.getCliente().getNombres()} ${cita.getCliente().getPaterno()}</td>
                                         <%--       <td>${cita.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>  --%>
 
-                                        <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
-                                            <div style="width: max-content; float: left;">
-                                                <div style="width: max-content; float: left;">
-                                                    <%--<form action="citas/editar" method="POST"> --%>
-                                                    <a href="actualizar?id=${cita.getId_cita()}">
-                                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
-                                                        <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                                </div>
-                                                <div style="width: max-content; float: left;">
-                                                    <%-- Boton para generar Cotizacion --%>
-                                                    <a href="SERVLET/COTIZACION?id=${cita.getId_cita()}">
-                                                        <button class="btn btn-info" title="Cotizar"><i class="fa fa-bookmark"></i></button></a> 
-                                                        <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                                </div>
-                                                   
-                                                <div style="width: max-content; float: left; margin-left: 5px">
-                                                    <form action="solicitudes/listar" method="POST">
-                                                        
-                                                        <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
-                                                            <i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </td>
+                                     
                                     </tr>
 
                          </c:forEach>  
@@ -119,14 +94,11 @@
 
                             <tfoot>
                                 <tr>
-                                    <th>Nº Solicitud</th>
+                                    <th>Nº Cita</th>
                                     <th>Fecha</th>
-                                    <th>Descripcion</th>
-                                    <th>Tipo</th>
-                                    <th>Estado</th>
+                                    <th>Nombre Notaria</th>
+                                    <th>Direccion</th>
                                     <th>Cliente</th>
-                                    <th>Técnico</th>
-                                    <th>Acciones</th>
                                 </tr>
                             </tfoot>
                         </table>
