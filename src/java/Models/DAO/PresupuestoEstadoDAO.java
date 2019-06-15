@@ -6,7 +6,7 @@
 package Models.DAO;
 
 import JDBC.Conexion;
-import Models.DTO.SolicitudTiposDTO;
+import Models.DTO.PresupuestoEstadoDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -16,26 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oracle.jdbc.*;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
- * @author claudio
+ * @author Funny
  */
-public class SolicitudTiposDAO {
+public class PresupuestoEstadoDAO {
 
-    private final String FIND_BY_ID = "{call PKG_SOLICITUD_TIPOS.READ_SOLICITUD_TIPOS(?,?)}";
-    private final String GET_ALL = "{call PKG_SOLICITUD_TIPOS.READ_ALL_SOLICITUDES_TIPOS(?)}";
+    private final String FIND_BY_ID = "{call PKG_PRESUPUESTO_ESTADO.READ_PRESUPUESTO_ESTADO(?)}";
+    private final String GET_ALL = "{call PKG_PRESUPUESTO_ESTADOS.READ_ALL_PRESUPUESTO_ESTADOS(?)}";
 
     Conexion con = new Conexion();
 
+    public PresupuestoEstadoDTO findById(int id) {
 
-    public SolicitudTiposDTO findById(int id) {
-
-        SolicitudTiposDTO solicitudTipos = new SolicitudTiposDTO();
+        PresupuestoEstadoDTO presupuesto_estado = new PresupuestoEstadoDTO();
 
         try {
-            
+
             Connection cn = con.open();
 
             CallableStatement cs = cn.prepareCall(FIND_BY_ID);
@@ -49,9 +48,9 @@ public class SolicitudTiposDAO {
 
             while (rs.next()) {
 
-                solicitudTipos.setId(rs.getInt("ID_TIPO_SOLICITUD"));
-                solicitudTipos.setNombre(rs.getString("NOMBRE"));
-       
+                presupuesto_estado.setId_estado_presupuesto(rs.getInt("ID_ESTADO_PRESUPUESTO"));
+                presupuesto_estado.setNombre(rs.getString("NOMBRE"));
+
             }
 
         } catch (SQLException | IOException ex) {
@@ -60,15 +59,13 @@ public class SolicitudTiposDAO {
             con.close();
         }
 
-        return solicitudTipos;
+        return presupuesto_estado;
 
     }
 
-    
-     
-    public List<SolicitudTiposDTO> getAll() {
+    public List<PresupuestoEstadoDTO> getAll() {
 
-        List<SolicitudTiposDTO> list = new ArrayList<>();
+        List<PresupuestoEstadoDTO> list = new ArrayList<>();
 
         try {
 
@@ -83,12 +80,12 @@ public class SolicitudTiposDAO {
 
             while (rs.next()) {
 
-                SolicitudTiposDTO solicitudTipos = new SolicitudTiposDTO();
+                PresupuestoEstadoDTO presupuesto_estado = new PresupuestoEstadoDTO();
 
-                solicitudTipos.setId(rs.getInt("ID_TIPO_SOLICITUD"));
-                solicitudTipos.setNombre(rs.getString("NOMBRE"));
+                presupuesto_estado.setId_estado_presupuesto(rs.getInt("ID_ESTADO_PRESUPUESTO"));
+                presupuesto_estado.setNombre(rs.getString("NOMBRE"));
 
-                list.add(solicitudTipos);
+                list.add(presupuesto_estado);
             }
 
         } catch (SQLException | IOException ex) {
@@ -99,4 +96,5 @@ public class SolicitudTiposDAO {
 
         return list;
     }
+
 }

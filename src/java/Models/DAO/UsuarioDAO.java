@@ -9,6 +9,7 @@ import JDBC.Conexion;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -262,4 +263,50 @@ public class UsuarioDAO {
 
         return list;
     }
+    // agregado!!! para buscar usuarios por el rol  
+    public List<UsuarioDTO> getAllByIdRol(int id){
+      List<UsuarioDTO> list = new ArrayList();
+
+        try {
+
+            con = new Conexion();
+
+            PreparedStatement cs = con.open().prepareStatement("SELECT * FROM USUARIOS WHERE ID_ROL = ?");
+            cs.setInt(1, id);
+            
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getResultSet();
+
+            while (rs.next()) {
+
+                UsuarioDTO user = new UsuarioDTO();
+
+                user.setId(rs.getInt("ID_USUARIO"));
+                user.setNombres(rs.getString("NOMBRES"));
+                user.setPaterno(rs.getString("PATERNO"));
+                user.setMaterno(rs.getString("MATERNO"));
+                user.setRut(rs.getString("RUT"));
+                user.setfNac(rs.getDate("F_NAC"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setCelular(rs.getInt("CELULAR"));
+                user.setTelefono(rs.getInt("TELEFONO"));
+                user.setDireccion(rs.getString("DIRECCION"));
+                user.setActivo(rs.getBoolean("ACTIVO"));
+                user.setId_rol(rs.getInt("ID_ROL"));
+                user.setCreado(rs.getDate("CREADO"));
+                user.setModificado(rs.getDate("MODIFICADO"));
+
+                list.add(user);
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return list;
+    }
+    ////////////////////////////////////////////////////////////
 }

@@ -22,7 +22,7 @@ import oracle.jdbc.OracleTypes;
  */
 public class SolicitudEstadoDAO {
 
-    private final String FIND_BY_ID = "{call PKG_SOLICITUD_ESTADOS.READ_SESTADO(?)}";
+    private final String FIND_BY_ID = "{call PKG_SOLICITUD_ESTADOS.READ_SESTADO(?,?)}";
     private final String GET_ALL = "{call PKG_SOLICITUD_ESTADOS.READ_ALL_SESTADOS(?)}";
 
     Conexion con = new Conexion();

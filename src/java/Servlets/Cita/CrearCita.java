@@ -108,6 +108,6 @@ public class CrearCita extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short descript  ion";
+        return "Short description";
     }// </editor-fold>
 }

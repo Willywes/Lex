@@ -182,8 +182,38 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
                                 <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
                                 <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
+                                <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
+                                <li><a href="<c:url value = "/solicitudes/buscar"/>">Buscar solicitud</a></li>
+                                
+                            </ul>
+                        </li>
+                        
+                        <li class="header">Gestión de Presupuestos y Pagos </li>
+                        
+                         <li class="treeview">
+                            <a href="<c:url value = "/presupuestos"/>"><i class="fa fa-dollar"></i> <span>Presupuestos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/presupuestos/crear"/>">Crear Presupuestos</a></li>
+                                <li><a href="<c:url value = "/presupuestos"/>">Ver Presupuestos</a></li>
+                            </ul>
+                        </li>
+                        
+                          <li class="treeview">
+                            <a href="<c:url value = "/pagos"/>"><i class="fa fa-dollar"></i> <span>Pagos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value = "/pagos/crear"/>">Crear Pagos</a></li>
+                                <li><a href="<c:url value = "/pagos"/>">Ver Pagos</a></li>
                             </ul>
                         </li>
                     </ul>

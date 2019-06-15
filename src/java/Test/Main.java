@@ -3,11 +3,13 @@ package Test;
 
 import Models.DAO.CitaDAO;
 import Models.DAO.RolDAO;
+import Models.DAO.SolicitudDAO;
 import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.CitaDTO;
 import Models.DTO.RolDTO;
+import Models.DTO.SolicitudDTO;
 import Models.DTO.SolicitudEstadoDTO;
 import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
@@ -52,7 +54,7 @@ public class Main {
      //   System.out.println("Un Usuario");
         
         
-//        SolicitudEstadoDAO solicitudEstado = new SolicitudEstadoDAO();
+//       SolicitudEstadoDAO solicitudEstado = new SolicitudEstadoDAO();
 //        List<SolicitudEstadoDTO> solicitudesEstados = solicitudEstado.getAll();
 //        
 //        for (SolicitudEstadoDTO tipos : solicitudesEstados) {
@@ -76,6 +78,13 @@ public class Main {
 //        for(CitaDTO cita: citas){
 //            System.out.println(cita.toString());
 //        }
+        
+        SolicitudDAO soli = new SolicitudDAO();
+        SolicitudDTO  soliResul= new SolicitudDTO();
+        
+      //  soliResul=soli.buscarPorCliente(101);
+        
+        System.out.println("El resultado es: "+soliResul);
         
     }
 }
