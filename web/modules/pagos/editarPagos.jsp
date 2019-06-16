@@ -1,7 +1,7 @@
 <%-- 
     Document   : editarPagos
     Created on : 08-jun-2019, 22:20:36
-    Author     : Funny
+    Author     : jean
 --%>
 
 <%@page import="Models.DTO.ContratoDTO"%>

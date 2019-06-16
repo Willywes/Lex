@@ -8,6 +8,7 @@ package Servlet.Pago;
 import Models.DAO.ContratoDAO;
 import Models.DAO.PagoDAO;
 import Models.DTO.ContratoDTO;
+import Models.DTO.PagoClienteDTO;
 import Models.DTO.PagoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Funny
+ * @author jean
  */
 @WebServlet(name = "ModificarPago", urlPatterns = {"/pagos/modificar"})
 public class ModificarPago extends HttpServlet {
@@ -138,7 +139,7 @@ public class ModificarPago extends HttpServlet {
 
         }
 
-        List<PagoDTO> pagos = PagoDAO.getAll();
+        List<PagoClienteDTO> pagos = PagoDAO.getAll();
         request.setAttribute("mensaje", "get");
         request.setAttribute("pagos", pagos);
         request.getRequestDispatcher("/modules/pagos/index.jsp").forward(request, response);

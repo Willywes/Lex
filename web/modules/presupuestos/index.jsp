@@ -23,6 +23,9 @@
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-reorder-rows.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-fixed-columns.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table.min.css">
+
+
+
     </jsp:attribute>
 
     <jsp:attribute name="content">
@@ -44,14 +47,16 @@
                             <thead>
                                 <tr>
                                     <th style="width:1%;white-space: nowrap;">N° Presupuesto</th>
+                                    <th style="width:1%;white-space: nowrap;">Nombre Cliente</th>
+                                    <th style="width:1%;white-space: nowrap;">Apellido Cliente</th>
+                                    <th style="width:1%;white-space: nowrap;">Correo Cliente</th>
                                     <th style="width:1%;white-space: nowrap;">Fecha</th>
                                     <th style="width:1%;white-space: nowrap;">Solicitud</th>
                                     <th style="width:1%;white-space: nowrap;">Servicio</th>
                                     <th style="width:1%;white-space: nowrap;">Estado</th>
                                     <th style="width:1%;white-space: nowrap;">Plan Pago</th>
                                     <th style="width:1%;white-space: nowrap;">Monto</th>
-                                    <th style="width:1%;white-space: nowrap;">Creado</th>
-                                    <th style="width:1%;white-space: nowrap;">Modificado</th>
+
                                     <th style="width:1%;white-space: nowrap;"></th>
                                 </tr>
                             </thead>
@@ -61,14 +66,16 @@
 
                                     <tr>
                                         <td>${presupuesto.presupuestoDTO.id_presupuesto}</td>
+                                        <td>${presupuesto.usuario.nombres}</td>
+                                        <td>${presupuesto.usuario.paterno}</td>
+                                        <td>${presupuesto.usuario.email}</td>
                                         <td>${presupuesto.presupuestoDTO.fecha}</td> 
                                         <td>${presupuesto.solicitud.descripcion}</td>
                                         <td>${presupuesto.presupuestoDetalle.servicio}</td>
                                         <td>${presupuesto.presupuestoEstado.nombre}</td>
                                         <td>${presupuesto.presupuestoPlanPago.nombre}</td>
                                         <td>${presupuesto.presupuestoDetalle.monto}</td>
-                                        <td>${presupuesto.presupuestoDTO.creado}</td>
-                                        <td>${presupuesto.presupuestoDTO.modificado}</td>
+
 
                                         <td style="width:1%;white-space: nowrap;">
 
@@ -118,5 +125,13 @@
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+        <!--Data tables --->
+        <script src="/Lex/assets/custom/dataTables.js" type="text/javascript"></script>
+
+
+
+
+
     </jsp:attribute>
 </t:template>
