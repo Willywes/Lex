@@ -14,6 +14,7 @@ import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -35,6 +36,9 @@ public class SolicitudDAO {
   private final String DELETE = "{call PKG_SOLICITUDES.DELETE_SOLICITUD(?,?)}";
   private final String UPDATE = "{call PKG_SOLICITUDES.UPDATE_SOLICITUD(?,?,?,?,?,?,?,?,?,?)}";
   private final String BUSCAR = "{call PKG_SOLICITUDES.BUSCAR_SOLICITUD_CLIENTE(?,?)}";
+  private final String BUSCARFECHAS = "{call PKG_SOLICITUDES.BUSCAR_SOLICITUD_FECHAS(?,?,?)}";
+  private final String BUSCARTIPO = "{call PKG_SOLICITUDES.BUSCAR_SOLICITUD_TIPO(?,?)}";
+  private final String BUSCARESTADO = "{call PKG_SOLICITUDES.BUSCAR_SOLICITUD_ESTADO(?,?)}";
 
   
   Conexion con = new Conexion();
@@ -82,6 +86,8 @@ public class SolicitudDAO {
     SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
     UsuarioDAO usuarioDAO = new UsuarioDAO();
     
+    List<SolicitudTiposDTO> listTipos = new ArrayList<>();
+    
     try {
 
       Connection cn = con.open();
@@ -96,9 +102,9 @@ public class SolicitudDAO {
         solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
         solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
         solicitud.setDescripcion(rs.getString("DESCRIPCION"));
-        // revisar mañana esto!! esta devolviendo null
+        
         SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
-     //SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt(1));
+     
         
         solicitud.setTipoSolicitud(solicitudTiposDTO);
         
@@ -116,12 +122,14 @@ public class SolicitudDAO {
 
         list.add(solicitud);
       }
+   
 
     } catch (SQLException | IOException ex) {
       Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       con.close();
     }
+    
 
     return list;
   }
@@ -237,6 +245,165 @@ public class SolicitudDAO {
     try {
       Connection cn = con.open();
       CallableStatement cs = cn.prepareCall(BUSCAR);
+      
+      
+      cs.setInt(1, id);
+      cs.registerOutParameter(2, OracleTypes.CURSOR);
+      cs.executeUpdate();
+
+      ResultSet rs = (ResultSet) cs.getObject(2);
+      while (rs.next()) {
+        SolicitudDTO solicitud = new SolicitudDTO();
+        solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
+        solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
+        solicitud.setDescripcion(rs.getString("DESCRIPCION"));
+
+        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+        
+        solicitud.setTipoSolicitud(solicitudTiposDTO);
+        
+        SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));
+        solicitud.setEstadoSolicitud(solicitudEstadoDTO);
+        
+        solicitud.setCreado(rs.getDate("CREADO"));
+        solicitud.setModificado(rs.getDate("MODIFICADO"));
+        
+        UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
+        solicitud.setCliente(cliente);
+        
+        UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
+        solicitud.setTecnico(tecnico);
+
+        list.add(solicitud);
+      }
+
+    } catch (SQLException | IOException ex) {
+      Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      con.close();
+    }
+
+    return list;
+
+  }
+  
+  public List<SolicitudDTO> buscarPorFecha(String fechaInicio,String fechaTermino) { //por fechas
+    
+    List<SolicitudDTO> list = new ArrayList<>();
+    SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
+    SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+    
+    try {
+      Connection cn = con.open();
+      CallableStatement cs = cn.prepareCall(BUSCARFECHAS);
+      
+        //cs.setDate(1, fechaInicio);
+       // cs.setDate(2, fechaTermino);
+        cs.setString(1, fechaInicio);
+        cs.setString(2, fechaTermino);
+     
+      cs.registerOutParameter(3, OracleTypes.CURSOR);
+      cs.executeUpdate();
+
+      ResultSet rs = (ResultSet) cs.getObject(3);
+      while (rs.next()) {
+        SolicitudDTO solicitud = new SolicitudDTO();
+        solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
+        solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
+        solicitud.setDescripcion(rs.getString("DESCRIPCION"));
+
+        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+        
+        solicitud.setTipoSolicitud(solicitudTiposDTO);
+        
+        SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));
+        solicitud.setEstadoSolicitud(solicitudEstadoDTO);
+        
+        solicitud.setCreado(rs.getDate("CREADO"));
+        solicitud.setModificado(rs.getDate("MODIFICADO"));
+        
+        UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
+        solicitud.setCliente(cliente);
+        
+        UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
+        solicitud.setTecnico(tecnico);
+
+        list.add(solicitud);
+      }
+
+    } catch (SQLException | IOException ex) {
+      Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      con.close();
+    }
+
+    return list;
+
+  }
+  
+  public List<SolicitudDTO> buscarPorTipo(int id) { //Id de tipo.
+    
+    List<SolicitudDTO> list = new ArrayList<>();
+    SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
+    SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+    try {
+      Connection cn = con.open();
+      CallableStatement cs = cn.prepareCall(BUSCARTIPO);
+      
+      
+      cs.setInt(1, id);
+      cs.registerOutParameter(2, OracleTypes.CURSOR);
+      cs.executeUpdate();
+
+      ResultSet rs = (ResultSet) cs.getObject(2);
+      while (rs.next()) {
+        SolicitudDTO solicitud = new SolicitudDTO();
+        solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
+        solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
+        solicitud.setDescripcion(rs.getString("DESCRIPCION"));
+
+        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+        
+        solicitud.setTipoSolicitud(solicitudTiposDTO);
+        
+        SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));
+        solicitud.setEstadoSolicitud(solicitudEstadoDTO);
+        
+        solicitud.setCreado(rs.getDate("CREADO"));
+        solicitud.setModificado(rs.getDate("MODIFICADO"));
+        
+        UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
+        solicitud.setCliente(cliente);
+        
+        UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
+        solicitud.setTecnico(tecnico);
+
+        list.add(solicitud);
+      }
+
+    } catch (SQLException | IOException ex) {
+      Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      con.close();
+    }
+
+    return list;
+
+  }
+  public List<SolicitudDTO> buscarPorEstado(int id) { //Id de tipo.
+    
+    List<SolicitudDTO> list = new ArrayList<>();
+    SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
+    SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+    try {
+      Connection cn = con.open();
+      CallableStatement cs = cn.prepareCall(BUSCARESTADO);
       
       
       cs.setInt(1, id);

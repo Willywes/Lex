@@ -61,7 +61,7 @@ public class SolicitudBuscar extends HttpServlet {
         List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
         request.setAttribute("clientes", clientes);
         
-        request.getRequestDispatcher("/modules/solicitudes/buscar.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/solicitudes/buscartipos.jsp").forward(request, response);
     }
 
 
@@ -75,7 +75,7 @@ public class SolicitudBuscar extends HttpServlet {
         List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
         request.setAttribute("clientes", clientes);
         
-        System.out.println("entro a DO POST");
+        
          int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
         request.setAttribute("id_cliente", id_cliente);
         

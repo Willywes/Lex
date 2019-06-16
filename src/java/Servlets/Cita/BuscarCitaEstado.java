@@ -6,14 +6,16 @@
 package Servlets.Cita;
 
 import Models.DAO.CitaDAO;
+import Models.DAO.CitaEstadoDAO;
 import Models.DAO.NotariaDAO;
-import Models.DAO.SolicitudDAO;
 import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.CitaDTO;
+import Models.DTO.CitaEstadoDTO;
+import Models.DTO.NotariaDTO;
 import Models.DTO.SolicitudDTO;
-import Models.DTO.UsuarioDTO;
+import Models.DTO.SolicitudEstadoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,14 +29,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claudio
  */
-@WebServlet(name = "BuscarCita", urlPatterns = {"/citas/buscar"})
-public class BuscarCita extends HttpServlet {
+@WebServlet(name = "BuscarCitaEstado", urlPatterns = {"/citas/buscarestado"})
+public class BuscarCitaEstado extends HttpServlet {
     private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
     private final SolicitudEstadoDAO estadoSolicitudDAO = new SolicitudEstadoDAO();
+    private final CitaEstadoDAO citaEstadoDAO = new CitaEstadoDAO();
     private final CitaDAO citaDAO = new CitaDAO();
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     private final NotariaDAO notariaDAO = new NotariaDAO();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,10 +54,10 @@ public class BuscarCita extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BuscarCita</title>");            
+            out.println("<title>Servlet BuscarCitaEstado</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BuscarCita at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BuscarCitaEstado at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,11 +75,11 @@ public class BuscarCita extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //id clientes 5 cliente
-        List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
-        request.setAttribute("clientes", clientes);
+        //recuperar todas los tipos para el select
+        List<CitaEstadoDTO> estados = citaEstadoDAO.getAll();
+        request.setAttribute("estados", estados);
         
-        request.getRequestDispatcher("/modules/citas/buscarcitas.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/citas/buscarestado.jsp").forward(request, response);
     }
 
     /**
@@ -91,20 +93,24 @@ public class BuscarCita extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
-        request.setAttribute("clientes", clientes);
         
-        System.out.println("entro a DO POST");
-         int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
-        request.setAttribute("id_cliente", id_cliente);
+       //recuperar todas los tipos para el select
+        List<CitaEstadoDTO> estados = citaEstadoDAO.getAll();
+        request.setAttribute("estados", estados);
+        
+        int id_estado = Integer.parseInt(request.getParameter("selectCliente"));
+        request.setAttribute("id_estado", id_estado);
+        
+        List<NotariaDTO> notarias = notariaDAO.getAll();
+        request.setAttribute("notarias", notarias);
         
        // SolicitudDTO solicitudes = new SolicitudDTO();
-        List<CitaDTO> cita = citaDAO.buscarPorCliente(102);
+        List<CitaDTO> citas = citaDAO.buscarPorEstado(id_estado);
        // solicitudes = solicitudDAO.//buscar por un ID    
-        System.out.println(" cita es: "+cita.toString());
-        request.setAttribute("cita", cita);
         
-        request.getRequestDispatcher("/modules/citas/lista.jsp").forward(request, response);
+        request.setAttribute("citas", citas);
+        
+        request.getRequestDispatcher("/modules/citas/listaestado.jsp").forward(request, response);
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package Models.DTO;
 
+import Models.DAO.CitaEstadoDAO;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -20,11 +21,13 @@ public class CitaDTO {
     private Time hora;
     private UsuarioDTO cliente;
     private NotariaDTO notaria;
+    private CitaEstadoDTO citaEstado;
+    
 
     public CitaDTO() {
     }
 
-    public CitaDTO(int id_cita, Date fecha_hora, int id_notaria, int id_estado_cita, Time hora, UsuarioDTO cliente, NotariaDTO notaria) {
+    public CitaDTO(int id_cita, Date fecha_hora, int id_notaria, int id_estado_cita, Time hora, UsuarioDTO cliente, NotariaDTO notaria, CitaEstadoDTO citaEstado) {
         this.id_cita = id_cita;
         this.fecha_hora = fecha_hora;
         this.id_notaria = id_notaria;
@@ -32,9 +35,18 @@ public class CitaDTO {
         this.hora = hora;
         this.cliente = cliente;
         this.notaria = notaria;
+        this.citaEstado = citaEstado;
     }
 
-  
+    
+    public CitaEstadoDTO getCitaEstado() {
+        return citaEstado;
+    }
+
+    public void setCitaEstado(CitaEstadoDTO citaEstado) {
+        this.citaEstado = citaEstado;
+    }
+
 
     public int getId_cita() {
         return id_cita;
@@ -91,11 +103,16 @@ public class CitaDTO {
     public void setNotaria(NotariaDTO notaria) {
         this.notaria = notaria;
     }
+ 
 
     @Override
     public String toString() {
-        return "CitaDTO{" + "id_cita=" + id_cita + ", fecha_hora=" + fecha_hora + ", id_notaria=" + id_notaria + ", id_estado_cita=" + id_estado_cita + ", hora=" + hora + ", cliente=" + cliente + ", notaria=" + notaria + '}';
+        return "CitaDTO{" + "id_cita=" + id_cita + ", fecha_hora=" + fecha_hora + ", id_notaria=" + id_notaria + ", id_estado_cita=" + id_estado_cita + ", hora=" + hora + ", cliente=" + cliente + ", notaria=" + notaria + ", citaEstado=" + citaEstado + '}';
     }
+
+  
+
+
 
    
     

@@ -65,6 +65,8 @@ public class SolicitudListar extends HttpServlet {
            List<SolicitudDTO> solicitudes = solicitudDAO.getAll();
            
         request.setAttribute("solicitudes", solicitudes);        
+        
+        
        
         request.getRequestDispatcher("/modules/solicitudes/index.jsp").forward(request, response);
     }

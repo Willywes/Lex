@@ -28,6 +28,22 @@
         <servlet-name>BuscarCita</servlet-name>
         <servlet-class>Servlets.Cita.BuscarCita</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitudBuscarFechas</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudBuscarFechas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudBuscarTipos</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudBuscarTipos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudBuscarEstado</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudBuscarEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarCitaEstado</servlet-name>
+        <servlet-class>Servlets.Cita.BuscarCitaEstado</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -55,6 +71,22 @@
     <servlet-mapping>
         <servlet-name>BuscarCita</servlet-name>
         <url-pattern>/citas/buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudBuscarFechas</servlet-name>
+        <url-pattern>/solicitudes/buscarfechas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudBuscarTipos</servlet-name>
+        <url-pattern>/solicitudes/buscartipos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudBuscarEstado</servlet-name>
+        <url-pattern>/solicitudes/buscarestado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarCitaEstado</servlet-name>
+        <url-pattern>/citas/buscarestado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

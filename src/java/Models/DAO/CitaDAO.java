@@ -7,6 +7,7 @@ package Models.DAO;
 
 import JDBC.Conexion;
 import Models.DTO.CitaDTO;
+import Models.DTO.CitaEstadoDTO;
 import Models.DTO.NotariaDTO;
 import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
@@ -36,6 +37,7 @@ public class CitaDAO {
     private final String DELETE = "{call PKG_CITAS.DELETE_CITAS(?,?)}" ;
     private final String UPDATE = "{call PKG_CITAS.UPDATE_CITAS(?,?,?,?,?)}";
     private final String BUSCARCITACLIENTE = "{call PKG_CITAS.BUSCAR_CITA_CLIENTE(?,?)}";
+    private final String BUSCARCITAESTADO = "{call PKG_CITAS.BUSCAR_CITA_ESTADO(?,?)}";
 
     Conexion con = new Conexion();
 
@@ -242,6 +244,62 @@ public class CitaDAO {
                 
                 cita.setNotaria(notaria);
                 cita.setCliente(cliente);
+                
+                list.add(cita);
+               
+
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return list;
+
+    }
+    
+    
+    public List<CitaDTO> buscarPorEstado(int id) {
+        List<CitaDTO> list = new ArrayList<>();
+
+       // NotariaDTO notaria = new NotariaDTO();
+        NotariaDAO notariaDAO = new NotariaDAO();
+        CitaEstadoDAO citaEstadoDAO = new CitaEstadoDAO();
+
+        try {
+
+            Connection cn = con.open();
+
+            CallableStatement cs = cn.prepareCall(BUSCARCITAESTADO);
+
+            cs.setInt(1, id);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getObject(2);
+
+            while (rs.next()) {
+                CitaDTO cita = new CitaDTO();
+                
+                //ci.id_cita,ci.fecha_hora,ci.ID_ESTADO_CITA,nota.id_notaria,us.id_usuario
+                //nota.direccion,us.nombres,us.paterno,us.id_usuario,nota.id_notaria
+                
+                cita.setId_cita(rs.getInt("ID_CITA"));
+                cita.setFecha_hora(rs.getDate("FECHA_HORA"));
+                cita.setId_notaria(rs.getInt("ID_NOTARIA"));
+                cita.setId_estado_cita(rs.getInt("ID_ESTADO_CITA"));
+               // cita.setId_notaria(rs.getInt("ci.id_notaria"));
+               // cita.setId_estado_cita(rs.getInt("ci.ID_ESTADO_CITA"));
+                /// ACA REVISAR MAÑANA !  NO EXISTE EL ID DE LA NOTERIA!! REVISAR
+                NotariaDTO notaria= notariaDAO.findById(rs.getInt("id_notaria"));
+                CitaEstadoDTO citaEstado = citaEstadoDAO.findById(rs.getInt("ID_ESTADO_CITA"));
+              // UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("id_usuario"));
+                //  ID_CITA FECHA_HO ID_NOTARIA ID_ESTADO_CITA
+                cita.setNotaria(notaria);
+                cita.setCitaEstado(citaEstado);   
                 
                 list.add(cita);
                

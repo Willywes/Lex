@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets.Cita;
+package Servlets.Solicitud;
 
-import Models.DAO.CitaDAO;
-import Models.DAO.NotariaDAO;
 import Models.DAO.SolicitudDAO;
 import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
-import Models.DTO.CitaDTO;
 import Models.DTO.SolicitudDTO;
+import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,14 +25,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claudio
  */
-@WebServlet(name = "BuscarCita", urlPatterns = {"/citas/buscar"})
-public class BuscarCita extends HttpServlet {
-    private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
+@WebServlet(name = "SolicitudBuscarTipos", urlPatterns = {"/solicitudes/buscartipos"})
+public class SolicitudBuscarTipos extends HttpServlet {
+ private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
     private final SolicitudEstadoDAO estadoSolicitudDAO = new SolicitudEstadoDAO();
-    private final CitaDAO citaDAO = new CitaDAO();
+    private final SolicitudDAO solicitudDAO = new SolicitudDAO();
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private final NotariaDAO notariaDAO = new NotariaDAO();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,10 +48,10 @@ public class BuscarCita extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BuscarCita</title>");            
+            out.println("<title>Servlet SolicitudBuscarTipos</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BuscarCita at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SolicitudBuscarTipos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,11 +69,11 @@ public class BuscarCita extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //id clientes 5 cliente
-        List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
-        request.setAttribute("clientes", clientes);
+        //recuperar todas los tipos para el select
+        List<SolicitudTiposDTO> tipos = tipoSolicitudDAO.getAll();
+        request.setAttribute("tipos", tipos);
         
-        request.getRequestDispatcher("/modules/citas/buscarcitas.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/solicitudes/buscartipos.jsp").forward(request, response);
     }
 
     /**
@@ -91,20 +87,21 @@ public class BuscarCita extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
-        request.setAttribute("clientes", clientes);
         
-        System.out.println("entro a DO POST");
-         int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
+        //recuperar todas los tipos para el select
+        List<SolicitudTiposDTO> tipos = tipoSolicitudDAO.getAll();
+        request.setAttribute("tipos", tipos);
+        
+        int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
         request.setAttribute("id_cliente", id_cliente);
         
        // SolicitudDTO solicitudes = new SolicitudDTO();
-        List<CitaDTO> cita = citaDAO.buscarPorCliente(102);
+        List<SolicitudDTO> solicitudes = solicitudDAO.buscarPorTipo(id_cliente);
        // solicitudes = solicitudDAO.//buscar por un ID    
-        System.out.println(" cita es: "+cita.toString());
-        request.setAttribute("cita", cita);
         
-        request.getRequestDispatcher("/modules/citas/lista.jsp").forward(request, response);
+        request.setAttribute("solicitudes", solicitudes);
+        
+        request.getRequestDispatcher("/modules/solicitudes/listatipo.jsp").forward(request, response);
     }
 
     /**
