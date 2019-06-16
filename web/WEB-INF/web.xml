@@ -44,6 +44,10 @@
         <servlet-name>BuscarCitaEstado</servlet-name>
         <servlet-class>Servlets.Cita.BuscarCitaEstado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModificarContrato</servlet-name>
+        <servlet-class>Servlet.Contrato.ModificarContrato</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>BuscarCitaEstado</servlet-name>
         <url-pattern>/citas/buscarestado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarContrato</servlet-name>
+        <url-pattern>/ModificarContrato</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
