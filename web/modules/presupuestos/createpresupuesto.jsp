@@ -38,22 +38,26 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="solicitud">Solicitud (*)</label>
-                                        <select required name="solicitud" class="form-control">
+                                        <select required name="solicitud" disabled="true" class="form-control">
                                             <c:forEach  var="solicitud" items="${solicitudes}">
                                                 <option ${ idSolicitud == solicitud.getId_solicitud() ? 'selected' : '' } value="${solicitud.getId_solicitud()}"> ${solicitud.getDescripcion()}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="servicio">Servicio (*)</label>
                                         <input required type="text" class="form-control" name="servicio" placeholder="Ingrese descripción de Servicio">                        
                                     </div>
                                 </div>
+
+                                <div class="col-md-12"><hr></div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="estado">Estado (*)</label>
@@ -65,9 +69,6 @@
                                         </select>                                    
                                     </div>
                                 </div>
-                                <div class="col-md-12"><hr></div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="plan_pago">Plan Pago (*)</label>
