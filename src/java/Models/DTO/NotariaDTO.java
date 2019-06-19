@@ -70,7 +70,7 @@ public class NotariaDTO {
         this.id = id;
     }
 
-    public String getNombre() {
+        public String getNombre() {
         return nombre;
     }
 

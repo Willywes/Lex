@@ -10,12 +10,8 @@ import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.SolicitudDTO;
-import Models.DTO.SolicitudEstadoDTO;
-import Models.DTO.SolicitudTiposDTO;
-import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,10 +22,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claudio
  */
-@WebServlet(name = "SolicitudListar", urlPatterns = {"/solicitudes/listar"})
-public class SolicitudListar extends HttpServlet {
-    private final SolicitudDAO solicitudDAO = new SolicitudDAO();
-
+@WebServlet(name = "SolicitudBorrar", urlPatterns = {"/solicitudes/borrar"})
+public class SolicitudBorrar extends HttpServlet {
+private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
+  private final SolicitudEstadoDAO estadoSolicitudDAO = new SolicitudEstadoDAO();
+  private final SolicitudDAO solicitudDAO = new SolicitudDAO();
+  private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,10 +45,10 @@ public class SolicitudListar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SolicitudListar</title>");            
+            out.println("<title>Servlet SolicitudBorrar</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SolicitudListar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SolicitudBorrar at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,31 +66,14 @@ public class SolicitudListar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        int id_solicitud = Integer.parseInt(request.getParameter("id"));
+        SolicitudDTO solicitudes=solicitudDAO.findById(id_solicitud);
         
-        List<SolicitudDTO> solicitudes = solicitudDAO.getAll();
-
-        SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
-        List<SolicitudTiposDTO> solicitudTipo = solicitudTiposDAO.getAll();
-        request.setAttribute("solicitudTipo", solicitudTipo);
+           
+        request.setAttribute("solicitudes", solicitudes);      
         
-        
-        
-        SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
-        List<SolicitudEstadoDTO> solicitudEstado = solicitudEstadoDAO.getAll();
-        request.setAttribute("solicitudEstado", solicitudEstado);
-
-
-        UsuarioDAO clienteDAO = new UsuarioDAO();
-        List<UsuarioDTO> cliente= clienteDAO.getAllByIdRol(5);
-        request.setAttribute("cliente", cliente);
-        
-         UsuarioDAO tecnicoDAO = new UsuarioDAO();
-        List<UsuarioDTO> tecnico= tecnicoDAO.getAllByIdRol(3);
-        request.setAttribute("tecnico", tecnico);
-        
-        request.setAttribute("solicitudes", solicitudes);
-
-        request.getRequestDispatcher("/modules/solicitudes/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/solicitudes/confirmarborrar.jsp").forward(request, response);
     }
 
     /**
@@ -106,7 +87,16 @@ public class SolicitudListar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int id_solicitud = Integer.parseInt(request.getParameter("idSolicitud"));
+        
+        
+      
+        SolicitudDTO solicitudActualizar = new SolicitudDTO();
+        
+        solicitudDAO.delete(id_solicitud);
+        
+        request.getRequestDispatcher("/modules/solicitudes/").forward(request, response);
     }
 
     /**

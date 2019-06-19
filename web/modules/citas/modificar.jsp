@@ -11,6 +11,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <t:template>
     <jsp:attribute name="styles">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/dragtable.css">
@@ -19,72 +20,67 @@
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table.min.css">
     </jsp:attribute>
 
+
+    <jsp:attribute name="title">
+        Gestión de Citas
+    </jsp:attribute>
+    <jsp:attribute name="subtitle">
+        Modificar Cita
+    </jsp:attribute>
+
     <jsp:attribute name="content">
-        <div class="row">
-            <div id="main-box"class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-
-                    </div>
-                    <div class="box-body">
-                        <table id="table" class="table table-bordered table-hover">
-
-                            <tbody>
-                            <center>
-                                <div class="form-group">
-                                    <h3>Editar Cita nº ${id_cita} </h3>
-
-                                </div>
-                                <div class="form-group">
-                                    <form action="editar" method="POST">
-                                        Fecha:
-                                        <%--  <input type="number" name="txtid" value="${solicitud.getIdSolicitud()}"><br>  --%>
-                                        <input type="date" required name="txtfechaHora" value="${cita.getFecha_hora()}"><br>
-
-                                        Hora:
-
-                                        <select name="txthora" required>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                        </select> 
-                                        :
-                                        <select name="txtminutos" required>
-                                            <option value="00">00</option>
-                                            <option value="15">15</option>
-                                            <option value="30">30</option>
-                                            <option value="45">45</option>
-                                        </select>
-                                        <br>
-
-                                        número Notaria
-                                        <input type="number" required name="txtidnotaria" value="${cita.getId_notaria()}"><br>
-                                        número estado notaria:
-                                        <input type="number" required name="txtestadonotaria" value="${cita.getId_estado_cita()}"><br>
-                                        <input type="hidden" name="id" value="${cita.getId_cita()}" />   
-                                        <input type="submit" name="accion" value="Guardar">
-
-                                        <input type="button" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/citas'">
-
-                                    </form>
-                                </div>
-                            </center>
-
-
-                            </tbody>
-
-
-                        </table>
-                    </div>
+        <form action="/Lex/citas/editar" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Nº Cita</label>
+                <div class="col-sm-10">
+                    <input  readonly type="text" class="form-control" id="id_solicitud" value="${cita.getId_cita()}">
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Fecha Cita</label>
+                <div class="col-sm-10">
+                    <input  readonly type="text" class="form-control" id="fechasolicitud" value="${cita.getFecha_hora()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label readonly for="inputSolicitud" class="col-sm-2 control-label" >Notaria</label>
+                <div class="col-sm-10">
+                    
+                     <c:set var="notariaName" value="" />
+                                     <c:set var="notariaRazonSocial" value="" />
+
+                                    <c:forEach var="notarias" items="${notarias}">
+                                        <c:if test="${notarias.id == cita.getId_notaria()}">
+                                            <c:set var="notariaName" value="${notarias.nombre}" />
+                                            <c:set var="notariaRazonSocial" value="${notarias.razonSocial}" />
+                                        </c:if>
+                                    </c:forEach>
+                    
+                    <input readonly type="text" class="form-control"  id="idnotaria" value="${notariaName} - ${notariaRazonSocial}"></textarea>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label  for="inputSolicitud" class="col-sm-2 control-label" >Estado de cita</label>
+                <div class="col-sm-10">
+                    <select id="selectestadoCita" name="selectestadoCita" requerid class="form-control">
+                        <option selected>Seleccione...</option>                                                
+                        <c:forEach var="citaEstado" items="${citaEstado}">
+                            <option value="${citaEstado.getId_cita_estado()}">${citaEstado.nombre}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            
+
+            <div class="col-md-12 text-rigth">
+               <input type="submit" class="btn btn-primary" name="accion" value="Guardar">
+               <input type="hidden" name="id" value="${cita.getId_cita()}"/>
+
+                
+               <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/'">
+            </div>
+        </form>
     </jsp:attribute>
 
     <jsp:attribute name="scripts">

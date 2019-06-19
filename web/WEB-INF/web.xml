@@ -48,6 +48,14 @@
         <servlet-name>ModificarContrato</servlet-name>
         <servlet-class>Servlet.Contrato.ModificarContrato</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitudVerSolicitud</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudVerSolicitud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudBorrar</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudBorrar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>ModificarContrato</servlet-name>
         <url-pattern>/ModificarContrato</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudVerSolicitud</servlet-name>
+        <url-pattern>/solicitudes/versolicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudBorrar</servlet-name>
+        <url-pattern>/solicitudes/borrar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -40,6 +40,10 @@ public class SolicitudTiposDTO {
 
     @Override
     public String toString() {
-        return "SolicitudTiposDTO{" + "id_tipo_solicitud=" + id + ", nombre=" + nombre + '}';
+        return "SolicitudTiposDTO{" + "id=" + id + ", nombre=" + nombre + '}';
     }
+
+
+
+
 }

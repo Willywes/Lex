@@ -58,23 +58,53 @@
                                     <tr>
                                         <td>${solicitudes.getId_solicitud()}</td>
                                         <td>${solicitudes.getFecha_hora()}</td>
-                                        <td>${solicitudes.getDescripcion()}</td>          
-                                        <td>
-                                            <%--         <c:choose>
-                                                <c:when test="${solicitudes.getEstadoSolicitud() == 1}">
-                                                    <span class="badge bg-green">Activado</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="badge bg-red">Desactivado</span>
-                                                </c:otherwise>
-                                            </c:choose>  --%>
-                                            ${solicitudes.getTipoSolicitud().getNombre()} <%-- no entrega valor, null --%>
-                                        </td>
-                                        <%--    <td>${solicitudes.getEstadoSolicitud()}</td> --%>
-                                        <td>${solicitudes.getEstadoSolicitud().getNombre()}</td>
+                                        <td>${solicitudes.getDescripcion()}</td> 
+                                        
+                                        <c:set var="tipoName" value="" />
+                                        <c:forEach var="solicitudTipo" items="${solicitudTipo}">
+                                            <c:if test="${solicitudTipo.id == solicitudes.getId_tipo_solicitud()}">
 
-                                        <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
-                                        <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
+                                                <c:set var="tipoName" value="${solicitudTipo.nombre}" />
+
+                                            </c:if>
+                                        </c:forEach>
+                                        <td> ${tipoName}</td>
+                                        
+                                        
+                                        <c:set var="estadoName" value="" />
+                                        <c:forEach var="solicitudEstado" items="${solicitudEstado}">
+                                        <c:if test="${solicitudEstado.id_estado_solicitud == solicitudes.getId_estado_solicitud()}">
+                                            
+                                            <c:set var="estadoName" value="${solicitudEstado.nombre}" />
+                                            
+                                        </c:if>
+                                    </c:forEach>
+                                       
+                                        <td> ${estadoName}  </td>
+
+                                        <c:set var="clienteName" value="" />
+
+                                        <c:forEach var="cliente" items="${cliente}">
+                                            <c:if test="${cliente.id == solicitudes.getId_cliente()}">
+                                                <c:set var="clienteName" value="${cliente.nombres} ${cliente.paterno} " />
+
+                                            </c:if>
+                                        </c:forEach>
+                                        
+
+                                        <td>${clienteName}</td>
+                                        <c:set var="tecnicoName" value="" />
+
+                                        <c:forEach var="tecnico" items="${tecnico}">
+                                            <c:if test="${tecnico.id == solicitudes.getId_tecnico()}">
+                                                <c:set var="tecnicoName" value="${tecnico.nombres} ${tecnico.paterno} " />
+
+                                            </c:if>
+                                        </c:forEach>
+                                        
+
+                                        <td>${tecnicoName}</td>
+                                        
 
                                         <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
                                             <div style="width: max-content; float: left;">
@@ -84,6 +114,12 @@
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
                                                     <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                 </div>
+                                                <div style="width: max-content; float: left;">
+                                                    <%--VER solicitud --%>
+                                                    <a href="versolicitud?id=${solicitudes.getId_solicitud()}">
+                                                        <button class="btn btn-warning btn-sm" title="Ver"><i class="fa fa-eye"></i></button></a> 
+                                                    <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                </div>
                                                 <div style="width: max-content; float: left;margin-left: 5px;">
                                                     <form action="../presupuestos/crear" method="GET">
                                                         <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
@@ -91,11 +127,10 @@
                                                     </form>
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
-                                                    <form action="citas/borrar" method="POST">
-
-                                                        <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
-                                                            <i class="fa fa-trash"></i></button>
-                                                    </form>
+                                                    <a href="borrar?id=${solicitudes.getId_solicitud()}">
+                                                        <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash"></i></button></a> 
+                                                    <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                    
                                                 </div>
                                             </div>
                                         </td>

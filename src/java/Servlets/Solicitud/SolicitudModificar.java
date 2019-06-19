@@ -76,9 +76,9 @@ public class SolicitudModificar extends HttpServlet {
         int id_solicitud = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("id_solicitud", id_solicitud);
         
-        SolicitudDTO solicitud = new SolicitudDTO();
-        solicitud = solicitudDAO.findById(id_solicitud);//buscar por un ID       
-        request.setAttribute("solicitud", solicitud);
+        SolicitudDTO solicitudes = new SolicitudDTO();
+        solicitudes = solicitudDAO.findById(id_solicitud);//buscar por un ID       
+        request.setAttribute("solicitudes", solicitudes);
         
         
         ////
@@ -113,9 +113,11 @@ public class SolicitudModificar extends HttpServlet {
             throws ServletException, IOException {
         
         int respuesta;
+        
+        
         int id_solicitud = Integer.parseInt(request.getParameter("id"));
         
-       
+        
        // System.out.println("ID "+id_solicitud);
         SolicitudDTO solicitudActualizar = new SolicitudDTO();
         
@@ -124,28 +126,32 @@ public class SolicitudModificar extends HttpServlet {
         
        
         String descripcion = request.getParameter("txtDescripcion");
-        int id_tipo_solicitud = Integer.parseInt(request.getParameter("selectTipoSolicitud"));
-        int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
-        int id_tecnico = Integer.parseInt(request.getParameter("selectTecnico"));
         
-        System.out.println("tipo id "+id_tipo_solicitud+ " Cliente id "+id_cliente+" selectTecnico "+id_tecnico);
-        SolicitudTiposDTO soliTipoDTO = new SolicitudTiposDTO();
+        int id_estado_solicitud = Integer.parseInt(request.getParameter("selectestadoSolicitudes"));
+        System.out.println("EL ID ESTADO SOLICITUD ES: "+id_estado_solicitud);
+        //int id_tipo_solicitud = Integer.parseInt(request.getParameter("selectTipoSolicitud"));
+        
+       // int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
+       // int id_tecnico = Integer.parseInt(request.getParameter("selectTecnico"));
+        
+       // System.out.println("tipo id "+id_tipo_solicitud+ " Cliente id "+id_cliente+" selectTecnico "+id_tecnico);
+      //  SolicitudTiposDTO soliTipoDTO = new SolicitudTiposDTO();
         SolicitudEstadoDTO soliEstadoDTO = new SolicitudEstadoDTO();
-        UsuarioDTO usuarioCliente = new UsuarioDTO();
-        UsuarioDTO usuarioTecnico = new UsuarioDTO();
+     //   UsuarioDTO usuarioCliente = new UsuarioDTO();
+     //   UsuarioDTO usuarioTecnico = new UsuarioDTO();
         
         
-        soliTipoDTO=tipoSolicitudDAO.findById(id_tipo_solicitud);
-        soliEstadoDTO =estadoSolicitudDAO.findById(2);//en espera eso significa 2
+      //  soliTipoDTO=tipoSolicitudDAO.findById(id_tipo_solicitud);
+        soliEstadoDTO =estadoSolicitudDAO.findById(id_estado_solicitud);//en espera eso significa 2
         
-         usuarioCliente=usuarioDAO.findById(id_cliente);
-         usuarioTecnico = usuarioDAO.findById(id_tecnico);
+       //  usuarioCliente=usuarioDAO.findById(id_estado_solicitud);
+      //   usuarioTecnico = usuarioDAO.findById(id_tecnico);
         
-        solicitudActualizar.setCliente(usuarioCliente);
-        solicitudActualizar.setTecnico(usuarioTecnico);
-        solicitudActualizar.setDescripcion(descripcion);
+        //solicitudActualizar.setCliente(usuarioCliente);
+        //solicitudActualizar.setTecnico(usuarioTecnico);
+        //solicitudActualizar.setDescripcion(descripcion);
         solicitudActualizar.setEstadoSolicitud(soliEstadoDTO);
-        solicitudActualizar.setTipoSolicitud(soliTipoDTO);
+        //solicitudActualizar.setTipoSolicitud(soliTipoDTO);
       
        
         respuesta=solicitudDAO.update(solicitudActualizar);

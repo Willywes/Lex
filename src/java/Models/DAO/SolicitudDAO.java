@@ -46,6 +46,9 @@ public class SolicitudDAO {
   public SolicitudDTO findById(int id) {
     
     SolicitudDTO solicitud = new SolicitudDTO();
+    SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
+    SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     try {
       Connection cn = con.open();
@@ -61,6 +64,19 @@ public class SolicitudDAO {
         solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
         solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
         solicitud.setDescripcion(rs.getString("DESCRIPCION"));
+        
+        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+        solicitud.setTipoSolicitud(solicitudTiposDTO);
+        
+        
+        SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));
+        solicitud.setEstadoSolicitud(solicitudEstadoDTO);
+        
+        UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
+        solicitud.setCliente(cliente);
+        
+        UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
+        solicitud.setTecnico(tecnico);
 //        solicitud.setId_tipo_solicitud(rs.getInt("ID_TIPO_SOLICITUD"));
 //        solicitud.setId_estado_solicitud(rs.getInt("ID_ESTADO_SOLICITUD"));
         solicitud.setCreado(rs.getDate("CREADO"));
@@ -82,6 +98,7 @@ public class SolicitudDAO {
   public List<SolicitudDTO> getAll() {
 
     List<SolicitudDTO> list = new ArrayList<>();
+    
     SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
     SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
     UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -102,34 +119,47 @@ public class SolicitudDAO {
         solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
         solicitud.setFecha_hora(rs.getDate("FECHA_HORA"));
         solicitud.setDescripcion(rs.getString("DESCRIPCION"));
+        solicitud.setId_tipo_solicitud(rs.getInt("ID_TIPO_SOLICITUD"));
         
-        SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
-     
+      //  SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(rs.getInt("ID_TIPO_SOLICITUD"));
+       //   solicitud.setTipoSolicitud(solicitudTiposDTO);
+       solicitud.setId_estado_solicitud(rs.getInt("ID_ESTADO_SOLICITUD"));
+       
+        solicitud.setId_estado_solicitud(rs.getInt("ID_ESTADO_SOLICITUD"));
+    ///    solicitud.setEstadoSolicitud(solicitudEstadoDTO);
         
-        solicitud.setTipoSolicitud(solicitudTiposDTO);
-        
-        SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(rs.getInt("ID_ESTADO_SOLICITUD"));
-        solicitud.setEstadoSolicitud(solicitudEstadoDTO);
-        
+    
         solicitud.setCreado(rs.getDate("CREADO"));
         solicitud.setModificado(rs.getDate("MODIFICADO"));
         
-        UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
-        solicitud.setCliente(cliente);
+ //      UsuarioDTO cliente = usuarioDAO.findById(rs.getInt("ID_CLIENTE"));
+         solicitud.setId_cliente(rs.getInt("ID_CLIENTE"));
         
-        UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
-        solicitud.setTecnico(tecnico);
+ //    UsuarioDTO tecnico = usuarioDAO.findById(rs.getInt("ID_TECNICO"));
+        solicitud.setId_tecnico(rs.getInt("ID_TECNICO"));
 
         list.add(solicitud);
       }
-   
+         
 
     } catch (SQLException | IOException ex) {
       Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       con.close();
+      
+      /*
+      SolicitudDTO solicitud = new SolicitudDTO();
+        System.out.println("listo para entrar al for");
+        for (SolicitudTiposDTO lista : listTipos) {
+            
+            if (list.) {
+                
+            }
+            System.out.println(" id tipos dto "+lista.getId());
+        }   
+*/
     }
-    
+  
 
     return list;
   }
