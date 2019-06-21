@@ -16,83 +16,80 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <div class="row">
-            <div id="main-box"class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
+        <form action="/Lex/solicitudes/crear" method="POST" class="form-horizontal" role="form">
+        <!-- Main content -->
+        <section class="content container-fluid">
 
-                    </div>
-                    <div class="box-body">
-                        <table id="table" class="table table-bordered table-hover">
+            <!--------------------------
+            | usar solo esta parteeeeeee |
+            -------------------------->
 
-                            <tbody>
-                            <center>
-                                <div>
-                                    <h3>Crear Solicitud</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Nueva Solicitud</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>Rut</th>
+                                                <th>Nombre</th>
+                                                <th>Telefono</th>
+                                                <th>Email</th>
+                                            </tr>
+                                            <tr>
+                                                <td>${clientes.rut}</td>
+                                                <td>${clientes.nombres} ${clientes.paterno}</td>
+                                                <td>${clientes.celular}</td>
+                                                <td>${clientes.email}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
 
-                                <div>
-                                    <form action="/Lex/solicitudes/crear" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tipo">Tipo Solicitud</label>
 
-                                        <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <label for="FechaInicio">Fecha de Inicio</label>
-                                                <input type="Date" class="form-control" id="FechaInicio" name="FechaInicio" placeholder="FechaInicio">
-                                            </div>
+                                        <select id="selectTipoSolicitud" name="selectTipoSolicitud" class="form-control">
+                                            <option selected>Seleccione...</option>                                                
+                                            <c:forEach var="tipoDeSolicitudes" items="${tipoDeSolicitudes}">
+                                                <option value="${tipoDeSolicitudes.getId()}">${tipoDeSolicitudes.nombre}</option>
+                                            </c:forEach>
+                                        </select>
 
-                                            <label for="Descripcion">Descripcion</label>
-                                            <div class="form-group col-md-4">
-                                                <textarea name="txtDescripcion" rows="4" cols="50">Escriba aquí tus comentarios</textarea>      
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="tipo">Tipo Solicitud</label>
-
-                                            <select id="selectTipoSolicitud" name="selectTipoSolicitud" class="form-control">
-                                                <option selected>Seleccione...</option>                                                
-                                                <c:forEach var="tipoDeSolicitudes" items="${tipoDeSolicitudes}">
-                                                    <option value="${tipoDeSolicitudes.getId()}">${tipoDeSolicitudes.nombre}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="Detalle">Cliente</label>
-
-                                            <select id="selectCliente" name="selectCliente" class="form-control">
-                                                <option selected>Seleccione...</option>                                                
-                                                <c:forEach var="clientes" items="${clientes}">
-                                                    <option value="${clientes.getId()}">${clientes.nombres}  ${clientes.paterno} </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="Detalle">Tecnico</label>
-
-                                            <select id="selectTecnico" name="selectTecnico" class="form-control">
-                                                <option selected>Seleccione...</option>                                                
-                                                <c:forEach var="tecnicos" items="${tecnicos}">
-                                                    <option value="${tecnicos.getId()}">${tecnicos.nombres}  ${tecnicos.paterno} </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="form-group col-md-12">
-                                            <input type="submit" class="btn btn-primary" name="accion" value="Guardar">
-
-                                            <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/contratos'">
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </center>
-                            </tbody>
-
-
-                        </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Describa lo que sea solicitar</label>
+                                        <textarea class="form-control" name="textDescripcion" id="textDescripcion" cols="30" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button  type="submit" class="btn btn-primary right" name="accion"><i class="fa fa-save"></i> Guardar</button>
+                                    <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/'">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
+
+        </section>
+        <!-- /.content -->
+</form>
     </jsp:attribute>
 
     <jsp:attribute name="scripts">

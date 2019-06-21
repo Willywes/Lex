@@ -63,13 +63,17 @@ public class SolicitudesCrear extends HttpServlet {
     List<SolicitudEstadoDTO> estadoSolicitudes = estadoSolicitudDAO.getAll();
     request.setAttribute("estadoSolicitudes", estadoSolicitudes);
     
-    //id clientes 5 cliente
-    List<UsuarioDTO> clientes = usuarioDAO.getAllByIdRol(5);
+    
+    UsuarioDTO clientes = new UsuarioDTO();
+    //id recuperado de  Inicio de sesion 
+    clientes = usuarioDAO.findById(3);
+    
+  
     request.setAttribute("clientes", clientes);
     
     //id tecnico 3 tecnico juridico
-    List<UsuarioDTO> tecnicos = usuarioDAO.getAllByIdRol(3);
-    request.setAttribute("tecnicos", tecnicos);
+  //  List<UsuarioDTO> tecnicos = usuarioDAO.getAllByIdRol(3);
+   // request.setAttribute("tecnicos", tecnicos);
     
     request.getRequestDispatcher("/modules/solicitudes/crear.jsp").forward(request, response);
   }
@@ -84,27 +88,50 @@ public class SolicitudesCrear extends HttpServlet {
     
     java.util.Date utilDate = new java.util.Date();
     java.sql.Date fechaHora = new java.sql.Date(utilDate.getTime());
-    String descripcion =request.getParameter("txtDescripcion");
-    int id_tipo_solicitud = Integer.parseInt(request.getParameter("selectTipoSolicitud"));
-    int id_estado_solicitud = 2;
+    String descripcion =request.getParameter("textDescripcion");//listo
+    int id_tipo_solicitud = Integer.parseInt(request.getParameter("selectTipoSolicitud"));//listo
+    int id_estado_solicitud = 2;// 2 es en espera
     Date creado = fechaHora;
-    Date modificado = fechaHora;
-    int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));
-    int id_tecnico = Integer.parseInt(request.getParameter("selectTecnico"));    
-   
+
+    int id_solicitud = 1000;
+    solicitud.setId_solicitud(id_solicitud);
+    
+    //id tecnico null
+    int id_tecnico=2;
+    solicitud.setId_tecnico(id_tecnico);
+    UsuarioDTO tecnico = new UsuarioDTO();
+    tecnico = usuarioDAO.findById(id_tecnico);
+    solicitud.setTecnico(tecnico);
+    
     solicitud.setId_solicitud(10);//test
     solicitud.setFecha_hora(fechaHora);
     solicitud.setDescripcion(descripcion);
-    SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(id_tipo_solicitud);
+    
+    solicitud.setId_tipo_solicitud(id_tipo_solicitud);
+    SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(id_tipo_solicitud);//listo
     solicitud.setTipoSolicitud(solicitudTiposDTO);
+    
+    solicitud.setId_estado_solicitud(id_estado_solicitud);
     SolicitudEstadoDTO solicitudEstadoDTO = solicitudEstadoDAO.findById(id_estado_solicitud);
     solicitud.setEstadoSolicitud(solicitudEstadoDTO);
+    
     solicitud.setCreado(creado);
-    solicitud.setModificado(modificado);
-    UsuarioDTO cliente = usuarioDAO.findById(id_cliente);
+   
+    
+    //id recuperado de  Inicio de sesion 141
+    int id_cliente=101;
+    UsuarioDTO cliente = new UsuarioDTO();
+    cliente = usuarioDAO.findById(id_cliente);
     solicitud.setCliente(cliente);
-    UsuarioDTO tecnico = usuarioDAO.findById(id_tecnico);
-    solicitud.setTecnico(tecnico);
+    solicitud.setId_cliente(id_cliente);
+    
+//  UsuarioDTO cliente = usuarioDAO.findById(id_cliente);
+System.out.println("solicitud "+solicitud);
+    solicitud.setCliente(cliente);
+    
+   //Tecnico null
+   // UsuarioDTO tecnico = usuarioDAO.findById(id_tecnico);
+   // solicitud.setTecnico(tecnico);
     
     int resultadoOperacion = solicitudDAO.create(solicitud);
     

@@ -68,7 +68,7 @@
 
                                             </c:if>
                                         </c:forEach>
-                                        <td> ${tipoName}</td>
+                                        <td>${tipoName}</td>
                                         
                                         
                                         <c:set var="estadoName" value="" />
@@ -82,18 +82,17 @@
                                        
                                         <td> ${estadoName}  </td>
 
-                                        <c:set var="clienteName" value="" />
+                                        <c:set var="clienteName" value="Test rol no Cliente" />
 
-                                        <c:forEach var="cliente" items="${cliente}">
-                                            <c:if test="${cliente.id == solicitudes.getId_cliente()}">
-                                                <c:set var="clienteName" value="${cliente.nombres} ${cliente.paterno} " />
-
+                                        <c:forEach var="clientes" items="${clientes}">
+                                            <c:if test="${clientes.id == solicitudes.getId_cliente()}">
+                                                <c:set var="clienteName" value="${clientes.nombres} ${clientes.paterno}" />
                                             </c:if>
                                         </c:forEach>
+                                        <td>${clienteName} </td>
+                                       
                                         
-
-                                        <td>${clienteName}</td>
-                                        <c:set var="tecnicoName" value="" />
+                                        <c:set var="tecnicoName" value="No Asignado" />
 
                                         <c:forEach var="tecnico" items="${tecnico}">
                                             <c:if test="${tecnico.id == solicitudes.getId_tecnico()}">
@@ -107,6 +106,13 @@
                                         
 
                                         <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
+                                            
+                                            <div style="width: max-content; float: left;">
+                                                    <%--VER solicitud --%>
+                                                    <a href="versolicitud?id=${solicitudes.getId_solicitud()}">
+                                                        <button class="btn btn-sm btn-info" title="Ver"><i class="fa fa-eye"></i></button></a> 
+                                                    <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                </div>
                                             <div style="width: max-content; float: left;">
                                                 <div style="width: max-content; float: left;">
                                                     <%--<form action="citas/editar" method="POST"> --%>
@@ -114,24 +120,37 @@
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
                                                     <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                 </div>
-                                                <div style="width: max-content; float: left;">
-                                                    <%--VER solicitud --%>
-                                                    <a href="versolicitud?id=${solicitudes.getId_solicitud()}">
-                                                        <button class="btn btn-warning btn-sm" title="Ver"><i class="fa fa-eye"></i></button></a> 
-                                                    <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
-                                                </div>
+                                                
+                                                
+                                                <c:if test="${solicitudes.getId_estado_solicitud()==2}">
+
                                                 <div style="width: max-content; float: left;margin-left: 5px;">
                                                     <form action="../presupuestos/crear" method="GET">
                                                         <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
-                                                        <button class="btn btn-success" title="Cotizar"><i class="fa fa-dollar"></i></button>
+                                                        <button class="btn btn-success" title="Presupuesto">Presupuesto<i class="fa fa-dollar"></i></button>
                                                     </form>
                                                 </div>
+                                                </c:if>
+                                                
+                                                <c:if test="${solicitudes.getId_estado_solicitud()==1}">
+
+                                                <div style="width: max-content; float: left;margin-left: 5px;">
+                                                    <form action="../presupuestos/crear" method="GET">
+                                                        <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
+                                                        <button class="btn btn-success" title="Ver Presupuesto">Ver Presupuesto<i class="fa fa-dollar"></i></button>
+                                                    </form>
+                                                </div>
+                                                </c:if>
+                                                
+                                                <c:if test="${solicitudes.getId_estado_solicitud()!=3}">
+                                              
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <a href="borrar?id=${solicitudes.getId_solicitud()}">
-                                                        <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash"></i></button></a> 
+                                                        <button class="btn btn-sm btn-danger" title="Rechazar"><i class="btn btn-sm btn-danger"></i>Rechazar</button></a> 
                                                     <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
                                                     
                                                 </div>
+                                                 </c:if>
                                             </div>
                                         </td>
                                     </tr>

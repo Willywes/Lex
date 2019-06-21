@@ -71,7 +71,8 @@ private final SolicitudDAO solicitudDAO = new SolicitudDAO();
         
         
        
-        request.getRequestDispatcher("/modules/solicitudes/listarsolicitud.jsp").forward(request, response);
+       // request.getRequestDispatcher("/modules/solicitudes/listarsolicitud.jsp").forward(request, response);
+       request.getRequestDispatcher("/modules/solicitudes/detallesolicitud.jsp").forward(request, response);
     }
 
     /**

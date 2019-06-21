@@ -10,6 +10,7 @@ import Models.DAO.SolicitudEstadoDAO;
 import Models.DAO.SolicitudTiposDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.SolicitudDTO;
+import Models.DTO.SolicitudEstadoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -89,12 +90,22 @@ private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
             throws ServletException, IOException {
         
         int id_solicitud = Integer.parseInt(request.getParameter("idSolicitud"));
+ 
         
+      // 3 es rechazado o cancelado
+        SolicitudDTO solicitudActualizar = new SolicitudDTO();
+        solicitudActualizar =solicitudDAO.findById(id_solicitud);
+        
+        SolicitudEstadoDTO solicitudEstadoDTO =new SolicitudEstadoDTO();
+        solicitudEstadoDTO =estadoSolicitudDAO.findById(3);
+        
+        solicitudActualizar.setEstadoSolicitud(solicitudEstadoDTO);
+        solicitudActualizar.setId_estado_solicitud(3);
         
       
-        SolicitudDTO solicitudActualizar = new SolicitudDTO();
         
-        solicitudDAO.delete(id_solicitud);
+        //solicitudDAO.delete(id_solicitud);
+        solicitudDAO.update(solicitudActualizar);
         
         request.getRequestDispatcher("/modules/solicitudes/").forward(request, response);
     }

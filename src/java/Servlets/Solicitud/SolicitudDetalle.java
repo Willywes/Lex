@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claudio
  */
-@WebServlet(name = "SolicitudListar", urlPatterns = {"/solicitudes/listar"})
-public class SolicitudListar extends HttpServlet {
+@WebServlet(name = "SolicitudDetalle", urlPatterns = {"/solicitudes/detalle"})
+public class SolicitudDetalle extends HttpServlet {
     private final SolicitudDAO solicitudDAO = new SolicitudDAO();
 
     /**
@@ -47,10 +47,10 @@ public class SolicitudListar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SolicitudListar</title>");            
+            out.println("<title>Servlet SolicitudDetalle</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SolicitudListar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SolicitudDetalle at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,12 +69,9 @@ public class SolicitudListar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<SolicitudDTO> solicitudes = solicitudDAO.getAll();
-
         SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
         List<SolicitudTiposDTO> solicitudTipo = solicitudTiposDAO.getAll();
         request.setAttribute("solicitudTipo", solicitudTipo);
-        
         
         
         SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
@@ -83,17 +80,18 @@ public class SolicitudListar extends HttpServlet {
 
 
         UsuarioDAO clienteDAO = new UsuarioDAO();
-        List<UsuarioDTO> clientes= clienteDAO.getAllByIdRol(5);
-        request.setAttribute("clientes", clientes);
+        List<UsuarioDTO> cliente= clienteDAO.getAllByIdRol(5);
+        request.setAttribute("cliente", cliente);
         
- 
-         UsuarioDAO tecnicoDAO = new UsuarioDAO();
-        List<UsuarioDTO> tecnico= tecnicoDAO.getAllByIdRol(3);
-        request.setAttribute("tecnico", tecnico);
         
-        request.setAttribute("solicitudes", solicitudes);
-
-        request.getRequestDispatcher("/modules/solicitudes/index.jsp").forward(request, response);
+        int id_solicitud =   1 ;//Integer.parseInt(request.getParameter("id"));
+        SolicitudDTO solicitudes=solicitudDAO.findById(id_solicitud);
+        
+        System.out.println("solicitudes "+solicitudes);
+        
+           
+        request.setAttribute("solicitudes", solicitudes);     
+        request.getRequestDispatcher("/modules/solicitudes/detallesolicitud.jsp").forward(request, response);
     }
 
     /**

@@ -78,8 +78,8 @@
                 <a class="btn btn-warning btn-sm" title="Editar" href="actualizar?id=${solicitudes.getId_solicitud()}">
                     <i class="fa fa-edit"></i> Editar
                 </a> 
-                <button class="btn btn-danger btn-sm" title="Eliminar " name="accion" value="Eliminar">
-                                                            <i class="fa fa-trash"></i>Eliminar</button>
+                <button class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar">
+                                                            <i class="fa fa-trash"></i>Rechazar</button>
                  <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
                 
             </div>
