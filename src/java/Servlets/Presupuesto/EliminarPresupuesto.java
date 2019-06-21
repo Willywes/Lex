@@ -6,7 +6,6 @@
 package Servlets.Presupuesto;
 
 import Models.DAO.PresupuestoDAO;
-import Models.DTO.PresupuestoDTO;
 import Models.DTO.PresupuestoTransaction;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +25,7 @@ public class EliminarPresupuesto extends HttpServlet {
 
     private final PresupuestoDAO presupuestoDAO = new PresupuestoDAO();
     private final PresupuestoDAO PresupuestoDAO = new PresupuestoDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -81,9 +81,8 @@ public class EliminarPresupuesto extends HttpServlet {
 
         int id_presupuesto = Integer.parseInt(request.getParameter("idPresupuesto"));
 
-
         presupuestoDAO.delete(id_presupuesto);
-        
+
         List<PresupuestoTransaction> presupuestos = PresupuestoDAO.getAllTransaccion();
         request.setAttribute("presupuestos", presupuestos);
         request.setAttribute("mensaje", "exito");

@@ -14,14 +14,16 @@ public class PresupuestoDetalleDTO {
     protected int id_detalle_presupuesto;
     protected String servicio;
     protected int monto;
+    protected int id_presupuesto;
 
     public PresupuestoDetalleDTO() {
     }
 
-    public PresupuestoDetalleDTO(int id_detalle_presupuesto, String servicio, int monto) {
+    public PresupuestoDetalleDTO(int id_detalle_presupuesto, String servicio, int monto, int id_presupuesto) {
         this.id_detalle_presupuesto = id_detalle_presupuesto;
         this.servicio = servicio;
         this.monto = monto;
+        this.id_presupuesto = id_presupuesto;
     }
 
     public int getId_detalle_presupuesto() {
@@ -48,9 +50,17 @@ public class PresupuestoDetalleDTO {
         this.monto = monto;
     }
 
+    public int getId_presupuesto() {
+        return id_presupuesto;
+    }
+
+    public void setId_presupuesto(int id_presupuesto) {
+        this.id_presupuesto = id_presupuesto;
+    }
+
     @Override
     public String toString() {
-        return "PresupuestoDetalleDTO{" + "id_detalle_presupuesto=" + id_detalle_presupuesto + ", servicio=" + servicio + ", monto=" + monto + '}';
+        return "PresupuestoDetalleDTO{" + "id_detalle_presupuesto=" + id_detalle_presupuesto + ", servicio=" + servicio + ", monto=" + monto + "id_presupuesto=" + id_presupuesto + '}';
     }
 
 }

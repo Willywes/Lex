@@ -8,21 +8,15 @@ package Servlets.Presupuesto;
 import Models.DAO.PresupuestoDAO;
 import Models.DAO.PresupuestoDetalleDAO;
 import Models.DAO.SolicitudDAO;
-import Models.DAO.SolicitudTiposDAO;
 import Models.DTO.PresupuestoDTO;
 import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.SolicitudDTO;
-import Models.DTO.SolicitudTiposDTO;
 import Models.DAO.PlanPagoDAO;
 import Models.DAO.PresupuestoEstadoDAO;
-import Models.DAO.SolicitudEstadoDAO;
 import Models.DTO.PlanPagoDTO;
 import Models.DTO.PresupuestoEstadoDTO;
-import Models.DTO.SolicitudEstadoDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -126,15 +120,17 @@ public class CrearPresupuesto extends HttpServlet {
 
             int idTecnico = 1; //creo que es 1 siempre
 
-            //de detalle prosupuesto 
+            //de detalle presupuesto 
             String servicio = request.getParameter("servicio");
             int monto = Integer.parseInt(request.getParameter("monto"));
+            int id_presupuesto = Integer.parseInt(request.getParameter("id_presupuesto"));
 
             PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
 
             detalle.setId_detalle_presupuesto(20); //nose si el id es auto incrementable  
             detalle.setMonto(monto);
             detalle.setServicio(servicio);
+            detalle.setId_presupuesto(id_presupuesto);
 
             //resultado = al id de la fila insetada en detalle presupuesto 
             int resultado = this.presupuestoDetalle.create(detalle);
@@ -158,7 +154,6 @@ public class CrearPresupuesto extends HttpServlet {
 
                 presu.setFecha(sqlDate);
                 presu.setId_estado_presupuesto(estado);
-                presu.setId_detalle_presupuesto(resultado);
                 presu.setCreado(sqlDate); //no si esta fecha es auto 
                 presu.setId_solicitud(idSolicitud);
                 presu.setId_tecnico(idTecnico);

@@ -10,14 +10,12 @@ import Models.DAO.PresupuestoDAO;
 import Models.DAO.PresupuestoDetalleDAO;
 import Models.DAO.PresupuestoEstadoDAO;
 import Models.DAO.SolicitudDAO;
-import Models.DAO.SolicitudEstadoDAO;
 import Models.DTO.PlanPagoDTO;
 import Models.DTO.PresupuestoDTO;
 import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.PresupuestoEstadoDTO;
 import Models.DTO.PresupuestoTransaction;
 import Models.DTO.SolicitudDTO;
-import Models.DTO.SolicitudEstadoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -116,7 +114,7 @@ public class ModificarPresupuesto extends HttpServlet {
         PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
 
         for (PresupuestoDetalleDTO presupuestoDetalleDTO : detalles) {
-            if (presupuestoDetalleDTO.getId_detalle_presupuesto() == presupuesto.getId_detalle_presupuesto()) {
+            if (presupuestoDetalleDTO.getId_detalle_presupuesto() == presupuestoDetalleDTO.getId_presupuesto()) {
                 detalle = presupuestoDetalleDTO;
             }
         }
@@ -164,6 +162,8 @@ public class ModificarPresupuesto extends HttpServlet {
             String servicio = request.getParameter("servicio");
 
             int monto = Integer.parseInt(request.getParameter("monto"));
+            
+            int id_presupuesto = Integer.parseInt(request.getParameter("id_presupuesto"));
 
             int idDetallePresupuesto = Integer.parseInt(request.getParameter("idDetalle"));
 
@@ -172,11 +172,11 @@ public class ModificarPresupuesto extends HttpServlet {
             detalle.setId_detalle_presupuesto(idDetallePresupuesto); //nose si el id es auto incrementable  
             detalle.setMonto(monto);
             detalle.setServicio(servicio);
+            detalle.setId_presupuesto(id_presupuesto);
 
             //resultado = al id de la fila insetada en detalle presupuesto 
             int resultado = this.presupuestoDetalle.update(detalle);
 
-            //creo que 1 es exito en ingresar un detalle o es el id del detalle ??
             if (resultado != 0) {
 
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -196,7 +196,6 @@ public class ModificarPresupuesto extends HttpServlet {
                 presu.setId_presupuesto(idPresupuesto);
                 presu.setFecha(sqlDate);
                 presu.setId_estado_presupuesto(estado);
-                presu.setId_detalle_presupuesto(idDetallePresupuesto);
                 presu.setId_solicitud(idSolicitud);
                 presu.setId_tecnico(idTecnico);
                 presu.setId_plan_pago(idPlanPago);

@@ -29,7 +29,7 @@ public class PresupuestoDetalleDAO {
     private final String FIND_BY_ID = "{call PKG_PRESUPUESTO_DETALLES.READ_PRESUPUESTO_DETALLES(?)}";
     private final String GET_ALL = "{call PKG_PRESUPUESTO_DETALLES.READ_ALL_PRESUPUESTO_DETALLES(?)}";
     private final String DELETE = "{call PKG_PRESUPUESTO_DETALLES.DELETE_PRESUPUESTO_DETALLES(?,?)}";
-    private final String UPDATE = "{call PKG_PRESUPUESTO_DETALLES.UPDATE_PRESUPUESTO_DETALLES(?,?,?,?)}"; 
+    private final String UPDATE = "{call PKG_PRESUPUESTO_DETALLES.UPDATE_PRESUPUESTO_DETALLES(?,?,?)}";
 
     Conexion con = new Conexion();
 
@@ -53,6 +53,7 @@ public class PresupuestoDetalleDAO {
                 presupuesto_detalle.setId_detalle_presupuesto(rs.getInt("ID_DETALLE_PRESUPUESTO"));
                 presupuesto_detalle.setServicio(rs.getString("SERVICIO"));
                 presupuesto_detalle.setMonto(rs.getInt("MONTO"));
+                presupuesto_detalle.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
             }
 
         } catch (SQLException | IOException ex) {
@@ -83,6 +84,7 @@ public class PresupuestoDetalleDAO {
                 presupuesto_detalle.setId_detalle_presupuesto(rs.getInt("ID_DETALLE_PRESUPUESTO"));
                 presupuesto_detalle.setServicio(rs.getString("SERVICIO"));
                 presupuesto_detalle.setMonto(rs.getInt("MONTO"));
+                presupuesto_detalle.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
 
                 list.add(presupuesto_detalle);
             }
@@ -104,11 +106,12 @@ public class PresupuestoDetalleDAO {
             CallableStatement cs = cn.prepareCall(CREATE);
             cs.setString(1, presupuesto_detalle.getServicio());
             cs.setInt(2, presupuesto_detalle.getMonto());
+            cs.setInt(3, presupuesto_detalle.getId_presupuesto());
 
-            cs.registerOutParameter(3, Types.INTEGER);// salida de parametro 9
+            cs.registerOutParameter(4, Types.INTEGER);// salida de parametro 9
             cs.execute();
 
-            resultadoOperacion = cs.getInt(3);
+            resultadoOperacion = cs.getInt(4);
 
         } catch (SQLException | IOException ex) {
             Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,31 +149,30 @@ public class PresupuestoDetalleDAO {
         return presupuesto_detalle;
 
     }
-    
-    public int update(PresupuestoDetalleDTO detallePresuuesto) {
-    int resultadoOperacion = 0;
 
-    try {
-      Connection cn = con.open();
-      CallableStatement cs = cn.prepareCall(UPDATE);
-      cs.setInt(1, detallePresuuesto.getId_detalle_presupuesto());
-      cs.setString(2, detallePresuuesto.getServicio());
-      cs.setInt(3, detallePresuuesto.getMonto());
-      
+    public int update(PresupuestoDetalleDTO detallePresupuesto) {
+        int resultadoOperacion = 0;
 
-      cs.registerOutParameter(4, Types.INTEGER);// salida de parametro 5
-      cs.execute();
+        try {
+            Connection cn = con.open();
+            CallableStatement cs = cn.prepareCall(UPDATE);
+            cs.setInt(1, detallePresupuesto.getId_detalle_presupuesto());
+            cs.setString(2, detallePresupuesto.getServicio());
+            cs.setInt(3, detallePresupuesto.getMonto());
+            cs.setInt(4, detallePresupuesto.getId_presupuesto());
 
-      resultadoOperacion = cs.getInt(4);
+            cs.registerOutParameter(5, Types.INTEGER);// salida de parametro 5
+            cs.execute();
 
-    } catch (SQLException | IOException ex) {
-      Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      con.close();
+            resultadoOperacion = cs.getInt(6);
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return resultadoOperacion;
     }
-
-    return resultadoOperacion;
-  }
-    
 
 }

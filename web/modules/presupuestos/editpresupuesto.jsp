@@ -32,8 +32,117 @@
         <div class="row">
 
             <%@include file="/modules/globals/alerts.jsp" %>
+            
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Nuevo Presupuesto</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Nombre</th>
+                                            <th>Telefono</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr>
+                                            <td>111.111.111-9</td>
+                                            <td>Nombre del usuario</td>
+                                            <td>+569876654543</td>
+                                            <td>ocip@ltda.cl</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="width: 30%;">Tipo de Solicitud</th>
+                                            <td colspan="2">Familiar</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">Descripcion</th>
+                                            <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores expedita harum minima odio praesentium vero voluptates. Aliquam corporis delectus doloremque, hic modi quas rerum sequi tempora vel voluptatem. Ex!</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="width: 30%;">Técnico</th>
+                                            <td colspan="2">Nombre del Técnico</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-            <div id="main-box"class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Plan de pago</label>
+                                        <select class="form-control" name="" id="">
+                                            <option value="">Seleccione plan</option>
+                                            <option value="">Opcion 1</option>
+                                            <option selected value="">Opcion 2</option>
+                                            <option value="">Opcion 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>SERVICIOS</h4>
+                                    <button onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>
+                                    <hr>
+                                </div>
+                                <div class="col-md-12" id="servicios">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label for="">Servicio</label>
+                                                <input type="text" class="form-control" name="" id="" value="Lorem ipsum dolor sit amet">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">Monto</label>
+                                                <input type="number" class="form-control" name="" id="" value="105000">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" style="margin-top: 24px;" class="btn btn-danger removeButton"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label for="">Servicio</label>
+                                                <input type="text" class="form-control" name="" id="" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">Monto</label>
+                                                <input type="number" class="form-control" name="" id="" value="455000">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" style="margin-top: 24px;" class="btn btn-danger removeButton"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary right"><i class="fa fa-save"></i> Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <div id="main-box"class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body">
                         <form action="<c:url value = "/presupuestos/modificar"/>" method="POST">

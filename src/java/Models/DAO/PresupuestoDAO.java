@@ -31,11 +31,11 @@ import oracle.jdbc.*;
  */
 public class PresupuestoDAO {
 
-    private final String CREATE = "{call PKG_PRESUPUESTOS.CREATE_PRESUPUESTOS(?,?,?,?,?,?,?,?)}";
+    private final String CREATE = "{call PKG_PRESUPUESTOS.CREATE_PRESUPUESTOS(?,?,?,?,?,?,?)}";
     private final String FIND_BY_ID = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS(?)}";
     private final String GET_ALL = "{call PKG_PRESUPUESTOS.READ_ALL_PRESUPUESTOS(?)}";
     private final String DELETE = "{call PKG_PRESUPUESTOS.DELETE_PRESUPUESTOS(?,?)}";
-    private final String UPDATE = "{call PKG_PRESUPUESTOS.UPDATE_PRESUPUESTOS(?,?,?,?,?,?,?,?)}";
+    private final String UPDATE = "{call PKG_PRESUPUESTOS.UPDATE_PRESUPUESTOS(?,?,?,?,?,?,?)}";
     private final String GET_ALL_TRANSACCION = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_TRANSACCION(?)}";
 
     Conexion con = new Conexion();
@@ -60,7 +60,6 @@ public class PresupuestoDAO {
                 presupuesto.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
                 presupuesto.setFecha(rs.getDate("FECHA"));
                 presupuesto.setId_estado_presupuesto(rs.getInt("ID_ESTADO_PRESUPUESTO"));
-                presupuesto.setId_detalle_presupuesto(rs.getInt("ID_DETALLE_PRESUPUESTO"));
                 presupuesto.setCreado(rs.getDate("CREADO"));
                 presupuesto.setModificado(rs.getDate("MODIFICADO"));
                 presupuesto.setId_solicitud(rs.getInt("ID_SOLICITUD"));
@@ -96,7 +95,6 @@ public class PresupuestoDAO {
                 presupuesto.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
                 presupuesto.setFecha(rs.getDate("FECHA"));
                 presupuesto.setId_estado_presupuesto(rs.getInt("ID_ESTADO_PRESUPUESTO"));
-                presupuesto.setId_detalle_presupuesto(rs.getInt("ID_DETALLE_PRESUPUESTO"));
                 presupuesto.setCreado(rs.getDate("CREADO"));
                 presupuesto.setModificado(rs.getDate("MODIFICADO"));
                 presupuesto.setId_solicitud(rs.getInt("ID_SOLICITUD"));
@@ -124,13 +122,12 @@ public class PresupuestoDAO {
 
             cs.setDate(1, presupuesto.getFecha());
             cs.setInt(2, presupuesto.getId_estado_presupuesto());
-            cs.setInt(3, presupuesto.getId_detalle_presupuesto());
-            cs.setDate(4, presupuesto.getCreado());
-            cs.setInt(5, presupuesto.getId_solicitud());
-            cs.setInt(6, presupuesto.getId_tecnico());
-            cs.setInt(7, presupuesto.getId_plan_pago());
+            cs.setDate(3, presupuesto.getCreado());
+            cs.setInt(4, presupuesto.getId_solicitud());
+            cs.setInt(5, presupuesto.getId_tecnico());
+            cs.setInt(6, presupuesto.getId_plan_pago());
 
-            cs.registerOutParameter(8, Types.INTEGER);// salida de parametro 9
+            cs.registerOutParameter(7, Types.INTEGER);// salida de parametro 9
 
             cs.execute();
 
@@ -182,12 +179,11 @@ public class PresupuestoDAO {
             cs.setInt(1, presupuesto.getId_presupuesto());
             cs.setDate(2, presupuesto.getFecha());
             cs.setInt(3, presupuesto.getId_estado_presupuesto());
-            cs.setInt(4, presupuesto.getId_detalle_presupuesto());
-            cs.setInt(5, presupuesto.getId_solicitud());
-            cs.setInt(6, presupuesto.getId_tecnico());
-            cs.setInt(7, presupuesto.getId_plan_pago());
+            cs.setInt(4, presupuesto.getId_solicitud());
+            cs.setInt(5, presupuesto.getId_tecnico());
+            cs.setInt(6, presupuesto.getId_plan_pago());
 
-            cs.registerOutParameter(8, Types.INTEGER);// salida de parametro 5
+            cs.registerOutParameter(7, Types.INTEGER);// salida de parametro 5
             cs.execute();
 
             resultadoOperacion = cs.getInt(8);
@@ -244,9 +240,11 @@ public class PresupuestoDAO {
                 PlanPago.setNombre(rs.getString("NOMBRE_PAGO"));
                 
                 //usuario 
+                usuario.setRut(rs.getString("RUT"));
                 usuario.setNombres(rs.getString("NOMBRE_USUARIO")); 
-                usuario.setPaterno(rs.getString("APELLIDO_USUARIO"));  
-                usuario.setEmail(rs.getString("CORREO_USUARIO"));
+                usuario.setPaterno(rs.getString("APELLIDO_USUARIO"));
+                usuario.setTelefono(rs.getInt("TELEFONO"));
+                usuario.setEmail(rs.getString("EMAIL"));
 
                 
                 presupuestoTransaccion.setPresupuestoDTO(presupuesto);
