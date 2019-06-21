@@ -6,7 +6,9 @@
 package Models.DAO;
 
 import JDBC.Conexion;
+import Models.DTO.PagoClienteDTO;
 import Models.DTO.PagoDTO;
+import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -69,9 +71,9 @@ public class PagoDAO {
 
     }
 
-    public List<PagoDTO> getAll() {
+    public List<PagoClienteDTO> getAll() {
 
-        List<PagoDTO> list = new ArrayList<>();
+        List<PagoClienteDTO> list = new ArrayList<>();
 
         try {
 
@@ -90,8 +92,20 @@ public class PagoDAO {
                 pago.setCreado(rs.getDate("CREADO"));
                 pago.setModificado(rs.getDate("MODIFICADO"));
                 pago.setId_contrato(rs.getInt("ID_CONTRATO"));
-
-                list.add(pago);
+                
+                //cliente 
+                UsuarioDTO cliente = new UsuarioDTO();
+                cliente.setId(rs.getInt("ID_USUARIO")); 
+                cliente.setNombres(rs.getString("NOMBRE_CLIENTE")); 
+                cliente.setPaterno(rs.getString("APELLIDO_CLIENTE")); 
+                cliente.setEmail(rs.getString("EMAIL_CLIENTE")); 
+                
+                PagoClienteDTO pagoCliente = new PagoClienteDTO();
+                
+                pagoCliente.setCliente(cliente); 
+                pagoCliente.setPagoDTO(pago); 
+                
+                list.add(pagoCliente); 
             }
 
         } catch (SQLException | IOException ex) {
@@ -103,9 +117,9 @@ public class PagoDAO {
         return list;
     }
 
-    public List<PagoDTO> getAll(int id) {
+    public List<PagoClienteDTO> getAll(int id) {
 
-        List<PagoDTO> list = new ArrayList<>();
+        List<PagoClienteDTO> list = new ArrayList<>();
 
         try {
 
@@ -125,8 +139,20 @@ public class PagoDAO {
                 pago.setCreado(rs.getDate("CREADO"));
                 pago.setModificado(rs.getDate("MODIFICADO"));
                 pago.setId_contrato(rs.getInt("ID_CONTRATO"));
-
-                list.add(pago);
+                
+                   //cliente 
+                UsuarioDTO cliente = new UsuarioDTO();
+                cliente.setId(rs.getInt("ID_USUARIO")); 
+                cliente.setNombres(rs.getString("NOMBRE_CLIENTE")); 
+                cliente.setPaterno(rs.getString("APELLIDO_CLIENTE")); 
+                cliente.setEmail(rs.getString("EMAIL_CLIENTE")); 
+                
+                PagoClienteDTO pagoCliente = new PagoClienteDTO();
+                
+                pagoCliente.setCliente(cliente); 
+                pagoCliente.setPagoDTO(pago); 
+                
+                list.add(pagoCliente); 
             }
 
         } catch (SQLException | IOException ex) {

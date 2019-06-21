@@ -34,7 +34,7 @@
                         </div>
                         
                        
-                        <form action="crear" method="POST" >
+                        <form action="crear" method="POST" name="form" >
                            
 
                             <div class="row">
@@ -82,5 +82,9 @@
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        
+          <!--Validar datos del form--->
+        <script src="/Lex/assets/custom/formPresupuesto_Pagos.js" type="text/javascript"></script>
+        
     </jsp:attribute>
 </t:template>

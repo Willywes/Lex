@@ -1,13 +1,11 @@
 <%-- 
     Document   : index pagos
     Created on : 08-jun-2019, 22:20:49
-    Author     : Funny
+    Author     : jean
 --%>
 
 
-<%@page import="Models.DTO.PagoDTO"%>
-<%@page import="Models.DAO.PagoDAO"%>
-<%@page import="java.util.List"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -40,21 +38,27 @@
                             </a>
                         </div>
                     </div>
-                    <div class="box-body">
-                        <form action="/Lex/pagos" method="get" style="float: left; margin: 1px 1px 1px auto;" >
-                            Contrato: <input  type="number" name="idContrato"  />
-                            <button type="submit" class="btn btn-info btn-sm" title="Buscar"  >
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
+
+                    <br/>
+                    <form action="/Lex/pagos" method="get" class="mt-4 ml-4 mr-4 mb-4"  >
+                        &nbsp; Contrato: <input  type="number" name="idContrato"  />
+                        <button type="submit" class="btn btn-info btn-sm" title="Buscar"  >
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+
+                    <div class="box-body mt-4">
+
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
-
                                 <tr>
                                     <th style="width:1%;white-space: nowrap;">N° Pago</th>
+                                    <th style="width:1%;white-space: nowrap;">Nombre Cliente</th> 
+                                    <th style="width:1%;white-space: nowrap;">Apellido CLiente</th> 
+                                    <th style="width:1%;white-space: nowrap;">Correo Cliente</th> 
                                     <th style="width:1%;white-space: nowrap;">Fecha</th>
                                     <th style="width:1%;white-space: nowrap;">Monto</th>
-                                    <th style="width:1%;white-space: nowrap;">Contrato</th> 
+                                    <th style="width:1%;white-space: nowrap;">N° Contrato</th> 
                                     <th style="width:1%;white-space: nowrap;"></th>
                                 </tr>
                             </thead>
@@ -63,26 +67,28 @@
                                 <c:forEach var="pago" items="${pagos}">
 
                                     <tr>
-                                        <td>${pago.id_pago}</td>
-                                        <td>${pago.fecha_hora}</td> 
-                                        <td>${pago.monto}</td>
-                                        <td>${pago.id_contrato}</td>
+                                        <td>${pago.pagoDTO.id_pago}</td>
+                                        <td>${pago.cliente.nombres}</td>
+                                        <td>${pago.cliente.paterno}</td>
+                                        <td>${pago.cliente.email}</td>
+                                        <td>${pago.pagoDTO.fecha_hora}</td> 
+                                        <td>${pago.pagoDTO.monto}</td>
+                                        <td>${pago.pagoDTO.id_contrato}</td>
 
                                         <td style="width:1%;white-space: nowrap;">
-
 
                                             <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
                                                 <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <input type="hidden" name="idPago" value="${pago.id_pago}"  />
+                                                <input type="hidden" name="idPago" value="${pago.pagoDTO.id_pago}"  />
                                             </form>
 
                                             <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                                <input type="hidden" name="idPago" value="${pago.id_pago}"  />
+                                                <input type="hidden" name="idPago" value="${pago.pagoDTO.id_pago}"  />
                                             </form>
 
                                         </td>
@@ -101,5 +107,14 @@
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+
+
+
+        <!--Data tables --->
+        <script src="/Lex/assets/custom/dataTables.js" type="text/javascript"></script>
+
+
+
     </jsp:attribute>
 </t:template>

@@ -12,6 +12,7 @@ import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.PresupuestoEstadoDTO;
 import Models.DTO.PresupuestoTransaction;
 import Models.DTO.SolicitudDTO;
+import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -221,6 +222,7 @@ public class PresupuestoDAO {
                 PresupuestoEstadoDTO estado = new PresupuestoEstadoDTO();
                 SolicitudDTO solicitud = new SolicitudDTO();
                 PlanPagoDTO PlanPago = new PlanPagoDTO();
+                UsuarioDTO usuario = new UsuarioDTO();
 
                 //presupuestos 
                 presupuesto.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
@@ -240,12 +242,19 @@ public class PresupuestoDAO {
 
                 //PLAN PAGO 
                 PlanPago.setNombre(rs.getString("NOMBRE_PAGO"));
+                
+                //usuario 
+                usuario.setNombres(rs.getString("NOMBRE_USUARIO")); 
+                usuario.setPaterno(rs.getString("APELLIDO_USUARIO"));  
+                usuario.setEmail(rs.getString("CORREO_USUARIO"));
 
+                
                 presupuestoTransaccion.setPresupuestoDTO(presupuesto);
                 presupuestoTransaccion.setPresupuestoDetalle(detalle);
                 presupuestoTransaccion.setPresupuestoEstado(estado);
                 presupuestoTransaccion.setPresupuestoPlanPago(PlanPago);
                 presupuestoTransaccion.setSolicitud(solicitud);
+                presupuestoTransaccion.setUsuario(usuario); 
 
                 list.add(presupuestoTransaccion);
             }

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Funny
+ * @author jean
  */
 public class PresupuestoTransaction {
 
@@ -18,6 +18,18 @@ public class PresupuestoTransaction {
     private PresupuestoEstadoDTO presupuestoEstado;
     private SolicitudDTO solicitud;
     private PlanPagoDTO presupuestoPlanPago;
+    private UsuarioDTO usuario;
+
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+    
+    
+    
 
     public PresupuestoDTO getPresupuestoDTO() {
         return presupuestoDTO;

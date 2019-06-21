@@ -27,35 +27,38 @@
                         <div class="<c:out value="${ mensaje == 'get' ? '' : 'alert alert-success'  }" />" >
                             <p> <c:out value="${ mensaje == 'get' ? '' : 'Agregado con Exito'  }" /> </p>
                         </div>
-                        <form action="crear" method="POST" >
+                        <form action="crear" method="POST" name="form" >
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="fecha">Fecha (*)</label>
-                                        <input required type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha">
+                                        <input required type="date" class="form-control " id="fecha" name="fecha" placeholder="Ingrese Fecha">
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="solicitud">Solicitud (*)</label>
-                                        <select required name="solicitud" class="form-control">
-                                            <option value="" >Seleccione una Opción</option>
+                                        <select required name="solicitud" disabled="true" class="form-control">
                                             <c:forEach  var="solicitud" items="${solicitudes}">
                                                 <option ${ idSolicitud == solicitud.getId_solicitud() ? 'selected' : '' } value="${solicitud.getId_solicitud()}"> ${solicitud.getDescripcion()}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="servicio">Servicio (*)</label>
-                                        <input required type="text" class="form-control" name="servicio" placeholder="Servicio">                        
+                                        <input required type="text" class="form-control" name="servicio" placeholder="Ingrese descripción de Servicio">                        
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+
+                                <div class="col-md-12"><hr></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="estado">Estado (*)</label>
                                         <select required name="estado" class="form-control">
@@ -66,9 +69,6 @@
                                         </select>                                    
                                     </div>
                                 </div>
-                                <div class="col-md-12"><hr></div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="plan_pago">Plan Pago (*)</label>
@@ -100,5 +100,10 @@
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+        <!--Validar datos del form--->
+        <script src="/Lex/assets/custom/formPresupuesto_Pagos.js" type="text/javascript"></script>
+
+
     </jsp:attribute>
 </t:template>
