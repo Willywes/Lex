@@ -77,6 +77,7 @@
                 <a class="btn btn-warning btn-sm" title="Editar" href="actualizar?id=${solicitudes.getId_solicitud()}">
                     <i class="fa fa-edit"></i> Editar
                 </a> 
+                    
                 <form action="../presupuestos/crear" method="GET">
                     <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
                     <button class="btn btn-success btn-sm" title="Cotizar"><i class="fa fa-dollar"></i> Cotizar</button>

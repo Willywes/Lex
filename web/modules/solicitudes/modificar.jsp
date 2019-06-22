@@ -78,7 +78,7 @@
                <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}"/>
 
                 
-               <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/'">
+               <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
             </div>
         </form>
     </jsp:attribute>

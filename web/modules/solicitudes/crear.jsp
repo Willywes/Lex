@@ -78,7 +78,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button  type="submit" class="btn btn-primary right" name="accion"><i class="fa fa-save"></i> Guardar</button>
-                                    <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/'">
+                                    <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
                                 </div>
                             </div>
                         </div>

@@ -65,6 +65,8 @@ private final SolicitudDAO solicitudDAO = new SolicitudDAO();
         
         int id_solicitud = Integer.parseInt(request.getParameter("id"));
         SolicitudDTO solicitudes=solicitudDAO.findById(id_solicitud);
+        solicitudes.setId_estado_solicitud(solicitudes.getTipoSolicitud().getId());
+        solicitudes.setId_tipo_solicitud(solicitudes.getEstadoSolicitud().getId_estado_solicitud());
         
            
         request.setAttribute("solicitudes", solicitudes);        

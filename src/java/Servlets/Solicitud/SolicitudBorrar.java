@@ -90,7 +90,7 @@ private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
             throws ServletException, IOException {
         
         int id_solicitud = Integer.parseInt(request.getParameter("idSolicitud"));
- 
+        System.out.println("el ID_solicitud es: "+id_solicitud);        
         
       // 3 es rechazado o cancelado
         SolicitudDTO solicitudActualizar = new SolicitudDTO();
