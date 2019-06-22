@@ -83,6 +83,7 @@
                     --%>
                 <button class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarSolicitud();">
                 <i class="fa fa-trash"></i>Rechazar</button>
+                <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
                <%--  <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" /> --%>
                 
             </div>
