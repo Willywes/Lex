@@ -13,22 +13,16 @@ public class ContratoDetalleDTO {
     private int id_detalle_contrato;
     private String servicio;
     private int monto;
+    private int id_contrato;
 
     public ContratoDetalleDTO() {
     }
 
-    public ContratoDetalleDTO(int id_detalle_contrato, String servicio, int monto) {
+    public ContratoDetalleDTO(int id_detalle_contrato, String servicio, int monto, int id_contrato) {
         this.id_detalle_contrato = id_detalle_contrato;
         this.servicio = servicio;
         this.monto = monto;
-    }
-
-    public int getMonto() {
-        return monto;
-    }
-
-    public void setMonto(int monto) {
-        this.monto = monto;
+        this.id_contrato = id_contrato;
     }
 
     public int getId_detalle_contrato() {
@@ -47,10 +41,27 @@ public class ContratoDetalleDTO {
         this.servicio = servicio;
     }
 
+    public int getMonto() {
+        return monto;
+    }
+
+    public void setMonto(int monto) {
+        this.monto = monto;
+    }
+
+    public int getId_contrato() {
+        return id_contrato;
+    }
+
+    public void setId_contrato(int id_contrato) {
+        this.id_contrato = id_contrato;
+    }
+
     @Override
     public String toString() {
-        return "ContratoDetalleDTO{" + "id_detalle_contrato=" + id_detalle_contrato + ", servicio=" + servicio + ", monto=" + monto + '}';
+        return "ContratoDetalleDTO{" + "id_detalle_contrato=" + id_detalle_contrato + ", servicio=" + servicio + ", monto=" + monto + ", id_contrato=" + id_contrato + '}';
     }
-    
+
+   
     
 }

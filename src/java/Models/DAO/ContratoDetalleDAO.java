@@ -103,6 +103,7 @@ public class ContratoDetalleDAO {
                 contratoDetalle.setId_detalle_contrato(rs.getInt("ID_DETALLE_CONTRATO"));
                 contratoDetalle.setServicio(rs.getString("SERVICIO"));
                 contratoDetalle.setMonto(rs.getInt("MONTO"));
+                contratoDetalle.setId_contrato(rs.getInt("ID_CONTRATO"));
                
                 list.add(contratoDetalle);
             }

@@ -60,6 +60,10 @@
         <servlet-name>SolicitudDetalle</servlet-name>
         <servlet-class>Servlets.Solicitud.SolicitudDetalle</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetalleContratoServlet</servlet-name>
+        <servlet-class>Servlet.Contrato.DetalleContratoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>SolicitudDetalle</servlet-name>
         <url-pattern>/solicitudes/detalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetalleContratoServlet</servlet-name>
+        <url-pattern>/DetalleContratoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

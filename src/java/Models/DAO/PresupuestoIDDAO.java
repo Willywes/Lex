@@ -27,7 +27,7 @@ import oracle.jdbc.OracleTypes;
  * @author Tecmar
  */
 public class PresupuestoIDDAO {
-    //private final String FIND_BY_ID = "{call PKG_CONTRATO.READ_CONTRATO(?)}";
+    private final String FIND_BY_ID = "{call LEX.PKG_PRESUPUESTOS.READ_PRESUPUESTOS(?,?)}";
     private final String GET_ALL = "{call LEX.PKG_PRESUPUESTOS.READ_ALL_PRESUPUESTOS(?)}";
     //{call LEX.PKG_CONTRATOS.READ_ALL_CONTRATOS(?)}
     //private final String CREATE = "{call PKG_CONTRATO.CREATE_CONTRATO(?,?,?,?,?,?,?,?,?,?,?)}";
@@ -36,9 +36,9 @@ public class PresupuestoIDDAO {
     Conexion con = new Conexion();
 
 
-    /*public ContratoEstadoDTO findById(int id) {
+    public PresupuestoIDDTO findById(int id) {
 
-        ContratoDTO contrato = new ContratoDTO();
+        PresupuestoIDDTO presupuesto = new PresupuestoIDDTO();
 
         try {
             
@@ -55,22 +55,18 @@ public class PresupuestoIDDAO {
 
             while (rs.next()) {
 
-                contrato.setId_contrato(rs.getInt("ID_CONTRATO"));
-                contrato.setFecha_inicio(rs.getDate("FECHA_INICIO"));
-                contrato.setFecha_termino(rs.getDate("FECHA_TERMINO"));
-                contrato.setId_contrato_estado(rs.getInt("ID_CONTRATO_ESTADO"));
-                contrato.setId_detalle_contrato(rs.getInt("ID_DETALLE_CONTRATO"));
-                contrato.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
-                contrato.setId_abogado(rs.getInt("ID_ABOGADO"));
-                contrato.setId_plan_pago(rs.getInt("ID_PLAN_PAGO"));
-                contrato.setCreado(rs.getDate("CREADO"));
-                contrato.setModificado(rs.getDate("MODIFICADO"));
-                contrato.setAprobado_abogado(rs.getInt("APROBADO_ABOGADO"));
-                contrato.setAprobado_cliente(rs.getInt("APROBADO_CLIENTE"));
-                contrato.setId_forma_pago(rs.getInt("ID_FORMA_PAGO"));
+                presupuesto.setIdPresupuesto(rs.getInt("ID_PRESUPUESTO"));
+                presupuesto.setFecha(rs.getDate("FECHA"));
+                presupuesto.setIdEstado(rs.getInt("ID_ESTADO_PRESUPUESTO"));
+                
+                presupuesto.setCreado(rs.getDate("CREADO"));
+                presupuesto.setModificado(rs.getDate("MODIFICADO"));
+                presupuesto.setIdSolicitud(rs.getInt("ID_SOLICITUD"));
+                presupuesto.setIdTecnico(rs.getInt("ID_TECNICO"));
+                presupuesto.setIdPlanPago(rs.getInt("ID_PLAN_PAGO"));
                         
                 
-               
+                System.out.println("Objeto presupuesto dao: " + presupuesto);
        
             }
 
@@ -80,9 +76,9 @@ public class PresupuestoIDDAO {
             con.close();
         }
 
-        return contrato;
+        return presupuesto;
 
-    }*/
+    }
 
     public List<PresupuestoIDDTO> getAll() {
 
@@ -101,6 +97,7 @@ public class PresupuestoIDDAO {
 
                 PresupuestoIDDTO presupuestoID = new PresupuestoIDDTO();
                 presupuestoID.setIdPresupuesto(rs.getInt("ID_PRESUPUESTO"));
+                presupuestoID.setIdPlanPago(rs.getInt("ID_PLAN_PAGO"));
                 
                
                 list.add(presupuestoID);

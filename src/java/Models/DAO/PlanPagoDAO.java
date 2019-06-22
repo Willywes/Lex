@@ -105,6 +105,8 @@ public class PlanPagoDAO {
                 
                
                 list.add(planPago);
+                
+                System.out.println("plan pago dao: " + planPago);
             }
 
 

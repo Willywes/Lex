@@ -15,7 +15,7 @@ public class PresupuestoIDDTO {
      private int idPresupuesto;
      private Date fecha;
      private int idEstado;
-     private int idDetalle;
+     
      private Date creado;
      private Date modificado;
      private int idSolicitud;
@@ -25,11 +25,11 @@ public class PresupuestoIDDTO {
     public PresupuestoIDDTO() {
     }
 
-    public PresupuestoIDDTO(int idPresupuesto, Date fecha, int idEstado, int idDetalle, Date creado, Date modificado, int idSolicitud, int idTecnico, int idPlanPago) {
+    public PresupuestoIDDTO(int idPresupuesto, Date fecha, int idEstado, Date creado, Date modificado, int idSolicitud, int idTecnico, int idPlanPago) {
         this.idPresupuesto = idPresupuesto;
         this.fecha = fecha;
         this.idEstado = idEstado;
-        this.idDetalle = idDetalle;
+        
         this.creado = creado;
         this.modificado = modificado;
         this.idSolicitud = idSolicitud;
@@ -37,12 +37,11 @@ public class PresupuestoIDDTO {
         this.idPlanPago = idPlanPago;
     }
 
-    public int getIdPlanPago() {
-        return idPlanPago;
-    }
+    
 
-    public void setIdPlanPago(int idPlanPago) {
-        this.idPlanPago = idPlanPago;
+    @Override
+    public String toString() {
+        return "PresupuestoIDDTO{" + "idPresupuesto=" + idPresupuesto + ", fecha=" + fecha + ", idEstado=" + idEstado +  ", creado=" + creado + ", modificado=" + modificado + ", idSolicitud=" + idSolicitud + ", idTecnico=" + idTecnico + ", idPlanPago=" + idPlanPago + '}';
     }
 
     public int getIdPresupuesto() {
@@ -67,14 +66,6 @@ public class PresupuestoIDDTO {
 
     public void setIdEstado(int idEstado) {
         this.idEstado = idEstado;
-    }
-
-    public int getIdDetalle() {
-        return idDetalle;
-    }
-
-    public void setIdDetalle(int idDetalle) {
-        this.idDetalle = idDetalle;
     }
 
     public Date getCreado() {
@@ -109,9 +100,12 @@ public class PresupuestoIDDTO {
         this.idTecnico = idTecnico;
     }
 
-    @Override
-    public String toString() {
-        return "PresupuestoIDDTO{" + "idPresupuesto=" + idPresupuesto + ", fecha=" + fecha + ", idEstado=" + idEstado + ", idDetalle=" + idDetalle + ", creado=" + creado + ", modificado=" + modificado + ", idSolicitud=" + idSolicitud + ", idTecnico=" + idTecnico + ", idPlanPago=" + idPlanPago + '}';
+    public int getIdPlanPago() {
+        return idPlanPago;
+    }
+
+    public void setIdPlanPago(int idPlanPago) {
+        this.idPlanPago = idPlanPago;
     }
      
      

@@ -12,24 +12,18 @@ package Models.DTO;
 public class PlanPagoDTO {
     private int id_Plan_Pago;
     private String nombre;
-    private int cantidad_cuotas;
+    
 
     public PlanPagoDTO() {
     }
 
-    public PlanPagoDTO(int id_Plan_Pago, String nombre, int cantidad_cuotas) {
+    public PlanPagoDTO(int id_Plan_Pago, String nombre) {
         this.id_Plan_Pago = id_Plan_Pago;
         this.nombre = nombre;
-        this.cantidad_cuotas = cantidad_cuotas;
+        
     }
 
-    public int getCantidad_cuotas() {
-        return cantidad_cuotas;
-    }
-
-    public void setCantidad_cuotas(int cantidad_cuotas) {
-        this.cantidad_cuotas = cantidad_cuotas;
-    }
+    
 
     public int getId_Plan_Pago() {
         return id_Plan_Pago;
@@ -49,7 +43,7 @@ public class PlanPagoDTO {
 
     @Override
     public String toString() {
-        return "PlanPagoDTO{" + "id_Plan_Pago=" + id_Plan_Pago + ", nombre=" + nombre + ", cantidad_cuotas=" + cantidad_cuotas + '}';
+        return "PlanPagoDTO{" + "id_Plan_Pago=" + id_Plan_Pago + ", nombre=" + nombre + '}';
     }
 
 }

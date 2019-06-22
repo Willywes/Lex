@@ -11,7 +11,6 @@ public class ContratoDTO {
     private Date fecha_inicio;
     private Date fecha_termino;
     private int id_contrato_estado;
-    private int id_detalle_contrato;
     private int id_presupuesto;
     private int id_abogado;
     private int id_plan_pago;
@@ -20,16 +19,16 @@ public class ContratoDTO {
     private int aprobado_abogado;
     private int aprobado_cliente;
     private int id_forma_pago;
+    private String rol_causa;
 
     public ContratoDTO() {
     }
 
-    public ContratoDTO(int id_contrato, Date fecha_inicio, Date fecha_termino, int id_contrato_estado, int id_detalle_contrato, int id_presupuesto, int id_abogado, int id_plan_pago, Date creado, Date modificado, int aprobado_abogado, int aprobado_cliente, int id_forma_pago) {
+    public ContratoDTO(int id_contrato, Date fecha_inicio, Date fecha_termino, int id_contrato_estado, int id_presupuesto, int id_abogado, int id_plan_pago, Date creado, Date modificado, int aprobado_abogado, int aprobado_cliente, int id_forma_pago, String rol_causa) {
         this.id_contrato = id_contrato;
         this.fecha_inicio = fecha_inicio;
         this.fecha_termino = fecha_termino;
         this.id_contrato_estado = id_contrato_estado;
-        this.id_detalle_contrato = id_detalle_contrato;
         this.id_presupuesto = id_presupuesto;
         this.id_abogado = id_abogado;
         this.id_plan_pago = id_plan_pago;
@@ -38,14 +37,7 @@ public class ContratoDTO {
         this.aprobado_abogado = aprobado_abogado;
         this.aprobado_cliente = aprobado_cliente;
         this.id_forma_pago = id_forma_pago;
-    }
-
-    public int getId_forma_pago() {
-        return id_forma_pago;
-    }
-
-    public void setId_forma_pago(int id_forma_pago) {
-        this.id_forma_pago = id_forma_pago;
+        this.rol_causa = rol_causa;
     }
 
     public int getId_contrato() {
@@ -78,14 +70,6 @@ public class ContratoDTO {
 
     public void setId_contrato_estado(int id_contrato_estado) {
         this.id_contrato_estado = id_contrato_estado;
-    }
-
-    public int getId_detalle_contrato() {
-        return id_detalle_contrato;
-    }
-
-    public void setId_detalle_contrato(int id_detalle_contrato) {
-        this.id_detalle_contrato = id_detalle_contrato;
     }
 
     public int getId_presupuesto() {
@@ -144,10 +128,30 @@ public class ContratoDTO {
         this.aprobado_cliente = aprobado_cliente;
     }
 
+    public int getId_forma_pago() {
+        return id_forma_pago;
+    }
+
+    public void setId_forma_pago(int id_forma_pago) {
+        this.id_forma_pago = id_forma_pago;
+    }
+
+    public String getRol_causa() {
+        return rol_causa;
+    }
+
+    public void setRol_causa(String rol_causa) {
+        this.rol_causa = rol_causa;
+    }
+
     @Override
     public String toString() {
-        return "DocumentoDTO{" + "id_contrato=" + id_contrato + ", fecha_inicio=" + fecha_inicio + ", fecha_termino=" + fecha_termino + ", id_contrato_estado=" + id_contrato_estado + ", id_detalle_contrato=" + id_detalle_contrato + ", id_presupuesto=" + id_presupuesto + ", id_abogado=" + id_abogado + ", id_plan_pago=" + id_plan_pago + ", creado=" + creado + ", modificado=" + modificado + ", aprobado_abogado=" + aprobado_abogado + ", aprobado_cliente=" + aprobado_cliente + ", id_forma_pago=" + id_forma_pago + '}';
+        return "ContratoDTO{" + "id_contrato=" + id_contrato + ", fecha_inicio=" + fecha_inicio + ", fecha_termino=" + fecha_termino + ", id_contrato_estado=" + id_contrato_estado + ", id_presupuesto=" + id_presupuesto + ", id_abogado=" + id_abogado + ", id_plan_pago=" + id_plan_pago + ", creado=" + creado + ", modificado=" + modificado + ", aprobado_abogado=" + aprobado_abogado + ", aprobado_cliente=" + aprobado_cliente + ", id_forma_pago=" + id_forma_pago + ", rol_causa=" + rol_causa + '}';
     }
+
+    
+
+    
     
     
 }

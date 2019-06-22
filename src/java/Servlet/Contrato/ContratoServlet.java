@@ -5,9 +5,11 @@
  */
 package Servlet.Contrato;
 
+import Models.DAO.CausaIdDAO;
 import Models.DAO.ContratoDAO;
 import Models.DTO.ContratoDTO;
 import Models.DAO.ContratoEstadoDAO;
+import Models.DTO.CausaIdDTO;
 import Models.DTO.ContratoEstadoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +30,7 @@ public class ContratoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final ContratoDAO contrantoDAO = new ContratoDAO();
     private final ContratoEstadoDAO contratoEstadoDAO = new ContratoEstadoDAO();
+    //private final CausaIdDAO causaIdDAO = new CausaIdDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,10 +40,10 @@ public class ContratoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CitaServlet</title>");            
+            out.println("<title>Servlet ContratoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CitaServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ContratoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -52,9 +55,12 @@ public class ContratoServlet extends HttpServlet {
         
         List<ContratoDTO> contratos = contrantoDAO.getAll();
         List<ContratoEstadoDTO> estados = contratoEstadoDAO.getAll();
+        //List<CausaIdDTO> causas = causaIdDAO.getAll();
        
         request.setAttribute("contratos", contratos);
+        System.out.println("contratos "+contratos);
         request.setAttribute("estados", estados);
+        //request.setAttribute("causas", causas);
         request.setAttribute("nombre", "miguel");
         request.getRequestDispatcher("/modules/contratos/index.jsp").forward(request, response);
          

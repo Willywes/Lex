@@ -48,13 +48,14 @@ public class ContratoDAO {
 			cs.setDate(2, contrato.getFecha_inicio()==null ? null : new java.sql.Date( contrato.getFecha_inicio().getTime()) );
 			cs.setDate(3, contrato.getFecha_termino()==null ? null : new java.sql.Date( contrato.getFecha_termino().getTime() ) );
 			cs.setLong( 4, contrato.getId_contrato_estado());
-			cs.setLong( 5, contrato.getId_detalle_contrato());
-			cs.setLong( 6, contrato.getId_presupuesto());
-			cs.setLong( 7, contrato.getId_abogado());
-			cs.setLong( 8, contrato.getId_plan_pago());
-			cs.setInt( 9, contrato.getAprobado_abogado());
-			cs.setInt( 10, contrato.getAprobado_cliente());
-			cs.setLong( 11, contrato.getId_forma_pago());
+			
+			cs.setLong( 5, contrato.getId_presupuesto());
+			cs.setLong( 6, contrato.getId_abogado());
+			cs.setLong( 7, contrato.getId_plan_pago());
+			cs.setInt( 8, contrato.getAprobado_abogado());
+			cs.setInt( 9, contrato.getAprobado_cliente());
+			cs.setLong( 10, contrato.getId_forma_pago());
+                        cs.setString(11, contrato.getRol_causa());
 			cs.registerOutParameter( 12, java.sql.Types.NUMERIC);
             
                         System.out.println("ini contrato dao create: " + contrato.getFecha_inicio());
@@ -83,13 +84,14 @@ public class ContratoDAO {
 			cs.setDate(2, contrato.getFecha_inicio()==null ? null : new java.sql.Date( contrato.getFecha_inicio().getTime()) );
 			cs.setDate(3, contrato.getFecha_termino()==null ? null : new java.sql.Date( contrato.getFecha_termino().getTime() ) );
 			cs.setLong( 4, contrato.getId_contrato_estado());
-			cs.setLong( 5, contrato.getId_detalle_contrato());
-			cs.setLong( 6, contrato.getId_presupuesto());
-			cs.setLong( 7, contrato.getId_abogado());
-			cs.setLong( 8, contrato.getId_plan_pago());
-			cs.setInt( 9, contrato.getAprobado_abogado());
-			cs.setInt( 10, contrato.getAprobado_cliente());
-			cs.setLong( 11, contrato.getId_forma_pago());
+			
+			cs.setLong( 5, contrato.getId_presupuesto());
+			cs.setLong( 6, contrato.getId_abogado());
+			cs.setLong( 7, contrato.getId_plan_pago());
+			cs.setInt( 8, contrato.getAprobado_abogado());
+			cs.setInt( 9, contrato.getAprobado_cliente());
+			cs.setLong( 10, contrato.getId_forma_pago());
+                        cs.setString(11, contrato.getRol_causa());
 			cs.registerOutParameter( 12, java.sql.Types.NUMERIC);
                         
                         System.out.println("Id contrato dao update: " + contrato.getId_contrato());
@@ -133,7 +135,7 @@ public class ContratoDAO {
                 contrato.setFecha_inicio(rs.getDate("FECHA_INICIO"));
                 contrato.setFecha_termino(rs.getDate("FECHA_TERMINO"));
                 contrato.setId_contrato_estado(rs.getInt("ID_CONTRATO_ESTADO"));
-                contrato.setId_detalle_contrato(rs.getInt("ID_DETALLE_CONTRATO"));
+                
                 contrato.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
                 contrato.setId_abogado(rs.getInt("ID_ABOGADO"));
                 contrato.setId_plan_pago(rs.getInt("ID_PLAN_PAGO"));
@@ -142,6 +144,7 @@ public class ContratoDAO {
                 contrato.setAprobado_abogado(rs.getInt("APROBADO_ABOGADO"));
                 contrato.setAprobado_cliente(rs.getInt("APROBADO_CLIENTE"));
                 contrato.setId_forma_pago(rs.getInt("ID_FORMA_PAGO"));
+                contrato.setRol_causa(rs.getString("ROL_CAUSA"));
                         
                 
                
@@ -178,7 +181,7 @@ public class ContratoDAO {
                 contrato.setFecha_inicio(rs.getDate("FECHA_INICIO"));
                 contrato.setFecha_termino(rs.getDate("FECHA_TERMINO"));
                 contrato.setId_contrato_estado(rs.getInt("ID_CONTRATO_ESTADO"));
-                contrato.setId_detalle_contrato(rs.getInt("ID_DETALLE_CONTRATO"));
+                
                 contrato.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
                 contrato.setId_abogado(rs.getInt("ID_ABOGADO"));
                 contrato.setId_plan_pago(rs.getInt("ID_PLAN_PAGO"));
@@ -187,6 +190,7 @@ public class ContratoDAO {
                 contrato.setAprobado_abogado(rs.getInt("APROBADO_ABOGADO"));
                 contrato.setAprobado_cliente(rs.getInt("APROBADO_CLIENTE"));
                 contrato.setId_forma_pago(rs.getInt("ID_FORMA_PAGO"));
+                contrato.setRol_causa(rs.getString("ROL_CAUSA"));
                
                 list.add(contrato);
             }
