@@ -87,16 +87,18 @@
                                         <td style="white-space: nowrap; width: 1%; vertical-align: middle; ">
                                             <div style="width: max-content; float: left;">
                                                 <div style="width: max-content; float: left;">
-                                                    <%--<form action="citas/editar" method="POST"> --%>
+                                                    
                                                     <a href="citas/editar?id=${cita.getId_cita()}">
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>    
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
-                                                    <form action="citas/borrar" method="POST">
+                                                    <c:if test="${cita.getId_estado_cita()==1}">
+                                                    <form action="citas/borrar" method="GET">
                                                         <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                                        <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar">
+                                                        <button class="btn btn-danger btn-sm" title="Desactivar" name="accion" value="Eliminar">
                                                             <i class="fa fa-trash"></i></button>
                                                     </form>
+                                                        </c:if>
                                                 </div>
                                             </div>
                                         </td>

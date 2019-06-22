@@ -1,8 +1,9 @@
 <%-- 
-    Document   : cita index
-    Created on : 15-05-2019, 22:34:03
+    Document   : confirmarEstado
+    Created on : 22-06-2019, 0:29:48
     Author     : claudio
 --%>
+
 
 <%@page import="Models.DTO.CitaDTO"%>
 <%@page import="Models.DAO.CitaDAO"%>
@@ -14,10 +15,10 @@
 <t:template>
 
     <jsp:attribute name="title">
-        Gestión de Citas
+        Gestión de Solicitudes
     </jsp:attribute>
     <jsp:attribute name="subtitle">
-        Cambiar Estado
+        Confirmar Rechazar Solicitud
     </jsp:attribute>
 
 
@@ -40,48 +41,31 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSolicitud" class="col-sm-2 control-label" >Fecha cita</label>
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Fecha Cita</label>
                 <div class="col-sm-10">
                     <input  readonly type="text" class="form-control" id="inputFecha" value="${cita.getFecha_hora()}">
                 </div>
             </div>
-   
+            
             <div class="form-group">
-                <label for="inputSolicitud" class="col-sm-2 control-label" >Nombre Notaria</label>
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Notaria</label>
                 <div class="col-sm-10">
-                    <c:set var="notariaName" value="" />
-                    <c:set var="notariaRazonSocial" value="" />
-
-                                    <c:forEach var="notaria" items="${notarias}">
-                                        <c:if test="${notaria.id == cita.getId_notaria()}">
-                                            <c:set var="notariaName" value="${notaria.nombre}" />
-                                            <c:set var="notariaRazonSocial" value="${notaria.razonSocial}" />
-                                        </c:if>
-                                         </c:forEach>
-                    <input  readonly type="text" class="form-control" id="inputEmail3" value="${notariaName}">
+                    <input  readonly type="text" class="form-control" id="inputEmail3" value="${cita.getId_notaria()}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSolicitud" class="col-sm-2 control-label" >Estado de Solicitud</label>
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Estado cita</label>
                 <div class="col-sm-10">
-                                                 <c:choose>
-                                                <c:when test="${cita.getId_estado_cita() == 1}">
-                                                    <span class="badge bg-green">Activado</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="badge bg-red">Desactivado</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                                    
-                   <%-- <input  readonly type="text" class="form-control" id="inputEmail3" value="${cita.getId_estado_cita()}">  --%>
+                    <input  readonly type="text" class="form-control" id="inputEmail3" value="${cita.getId_estado_cita()}">
                 </div>
             </div>
+        
 
-                 <input type="hidden" name="id" value="${cita.getId_cita()}" />
+                 <input type="hidden" name="id" value="${citas.getId_cita()}" />
                 
                  <button type="button" class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarSolicitud()">
                 <i class="fa fa-trash"></i>Rechazar</button>
-                <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/citas/listar'">
+                <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
                 
                 
             </div>
@@ -119,7 +103,7 @@
         
                 swal({
                     title: '¿Estas Seguro?',
-                    text: "Rechazara esta cita, el estado cambiara a Rechazado",
+                    text: "Rechazara este solicitud, el estado cambiara a Rechazado",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#43a047',
@@ -136,5 +120,3 @@
         </script>
     </jsp:attribute>
 </t:template>
-
-

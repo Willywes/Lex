@@ -156,7 +156,8 @@ public class SolicitudModificar extends HttpServlet {
        
         respuesta=solicitudDAO.update(solicitudActualizar);
         
-        request.getRequestDispatcher("/modules/solicitudes/index.jsp").forward(request, response);
+        response.sendRedirect("/Lex/solicitudes/listar");
+       // request.getRequestDispatcher("/modules/solicitudes/index.jsp").forward(request, response);
     }
 
     /**

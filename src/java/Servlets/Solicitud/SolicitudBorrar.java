@@ -106,7 +106,7 @@ private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
         
         //solicitudDAO.delete(id_solicitud);
         solicitudDAO.update(solicitudActualizar);
-        System.out.println(" aca paso ! antes de  request ");
+        
         response.sendRedirect("/Lex/solicitudes/listar");
         //request.getRequestDispatcher("/solicitudes/listar").forward(request, response);
     }
