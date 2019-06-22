@@ -90,7 +90,7 @@ private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
             throws ServletException, IOException {
         
         int id_solicitud = Integer.parseInt(request.getParameter("idSolicitud"));
-        System.out.println("el ID_solicitud es: "+id_solicitud);        
+             
         
       // 3 es rechazado o cancelado
         SolicitudDTO solicitudActualizar = new SolicitudDTO();
@@ -106,8 +106,9 @@ private final SolicitudTiposDAO tipoSolicitudDAO = new SolicitudTiposDAO();
         
         //solicitudDAO.delete(id_solicitud);
         solicitudDAO.update(solicitudActualizar);
-        
-        request.getRequestDispatcher("/modules/solicitudes/").forward(request, response);
+        System.out.println(" aca paso ! antes de  request ");
+        response.sendRedirect("/Lex/solicitudes/listar");
+        //request.getRequestDispatcher("/solicitudes/listar").forward(request, response);
     }
 
     /**

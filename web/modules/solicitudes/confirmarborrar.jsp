@@ -32,7 +32,7 @@
 
     <jsp:attribute name="content">
   
-    <form class="form-horizontal" action="/Lex/solicitudes/borrar" method="POST"role="form">
+    <form id="rechaza" class="form-horizontal" action="/Lex/solicitudes/borrar" method="POST"role="form">
             <div class="form-group">
                 <label for="inputSolicitud" class="col-sm-2 control-label" >Nº Solicitud</label>
                 <div class="col-sm-10">
@@ -81,10 +81,12 @@
                     <i class="fa fa-edit"></i> Editar
                 </a> 
                     --%>
-                <button class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarSolicitud();">
+                 <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" />
+                
+                 <button type="button" class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarSolicitud()">
                 <i class="fa fa-trash"></i>Rechazar</button>
                 <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
-               <%--  <input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}" /> --%>
+                
                 
             </div>
         </form>
@@ -118,8 +120,7 @@
            
             
             function rechazarSolicitud(){
-               
-               
+        
                 swal({
                     title: '¿Estas Seguro?',
                     text: "Rechazara este solicitud, el estado cambiara a Rechazado",
@@ -131,10 +132,10 @@
                     cancelButtonText: 'No, cancelar!'
                 }).then(function (result) {
                     if (result.value) {
-                        //$('borrar?idSolicitud=${solicitudes.getId_solicitud()}').submit();
-                        $('<input type="hidden" name="idSolicitud" value="${solicitudes.getId_solicitud()}"/>').submit();
+                      $('#rechaza').submit();
                     }
                 });
+                
            }
         </script>
     </jsp:attribute>
