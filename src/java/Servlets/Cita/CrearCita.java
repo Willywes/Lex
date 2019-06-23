@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +57,37 @@ public class CrearCita extends HttpServlet {
             throws ServletException, IOException {
         List<NotariaDTO> notarias = new NotariaDAO().getAll();
         request.setAttribute("notarias", notarias);
+        
+        
+        //sacar fecha del sistema
+        java.util.Date fechas = new Date();
+        String fechaString =fechas.toString();
+        System.out.println(fechas.getMonth());
+        
+        
+        //validar fecha en crear cita
+             Calendar fecha = new GregorianCalendar();
+
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        dia= dia+1;
+        mes =mes+1;
+        String fechaHoy=año+"-0"+mes+"-"+dia;
+       
+        System.out.println("Fecha Actual: "+fechaHoy);
+        request.setAttribute("fechaHoy", fechaHoy);
+            
+         /*   
+        //formatear la fecha
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = sdf1.parse(fechaString);
+        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+*/
+            
+      
+        
+        
         request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
     }
 

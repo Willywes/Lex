@@ -130,13 +130,11 @@ public class ModificarCita extends HttpServlet {
 
  
 
-        System.out.println(citaDTO.toString());// test  borrar
-
         int resultadoOperacion = citaDAO.update(citaDTO);
 
         response.sendRedirect("/Lex/citas");
        
-        // request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
+ 
     }
 
     /**

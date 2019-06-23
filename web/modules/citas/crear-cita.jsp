@@ -42,8 +42,8 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="txtfechaHora">Fecha</label>
-                                                    <input type="date" required name="txtfechaHora" class="form-control">
+                                                    <label for="txtfechaHora">Fecha </label>
+                                                    <input type="date" required name="txtfechaHora"  min="${fechaHoy}"  class="form-control">
                                                 </div>
 
                                             </div>

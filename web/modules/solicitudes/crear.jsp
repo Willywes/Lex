@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label for="tipo">Tipo Solicitud</label>
 
-                                        <select id="selectTipoSolicitud" name="selectTipoSolicitud" class="form-control">
+                                        <select id="selectTipoSolicitud" name="selectTipoSolicitud" class="form-control" required>
                                             <option selected>Seleccione...</option>                                                
                                             <c:forEach var="tipoDeSolicitudes" items="${tipoDeSolicitudes}">
                                                 <option value="${tipoDeSolicitudes.getId()}">${tipoDeSolicitudes.nombre}</option>
@@ -71,7 +71,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Describa lo que sea solicitar</label>
-                                        <textarea class="form-control" name="textDescripcion" id="textDescripcion" cols="30" rows="10"></textarea>
+                                        <textarea class="form-control" name="textDescripcion" id="textDescripcion" cols="30" rows="10" required></textarea>
                                     </div>
                                 </div>
                             </div>

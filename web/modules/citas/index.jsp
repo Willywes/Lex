@@ -89,7 +89,7 @@
                                                 <div style="width: max-content; float: left;">
                                                     
                                                     <a href="citas/editar?id=${cita.getId_cita()}">
-                                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>    
+                                                        <button class="btn btn-sm btn-info" title="Ver"><i class="fa fa-eye"></i></button></a>    
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <c:if test="${cita.getId_estado_cita()==1}">
@@ -97,8 +97,8 @@
                                                         <input type="hidden" name="id" value="${cita.getId_cita()}" />
                                                        
                                                         
-                                                            <button type="button" class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarCita()">
-                                                                <i class="fa fa-trash"></i>Rechazar</button>
+                                                            <button type="button" class="btn btn-sm btn-danger" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarCita()">
+                                                                <i class="fa fa-times"></i> Rechazar</button>
                                                             
                                                     </form>
                                                         </c:if>
