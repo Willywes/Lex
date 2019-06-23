@@ -125,8 +125,7 @@ public class SolicitudesCrear extends HttpServlet {
     solicitud.setCliente(cliente);
     solicitud.setId_cliente(id_cliente);
     
-//  UsuarioDTO cliente = usuarioDAO.findById(id_cliente);
-System.out.println("solicitud "+solicitud);
+
     solicitud.setCliente(cliente);
     
    //Tecnico null
@@ -149,7 +148,10 @@ System.out.println("solicitud "+solicitud);
     //id tecnico 3
     List<UsuarioDTO> tecnicos = usuarioDAO.getAllByIdRol(3);
     request.setAttribute("tecnicos", tecnicos);
-    request.getRequestDispatcher("/modules/solicitudes/borrar.jsp").forward(request, response);
+    
+    response.sendRedirect("/Lex/solicitudes/listar");
+   
+    //request.getRequestDispatcher("/modules/solicitudes/borrar.jsp").forward(request, response);
     //request.getRequestDispatcher("/modules/solicitudes/crear.jsp").forward(request, response);
     
   }

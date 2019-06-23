@@ -112,13 +112,11 @@ public class CrearCita extends HttpServlet {
             java.util.Date date = sdf1.parse(startDate);
             java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
 
-            System.out.println(sqlStartDate.toString());
-
-            System.out.println(fechaHora);
+          
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date dateCita = formatter.parse(fechaHora);
             java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
-            System.out.println(sqlDate.toString());
+            
             citaDTO.setFecha_hora(sqlDate);
             citaDTO.setId_estado_cita(1);
             citaDTO.setId_notaria(idNotaria);
