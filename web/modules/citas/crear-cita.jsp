@@ -26,6 +26,8 @@
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-reorder-rows.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table-fixed-columns.css">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/bootstrap-table.min.css">
+        <link rel="stylesheet" href="/Lex/assets/plugins/sweet-alert/sweetalert2.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
     </jsp:attribute>
 
     <jsp:attribute name="content">
@@ -37,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div>
-                                    <form action="crear" method="POST">
+                                    <form id="rechaza" action="crear" method="POST">
 
                                         <div class="row">
                                             <div class="col-md-3">
@@ -102,7 +104,7 @@
 
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="submit" name="accion" value="Guardar" class="btn btn-primary">
+                                                    <button  type="button" class="btn btn-primary right" name="accion" onclick="guardarCita()"><i class="fa fa-save"></i> Guardar</button>
                                             </div>
                                             <div class="col-md-6">
                                                 <input type="button" name="Cancelar" value="Cancelar" class="btn btn-danger" onClick="location.href = '/Lex/citas'">
@@ -119,10 +121,42 @@
         </div>
     </jsp:attribute>
 
-    <jsp:attribute name="scripts">
+   <jsp:attribute name="scripts">
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="/Lex/assets/plugins/sweet-alert/sweetalert2.min.js"></script>
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>        
+        
+     <script>
+           
+            
+            function guardarCita(){
+        
+                swal({
+                    title: 'Aviso',
+                    text: "Su Cita a sido Creada",
+                    type: 'warning',
+                    showCancelButton: false,
+                    confirmButtonColor: '#43a047',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'No, cancelar!'
+                }).then(function (result) {
+                    if (result.value) {
+                      $('#rechaza').submit();
+                    }
+                });
+                
+           }
+        </script>
     </jsp:attribute>
 </t:template>
 
