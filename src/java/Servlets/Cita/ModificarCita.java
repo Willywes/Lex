@@ -32,134 +32,121 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ModificarCita", urlPatterns = {"/citas/editar"})
 public class ModificarCita extends HttpServlet {
- private final CitaDAO citaDAO = new CitaDAO();
 
-  /**
-   * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-   * methods.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    try (PrintWriter out = response.getWriter()) {
-      /* TODO output your page here. You may use following sample code. */
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet ModificarCita</title>");      
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>Servlet ModificarCita at " + request.getContextPath() + "</h1>");
-      out.println("</body>");
-      out.println("</html>");
+    private final CitaDAO citaDAO = new CitaDAO();
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ModificarCita</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ModificarCita at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
-  }
 
-  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-  /**
-   * Handles the HTTP <code>GET</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-      
-    int id_cita = Integer.parseInt(request.getParameter("id"));
-    
-    CitaDTO cita = new CitaDTO();
-    cita=citaDAO.findById(id_cita);//buscar por un ID
-    
-      CitaEstadoDAO citaEstadoDAO = new CitaEstadoDAO();
-      List<CitaEstadoDTO> citaEstado = citaEstadoDAO.getAll();
-      request.setAttribute("citaEstado", citaEstado);
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-      
-      NotariaDAO notariaDAO = new NotariaDAO();
-      List<NotariaDTO> notarias = notariaDAO.getAll();
-      System.out.println("Lista de notarias "+notarias);
-      request.setAttribute("notarias", notarias);
-      
-    
-    request.setAttribute("cita",cita);
-    request.getRequestDispatcher("/modules/citas/modificar.jsp").forward(request, response);
-  }
+        int id_cita = Integer.parseInt(request.getParameter("id"));
 
-  /**
-   * Handles the HTTP <code>POST</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+        CitaDTO cita = new CitaDTO();
+        cita = citaDAO.findById(id_cita);//buscar por un ID
+
+        CitaEstadoDAO citaEstadoDAO = new CitaEstadoDAO();
+        List<CitaEstadoDTO> citaEstado = citaEstadoDAO.getAll();
+        request.setAttribute("citaEstado", citaEstado);
+
+        NotariaDAO notariaDAO = new NotariaDAO();
+        List<NotariaDTO> notarias = notariaDAO.getAll();
         
-      
-       // String fechaCita =request.getParameter("txtfechaHora");
-       // String horaCita = request.getParameter("txthora");
-       // String minutosCita = request.getParameter("txtminutos");
-       // String fechaHora = fechaCita+" "+horaCita+":"+minutosCita+":00";
-        //System.out.println(fechaHora);
-        System.out.println("entro al DO POST");
-        int id_cita=Integer.parseInt(request.getParameter("id"));//enviado por parametro oculto
-        System.out.println("El id estado "+id_cita);
-     //   int idNotaria=Integer.parseInt(request.getParameter("txtidnotaria"));
-         int estadoCita = Integer.parseInt(request.getParameter("selectestadoCita"));
-        System.out.println("El estado Cita "+estadoCita); 
-         
+        request.setAttribute("notarias", notarias);
+
+        request.setAttribute("cita", cita);
+        request.getRequestDispatcher("/modules/citas/modificar.jsp").forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+
+       
+        int id_cita = Integer.parseInt(request.getParameter("id"));//enviado por parametro oculto
+        
+       
+
         CitaDTO citaDTO = new CitaDTO();
 
-        citaDTO = citaDAO.findById(id_cita);    
-            
-         //   String startDate= fechaHora;
-       //     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        //    java.util.Date date = sdf1.parse(startDate);
-        //    java.sql.Date sqlStartDate = new java.sql.Date(date.getTime()); 
-            
-        //    System.out.println(sqlStartDate.toString());
-            
-            
-     //       System.out.println(fechaHora);
-     //       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-     //       Date dateCita = formatter.parse(fechaHora);
-     //       java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
-    //        System.out.println(sqlDate.toString());
-            
-     //       citaDTO.setId_cita(Integer.parseInt(request.getParameter("id")));
-      //      citaDTO.setFecha_hora(sqlDate);
-            citaDTO.setId_estado_cita(estadoCita); 
-        //    citaDTO.setId_notaria(idNotaria);
-            
-            System.out.println(citaDTO.toString());// test  borrar
-            
-            int resultadoOperacion = citaDAO.update(citaDTO);
-            
-            System.out.println(" el valor es "+resultadoOperacion);
-            
-              
-        request.getRequestDispatcher("/modules/citas/borrar.jsp").forward(request, response);
-       // request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
-  }
+        citaDTO = citaDAO.findById(id_cita);
 
-  /**
-   * Returns a short description of the servlet.
-   *
-   * @return a String containing servlet description
-   */
-  @Override
-  public String getServletInfo() {
-    return "Short description";
-  }// </editor-fold>
+        CitaEstadoDTO citaEstado = new CitaEstadoDTO();
+        CitaEstadoDAO citaEstadoDAO = new CitaEstadoDAO();
+
+        if (citaDTO.getId_estado_cita() == 1) {
+            citaDTO.setId_estado_cita(2);
+
+            citaEstado = citaEstadoDAO.findById(2);
+            citaDTO.setCitaEstado(citaEstado);
+        } else {
+            citaDTO.setId_estado_cita(1);
+            citaEstado = citaEstadoDAO.findById(1);
+            citaDTO.setCitaEstado(citaEstado);
+        }
+
+ 
+
+        System.out.println(citaDTO.toString());// test  borrar
+
+        int resultadoOperacion = citaDAO.update(citaDTO);
+
+        response.sendRedirect("/Lex/citas");
+       
+        // request.getRequestDispatcher("/modules/citas/crear-cita.jsp").forward(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

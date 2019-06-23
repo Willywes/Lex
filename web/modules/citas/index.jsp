@@ -67,7 +67,7 @@
 
                                     <tr>
                                         <td>${cita.getId_cita()}</td>
-                                        <td>${cita.getFecha_hora()}</td>
+                                        <td>${cita.getFecha_hora()}  ${cita.getHora()}</td>
                                         <td>
                                             
                                             ${notariaName} - ${notariaRazonSocial}
@@ -93,10 +93,13 @@
                                                 </div>
                                                 <div style="width: max-content; float: left; margin-left: 5px">
                                                     <c:if test="${cita.getId_estado_cita()==1}">
-                                                    <form action="citas/borrar" method="GET">
+                                                    <form id="rechaza" action="citas/borrar" method="POST"> <%-- GET --%>
                                                         <input type="hidden" name="id" value="${cita.getId_cita()}" />
-                                                        <button class="btn btn-danger btn-sm" title="Desactivar" name="accion" value="Eliminar">
-                                                            <i class="fa fa-trash"></i></button>
+                                                       
+                                                        
+                                                            <button type="button" class="btn btn-danger btn-sm" title="Rechazar " name="accion" value="Rechazar" onclick="rechazarCita()">
+                                                                <i class="fa fa-trash"></i>Rechazar</button>
+                                                            
                                                     </form>
                                                         </c:if>
                                                 </div>
@@ -161,7 +164,28 @@
                /* content : 'Buscar';*/
             }
         </style>
-     
+     <script>
+           
+            
+            function rechazarCita(){
+        
+                swal({
+                    title: '¿Estas Seguro?',
+                    text: "Rechazara esta cita, el estado cambiara a Rechazado",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#43a047',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Rechazar!',
+                    cancelButtonText: 'No, cancelar!'
+                }).then(function (result) {
+                    if (result.value) {
+                      $('#rechaza').submit();
+                    }
+                });
+                
+           }
+        </script>
     </jsp:attribute>
 </t:template>
 

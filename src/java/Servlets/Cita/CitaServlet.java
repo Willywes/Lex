@@ -55,6 +55,8 @@ public class CitaServlet extends HttpServlet {
             throws ServletException, IOException {
         
         List<CitaDTO> citas = citaDAO.getAll();
+        
+        
         request.setAttribute("citas", citas);        
         List<NotariaDTO> notarias = new NotariaDAO().getAll();
         request.setAttribute("notarias", notarias);

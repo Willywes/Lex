@@ -39,46 +39,78 @@
             <div class="form-group">
                 <label for="inputSolicitud" class="col-sm-2 control-label" >Fecha Cita</label>
                 <div class="col-sm-10">
-                    <input  readonly type="text" class="form-control" id="fechasolicitud" value="${cita.getFecha_hora()}">
+                    <input  readonly type="text" class="form-control" id="fechasolicitud" value="${cita.getFecha_hora()} ${cita.getHora()}">
                 </div>
             </div>
+      
             <div class="form-group">
                 <label readonly for="inputSolicitud" class="col-sm-2 control-label" >Notaria</label>
                 <div class="col-sm-10">
-                    
-                     <c:set var="notariaName" value="" />
-                                     <c:set var="notariaRazonSocial" value="" />
 
-                                    <c:forEach var="notarias" items="${notarias}">
-                                        <c:if test="${notarias.id == cita.getId_notaria()}">
-                                            <c:set var="notariaName" value="${notarias.nombre}" />
-                                            <c:set var="notariaRazonSocial" value="${notarias.razonSocial}" />
-                                        </c:if>
-                                    </c:forEach>
-                    
+                    <c:set var="notariaName" value="" />
+                    <c:set var="notariaRazonSocial" value="" />
+
+                    <c:forEach var="notarias" items="${notarias}">
+                        <c:if test="${notarias.id == cita.getId_notaria()}">
+                            <c:set var="notariaName" value="${notarias.nombre}" />
+                            <c:set var="notariaRazonSocial" value="${notarias.razonSocial}" />
+                        </c:if>
+                    </c:forEach>
+
                     <input readonly type="text" class="form-control"  id="idnotaria" value="${notariaName} - ${notariaRazonSocial}"></textarea>
                 </div>
             </div>
-            
+
             <div class="form-group">
-                <label  for="inputSolicitud" class="col-sm-2 control-label" >Estado de cita</label>
+                <label  for="inputSolicitud" class="col-sm-2 control-label" >Direccion</label>
                 <div class="col-sm-10">
-                    <select id="selectestadoCita" name="selectestadoCita" requerid class="form-control">
-                        <option selected>Seleccione...</option>                                                
-                        <c:forEach var="citaEstado" items="${citaEstado}">
-                            <option value="${citaEstado.getId_cita_estado()}">${citaEstado.nombre}</option>
-                        </c:forEach>
-                    </select>
+
+                    <c:set var="Direccion" value="" />
+                    <c:set var="Fono" value="" />
+
+
+                    <c:forEach var="notarias" items="${notarias}">
+                    <c:if test="${notarias.id == cita.getId_notaria()}">
+                        <c:set var="Direccion" value="${notarias.direccion}" />
+                        <c:set var="Fono" value="${notarias.telefono}" />
+                    </c:if>
+                    </c:forEach>
+
+                    <input  readonly type="text" class="form-control" id="fechasolicitud" value="${Direccion}">
                 </div>
             </div>
-            
+                
+                <div class="form-group">
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Telefono</label>
+                <div class="col-sm-10">
+                    <input  readonly type="text" class="form-control" id="fechasolicitud" value="${Fono}">
+                </div>
+            </div>
+
+             <div class="form-group">
+                <label  for="inputSolicitud" class="col-sm-2 control-label" >Estado de cita</label>
+                <div class="col-sm-10">
+
+                    <c:set var="EstadoCita" value="Aceptada" />
+
+
+                    <c:if test="${cita.getId_estado_cita()==2}">
+                        <c:set var="EstadoCita" value="Denegada" />
+
+                    </c:if>
+
+
+                    <input  readonly type="text" class="form-control" id="fechasolicitud" value="${EstadoCita}">
+                </div>
+            </div>    
+                
 
             <div class="col-md-12 text-rigth">
-               <input type="submit" class="btn btn-primary" name="accion" value="Guardar">
-               <input type="hidden" name="id" value="${cita.getId_cita()}"/>
+                <input type="submit" class="btn btn-primary" name="accion" value="Cambiar Estado">
+                <input type="hidden" name="id" value="${cita.getId_cita()}"/>
 
-                
-               <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/'">
+
+                <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/citas'">
             </div>
         </form>
     </jsp:attribute>
