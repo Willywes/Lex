@@ -81,7 +81,7 @@ public class SolicitudesCrear extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    
+      System.out.println("entro a DO POST CREAR SOLICITUD ");
     SolicitudDTO solicitud = new SolicitudDTO();    
     SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
     SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
@@ -93,17 +93,19 @@ public class SolicitudesCrear extends HttpServlet {
     int id_estado_solicitud = 2;// 2 es en espera
     Date creado = fechaHora;
 
-    int id_solicitud = 1000;
-    solicitud.setId_solicitud(id_solicitud);
+     int id_solicitud = 1000;
+     solicitud.setId_solicitud(id_solicitud);
     
     //id tecnico null
-    int id_tecnico=2;
+    int id_tecnico=999;
     solicitud.setId_tecnico(id_tecnico);
     UsuarioDTO tecnico = new UsuarioDTO();
-    tecnico = usuarioDAO.findById(id_tecnico);
+    //tecnico=usuarioDAO.getAllByIdRol(3);
+    tecnico = usuarioDAO.findById(1);
+      System.out.println("TECNICO OBJETO "+tecnico);
     solicitud.setTecnico(tecnico);
     
-    solicitud.setId_solicitud(10);//test
+   // solicitud.setId_solicitud(10);//test
     solicitud.setFecha_hora(fechaHora);
     solicitud.setDescripcion(descripcion);
     
@@ -123,10 +125,13 @@ public class SolicitudesCrear extends HttpServlet {
     UsuarioDTO cliente = new UsuarioDTO();
     cliente = usuarioDAO.findById(id_cliente);
     solicitud.setCliente(cliente);
-    solicitud.setId_cliente(id_cliente);
+    solicitud.setId_cliente(cliente.getId());
     
 
     solicitud.setCliente(cliente);
+    
+      System.out.println(" solicitud "+solicitud);
+   
     
    //Tecnico null
    // UsuarioDTO tecnico = usuarioDAO.findById(id_tecnico);
@@ -151,8 +156,7 @@ public class SolicitudesCrear extends HttpServlet {
     
     response.sendRedirect("/Lex/solicitudes/listar");
    
-    //request.getRequestDispatcher("/modules/solicitudes/borrar.jsp").forward(request, response);
-    //request.getRequestDispatcher("/modules/solicitudes/crear.jsp").forward(request, response);
+  
     
   }
 

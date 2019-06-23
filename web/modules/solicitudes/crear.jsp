@@ -76,7 +76,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button  type="button" class="btn btn-primary right" name="accion" onclick="guardarSolicitud()"><i class="fa fa-save"></i> Guardar</button>
+                                    
+                                    <button  type="button" class="btn btn-primary right" name="accion" onclick="guardarCita()"><i class="fa fa-save"></i> Guardar</button>
                                     <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
                                 </div>
                             </div>
@@ -108,7 +109,7 @@
      <script>
            
             
-            function guardarSolicitud(){
+            function guardarCita(){
         
                 swal({
                     title: 'Aviso',
