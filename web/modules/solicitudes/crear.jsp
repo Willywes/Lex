@@ -20,9 +20,6 @@
         <!-- Main content -->
         <section class="content container-fluid">
 
-            <!--------------------------
-            | usar solo esta parteeeeeee |
-            -------------------------->
 
             <div class="row">
                 <div class="col-md-12">
@@ -38,7 +35,7 @@
                                             <tr>
                                                 <th>Rut</th>
                                                 <th>Nombre</th>
-                                                <th>Telefono</th>
+                                                <th>Teléfono</th>
                                                 <th>Email</th>
                                             </tr>
                                             <tr>
@@ -70,7 +67,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="">Describa lo que sea solicitar</label>
+                                        <label for="">Describa lo que desea solicitar</label>
                                         <textarea class="form-control" name="textDescripcion" id="textDescripcion" cols="30" rows="10" required></textarea>
                                     </div>
                                 </div>

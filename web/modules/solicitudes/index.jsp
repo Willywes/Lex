@@ -51,11 +51,11 @@
                                 <tr>
                                     <th style="width:1%;white-space: nowrap;">Nº Solicitud</th>
                                     <th style="width:1%;white-space: nowrap;">Fecha</th>
-                                    <th style="width:15%;white-space: nowrap;">Descripcion</th>
+                                    <th style="width:15%;white-space: nowrap;">Descripción</th>
                                     <th style="width:1%;white-space: nowrap;">Tipo</th>
                                     <th style="width:1%;white-space: nowrap;">Estado</th>
                                     <th style="width:1%;white-space: nowrap;">Cliente</th>
-                                    <th style="width:1%;white-space: nowrap;">técnico</th>
+                                    <th style="width:1%;white-space: nowrap;">Técnico</th>
                                     <th style="width:1%;white-space: nowrap;">Acciones</th>
                             </thead>
                             <tbody>
@@ -168,7 +168,7 @@
                                 <tr>
                                     <th>Nº Solicitud</th>
                                     <th>Fecha</th>
-                                    <th>Descripcion</th>
+                                    <th>Descripción</th>
                                     <th>Tipo</th>
                                     <th>Estado</th>
                                     <th>Cliente</th>

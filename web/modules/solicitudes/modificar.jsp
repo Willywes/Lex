@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label readonly for="inputSolicitud" class="col-sm-2 control-label" >Descripcion</label>
+                <label readonly for="inputSolicitud" class="col-sm-2 control-label" >Descripción</label>
                 <div class="col-sm-10">
                     <textarea readonly class="form-control" rows="3" id="descripcion">${solicitudes.getDescripcion()}</textarea>
                 </div>
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSolicitud" class="col-sm-2 control-label" >Tecnico</label>
+                <label for="inputSolicitud" class="col-sm-2 control-label" >Técnico</label>
                 <div class="col-sm-10">
                     <input  readonly type="text" class="form-control" id="tecnico" value="${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}">
                 </div>
