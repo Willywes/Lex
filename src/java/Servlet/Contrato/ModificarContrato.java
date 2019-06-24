@@ -10,12 +10,14 @@ import Models.DAO.ContratoDetalleDAO;
 import Models.DAO.ContratoEstadoDAO;
 import Models.DAO.FormaPagoDAO;
 import Models.DAO.PlanPagoDAO;
+import Models.DAO.PresupuestoDetalleDAO;
 import Models.DAO.PresupuestoIDDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.ContratoDTO;
 import Models.DTO.ContratoDetalleDTO;
 import Models.DTO.ContratoEstadoDTO;
 import Models.DTO.PlanPagoDTO;
+import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.PresupuestoIDDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
@@ -46,6 +48,7 @@ public class ModificarContrato extends HttpServlet {
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     private final PlanPagoDAO planPagoDAO = new PlanPagoDAO();
     private final FormaPagoDAO formaPagoDAO = new FormaPagoDAO();
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -89,6 +92,8 @@ public class ModificarContrato extends HttpServlet {
         
         int id_contrato = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("id_contrato", id_contrato);
+        
+        
        
         /*este esta aparte porque aqui mando los datos del contrato
         para no mandarlos por url los traigo mediante el PA findbyid
@@ -96,6 +101,8 @@ public class ModificarContrato extends HttpServlet {
         ContratoDTO contrato = new ContratoDTO();
         contrato = contratoDAO.findById(id_contrato);
         request.setAttribute("contrato", contrato);
+        
+        
         
         List<ContratoEstadoDTO> estados = contratoEstadoDAO.getAll();
         //List<ContratoDetalleDTO> detalles = contratoDetalleDAO.getAll();

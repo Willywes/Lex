@@ -12,6 +12,7 @@ import Models.DTO.ContratoDTO;
 import Models.DAO.ContratoEstadoDAO;
 import Models.DAO.FormaPagoDAO;
 import Models.DAO.PlanPagoDAO;
+import Models.DAO.PresupuestoDetalleDAO;
 import Models.DAO.PresupuestoIDDAO;
 import Models.DAO.UsuarioDAO;
 import Models.DTO.CausaIdDTO;
@@ -19,6 +20,7 @@ import Models.DTO.ContratoDetalleDTO;
 import Models.DTO.ContratoEstadoDTO;
 import Models.DTO.FormaPagoDTO;
 import Models.DTO.PlanPagoDTO;
+import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.PresupuestoIDDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
@@ -50,6 +52,7 @@ public class CrearContratoServlet extends HttpServlet {
     private final PlanPagoDAO planPagoDAO = new PlanPagoDAO();
     private final FormaPagoDAO formaPagoDAO = new FormaPagoDAO();
     private final CausaIdDAO causaIdDAO = new CausaIdDAO();
+    private final PresupuestoDetalleDAO presupuestoDetalleDAO = new PresupuestoDetalleDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -78,6 +81,12 @@ public class CrearContratoServlet extends HttpServlet {
         PresupuestoIDDTO presupuesto = new PresupuestoIDDTO();
         presupuesto = presupuestoIDDAO.findById(id_presupuesto);
         request.setAttribute("presupuesto", presupuesto);
+        
+        
+        List<PresupuestoDetalleDTO> pdetalles = presupuestoDetalleDAO.FIND_BY_ID_PRE(id_presupuesto);
+        request.setAttribute("pdetalles", pdetalles);
+        
+        System.out.println("Presupuesto detalle: " + pdetalles.toString());
         
         List<ContratoEstadoDTO> estados = contratoEstadoDAO.getAll();
         List<ContratoDetalleDTO> detalles = contratoDetalleDAO.getAll();
@@ -164,7 +173,7 @@ public class CrearContratoServlet extends HttpServlet {
             contratoDTO.setRol_causa(rol_causa);
             System.out.println("Contrato crear: " + contratoDTO.toString());
             int resultadoOperacion = contratoDAO.create(contratoDTO);
-            request.getRequestDispatcher("/modules/contratos/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/Lex/contratos/").forward(request, response);
     }
 
     @Override

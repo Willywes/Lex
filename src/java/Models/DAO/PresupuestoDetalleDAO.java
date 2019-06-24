@@ -25,14 +25,52 @@ import oracle.jdbc.OracleTypes;
  */
 public class PresupuestoDetalleDAO {
 
-    private final String CREATE = "{call PKG_PRESUPUESTO_DETALLES.CREATE_PRESUPUESTO_DETALLES(?,?,?,?)}";
-    private final String FIND_BY_ID = "{call PKG_PRESUPUESTO_DETALLES.READ_PRESUPUESTO_DETALLES(?,?)}";
+    private final String CREATE = "{call PKG_PRESUPUESTO_DETALLES.CREATE_PRESUPUESTO_DETALLES(?,?,?)}";
+    private final String FIND_BY_ID = "{call PKG_PRESUPUESTO_DETALLES.READ_PRESUPUESTO_DETALLES(?)}";
     private final String GET_ALL = "{call PKG_PRESUPUESTO_DETALLES.READ_ALL_PRESUPUESTO_DETALLES(?)}";
     private final String DELETE = "{call PKG_PRESUPUESTO_DETALLES.DELETE_PRESUPUESTO_DETALLES(?,?)}";
     private final String UPDATE = "{call PKG_PRESUPUESTO_DETALLES.UPDATE_PRESUPUESTO_DETALLES(?,?,?)}";
-    private final String FIND_BY_ID_PRESUPUESTO = "{call PKG_PRESUPUESTO_DETALLES.READ_PRESUPUESTO_ID_PRESUPUESTO(?,?)}";
+    private final String FIND_BY_ID_PRE = "{call LEX.PKG_PRESUPUESTO_DETALLES.READ_PRESUPUESTO_ID_PRESUPUESTO(?, ?)}";
+
     Conexion con = new Conexion();
 
+    
+    public List<PresupuestoDetalleDTO> FIND_BY_ID_PRE(int id) {
+
+        List<PresupuestoDetalleDTO> list = new ArrayList<>();
+
+        try {
+            Connection cn = con.open();
+
+            CallableStatement cs = cn.prepareCall(FIND_BY_ID_PRE);
+
+            cs.setInt(1, id);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getObject(2);
+
+            while (rs.next()) {
+                PresupuestoDetalleDTO presupuesto_detalle = new PresupuestoDetalleDTO();
+                presupuesto_detalle.setId_detalle_presupuesto(rs.getInt("ID_DETALLE_PRESUPUESTO"));
+                presupuesto_detalle.setServicio(rs.getString("SERVICIO"));
+                presupuesto_detalle.setMonto(rs.getInt("MONTO"));
+                presupuesto_detalle.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
+                
+                list.add(presupuesto_detalle);
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return list;
+
+    }
+    
     public PresupuestoDetalleDTO findById(int id) {
 
         PresupuestoDetalleDTO presupuesto_detalle = new PresupuestoDetalleDTO();
@@ -64,39 +102,6 @@ public class PresupuestoDetalleDAO {
 
         return presupuesto_detalle;
 
-    }
-    
-     public List<PresupuestoDetalleDTO> getDetallesByIdPresupuesto(int id) {
-
-        List<PresupuestoDetalleDTO> list = new ArrayList<>();
-
-        try {
-
-            Connection cn = con.open();
-            CallableStatement cs = cn.prepareCall(FIND_BY_ID_PRESUPUESTO);
-            cs.setInt(1, id);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.executeUpdate();
-
-            ResultSet rs = (ResultSet) cs.getObject(2);
-            while (rs.next()) {
-
-                PresupuestoDetalleDTO presupuesto_detalle = new PresupuestoDetalleDTO();
-                presupuesto_detalle.setId_detalle_presupuesto(rs.getInt("ID_DETALLE_PRESUPUESTO"));
-                presupuesto_detalle.setServicio(rs.getString("SERVICIO"));
-                presupuesto_detalle.setMonto(rs.getInt("MONTO"));
-                presupuesto_detalle.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
-
-                list.add(presupuesto_detalle);
-            }
-
-        } catch (SQLException | IOException ex) {
-            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            con.close();
-        }
-
-        return list;
     }
 
     public List<PresupuestoDetalleDTO> getAll() {

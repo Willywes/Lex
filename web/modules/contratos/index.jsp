@@ -76,7 +76,7 @@
                                                 <td style="width:1%;white-space: nowrap;">
 
 
-                                                   <a href="DetalleContratoServlet?id=${contrato.getId_contrato()}">
+                                                   <a href="DetalleContratoServlet?id=${contrato.getId_contrato()}&idp=${contrato.getId_presupuesto()}">
                                                        <button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a>
 
 

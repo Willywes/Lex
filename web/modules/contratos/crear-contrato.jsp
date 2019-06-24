@@ -31,7 +31,9 @@
                                         <tr>
                                             <th>N° de Presupuesto</th>
                                             <th>Plan de Pago</th>
+                                            
                                         </tr>
+                                       
                                         <tr>
                                             <td>${presupuesto.getIdPresupuesto()}</td>
                                             
@@ -42,7 +44,16 @@
                                                 </c:if>
                                                 
                                             </c:forEach>
-                                          
+                                                    
+                                                   
+                                        </tr>
+                                         <th>
+                                            Servicios/Monto <font size=1>*Nuevos servicios deben ser presupuestados y contratados</font>
+                                        </th>
+                                        <tr>
+                                             <td><c:forEach var="pdetalle" items="${pdetalles}">
+                                                            ${pdetalle.servicio}  -  $${pdetalle.monto} </br>
+                                                        </c:forEach></td>
                                         </tr>
                                         </tbody>
                                     </table>
