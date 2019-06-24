@@ -157,7 +157,8 @@ public class CitaDAO {
             cs.setInt(1, id);
             cs.registerOutParameter(2, Types.INTEGER);
             //cs.registerOutParameter(2, OracleTypes.CURSOR);
-            System.out.println("ANTES DE EJECUTAR");
+        
+            
             cs.execute();
            // cs.executeUpdate();
             
@@ -209,6 +210,7 @@ public class CitaDAO {
      return estado;
     }   
      
+    /*         
     public List<CitaDTO> buscarPorCliente(int id) {
         List<CitaDTO> list = new ArrayList<>();
 
@@ -316,4 +318,6 @@ public class CitaDAO {
         return list;
 
     }
+
+*/
 }

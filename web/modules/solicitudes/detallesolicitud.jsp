@@ -44,7 +44,7 @@
                                             <tr>
 
                                                 <td>${solicitudes.getCliente().getRut()}</td>
-                                                <td>${solicitudes.getCliente().getNombres()} ${solicitudes.getCliente().getPaterno()}</td>
+                                                <td>${solicitudes.getCliente().getNombres()}  ${solicitudes.getCliente().getPaterno()}</td>
                                                 <c:set var="celular" value="Sin número registrado." />
                                                 <c:if test="${solicitudes.getCliente().getCelular() != 0}">
 

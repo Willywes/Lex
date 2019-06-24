@@ -99,10 +99,10 @@ public class BuscarCita extends HttpServlet {
         request.setAttribute("id_cliente", id_cliente);
         
        // SolicitudDTO solicitudes = new SolicitudDTO();
-        List<CitaDTO> cita = citaDAO.buscarPorCliente(102);
+   //     List<CitaDTO> cita = citaDAO.buscarPorCliente(102);
        // solicitudes = solicitudDAO.//buscar por un ID    
-        System.out.println(" cita es: "+cita.toString());
-        request.setAttribute("cita", cita);
+ //       System.out.println(" cita es: "+cita.toString());
+  //      request.setAttribute("cita", cita);
         
         request.getRequestDispatcher("/modules/citas/lista.jsp").forward(request, response);
     }

@@ -105,10 +105,10 @@ public class BuscarCitaEstado extends HttpServlet {
         request.setAttribute("notarias", notarias);
         
        // SolicitudDTO solicitudes = new SolicitudDTO();
-        List<CitaDTO> citas = citaDAO.buscarPorEstado(id_estado);
+  //      List<CitaDTO> citas = citaDAO.buscarPorEstado(id_estado);
        // solicitudes = solicitudDAO.//buscar por un ID    
         
-        request.setAttribute("citas", citas);
+//        request.setAttribute("citas", citas);
         
         request.getRequestDispatcher("/modules/citas/listaestado.jsp").forward(request, response);
     }
