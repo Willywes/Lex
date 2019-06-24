@@ -38,7 +38,7 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table class="table table table-bordered">
+                                        <table id="table" class="table table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>Nº Presupuesto</th>
@@ -55,12 +55,12 @@
                                                         <td>${presupuesto.presupuestoDTO.id_presupuesto}</td>
                                                         <td>${presupuesto.presupuestoDTO.fecha}</td>
                                                         <td>${presupuesto.usuario.nombres} ${presupuesto.usuario.paterno}</td>
-                                                        <td>${presupuesto.presupuestoEstado.nombre}</td>
+                                                        <td> <span class="badge bg-gray">${presupuesto.presupuestoEstado.nombre}</span> </td>
                                                         <td>${presupuesto.tecnico.nombres}</td>
                                                         <td>
-                                                            
+
                                                             <button type="button" class="btn btn-info btn-sm" style="float: left; margin: 1px 1px 1px auto;" data-toggle="modal" data-target="#modal-info-${presupuesto.presupuestoDTO.id_presupuesto}" ><i class="fa fa-eye"></i></button>
-                                                            
+
                                                             <form action="/Lex/presupuestos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
                                                                 <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
                                                                 <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
@@ -307,7 +307,7 @@
         <script type="text/javascript" >
                                                     function detalle(idPresupuesto) {
                                                         document.getElementById("detallePresupuestoActivo-" + idPresupuesto).innerHTML = "";
-                                                        axios.get('http://localhost:33466/Lex/PresupuestoDetalleWebService?idPresupuesto=' + idPresupuesto)
+                                                        axios.get('http://localhost:8080/Lex/PresupuestoDetalleWebService?idPresupuesto=' + idPresupuesto)
                                                                 .then(function (response) {
                                                                     if (response.data[0].length != 0) {
                                                                         for (var i = 0; i < response.data[0].length; i++) {
@@ -330,6 +330,8 @@
                                                                 });
                                                     }
         </script>
+
+        
 
     </jsp:attribute>
 </t:template>

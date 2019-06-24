@@ -39,6 +39,7 @@ public class PresupuestoDAO {
     private final String UPDATE = "{call PKG_PRESUPUESTOS.UPDATE_PRESUPUESTOS(?,?,?,?,?,?,?)}";
     private final String GET_ALL_TRANSACCION = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_TRANSACCION(?)}";
     private final String READ_PRESUPUESTOS_DETAIL = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_DETAIL(?)}";
+    private final String UPDATE_PRESUPUESTOS_PARCIAL = "{call PKG_PRESUPUESTOS.UPDATE_PRESUPUESTOS_PARCIAL(?,?,?,?)}";
 
     Conexion con = new Conexion();
 
@@ -188,6 +189,33 @@ public class PresupuestoDAO {
             cs.execute();
 
             resultadoOperacion = cs.getInt(8);
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return resultadoOperacion;
+    }
+    
+    
+    public int updateParcial(PresupuestoDTO presupuesto) {
+        int resultadoOperacion = 0;
+        try {
+            Connection cn = con.open();
+            CallableStatement cs = cn.prepareCall(UPDATE_PRESUPUESTOS_PARCIAL);
+
+            cs.setInt(1, presupuesto.getId_presupuesto());
+            cs.setInt(2, presupuesto.getId_estado_presupuesto());
+            cs.setInt(3, presupuesto.getId_plan_pago());
+            
+            
+
+            cs.registerOutParameter(4, Types.INTEGER);// salida de parametro 5
+            cs.execute();
+
+            resultadoOperacion = cs.getInt(4);
 
         } catch (SQLException | IOException ex) {
             Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);

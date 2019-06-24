@@ -21,7 +21,7 @@ import org.json.simple.JSONObject;
 
 /**
  *
- * @author jean
+ * @author Funny
  */
 @WebServlet(name = "PresupuestoDetalleWebService", urlPatterns = {"/PresupuestoDetalleWebService"})
 public class PresupuestoDetalleWebService extends HttpServlet {

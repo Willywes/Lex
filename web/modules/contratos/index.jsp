@@ -54,7 +54,7 @@
                                                 </c:if>
                                             </c:forEach>
 
-                                           
+
 
                                             <tr>
                                                 <td>${contrato.getId_contrato()}</td>
@@ -63,21 +63,21 @@
 
                                                 <td>${contrato.rol_causa}</td>
                                                 <td>
-                                                <c:choose>
-                                                <c:when test="${estadoNombre == 'VIGENTE'}">
-                                                    <span class="badge bg-green">Vigente</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="badge bg-red">Vencido</span>
-                                                </c:otherwise>
-                                            </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${estadoNombre == 'VIGENTE'}">
+                                                            <span class="badge bg-green">Vigente</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge bg-red">Vencido</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
 
                                                 <td style="width:1%;white-space: nowrap;">
 
 
-                                                   <a href="DetalleContratoServlet?id=${contrato.getId_contrato()}&idp=${contrato.getId_presupuesto()}">
-                                                       <button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a>
+                                                    <a href="DetalleContratoServlet?id=${contrato.getId_contrato()}&idp=${contrato.getId_presupuesto()}">
+                                                        <button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a>
 
 
 
@@ -91,6 +91,11 @@
                                                         <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
                                                     </form>-->                                                  
 
+                                                    <form action="pagos/crear" method="GET"> 
+
+                                                        <input type="hidden" name="idContrato" value="${contrato.getId_contrato()}" />
+                                                        <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-dollar"></i></button>
+                                                    </form>
 
 
 
@@ -126,37 +131,37 @@
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <script src="/Lex/assets/plugins/sweet-alert/sweetalert2.min.js"></script>
-        
+
         <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>        
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>        
         <script>
-            $('#table').dataTable( {
+            $('#table').dataTable({
                 "searching": true,
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
-              } );
-              
-              $('.dt-button').addClass('btn btn-primary');
-              $('.dt-button').css({'margin-bottom': '10px'});
-              $('.dt-button').removeClass('dt-button');
+            });
+
+            $('.dt-button').addClass('btn btn-primary');
+            $('.dt-button').css({'margin-bottom': '10px'});
+            $('.dt-button').removeClass('dt-button');
 
         </script>
 
         <style>
-            
+
             #table_filter label{
                 float:right;
             }
-            
+
             #table_filter label:before{
-               /* content : 'Buscar';*/
+                /* content : 'Buscar';*/
             }
         </style>
     </jsp:attribute>

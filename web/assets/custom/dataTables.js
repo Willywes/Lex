@@ -18,10 +18,10 @@ $('#table').DataTable({
         zeroRecords: " <div class='alert alert-danger' >No existe el registro de los elementos que busca</div> ",
         emptyTable: " <div class='alert alert-danger' >No se encuentran registros disponibles</div> ",
         paginate: {
-            first: "   Primero   ",
-            previous: " <button class='btn btn-primary mr-4 ml-4' >Anterior</button>   ",
-            next: " <button class='btn btn-primary' >Siguiente</button>    ",
-            last: "  <br/> <button class='btn btn-primary ml-4 mr-4' >Ultimo</button>   "
+            first: "Primero",
+            previous: "Anterior",
+            next: "Siguiente",
+            last: "Ultimo"
         },
         aria: {
             sortAscending: ": activer pour trier la colonne par ordre croissant",

@@ -43,7 +43,6 @@ public class ModificarPresupuesto extends HttpServlet {
     private final PlanPagoDAO planPagoDAO = new PlanPagoDAO();
 
     private final PresupuestoEstadoDAO PresupuestoEstadoDAO = new PresupuestoEstadoDAO();
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,12 +97,11 @@ public class ModificarPresupuesto extends HttpServlet {
             }
         }
 
-       
         request.setAttribute("presupuesto", presupuesto);
 
         List<SolicitudDTO> solicitudes = SolicitudTipoDAO.getAll();
-        request.setAttribute("solicitudes", solicitudes); 
-        
+        request.setAttribute("solicitudes", solicitudes);
+
         SolicitudDTO solicitud = new SolicitudDAO().findById(idSolicitud);
         request.setAttribute("solicitud", solicitud);
 
@@ -111,14 +109,12 @@ public class ModificarPresupuesto extends HttpServlet {
         List<PlanPagoDTO> planPagos = this.planPagoDAO.getAll();
         request.setAttribute("planPagos", planPagos);
 
-        
         List<PresupuestoEstadoDTO> solicitudEstado = this.PresupuestoEstadoDAO.getAll();
         request.setAttribute("estadosPresupuestos", solicitudEstado);
 
         List<PresupuestoDetalleDTO> detalles = this.presupuestoDetalle.getDetallesByIdPresupuesto(id_presupuesto);
-          
 
-        request.setAttribute("detalles", detalles );
+        request.setAttribute("detalles", detalles);
         request.getRequestDispatcher("/modules/presupuestos/editpresupuesto.jsp").forward(request, response);
     }
 
@@ -141,79 +137,71 @@ public class ModificarPresupuesto extends HttpServlet {
 
         try {
 
-            
-
-            int estado = Integer.parseInt(request.getParameter("estado"));
-            //creado en presupuesto creo es automatico 
-            //modificado null 
-            int idSolicitud = Integer.parseInt(request.getParameter("solicitud"));
-
             int idPresupuesto = Integer.parseInt(request.getParameter("idPresupuesto"));
 
-            int idPlanPago = Integer.parseInt(request.getParameter("pago"));
+            int estado = Integer.parseInt(request.getParameter("estado"));
 
-            int idTecnico = 1; //creo que es 1 siempre
+            int idPlanPago = Integer.parseInt(request.getParameter("plan_pago"));
 
-            //de detalle prosupuesto 
-            String servicio = request.getParameter("servicio");
+            PresupuestoDTO presu = new PresupuestoDTO();
 
-            int monto = Integer.parseInt(request.getParameter("monto"));
-            
-            int id_presupuesto = Integer.parseInt(request.getParameter("id_presupuesto"));
-
-            int idDetallePresupuesto = Integer.parseInt(request.getParameter("idDetalle"));
-
-//            PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
-//
-//            detalle.setId_detalle_presupuesto(idDetallePresupuesto); //nose si el id es auto incrementable  
-//            detalle.setMonto(monto);
-//            detalle.setServicio(servicio);
-//            detalle.setId_presupuesto(id_presupuesto);
-//
-//            //resultado = al id de la fila insetada en detalle presupuesto 
-//            int resultado = this.presupuestoDetalle.update(detalle);
-
-//            if (resultado != 0) {
-
-//                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//                java.util.Date date = sdf1.parse(fechaHora);
-//                java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-
-//                System.out.println(sqlStartDate.toString());
-//
-//                System.out.println(fechaHora);
-//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//                java.util.Date dateCita = formatter.parse(fechaHora);
-//                java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
-//                System.out.println(sqlDate.toString());
-
-                PresupuestoDTO presu = new PresupuestoDTO();
-
-                presu.setId_presupuesto(idPresupuesto);
+            presu.setId_presupuesto(idPresupuesto);
 //                presu.setFecha(sqlDate);
-                presu.setId_estado_presupuesto(estado);
-                presu.setId_solicitud(idSolicitud);
-                presu.setId_tecnico(idTecnico);
-                presu.setId_plan_pago(idPlanPago);
+            presu.setId_estado_presupuesto(estado);
+            presu.setId_plan_pago(idPlanPago);
 
-                int idFilaInsertada = this.presupuesto.update(presu);
+            int idFilaInsertada = this.presupuesto.updateParcial(presu);
 
-                //1 puede ser resultado exito ???? 
-                if (idFilaInsertada == 0) {
+            //1 puede ser resultado exito ???? 
+            if (idFilaInsertada == 0) {
 
-                    exito = false;
+                exito = false;
 
+            }
+
+            int cantidadDetalles = Integer.parseInt(request.getParameter("catidadDetalles"));
+
+            if (cantidadDetalles != 0) {
+                int cont = 1;
+                for (int i = 0; i < cantidadDetalles; i++) {
+                    String servicio = request.getParameter("servicio" + cont);
+                    int monto = Integer.parseInt(request.getParameter("monto" + cont));
+                    int idDetalle = Integer.parseInt(request.getParameter("detalleService" + cont));
+                    PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+                    detalle.setId_detalle_presupuesto(idDetalle);
+                    detalle.setMonto(monto);
+                    detalle.setServicio(servicio);
+                    detalle.setId_presupuesto(idPresupuesto);
+                    this.presupuestoDetalle.update(detalle);
+                    cont++;
                 }
+            }
+
+            //agregamos los detalles 
+            int cantidadDetalleAgregar = Integer.parseInt(request.getParameter("cantidadDetalleAgregar"));
+
+            if (cantidadDetalleAgregar != 0) {
+                int contt = 1;
+                for (int i = 0; i < cantidadDetalleAgregar; i++) {
+                    String servicio = request.getParameter("servicioAgregar" + contt);
+                    int monto = Integer.parseInt(request.getParameter("montoAgregar" + contt));
+                    PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+                    detalle.setMonto(monto);
+                    detalle.setServicio(servicio);
+                    detalle.setId_presupuesto(idPresupuesto);
+                    this.presupuestoDetalle.create(detalle);
+                    contt++;
+                }
+            }
 
 //            } else {
 //                exito = false;
 //            }
-
         } catch (Exception ex) {
             exito = false;
         }
 
-        List<PresupuestoTransaction> presupuestos = presupuesto.getAllTransaccion();
+        List<PresupuestoTransaction> presupuestos = presupuesto.getAllPresupuestoDetalle();
         request.setAttribute("presupuestos", presupuestos);
         request.setAttribute("mensaje", "get");
         request.getRequestDispatcher("/modules/presupuestos/index.jsp").forward(request, response);

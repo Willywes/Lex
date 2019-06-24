@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author jean
+ * @author Funny
  */
 public class PresupuestoTransaction {
 

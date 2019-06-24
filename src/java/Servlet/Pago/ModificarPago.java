@@ -10,6 +10,7 @@ import Models.DAO.PagoDAO;
 import Models.DTO.ContratoDTO;
 import Models.DTO.PagoClienteDTO;
 import Models.DTO.PagoDTO;
+import Models.DTO.PagosContratoClienteDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -139,7 +140,7 @@ public class ModificarPago extends HttpServlet {
 
         }
 
-        List<PagoClienteDTO> pagos = PagoDAO.getAll();
+        List<PagosContratoClienteDTO> pagos = PagoDAO.getPagosUsuario();
         request.setAttribute("mensaje", "get");
         request.setAttribute("pagos", pagos);
         request.getRequestDispatcher("/modules/pagos/index.jsp").forward(request, response);

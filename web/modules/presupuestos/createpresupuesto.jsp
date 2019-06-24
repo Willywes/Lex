@@ -69,7 +69,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Plan de pago</label>
-                                        <select class="form-control" name="plan_pago" id="">
+                                        <select required="" class="form-control" name="plan_pago" id="">
                                             <option value="">Seleccione plan</option>
                                             <c:forEach var="planPago" items="${planPagos}">
                                                 <option value="${planPago.getId_Plan_Pago()}"> ${planPago.getNombre()}</option>
@@ -77,17 +77,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <!--<div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Estado</label>
                                         <select class="form-control" name="estado" id="">
                                             <option value="">Seleccione estado</option>
                                             <c:forEach var="estado" items="${estadosPresupuestos}">
-                                                <option  value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
+                                                <option ${estado.nombre == 'pendiente' ? 'selected':''}   value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="col-md-12" id="servicios">
                             </div>
@@ -99,6 +99,7 @@
                                     <button type="button" onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>
                                 </div>
                             </div>
+                                            <input value="1" name="estado" type="hidden" />
                             <input type="hidden" id="cantidad" value="0"  name="cantidadDetalle" />
                             <input type="hidden"  value="${solicitud.id_solicitud}" name="idSolicitud" />
                             <input type="hidden"  value="${solicitud.tecnico.id}" name="idTecnico" />
@@ -251,13 +252,13 @@
                         '                                        <div class="col-md-9">\n' +
                         '                                            <div class="form-group">\n' +
                         '                                                <label for="">Servicio</label>\n' +
-                        '                                                <input type="text" class="form-control" name="servicio' + (cont) + '" id="servicio' + (cont) + '">\n' +
+                        '                                                <input type="text" required class="form-control" name="servicio' + (cont) + '" id="servicio' + (cont) + '">\n' +
                         '                                            </div>\n' +
                         '                                        </div>\n' +
                         '                                        <div class="col-md-2">\n' +
                         '                                            <div class="form-group">\n' +
                         '                                                <label for="">Monto</label>\n' +
-                        '                                                <input type="number" class="form-control" name="monto' + (cont) + '" id="monto' + (cont) + '">\n' +
+                        '                                                <input type="number" required class="form-control" name="monto' + (cont) + '" id="monto' + (cont) + '">\n' +
                         '                                            </div>\n' +
                         '                                        </div>\n' +
                         '                                        <div class="col-md-1">\n' +

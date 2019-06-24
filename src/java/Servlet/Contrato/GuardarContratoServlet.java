@@ -128,7 +128,6 @@ public class GuardarContratoServlet extends HttpServlet {
             contratoDTO.setFecha_inicio (mysqldate);
             contratoDTO.setFecha_termino(mysqldate2);
             contratoDTO.setId_contrato_estado(Estado);
-            //contratoDTO.setId_detalle_contrato(Detalle);
             contratoDTO.setId_presupuesto(Presupuesto);
             contratoDTO.setId_abogado(Abogado);
             contratoDTO.setId_plan_pago(PlanPago);

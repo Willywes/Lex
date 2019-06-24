@@ -32,45 +32,99 @@
                         <div class="<c:out value="${ mensaje == 'get' ? 'alert alert-danger' : ''  }" />" >
                             <p> <c:out value="${ mensaje == 'get' ? 'Error desconocido' : ''  }" /> </p>
                         </div>
-                        
-                       
+
+
                         <form action="crear" method="POST" name="form" >
-                           
-
                             <div class="row">
-                                
-                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="fecha">Fecha (*)</label>
-                                        <input required type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="contrato">Contrato (*)</label>
-                                        <select required name="contrato" class="form-control">
-                                            <option value="" >Seleccione una Opción</option>
-                                            <c:forEach var="contrato" items="${contratos}">
-                                                <option value="${contrato.id_contrato}"> ${contrato.id_contrato}</option>
-                                            </c:forEach>
-                                        </select>                                    
-                                    </div>
-                                </div>
+                                <div class="col-md-6">
+                                    <div class="box box-warning">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Contrato</h3>
 
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="monto">Monto (*)</label>
-                                        <input required type="number" class="form-control" name="monto" placeholder="Ingrese Monto">
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <h4> Crear Pago para el Contrato N° ${pago.contrato.id_contrato}</h4>
+                                        </div>
+                                        <!-- /.box-body -->
                                     </div>
+                                    <!-- /.box -->
                                 </div>
-
-                                <div class="col-md-12"><hr></div>
                             </div>
-                            
-                            
-                            <button type="submit" class="btn bt-primary">Crear Pago</button>
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <div class="box box-success box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Cliente</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <dl>
+                                                <dt>Nombre Cliente</dt>
+                                                <dd>${pago.cliente.nombres}</dd>
+                                                <dt>Email</dt>
+                                                <dd>${pago.cliente.email}</dd>
+                                                <dt>Telefono</dt>
+                                                <dd>${pago.cliente.telefono}</dd>
+                                            </dl>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <div class="box box-danger">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Crear Pago</h3>
+
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            <div class="row" >
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="monto">Monto (*)</label>
+                                                        <input required type="number" class="form-control" name="monto" placeholder="Ingrese Monto">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <input type="hidden" name="contrato" value="${pago.contrato.id_contrato}" />
+
+                                            <button type="submit" class="btn bt-primary">Crear Pago</button>
+
+                                        </div>
+
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+
+                            </div>
+
+
+
+
+
+
                         </form>
                     </div>
                 </div>
@@ -82,9 +136,9 @@
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-        
-          <!--Validar datos del form--->
+
+        <!--Validar datos del form--->
         <script src="/Lex/assets/custom/formPresupuesto_Pagos.js" type="text/javascript"></script>
-        
+
     </jsp:attribute>
 </t:template>

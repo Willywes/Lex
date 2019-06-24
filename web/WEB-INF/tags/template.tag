@@ -171,7 +171,6 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/contratos"/>">Ver Contratos</a></li>
-                                <li><a href="<c:url value = "/contratos/crear"/>">Crear contrato</a></li>
                                 <!--<li><a href="">Modificar contrato</a></li>-->
                             </ul>
                         </li>
@@ -183,7 +182,10 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
+                                <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
+                                <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
                                 <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
+                                <li><a href="<c:url value = "/solicitudes/buscar"/>">Buscar solicitud</a></li>
                             </ul>
                         </li>
 
@@ -196,7 +198,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value = "/presupuestos/crear"/>">Crear Presupuestos</a></li>
+    
                                 <li><a href="<c:url value = "/presupuestos"/>">Ver Presupuestos</a></li>
                             </ul>
                         </li>
@@ -208,7 +210,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value = "/pagos/crear"/>">Crear Pagos</a></li>
+
                                 <li><a href="<c:url value = "/pagos"/>">Ver Pagos</a></li>
                             </ul>
                         </li>

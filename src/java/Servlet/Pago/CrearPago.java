@@ -9,6 +9,7 @@ import Models.DAO.ContratoDAO;
 import Models.DAO.PagoDAO;
 import Models.DTO.ContratoDTO;
 import Models.DTO.PagoDTO;
+import Models.DTO.PagosContratoClienteDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -68,8 +69,15 @@ public class CrearPago extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        int idContrato = Integer.parseInt(request.getParameter("idContrato"));
+
+        PagosContratoClienteDTO pagosCrear = this.PagoDAO.getContratoClienteForPago(idContrato);
+
         List<ContratoDTO> contratos = this.ContratoDAO.getAll();
         request.setAttribute("contratos", contratos);
+
+        request.setAttribute("pago", pagosCrear);
 
         request.setAttribute("mensaje", "otro");
 
@@ -88,11 +96,10 @@ public class CrearPago extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String fecha = request.getParameter("fecha");
-        String horaCita = "0";
-        String minutosCita = "00";
-        String fechaHora = fecha + " " + horaCita + ":" + minutosCita + ":00";
-
+//        String fecha = request.getParameter("fecha");
+//        String horaCita = "0";
+//        String minutosCita = "00";
+//        String fechaHora = fecha + " " + horaCita + ":" + minutosCita + ":00";
         //contrato
         //monto
         String contrato = request.getParameter("contrato");
@@ -102,19 +109,16 @@ public class CrearPago extends HttpServlet {
 
         try {
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            java.util.Date dateCita = formatter.parse(fechaHora);
-            java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
-
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            java.util.Date dateCita = formatter.parse(fechaHora);
+//            java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
             PagoDTO pago = new PagoDTO();
 
-            pago.setId_pago(23);
-            pago.setFecha_hora(sqlDate);
-            pago.setMonto(Integer.parseInt(monto));
+//            pago.setFecha_hora(sqlDate);
             pago.setId_contrato(Integer.parseInt(contrato));
-            pago.setCreado(sqlDate); 
-            pago.setModificado(sqlDate); 
-
+            pago.setMonto(Integer.parseInt(monto));
+//            pago.setCreado(sqlDate); 
+//            pago.setModificado(sqlDate); 
             int resultado = PagoDAO.create(pago);
 
             if (resultado == 1) {
@@ -125,11 +129,15 @@ public class CrearPago extends HttpServlet {
 
         }
         String dato = "get";
-        if(exito){
+        if (exito) {
             dato = "exito";
         }
-        
+
         request.setAttribute("mensaje", dato);
+        
+        PagosContratoClienteDTO pagosCrear = this.PagoDAO.getContratoClienteForPago(Integer.parseInt(contrato));
+        
+          request.setAttribute("pago", pagosCrear);
 
         List<ContratoDTO> contratos = this.ContratoDAO.getAll();
         request.setAttribute("contratos", contratos);

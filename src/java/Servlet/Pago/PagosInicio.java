@@ -8,6 +8,7 @@ package Servlet.Pago;
 import Models.DAO.PagoDAO;
 import Models.DTO.PagoClienteDTO;
 import Models.DTO.PagoDTO;
+import Models.DTO.PagosContratoClienteDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -65,15 +66,16 @@ public class PagosInicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<PagoClienteDTO> pagos = PagoDAO.getAll();
-        try {
-            String contrato = request.getParameter("idContrato");
-
-            pagos = PagoDAO.getAll(Integer.parseInt(contrato));
-
-        } catch (Exception ex) {
-            pagos = PagoDAO.getAll();
-        }
+        
+        List<PagosContratoClienteDTO> pagos = PagoDAO.getPagosUsuario();
+//        try {
+//            String contrato = request.getParameter("idContrato");
+//
+//            pagos = PagoDAO.getAll(Integer.parseInt(contrato));
+//
+//        } catch (Exception ex) {
+//            pagos = PagoDAO.getAll();
+//        }
 
         request.setAttribute("mensaje", "get");
         request.setAttribute("pagos", pagos);
