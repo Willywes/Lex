@@ -43,6 +43,7 @@ public class ModificarPresupuesto extends HttpServlet {
     private final PlanPagoDAO planPagoDAO = new PlanPagoDAO();
 
     private final PresupuestoEstadoDAO PresupuestoEstadoDAO = new PresupuestoEstadoDAO();
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -84,6 +85,7 @@ public class ModificarPresupuesto extends HttpServlet {
             throws ServletException, IOException {
 
         int id_presupuesto = Integer.parseInt(request.getParameter("idPresupuesto"));
+        int idSolicitud = Integer.parseInt(request.getParameter("idSolicitud"));
 
         List<PresupuestoDTO> presupuestos = presupuesto.getAll();
 
@@ -100,26 +102,23 @@ public class ModificarPresupuesto extends HttpServlet {
         request.setAttribute("presupuesto", presupuesto);
 
         List<SolicitudDTO> solicitudes = SolicitudTipoDAO.getAll();
-        request.setAttribute("solicitudes", solicitudes);
+        request.setAttribute("solicitudes", solicitudes); 
+        
+        SolicitudDTO solicitud = new SolicitudDAO().findById(idSolicitud);
+        request.setAttribute("solicitud", solicitud);
 
 //        crear el modelo de plan pago para listar en el get 
         List<PlanPagoDTO> planPagos = this.planPagoDAO.getAll();
         request.setAttribute("planPagos", planPagos);
 
+        
         List<PresupuestoEstadoDTO> solicitudEstado = this.PresupuestoEstadoDAO.getAll();
-        request.setAttribute("estadosSolicitud", solicitudEstado);
+        request.setAttribute("estadosPresupuestos", solicitudEstado);
 
-        List<PresupuestoDetalleDTO> detalles = this.presupuestoDetalle.getAll();
+        List<PresupuestoDetalleDTO> detalles = this.presupuestoDetalle.getDetallesByIdPresupuesto(id_presupuesto);
+          
 
-        PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
-
-        for (PresupuestoDetalleDTO presupuestoDetalleDTO : detalles) {
-            if (presupuestoDetalleDTO.getId_detalle_presupuesto() == presupuestoDetalleDTO.getId_presupuesto()) {
-                detalle = presupuestoDetalleDTO;
-            }
-        }
-
-        request.setAttribute("detalle", detalle);
+        request.setAttribute("detalles", detalles );
         request.getRequestDispatcher("/modules/presupuestos/editpresupuesto.jsp").forward(request, response);
     }
 
@@ -142,10 +141,7 @@ public class ModificarPresupuesto extends HttpServlet {
 
         try {
 
-            String fecha = request.getParameter("fecha");
-            String horaCita = "0";
-            String minutosCita = "00";
-            String fechaHora = fecha + " " + horaCita + ":" + minutosCita + ":00";
+            
 
             int estado = Integer.parseInt(request.getParameter("estado"));
             //creado en presupuesto creo es automatico 
@@ -167,34 +163,34 @@ public class ModificarPresupuesto extends HttpServlet {
 
             int idDetallePresupuesto = Integer.parseInt(request.getParameter("idDetalle"));
 
-            PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+//            PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+//
+//            detalle.setId_detalle_presupuesto(idDetallePresupuesto); //nose si el id es auto incrementable  
+//            detalle.setMonto(monto);
+//            detalle.setServicio(servicio);
+//            detalle.setId_presupuesto(id_presupuesto);
+//
+//            //resultado = al id de la fila insetada en detalle presupuesto 
+//            int resultado = this.presupuestoDetalle.update(detalle);
 
-            detalle.setId_detalle_presupuesto(idDetallePresupuesto); //nose si el id es auto incrementable  
-            detalle.setMonto(monto);
-            detalle.setServicio(servicio);
-            detalle.setId_presupuesto(id_presupuesto);
+//            if (resultado != 0) {
 
-            //resultado = al id de la fila insetada en detalle presupuesto 
-            int resultado = this.presupuestoDetalle.update(detalle);
+//                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                java.util.Date date = sdf1.parse(fechaHora);
+//                java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
 
-            if (resultado != 0) {
-
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                java.util.Date date = sdf1.parse(fechaHora);
-                java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-
-                System.out.println(sqlStartDate.toString());
-
-                System.out.println(fechaHora);
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                java.util.Date dateCita = formatter.parse(fechaHora);
-                java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
-                System.out.println(sqlDate.toString());
+//                System.out.println(sqlStartDate.toString());
+//
+//                System.out.println(fechaHora);
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                java.util.Date dateCita = formatter.parse(fechaHora);
+//                java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
+//                System.out.println(sqlDate.toString());
 
                 PresupuestoDTO presu = new PresupuestoDTO();
 
                 presu.setId_presupuesto(idPresupuesto);
-                presu.setFecha(sqlDate);
+//                presu.setFecha(sqlDate);
                 presu.setId_estado_presupuesto(estado);
                 presu.setId_solicitud(idSolicitud);
                 presu.setId_tecnico(idTecnico);
@@ -209,9 +205,9 @@ public class ModificarPresupuesto extends HttpServlet {
 
                 }
 
-            } else {
-                exito = false;
-            }
+//            } else {
+//                exito = false;
+//            }
 
         } catch (Exception ex) {
             exito = false;

@@ -58,13 +58,12 @@ public class CrearPresupuesto extends HttpServlet {
         String idSolicitud = "";
 
         try {
-
             idSolicitud = request.getParameter("idSolicitud");
-
-            request.setAttribute("idSolicitud", idSolicitud);
-
+            SolicitudDTO solicitud = new SolicitudDAO().findById(Integer.parseInt(idSolicitud));
+            request.setAttribute("solicitud", solicitud);
         } catch (Exception ex) {
             request.setAttribute("idSolicitud", -1);
+            request.setAttribute("error", "Solicitud no encontrada");
         }
 
         List<SolicitudDTO> solicitudes = SolicitudTipoDAO.getAll();
@@ -106,72 +105,81 @@ public class CrearPresupuesto extends HttpServlet {
 
         try {
 
-            String fecha = request.getParameter("fecha");
-            String horaCita = "0";
-            String minutosCita = "00";
-            String fechaHora = fecha + " " + horaCita + ":" + minutosCita + ":00";
-
+//            String fecha = request.getParameter("fecha");
+//            String horaCita = "0";
+//            String minutosCita = "00";
+//            String fechaHora = fecha + " " + horaCita + ":" + minutosCita + ":00";
             int estado = Integer.parseInt(request.getParameter("estado"));
             //creado en presupuesto creo es automatico 
             //modificado null 
-            int idSolicitud = Integer.parseInt(request.getParameter("solicitud"));
+            int idSolicitud = Integer.parseInt(request.getParameter("idSolicitud"));
 
             int idPlanPago = Integer.parseInt(request.getParameter("plan_pago"));
 
-            int idTecnico = 1; //creo que es 1 siempre
+            int idTecnico = Integer.parseInt(request.getParameter("idTecnico"));
 
             //de detalle presupuesto 
-            String servicio = request.getParameter("servicio");
-            int monto = Integer.parseInt(request.getParameter("monto"));
-            int id_presupuesto = Integer.parseInt(request.getParameter("id_presupuesto"));
-
-            PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
-
-            detalle.setId_detalle_presupuesto(20); //nose si el id es auto incrementable  
-            detalle.setMonto(monto);
-            detalle.setServicio(servicio);
-            detalle.setId_presupuesto(id_presupuesto);
-
+//            String servicio = request.getParameter("servicio");
+//            int monto = Integer.parseInt(request.getParameter("monto"));
+//            int id_presupuesto = Integer.parseInt(request.getParameter("id_presupuesto"));
+//            PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+//
+//            detalle.setId_detalle_presupuesto(20); //nose si el id es auto incrementable  
+//            detalle.setMonto(monto);
+//            detalle.setServicio(servicio);
+//            detalle.setId_presupuesto(id_presupuesto);
             //resultado = al id de la fila insetada en detalle presupuesto 
-            int resultado = this.presupuestoDetalle.create(detalle);
+//            int resultado = this.presupuestoDetalle.create(detalle);
+            //creo que 1 es exito en ingresar un detalle o es el id del detalle ?? 
+//            if (resultado != 0) {
+//                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                java.util.Date date = sdf1.parse(fechaHora);
+//                java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                java.util.Date dateCita = formatter.parse(fechaHora);
+//                java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
+//                System.out.println(sqlDate.toString());
+            PresupuestoDTO presu = new PresupuestoDTO();
 
-            //creo que 1 es exito en ingresar un detalle o es el id del detalle ??
-            if (resultado != 0) {
+            presu.setId_estado_presupuesto(estado);
+            presu.setId_solicitud(idSolicitud);
+            presu.setId_tecnico(idTecnico);
+            presu.setId_plan_pago(idPlanPago);
 
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                java.util.Date date = sdf1.parse(fechaHora);
-                java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+            int idFilaInsertada = this.presupuesto.create(presu);
 
-                System.out.println(sqlStartDate.toString());
+            if (idFilaInsertada != 0) {
 
-                System.out.println(fechaHora);
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                java.util.Date dateCita = formatter.parse(fechaHora);
-                java.sql.Date sqlDate = new java.sql.Date(dateCita.getTime());
-                System.out.println(sqlDate.toString());
+                //agregamos los detalles 
+                int cantidadDetalles = Integer.parseInt(request.getParameter("cantidadDetalle"));
 
-                PresupuestoDTO presu = new PresupuestoDTO();
-
-                presu.setFecha(sqlDate);
-                presu.setId_estado_presupuesto(estado);
-                presu.setCreado(sqlDate); //no si esta fecha es auto 
-                presu.setId_solicitud(idSolicitud);
-                presu.setId_tecnico(idTecnico);
-                presu.setId_plan_pago(idPlanPago);
-
-                int idFilaInsertada = this.presupuesto.create(presu);
-
-                //1 puede ser resultado exito ???? 
-                if (idFilaInsertada == 0) {
-
-                    exito = false;
-
+                if (cantidadDetalles != 0) {
+                    int cont = 1;
+                    for (int i = 0; i < cantidadDetalles; i++) {
+                        String servicio = request.getParameter("servicio" + cont);
+                        int monto = Integer.parseInt(request.getParameter("monto" + cont));
+                        PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+                        detalle.setMonto(monto);
+                        detalle.setServicio(servicio);
+                        detalle.setId_presupuesto(idFilaInsertada);
+                        this.presupuestoDetalle.create(detalle);
+                        cont++;
+                    }
                 }
 
-            } else {
+            }
+
+            //1 puede ser resultado exito ???? 
+            if (idFilaInsertada == 0) {
                 exito = false;
             }
 
+            SolicitudDTO solicitud = new SolicitudDAO().findById(idSolicitud);
+            request.setAttribute("solicitud", solicitud);
+
+//            } else {
+//                exito = false;
+//            }
         } catch (Exception ex) {
             exito = false;
         }

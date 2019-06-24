@@ -24,74 +24,86 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Nuevo Presupuesto ${cliente}</h3>
+                        <h3 class="box-title">Nuevo Presupuesto ${solicitud.cliente.nombres}</h3>
                     </div>
                     <div class="box-body">
                         <div class="<c:out value="${ mensaje == 'get' ? '' : 'alert alert-success'  }" />" >
                             <p> <c:out value="${ mensaje == 'get' ? '' : 'Agregado con Exito'  }" /> </p>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <th>Rut</th>
-                                            <th>Nombre</th>
-                                            <th>Telefono</th>
-                                            <th>Email</th>
-                                        </tr>
-                                        <tr>
-                                            <td>${solicitudes.getCliente().getRut()}</td>
-                                            <td>${solicitudes.getCliente().getNombres()}${solicitudes.getCliente().getPaterno()}</td>
-                                            <td>${solicitudes.getCliente().getTelefono()}</td>
-                                            <td>${solicitudes.getCliente().getEmail()}</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2" style="width: 30%;">Tipo de Solicitud</th>
-                                            <td>${solicitudes.getTipoSolicitud().getNombre()}</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2">Descripcion</th>
-                                            <td>
-                                                ${solicitud.getDescripcion()}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2" style="width: 30%;">Técnico</th>
-                                            <td>${solicitudes.getTecnico().getNombres()} ${solicitudes.getTecnico().getPaterno()}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Plan de pago</label>
-                                    <select class="form-control" name="" id="">
-                                        <option value="">Seleccione plan</option>
-                                        <c:forEach var="planPago" items="${planPagos}">
-                                            <option value="${planPago.getId_Plan_Pago()}"> ${planPago.getNombre()}</option>
-                                        </c:forEach>
-                                    </select>
+                        <form action="" method="POST" >
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>Rut</th>
+                                                <th>Nombre</th>
+                                                <th>Telefono</th>
+                                                <th>Email</th>
+                                            </tr>
+                                            <tr>
+                                                <td>${solicitud.cliente.rut}</td>
+                                                <td>${solicitud.cliente.nombres}${solicitud.cliente.paterno}</td>
+                                                <td>${solicitud.cliente.telefono}</td>
+                                                <td>${solicitud.cliente.email}</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" style="width: 30%;">Tipo de Solicitud</th>
+                                                <td>${solicitud.tipoSolicitud.nombre}</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Descripcion</th>
+                                                <td>
+                                                    ${solicitud.descripcion}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" style="width: 30%;">Técnico</th>
+                                                <td>${solicitud.tecnico.nombres} ${solicitud.tecnico.paterno}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4>SERVICIOS</h4>
-                                <button onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>
-                                <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Plan de pago</label>
+                                        <select class="form-control" name="plan_pago" id="">
+                                            <option value="">Seleccione plan</option>
+                                            <c:forEach var="planPago" items="${planPagos}">
+                                                <option value="${planPago.getId_Plan_Pago()}"> ${planPago.getNombre()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Estado</label>
+                                        <select class="form-control" name="estado" id="">
+                                            <option value="">Seleccione estado</option>
+                                            <c:forEach var="estado" items="${estadosPresupuestos}">
+                                                <option  value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-12" id="servicios">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button class="btn btn-primary right"><i class="fa fa-save"></i> Guardar</button>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary right" type="submit" ><i class="fa fa-save"></i> Guardar</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>
+                                </div>
                             </div>
-                        </div>
+                            <input type="hidden" id="cantidad" value="0"  name="cantidadDetalle" />
+                            <input type="hidden"  value="${solicitud.id_solicitud}" name="idSolicitud" />
+                            <input type="hidden"  value="${solicitud.tecnico.id}" name="idTecnico" />
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -180,41 +192,80 @@
         <!--Validar datos del form--->
         <!--script src="/Lex/assets/custom/formPresupuesto_Pagos.js" type="text/javascript"></script-->
 
+        <script type="text/javascript" >
+                                        var cont = 0;
+        </script>
+
+
         <script>
 
 
 
-                                    $(document).ready(function () {
-                                        /* $('.removeButton').on('click', function(){
-                                         
-                                         console.log($(this).parent());
-                                         $(this).parent().remove();
-                                         }); */
-                                    })
+            $(document).ready(function () {
+                /* $('.removeButton').on('click', function(){
+                 
+                 console.log($(this).parent());
+                 $(this).parent().remove();
+                 }); */
+            })
 
-                                    function deleteElem(elem) {
-                                        $(elem).closest('.row').remove();
-                                    }
+            function deleteElem(elem) {
+                var elimiando = $(elem).closest('.row')[0].id;
+                var t = 1;
+                var cambio = 1;
+                for (var i = 0; i < cont; i++) {
+                    if (elimiando != t) {
+                        document.getElementById("servicio" + t).name = "servicio" + cambio;
+                        document.getElementById("servicio" + t).id = "servicio" + cambio;
+                        document.getElementById("monto" + t).name = "monto" + cambio;
+                        document.getElementById("monto" + t).id = "monto" + cambio;
+                        document.getElementById(t).id = cambio;
+                        cambio++;
+                    }
+                    t++;
+                }
 
-                                    function addServicio() {
-                                        $('#servicios').append($('<div class="row">\n' +
-                                                '                                        <div class="col-md-9">\n' +
-                                                '                                            <div class="form-group">\n' +
-                                                '                                                <label for="">Servicio</label>\n' +
-                                                '                                                <input type="text" class="form-control" name="" id="">\n' +
-                                                '                                            </div>\n' +
-                                                '                                        </div>\n' +
-                                                '                                        <div class="col-md-2">\n' +
-                                                '                                            <div class="form-group">\n' +
-                                                '                                                <label for="">Monto</label>\n' +
-                                                '                                                <input type="number" class="form-control" name="" id="">\n' +
-                                                '                                            </div>\n' +
-                                                '                                        </div>\n' +
-                                                '                                        <div class="col-md-1">\n' +
-                                                '                                            <button type="button" onclick="deleteElem(this);" style="margin-top: 24px;" class="btn btn-danger removeButton"><i class="fa fa-trash"></i></button>\n' +
-                                                '                                        </div>\n' +
-                                                '                                    </div>'));
-                                    }
+                cont = cont - 1;
+
+                document.getElementById("cantidad").value = cont
+
+                $(elem).closest('.row').remove();
+
+                //var d = 1;
+                //for (var i = 0; i < cont; i++) {
+                //  console.log(document.getElementById("servicio" + d));
+                // d++;
+                //}
+
+
+
+                //console.log(elimiando);
+
+
+
+                //document.getElementById("cantidad").value = cont;
+            }
+            function addServicio() {
+                cont++;
+                $('#servicios').append($('<div id="' + cont + '" class="row">\n' +
+                        '                                        <div class="col-md-9">\n' +
+                        '                                            <div class="form-group">\n' +
+                        '                                                <label for="">Servicio</label>\n' +
+                        '                                                <input type="text" class="form-control" name="servicio' + (cont) + '" id="servicio' + (cont) + '">\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="col-md-2">\n' +
+                        '                                            <div class="form-group">\n' +
+                        '                                                <label for="">Monto</label>\n' +
+                        '                                                <input type="number" class="form-control" name="monto' + (cont) + '" id="monto' + (cont) + '">\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="col-md-1">\n' +
+                        '                                            <button type="button" onclick="deleteElem(this);" style="margin-top: 24px;" class="btn btn-danger removeButton"><i class="fa fa-trash"></i></button>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>'));
+                document.getElementById("cantidad").value = cont;
+            }
 
 
 

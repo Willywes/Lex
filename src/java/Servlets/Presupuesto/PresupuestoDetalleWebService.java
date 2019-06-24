@@ -5,26 +5,30 @@
  */
 package Servlets.Presupuesto;
 
-import Models.DAO.PresupuestoDAO;
-import Models.DTO.PresupuestoTransaction;
+import Models.DAO.PresupuestoDetalleDAO;
+import Models.DTO.PresupuestoDetalleDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 
 /**
  *
- * @author Funny
+ * @author jean
  */
-@WebServlet(name="PresupuestoServlet", urlPatterns = {"/presupuestos"})
-public class PresupuestoServlet extends HttpServlet {
+@WebServlet(name = "PresupuestoDetalleWebService", urlPatterns = {"/PresupuestoDetalleWebService"})
+public class PresupuestoDetalleWebService extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private final PresupuestoDAO PresupuestoDAO = new PresupuestoDAO();
+
+    private final PresupuestoDetalleDAO presupuestoDetalle = new PresupuestoDetalleDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +47,10 @@ public class PresupuestoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PresupuestoServlet</title>");
+            out.println("<title>Servlet PresupuestoDetalleWebService</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PresupuestoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PresupuestoDetalleWebService at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,10 +69,23 @@ public class PresupuestoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<PresupuestoTransaction> presupuestos = PresupuestoDAO.getAllPresupuestoDetalle();
-        request.setAttribute("mensaje", "get");
-        request.setAttribute("presupuestos", presupuestos);
-        request.getRequestDispatcher("/modules/presupuestos/index.jsp").forward(request, response);
+        int idPresupuesto = Integer.parseInt(request.getParameter("idPresupuesto"));
+
+        List<JSONObject> jsons = new ArrayList<JSONObject>();
+        
+        List<PresupuestoDetalleDTO> detalle = this.presupuestoDetalle.getDetallesByIdPresupuesto(idPresupuesto);
+        try (PrintWriter out = response.getWriter()) {
+            for (PresupuestoDetalleDTO presupuestoDetalleDTO : detalle) {
+                JSONObject json = new JSONObject();
+                json.put("id_detalle", presupuestoDetalleDTO.getId_detalle_presupuesto());
+                json.put("id_presupuesto", presupuestoDetalleDTO.getId_presupuesto());
+                json.put("monto", presupuestoDetalleDTO.getMonto());
+                json.put("servicio", presupuestoDetalleDTO.getServicio());
+                jsons.add(json);
+            }
+            out.print("[" + jsons.toString() + "]");
+        }
+
     }
 
     /**

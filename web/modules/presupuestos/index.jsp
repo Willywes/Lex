@@ -28,43 +28,56 @@
 
     <jsp:attribute name="content">
         <div class="row">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Presupuestos</h3>
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Nº Presupuesto</th>
-                                                <th>Fecha</th>
-                                                <th>Cliente</th>
-                                                <th>Estado</th>
-                                                <th>Técnico</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>${solicitudes.Cliente.Nombres}${solicitudes.Cliente.Paterno}</td>
-                                                <td></td>
-                                                <td>${solicitudes.Tecnico.Nombres}${solicitudes.Tecnico.Paterno}</td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
-                                                    <a href="presupuestos-mofidicar.html" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                                    <button class="btn btn-sm btn-success">Crear Contrato</button>
-                                                    <button class="btn btn-sm btn-info">Ver Solicitud</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+            <div id="main-box"class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Presupuestos</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nº Presupuesto</th>
+                                                    <th>Fecha</th>
+                                                    <th>Cliente</th>
+                                                    <th>Estado</th>
+                                                    <th>Técnico</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="presupuesto" items="${presupuestos}">
+                                                    <tr>
+                                                        <td>${presupuesto.presupuestoDTO.id_presupuesto}</td>
+                                                        <td>${presupuesto.presupuestoDTO.fecha}</td>
+                                                        <td>${presupuesto.usuario.nombres} ${presupuesto.usuario.paterno}</td>
+                                                        <td>${presupuesto.presupuestoEstado.nombre}</td>
+                                                        <td>${presupuesto.tecnico.nombres}</td>
+                                                        <td>
+                                                            
+                                                            <button type="button" class="btn btn-info btn-sm" style="float: left; margin: 1px 1px 1px auto;" data-toggle="modal" data-target="#modal-info-${presupuesto.presupuestoDTO.id_presupuesto}" ><i class="fa fa-eye"></i></button>
+                                                            
+                                                            <form action="/Lex/presupuestos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                                <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
+                                                                <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                                <input type="hidden" name="idPresupuesto" value="${presupuesto.presupuestoDTO.id_presupuesto}"  />
+                                                            </form>                                                          
+                                                            <form action="/Lex/contratos/crear" method="GET" style="float: left; margin: 1px 1px 1px auto;" >
+                                                                <input type="hidden" name="id" value="${presupuesto.presupuestoDTO.id_presupuesto}" />
+                                                                <button type="submit" class="btn btn-sm btn-success">Crear Contrato</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,6 +85,140 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- /.modal-dialog -->
+        <c:forEach var="presupuesto" items="${presupuestos}">
+            <div class="modal modal-info fade" id="modal-info-${presupuesto.presupuestoDTO.id_presupuesto}"  style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Detalle Presupuesto</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!--presupuesto-->
+                            <div class="row" >
+                                <div class="col-md-12">
+                                    <div class="box box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Presupuesto N° ${presupuesto.presupuestoDTO.id_presupuesto} </h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <div class="box-group" id="accordion">
+                                                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                                                <div class="panel box box-primary">
+                                                    <div class="box-header with-border">
+                                                        <h4 class="box-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-${presupuesto.presupuestoDTO.id_presupuesto}-1" aria-expanded="false" class="collapsed">
+                                                                Ver Presupuesto
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-${presupuesto.presupuestoDTO.id_presupuesto}-1" class="panel-collapse collapse text-black" aria-expanded="false" style="height: 0px;">
+                                                        <div class="box-body">
+                                                            <dl>
+                                                                <dt>Identificador de presupuesto</dt>
+                                                                <dd>${presupuesto.presupuestoDTO.id_presupuesto}</dd>
+                                                                <dt>Fecha</dt>
+                                                                <dd>${presupuesto.presupuestoDTO.fecha}</dd>
+                                                                <dt>Estado</dt>
+                                                                <dd>${presupuesto.presupuestoEstado.nombre}</dd>
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel box box-danger">
+                                                    <div class="box-header with-border">
+                                                        <h4 class="box-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-${presupuesto.presupuestoDTO.id_presupuesto}-2" class="collapsed" aria-expanded="false">
+                                                                Ver Cliente
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-${presupuesto.presupuestoDTO.id_presupuesto}-2" class="panel-collapse collapse text-black" aria-expanded="false" style="height: 0px;">
+                                                        <div class="box-body">
+                                                            <dl>
+                                                                <dt>Rut</dt>
+                                                                <dd>${presupuesto.usuario.rut}</dd>
+                                                                <dt>Nombre</dt>
+                                                                <dd>${presupuesto.usuario.nombres} ${presupuesto.usuario.paterno}</dd>
+                                                                <dt>Telefono</dt>
+                                                                <dd>${presupuesto.usuario.telefono}</dd>
+                                                                <dt>Correo</dt>
+                                                                <dd>${presupuesto.usuario.email}</dd>
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel box box-success">
+                                                    <div class="box-header with-border">
+                                                        <h4 class="box-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-${presupuesto.presupuestoDTO.id_presupuesto}-3" class="" aria-expanded="true">
+                                                                Ver Solicitud y Plan de pago
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-${presupuesto.presupuestoDTO.id_presupuesto}-3" class="panel-collapse collapse in text-black " aria-expanded="true" style="">
+                                                        <div class="box-body">
+                                                            <dl>
+                                                                <dt>Tipo de Solicitud</dt>
+                                                                <dd>${presupuesto.tipoSolicitud.nombre}</dd>
+                                                                <dt>Descripción</dt>
+                                                                <dd>${presupuesto.solicitud.descripcion}</dd>
+                                                                <dt>Plan de Pago</dt>
+                                                                <dd>${presupuesto.presupuestoPlanPago.nombre}</dd>
+                                                                <dt>Tecnico</dt>
+                                                                <dd>${presupuesto.tecnico.nombres}</dd>
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                            </div>
+                            <!--presupuesto-->
+
+                            <div class="row" >
+                                <div class="col-md-12">
+                                    <div class="box box-default collapsed-box box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Ver Servicios</h3>
+
+                                            <div class="box-tools pull-right">
+                                                <button type="button" onclick="detalle(${presupuesto.presupuestoDTO.id_presupuesto})" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <!-- /.box-tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body text-black" id="detallePresupuestoActivo-${presupuesto.presupuestoDTO.id_presupuesto}" >
+
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                            </div>
+                            <!--servicios -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </c:forEach>
+
 
         <!--<div id="main-box"class="col-md-12">
             <div class="<c:out value="${ mensaje == 'get' ? '' : 'alert alert-success'  }" />" >
@@ -154,6 +301,35 @@
 
         <!--Data tables -->
         <script src="/Lex/assets/custom/dataTables.js" type="text/javascript"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script type="text/javascript" >
+                                                    function detalle(idPresupuesto) {
+                                                        document.getElementById("detallePresupuestoActivo-" + idPresupuesto).innerHTML = "";
+                                                        axios.get('http://localhost:33466/Lex/PresupuestoDetalleWebService?idPresupuesto=' + idPresupuesto)
+                                                                .then(function (response) {
+                                                                    if (response.data[0].length != 0) {
+                                                                        for (var i = 0; i < response.data[0].length; i++) {
+                                                                            $('#detallePresupuestoActivo-' + idPresupuesto).append($('<dt>Nombre del servicio</dt> ' +
+                                                                                    ' <dd> ' + response.data[0][i].servicio + ' </dd> ' +
+                                                                                    ' <dt>Monto</dt> <dd>' + response.data[0][i].monto + '</dd>  <hr/>'));
+
+
+                                                                        }
+                                                                    } else {
+                                                                        $('#detallePresupuestoActivo-' + idPresupuesto).append($('<div class="alert alert-danger" >Sin servicios disponibles</div>'));
+                                                                    }
+                                                                })
+                                                                .catch(function (error) {
+                                                                    // handle error
+                                                                    console.log(error);
+                                                                })
+                                                                .finally(function () {
+                                                                    // always executed
+                                                                });
+                                                    }
+        </script>
 
     </jsp:attribute>
 </t:template>

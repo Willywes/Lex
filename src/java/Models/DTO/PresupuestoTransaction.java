@@ -19,17 +19,8 @@ public class PresupuestoTransaction {
     private SolicitudDTO solicitud;
     private PlanPagoDTO presupuestoPlanPago;
     private UsuarioDTO usuario;
-
-    public UsuarioDTO getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
-    }
-    
-    
-    
+    private UsuarioDTO tecnico;
+    private SolicitudTiposDTO tipoSolicitud;
 
     public PresupuestoDTO getPresupuestoDTO() {
         return presupuestoDTO;
@@ -71,5 +62,34 @@ public class PresupuestoTransaction {
         this.presupuestoPlanPago = presupuestoPlanPago;
     }
 
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+
+    public UsuarioDTO getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(UsuarioDTO tecnico) {
+        this.tecnico = tecnico;
+    }
+
+    public SolicitudTiposDTO getTipoSolicitud() {
+        return tipoSolicitud;
+    }
+
+    public void setTipoSolicitud(SolicitudTiposDTO tipoSolicitud) {
+        this.tipoSolicitud = tipoSolicitud;
+    }
+
+    
+    
+
+    
+    
+    
 }

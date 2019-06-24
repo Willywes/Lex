@@ -12,6 +12,7 @@ import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.PresupuestoEstadoDTO;
 import Models.DTO.PresupuestoTransaction;
 import Models.DTO.SolicitudDTO;
+import Models.DTO.SolicitudTiposDTO;
 import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.sql.CallableStatement;
@@ -31,12 +32,13 @@ import oracle.jdbc.*;
  */
 public class PresupuestoDAO {
 
-    private final String CREATE = "{call PKG_PRESUPUESTOS.CREATE_PRESUPUESTOS(?,?,?,?,?,?,?)}";
+    private final String CREATE = "{call PKG_PRESUPUESTOS.CREATE_PRESUPUESTOS(?,?,?,?,?)}";
     private final String FIND_BY_ID = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS(?)}";
     private final String GET_ALL = "{call PKG_PRESUPUESTOS.READ_ALL_PRESUPUESTOS(?)}";
     private final String DELETE = "{call PKG_PRESUPUESTOS.DELETE_PRESUPUESTOS(?,?)}";
     private final String UPDATE = "{call PKG_PRESUPUESTOS.UPDATE_PRESUPUESTOS(?,?,?,?,?,?,?)}";
     private final String GET_ALL_TRANSACCION = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_TRANSACCION(?)}";
+    private final String READ_PRESUPUESTOS_DETAIL = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_DETAIL(?)}";
 
     Conexion con = new Conexion();
 
@@ -120,18 +122,17 @@ public class PresupuestoDAO {
             Connection cn = con.open();
             CallableStatement cs = cn.prepareCall(CREATE);
 
-            cs.setDate(1, presupuesto.getFecha());
-            cs.setInt(2, presupuesto.getId_estado_presupuesto());
-            cs.setDate(3, presupuesto.getCreado());
-            cs.setInt(4, presupuesto.getId_solicitud());
-            cs.setInt(5, presupuesto.getId_tecnico());
-            cs.setInt(6, presupuesto.getId_plan_pago());
+            
+            cs.setInt(1, presupuesto.getId_estado_presupuesto());
+            cs.setInt(2, presupuesto.getId_solicitud());
+            cs.setInt(3, presupuesto.getId_tecnico());
+            cs.setInt(4, presupuesto.getId_plan_pago());
 
-            cs.registerOutParameter(7, Types.INTEGER);// salida de parametro 9
+            cs.registerOutParameter(5, Types.INTEGER);// salida de parametro 9
 
             cs.execute();
 
-            resultadoOperacion = cs.getInt(8);
+            resultadoOperacion = cs.getInt(5);
 
         } catch (SQLException | IOException ex) {
             Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,6 +255,86 @@ public class PresupuestoDAO {
                 presupuestoTransaccion.setSolicitud(solicitud);
                 presupuestoTransaccion.setUsuario(usuario); 
 
+                list.add(presupuestoTransaccion);
+            }
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return list;
+    }
+    
+    
+    
+    public List<PresupuestoTransaction> getAllPresupuestoDetalle() {
+
+        List<PresupuestoTransaction> list = new ArrayList<>();
+
+        try {
+
+            Connection cn = con.open();
+            CallableStatement cs = cn.prepareCall(READ_PRESUPUESTOS_DETAIL);
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeUpdate();
+
+            ResultSet rs = (ResultSet) cs.getObject(1);
+            while (rs.next()) {
+
+                PresupuestoTransaction presupuestoTransaccion = new PresupuestoTransaction();
+
+                PresupuestoDTO presupuesto = new PresupuestoDTO();
+                PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
+                PresupuestoEstadoDTO estado = new PresupuestoEstadoDTO();
+                SolicitudDTO solicitud = new SolicitudDTO();
+                PlanPagoDTO PlanPago = new PlanPagoDTO();
+                UsuarioDTO usuario = new UsuarioDTO();
+                UsuarioDTO tecnico = new UsuarioDTO();
+                SolicitudTiposDTO tiposSolicitud = new SolicitudTiposDTO();
+
+                //presupuestos 
+                presupuesto.setId_presupuesto(rs.getInt("ID_PRESUPUESTO"));
+                presupuesto.setFecha(rs.getDate("FECHA"));
+                presupuesto.setCreado(rs.getDate("CREADO"));
+                presupuesto.setModificado(rs.getDate("MODIFICADO"));
+                
+                 //estado 
+                estado.setNombre(rs.getString("ESTADO_PRESUPUESTO"));
+
+
+                 //cliente
+                usuario.setRut(rs.getString("RUT"));
+                usuario.setNombres(rs.getString("NOMBRE_USUARIO")); 
+                usuario.setPaterno(rs.getString("APELLIDO_USUARIO"));
+                usuario.setTelefono(rs.getInt("TELEFONO"));
+                usuario.setEmail(rs.getString("CORREO_USUARIO"));
+                
+                //tipo de solicitud 
+                tiposSolicitud.setNombre(rs.getString("NOMBRE_SOLICITUD_TIPO")); 
+                 
+            
+                //SOLICITUD  
+                solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
+                solicitud.setDescripcion(rs.getString("DESCRIPCION_SOLICITUD"));
+
+                //PLAN PAGO 
+                PlanPago.setNombre(rs.getString("NOMBRE_PAGO"));
+                
+
+                //tecnico
+                tecnico.setNombres(rs.getString("NOMBRE_TECNICO")); 
+                
+                
+                presupuestoTransaccion.setPresupuestoDTO(presupuesto);
+                presupuestoTransaccion.setPresupuestoEstado(estado);
+                presupuestoTransaccion.setPresupuestoPlanPago(PlanPago);
+                presupuestoTransaccion.setSolicitud(solicitud);
+                presupuestoTransaccion.setUsuario(usuario); 
+                presupuestoTransaccion.setTipoSolicitud(tiposSolicitud); 
+                presupuestoTransaccion.setTecnico(tecnico); 
+                
                 list.add(presupuestoTransaccion);
             }
 
