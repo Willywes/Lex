@@ -142,11 +142,11 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">Gestión de Usuarios</li>
                         <!-- Menus-->
-                        
+
                         <li><a href="<c:url value = "/modulo/usuarios/index"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
-                        
+
                         <li><a href="<c:url value = "/modulo/clientes/index"/>"><i class="fa fa-users"></i><span>Clientes</span></a></li>
-                        
+
                         <li class="header">Gestión de Notarias </li>
                         <li><a href="<c:url value = "/modulo/notarias/index"/>"><i class="fa fa-university"></i><span>Notarias</span></a></li>
                         <li class="treeview">
@@ -160,9 +160,9 @@
                                 <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
                             </ul>
                         </li>
-                        
+
                         <li class="header">Gestión de Contratos </li>
-                        
+
                         <li class="treeview">
                             <a href="<c:url value = "/contratos"/>"><i class="fa fa-book"></i> <span>Contratos</span>
                                 <span class="pull-right-container">
@@ -183,17 +183,13 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
-                                <li><a href="<c:url value = "/solicitudes/tipos"/>">Ver tipos de solicitud</a></li>
-                                <li><a href="<c:url value = "/solicitudes/estados"/>">Ver estados de solicitud</a></li>
                                 <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
-                                <li><a href="<c:url value = "/solicitudes/buscar"/>">Buscar solicitud</a></li>
-                                
                             </ul>
                         </li>
-                        
+
                         <li class="header">Gestión de Presupuestos y Pagos </li>
-                        
-                         <li class="treeview">
+
+                        <li class="treeview">
                             <a href="<c:url value = "/presupuestos"/>"><i class="fa fa-dollar"></i> <span>Presupuestos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
@@ -204,8 +200,8 @@
                                 <li><a href="<c:url value = "/presupuestos"/>">Ver Presupuestos</a></li>
                             </ul>
                         </li>
-                        
-                          <li class="treeview">
+
+                        <li class="treeview">
                             <a href="<c:url value = "/pagos"/>"><i class="fa fa-dollar"></i> <span>Pagos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
@@ -236,7 +232,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="/Lex"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                        
+
                     </ol>
                 </section>
 
