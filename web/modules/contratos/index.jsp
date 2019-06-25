@@ -35,7 +35,7 @@
                                 <table id="table" class="table table-bordered table">
                                     <thead>
                                         <tr>
-                                   
+
                                             <th style="width:1%;white-space: nowrap;">Número de Contrato</th>
                                             <th style="width:1%;white-space: nowrap;">Fecha de inicio</th>
                                             <th style="width:1%;white-space: nowrap;">Fecha de término</th>
@@ -78,12 +78,20 @@
 
 
                                                     <a href="DetalleContratoServlet?id=${contrato.getId_contrato()}&idp=${contrato.getId_presupuesto()}">
-                                                        <button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a>
+                                                        <button class="btn btn-sm btn-info" title="Detalle Contrato"><i class="fa fa-eye"></i></button></a>
 
 
+                                                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                                                        <a href="ModificarContrato?id=${contrato.getId_contrato()}">
+                                                            <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>
+                                                    </c:if>
+                                                        
+                                                    <c:if test="${usuarioDTO.id_rol == 3}">
+                                                        <a href="pagos/crear?idContrato=${contrato.getId_contrato()}">
+                                                            <button class="btn btn-success btn-sm" title="Pago"><i class="fa fa-dollar"></i></button></a>
+                                                    </c:if>
+                                                        
 
-                                                    <a href="ModificarContrato?id=${contrato.getId_contrato()}">
-                                                        <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a>
 
 
                                                     <!--<form action="contratos/borrar" method="POST"> 
@@ -92,11 +100,11 @@
                                                         <button class="btn btn-danger btn-sm" title="Eliminar" name="accion" value="Eliminar"><i class="fa fa-trash"></i></button>
                                                     </form>-->                                                  
 
-                                                    <form action="pagos/crear" method="GET"> 
+                                                    <!--form action="pagos/crear" method="GET"> 
 
                                                         <input type="hidden" name="idContrato" value="${contrato.getId_contrato()}" />
                                                         <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-dollar"></i></button>
-                                                    </form>
+                                                    </form-->
 
 
 
