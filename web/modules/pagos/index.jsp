@@ -53,7 +53,9 @@
                                     <th style="width:1%;white-space: nowrap;">Fecha</th>
                                     <th style="width:1%;white-space: nowrap;">Monto</th>
                                     <th style="width:1%;white-space: nowrap;">N° Contrato</th> 
-                                    <th style="width:1%;white-space: nowrap;"></th>
+                                    <c:if test="${usuarioDTO.id_rol == 3}">
+                                        <th style="width:1%;white-space: nowrap;"></th>
+                                    </c:if>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,23 +71,25 @@
                                         <td>${pago.pago.id_contrato}</td>
 
 
-                                        <td style="width:1%;white-space: nowrap;">
-                                            <div id="main-box"class="col-md-3">
-                                                <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
-                                                    <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                </form>
+                                        <c:if test="${usuarioDTO.id_rol == 3}">
+                                            <td style="width:1%;white-space: nowrap;">
+                                                <div id="main-box"class="col-md-3">
+                                                    <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                    </form>
 
-                                                <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
-                                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                    <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                </form>
-                                            </div>
-                                        </td>
+                                                    <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
+                                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                        <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </c:if>
 
                                     </tr>
                                 </c:forEach>

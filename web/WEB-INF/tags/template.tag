@@ -212,7 +212,7 @@
                         
                         
                         
-                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
+                        <c:if test="${usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
                               <li class="header">Gestión de Presupuestos y Pagos </li>
 
                         <li class="treeview">
@@ -226,7 +226,7 @@
                                 <li><a href="<c:url value = "/presupuestos"/>">Ver Presupuestos</a></li>
                             </ul>
                         </li>
-
+                        </c:if>
                         <li class="treeview">
                             <a href="<c:url value = "/pagos"/>"><i class="fa fa-dollar"></i> <span>Pagos</span>
                                 <span class="pull-right-container">
@@ -239,7 +239,7 @@
                             </ul>
                         </li>
                     </ul>
-                         </c:if>
+                         
                         
                         
                         
