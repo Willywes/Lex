@@ -70,7 +70,6 @@
                                         <td>$ ${pago.pago.monto}</td>
                                         <td>${pago.pago.id_contrato}</td>
 
-
                                         <c:if test="${usuarioDTO.id_rol == 3}">
                                             <td style="width:1%;white-space: nowrap;">
                                                 <div id="main-box"class="col-md-3">

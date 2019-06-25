@@ -104,7 +104,7 @@
                                                                             <input type="hidden" name="id" value="${presupuesto.presupuestoDTO.id_presupuesto}" />
                                                                             <button type="submit" class="btn btn-sm btn-success">Crear Contrato</button>
                                                                         </form>
-                                                                    </td>
+                                                                   </td>
                                                             </tr>
                                                     </c:if>        
                                                 </c:forEach>
