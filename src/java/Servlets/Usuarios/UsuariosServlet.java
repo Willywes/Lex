@@ -160,8 +160,9 @@ public class UsuariosServlet extends HttpServlet {
             usuario.setPaterno(request.getParameter("paterno").toUpperCase());
             usuario.setMaterno(request.getParameter("materno").toUpperCase());
             usuario.setEmail(request.getParameter("email").toLowerCase());
-            
-            usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
+            //sin encriptar
+            usuario.setClave(request.getParameter("clave").toUpperCase());
+//            usuario.setClave(Utils.encriptarMD5(request.getParameter("clave").toUpperCase()));
             usuario.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
             
             UsuarioDAO u = new UsuarioDAO();

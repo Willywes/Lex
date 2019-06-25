@@ -22,7 +22,7 @@
     <jsp:attribute name="content">
         <div class="row">
             <%@include file="/modules/globals/alerts.jsp" %>
-            <div id="main-box"class="col-md-12">
+            <div id="main-box" class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Gestión de Contratos</h3>
@@ -35,6 +35,7 @@
                                 <table id="table" class="table table-bordered table">
                                     <thead>
                                         <tr>
+                                   
                                             <th style="width:1%;white-space: nowrap;">Número de Contrato</th>
                                             <th style="width:1%;white-space: nowrap;">Fecha de inicio</th>
                                             <th style="width:1%;white-space: nowrap;">Fecha de término</th>

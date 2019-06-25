@@ -36,6 +36,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -74,6 +75,10 @@ public class CrearContratoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+//        HttpSession misession= (HttpSession) request.getSession();
+//       UsuarioDTO usuarioDTO= (UsuarioDTO) misession.getAttribute("usuarioDTO");
+//        System.out.println("usuarioDTO "+usuarioDTO);
         
         int id_presupuesto = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("id_presupuesto", id_presupuesto);

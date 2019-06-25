@@ -11,6 +11,7 @@ import Models.DTO.ContratoDTO;
 import Models.DAO.ContratoEstadoDAO;
 import Models.DTO.CausaIdDTO;
 import Models.DTO.ContratoEstadoDTO;
+import Models.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -52,11 +54,16 @@ public class ContratoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         HttpSession misession= (HttpSession) request.getSession();
+       UsuarioDTO usuarioDTO= (UsuarioDTO) misession.getAttribute("usuarioDTO");
+        //System.out.println("usuarioDTO "+usuarioDTO);
+        System.out.println("variable sesion "+ misession);
         
         List<ContratoDTO> contratos = contrantoDAO.getAll();
         List<ContratoEstadoDTO> estados = contratoEstadoDAO.getAll();
         //List<CausaIdDTO> causas = causaIdDAO.getAll();
        
+        request.setAttribute("usuarioDTO", usuarioDTO);
         request.setAttribute("contratos", contratos);
         System.out.println("contratos "+contratos);
         request.setAttribute("estados", estados);
