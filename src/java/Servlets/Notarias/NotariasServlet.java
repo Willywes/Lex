@@ -7,8 +7,14 @@ package Servlets.Notarias;
 
 import Models.DAO.ComunaDAO;
 import Models.DAO.NotariaDAO;
+import Models.DAO.AsignadosDAO;
+import Models.DAO.RolDAO;
+import Models.DAO.UsuarioDAO;
 import Models.DTO.ComunaDTO;
 import Models.DTO.NotariaDTO;
+import Models.DTO.NotariaNota;
+import Models.DTO.RolDTO;
+import Models.DTO.UsuarioDTO;
 import Utilidades.Validator;
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author willywes
  */
+
 @WebServlet(name = "NotariasServlet", urlPatterns = {"/modulo/notarias/*"})
 public class NotariasServlet extends HttpServlet {
 
@@ -56,8 +63,13 @@ public class NotariasServlet extends HttpServlet {
         } else if (route.contains("show")) {
             
             show(request, response);
-        } else {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if(route.contains("listar")){
+            listar(request, response);
+        }else if (route.contains("asignar")) {
+            asignar(request, response);
+        }else
+{
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
         
     }
@@ -96,6 +108,29 @@ public class NotariasServlet extends HttpServlet {
             request.getRequestDispatcher("/").forward(request, response);
             
         }
+    }
+    public void listar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        
+       List<RolDTO> roles = new RolDAO().getAll();
+        List<UsuarioDTO> usuarios = new UsuarioDAO().getAll();
+        
+        request.setAttribute("roles", roles);
+        request.setAttribute("usuarios", usuarios);
+         request.getRequestDispatcher("/modules/notarias/listar.jsp").forward(request, response);
+    }
+     public void asignar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        
+         List<NotariaNota> notariausu = new AsignadosDAO().getAll();
+         System.out.println("1");
+        // List<NotariaNota> usuarios = new AsignadosDAO().getAll();
+        
+        request.setAttribute("notariasNotas", notariausu);
+        //request.setAttribute("usuarios", usuarios);
+        request.getRequestDispatcher("/modules/notarias/asignados.jsp").forward(request, response);
     }
     
     public void index(HttpServletRequest request, HttpServletResponse response)

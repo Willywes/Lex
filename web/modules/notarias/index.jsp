@@ -25,13 +25,18 @@
             <%@include file="/modules/globals/alerts.jsp" %>
 
 
-            <div id="main-box"class="col-md-12">
+            <div id="main-box" class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <div  class="btn-group">
                             <a href="create" class="btn btn-success"> 
                                 <i class="fa fa-plus"></i> Nueva Notaria
                             </a>
+                            
+                             <a href="listar" class="btn btn-success"> 
+                                <i class="fa fa-plus"></i> listar Notarios
+                            </a>
+                            
                         </div>
                     </div>
                     <div class="box-body">
