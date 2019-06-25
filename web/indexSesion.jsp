@@ -276,13 +276,14 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="/Lex/modules/citas/logo2.png" height="50%" width="50%" id="icon" alt="User Icon" />
+      <img src="/Lex/modules/citas/logo2.png" height="40%" width="50%" id="icon" alt="User Icon" />
+      <h2>SISTEMA LEX ABOGADOS</h2>
     </div>
 
     <!-- Login Form -->
     <form action="<%=request.getContextPath()%>/SesionServlet" method="POST">
       <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="Usuario">
-      <input type="password" id="clave" class="fadeIn third" name="clave" placeholder="Contraseña">
+      <input type="password" id="clave" class="fadeIn third" name="clave" placeholder="Clave">
       <input type="submit" class="fadeIn fourth" value="Iniciar">
       
      
