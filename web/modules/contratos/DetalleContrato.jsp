@@ -60,15 +60,10 @@
                                                             <label for="estado">Estado: </label>
 
                                                             <c:forEach var="estado" items="${estados}">
-                                                                <c:if test="${contrato.getId_contrato_estado() == estado.id_contrato_estado}">
+                                                                <c:if test="${estado.id_contrato_estado == contrato.getId_contrato_estado()}">
                                                                     ${estado.nombre}
 
                                                                 </c:if>
-                                                                <c:if test="${contrato.getId_contrato_estado() != estado.id_contrato_estado}">
-
-                                                                    ${estado.nombre}
-                                                                </c:if>
-
 
                                                             </c:forEach>
 
