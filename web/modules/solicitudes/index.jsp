@@ -88,7 +88,7 @@
 
                                         <td> ${estadoName}  </td>
 
-                                        <c:set var="clienteName" value="Test rol no Cliente" />
+                                        <c:set var="clienteName" value="Juan Urra" />
 
                                         <c:forEach var="clientes" items="${clientes}">
                                             <c:if test="${clientes.id == solicitudes.getId_cliente()}">
