@@ -9,7 +9,13 @@
 <t:template>
  
     <jsp:attribute name="content">
-      Dashboard
+        <center><h3><b>Bienvenido al Sistema</b></h3>
+            <hr>
+            
+            <center><img src="/Lex/modules/citas/logo2.png" /></center>
+            <center><h3><span style="color: #0105FF;">
+                        <FONT FACE="roman"><b>LEX ABOGADOS</b></FONT></span></h3></center>  
+           
     </jsp:attribute>
 
 </t:template>
