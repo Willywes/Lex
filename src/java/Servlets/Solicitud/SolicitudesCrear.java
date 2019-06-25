@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -56,6 +57,11 @@ public class SolicitudesCrear extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+      //Session
+       HttpSession misession= (HttpSession) request.getSession();
+       UsuarioDTO usuarioDTO= (UsuarioDTO) misession.getAttribute("usuarioDTO");
+       request.setAttribute("usuarioDTO", usuarioDTO);
+       
     //recuperar lista de todos los involucrados
     List<SolicitudTiposDTO> tipoDeSolicitudes = tipoSolicitudDAO.getAll();
     request.setAttribute("tipoDeSolicitudes", tipoDeSolicitudes);   
@@ -65,8 +71,10 @@ public class SolicitudesCrear extends HttpServlet {
     
     
     UsuarioDTO clientes = new UsuarioDTO();
+    
+    int id=usuarioDTO.getId();
     //id recuperado de  Inicio de sesion 
-    clientes = usuarioDAO.findById(3);
+    clientes = usuarioDAO.findById(id);
     
   
     request.setAttribute("clientes", clientes);
@@ -81,7 +89,11 @@ public class SolicitudesCrear extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-      System.out.println("entro a DO POST CREAR SOLICITUD ");
+    //session
+    //HttpSession misession= (HttpSession) request.getSession();
+    //UsuarioDTO usuarioDTO= (UsuarioDTO) misession.getAttribute("usuarioDTO");
+      
+      
     SolicitudDTO solicitud = new SolicitudDTO();    
     SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
     SolicitudEstadoDAO solicitudEstadoDAO = new SolicitudEstadoDAO();
@@ -102,7 +114,7 @@ public class SolicitudesCrear extends HttpServlet {
     UsuarioDTO tecnico = new UsuarioDTO();
     //tecnico=usuarioDAO.getAllByIdRol(3);
     tecnico = usuarioDAO.findById(1);
-      System.out.println("TECNICO OBJETO "+tecnico);
+    
     solicitud.setTecnico(tecnico);
     
    // solicitud.setId_solicitud(10);//test
@@ -119,8 +131,18 @@ public class SolicitudesCrear extends HttpServlet {
     
     solicitud.setCreado(creado);
    
-    
-    //id recuperado de  Inicio de sesion 141
+    //recuperar parametro session
+    UsuarioDTO session = new UsuarioDTO();
+    String session3=request.getParameter("usuarioSession");
+      System.out.println("  session3 "+session3);
+    //id recuperado de  Inicio de sesion 141  5 rol de clinete
+   // <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+    // </c:if>
+    //      if (usuarioDTO.id_rol==5) {
+              
+     //     }
+     
+             
     int id_cliente=101;
     UsuarioDTO cliente = new UsuarioDTO();
     cliente = usuarioDAO.findById(id_cliente);

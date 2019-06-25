@@ -106,7 +106,8 @@
 
                                             </c:if>
                                         </c:forEach>
-
+                                        <%-- envio de session a servelet --%>
+                                        <input type="hidden" name="usuarioSession" value="${usuarioDTO}" />
 
                                         <td>${tecnicoName}</td>
 
@@ -121,13 +122,16 @@
                                             </div>
                                             <div style="width: max-content; float: left;">
                                                 <div style="width: max-content; float: left;">
-                                                    <%--<form action="citas/editar" method="POST"> --%>
+                                                    
+                                                   <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                                                   
                                                     <a href="actualizar?id=${solicitudes.getId_solicitud()}">
                                                         <button class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-edit"></i></button></a> 
                                                     <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
+                                                     </c:if>
                                                 </div>
 
-
+                                                <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
                                                 <c:if test="${solicitudes.getId_estado_solicitud()==2}">
 
                                                     <div style="width: max-content; float: left;margin-left: 5px;">
@@ -137,7 +141,8 @@
                                                         </form>
                                                     </div>
                                                 </c:if>
-
+                                                </c:if>
+                                                
                                                 <c:if test="${solicitudes.getId_estado_solicitud()==1}">
 
                                                     <div style="width: max-content; float: left;margin-left: 5px;">
@@ -148,6 +153,7 @@
                                                     </div>
                                                 </c:if>
 
+                                                <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
                                                 <c:if test="${solicitudes.getId_estado_solicitud()!=3}">
 
                                                     <div style="width: max-content; float: left; margin-left: 5px">
@@ -156,6 +162,7 @@
                                                         <input type="hidden" name="id" value="${solicitudes.getId_solicitud()}" />
 
                                                     </div>
+                                                </c:if>
                                                 </c:if>
                                             </div>
                                         </td>

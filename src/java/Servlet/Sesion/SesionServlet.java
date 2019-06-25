@@ -82,10 +82,10 @@ public class SesionServlet extends HttpServlet {
                 out.println(resul.getString(2));
                 out.println(resul.getString(8));
                 out.println(resul.getInt(13));
-                System.out.println(rut+"rut");
-                System.out.println(clv+"clave");
-                System.out.println(rol+"rol");
-                System.out.println(id+"id");
+              //  System.out.println(rut+"rut");
+               // System.out.println(clv+"clave");
+               // System.out.println(rol+"rol");
+               // System.out.println(id+"id");
                 usuarioDTO = usuarioDAO.findById(id);
                 
                 
@@ -103,7 +103,7 @@ public class SesionServlet extends HttpServlet {
               //esta arribba
               //Producto miproducto= new Producto(1,"telefono",300);
              misession.setAttribute("usuarioDTO",usuarioDTO);
-        System.out.println("usarioDTOSesion "+ usuarioDTO);
+        
                request.setAttribute("usuarioDTO",usuarioDTO);
 
                 request.getRequestDispatcher("/index.jsp").forward(request, response);

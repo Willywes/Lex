@@ -57,7 +57,7 @@ public class ContratoServlet extends HttpServlet {
          HttpSession misession= (HttpSession) request.getSession();
        UsuarioDTO usuarioDTO= (UsuarioDTO) misession.getAttribute("usuarioDTO");
         //System.out.println("usuarioDTO "+usuarioDTO);
-        System.out.println("variable sesion "+ misession);
+        
         
         List<ContratoDTO> contratos = contrantoDAO.getAll();
         List<ContratoEstadoDTO> estados = contratoEstadoDAO.getAll();
@@ -65,7 +65,7 @@ public class ContratoServlet extends HttpServlet {
        
         request.setAttribute("usuarioDTO", usuarioDTO);
         request.setAttribute("contratos", contratos);
-        System.out.println("contratos "+contratos);
+        
         request.setAttribute("estados", estados);
         //request.setAttribute("causas", causas);
         request.setAttribute("nombre", "miguel");
