@@ -301,39 +301,3 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<%-- 
-    Document   : indexSesion
-    Created on : 24-06-2019, 22:28:33
-    Author     : Depredador
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
-
-<html>
-    <body style="text-align: center">
- 
-   
-      <form action="<%=request.getContextPath()%>/SesionServlet" method="POST">
-          
-      Rut <input type="text" name="usuario" /><br/>
-      Clave <input type="password" name="clave"/><br/>    
-            <input type="submit" value="Iniciar" />
-   
-    </form>
-     </body>
-
-</html>--%>
-

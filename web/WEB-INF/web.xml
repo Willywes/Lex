@@ -64,6 +64,14 @@
         <servlet-name>DetalleContratoServlet</servlet-name>
         <servlet-class>Servlet.Contrato.DetalleContratoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitudListarCliente</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudListarCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudVerUsuario</servlet-name>
+        <servlet-class>Servlets.Solicitud.SolicitudVerUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContratoServlet</servlet-name>
         <url-pattern>/contratos</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>DetalleContratoServlet</servlet-name>
         <url-pattern>/DetalleContratoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudListarCliente</servlet-name>
+        <url-pattern>/solicitudes/listarcliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudVerUsuario</servlet-name>
+        <url-pattern>/solicitudes/versolicitudusuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

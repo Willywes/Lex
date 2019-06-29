@@ -101,7 +101,7 @@ public class SesionServlet extends HttpServlet {
                 //levanta
                    HttpSession misession= request.getSession(true);
               //esta arribba
-              //Producto miproducto= new Producto(1,"telefono",300);
+              
              misession.setAttribute("usuarioDTO",usuarioDTO);
         
                request.setAttribute("usuarioDTO",usuarioDTO);
