@@ -158,13 +158,14 @@
                          </c:if>
                                
                          
-                        
+                               <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
                         <li class="treeview">
                             <a href="<c:url value = "/citas"/>"><i class="fa fa-calendar"></i> <span>Citas</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
+                                </c:if>
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
                           <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 4}">
