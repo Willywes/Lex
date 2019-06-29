@@ -70,12 +70,13 @@ private final SolicitudDAO solicitudDAO = new SolicitudDAO();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<SolicitudDTO> solicitudes = solicitudDAO.getAll();
-        
+       
         // Recuperar Session
          HttpSession misession= (HttpSession) request.getSession();
        UsuarioDTO usuarioDTO= (UsuarioDTO) misession.getAttribute("usuarioDTO");
        request.setAttribute("usuarioDTO", usuarioDTO);
        
+     
        
 
         SolicitudTiposDAO solicitudTiposDAO = new SolicitudTiposDAO();
@@ -114,6 +115,9 @@ private final SolicitudDAO solicitudDAO = new SolicitudDAO();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        System.out.println("PASA POR DO POST");
         processRequest(request, response);
     }
 
