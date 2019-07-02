@@ -21,6 +21,15 @@ public class PresupuestoTransaction {
     private UsuarioDTO usuario;
     private UsuarioDTO tecnico;
     private SolicitudTiposDTO tipoSolicitud;
+    private int cantidadPresupuesto;
+
+    public int getCantidadPresupuesto() {
+        return cantidadPresupuesto;
+    }
+
+    public void setCantidadPresupuesto(int cantidadPresupuesto) {
+        this.cantidadPresupuesto = cantidadPresupuesto;
+    }
 
     public PresupuestoDTO getPresupuestoDTO() {
         return presupuestoDTO;
@@ -86,10 +95,4 @@ public class PresupuestoTransaction {
         this.tipoSolicitud = tipoSolicitud;
     }
 
-    
-    
-
-    
-    
-    
 }

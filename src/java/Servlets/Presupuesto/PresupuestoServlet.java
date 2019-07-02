@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Funny
  */
-@WebServlet(name="PresupuestoServlet", urlPatterns = {"/presupuestos"})
+@WebServlet(name = "PresupuestoServlet", urlPatterns = {"/presupuestos"})
 public class PresupuestoServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +66,12 @@ public class PresupuestoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         List<PresupuestoTransaction> presupuestos = PresupuestoDAO.getAllPresupuestoDetalle();
+
+        for (PresupuestoTransaction presupuesto : presupuestos) {
+            int cantidadPresupuesto = PresupuestoDAO.get_count_contratos_presupuesto(presupuesto.getPresupuestoDTO().getId_presupuesto());
+            presupuesto.setCantidadPresupuesto(cantidadPresupuesto);
+        }
+
         request.setAttribute("mensaje", "get");
         request.setAttribute("presupuestos", presupuestos);
         request.getRequestDispatcher("/modules/presupuestos/index.jsp").forward(request, response);

@@ -1,8 +1,9 @@
 <%-- 
-    Document   : editpresupuesto
-    Created on : 26-05-2019, 21:04:18
+    Document   : detallepresupuesto
+    Created on : 01-07-2019, 23:03:15
     Author     : Funny
 --%>
+
 <%!  int cont = 1;%>
 
 <%@page import="Models.DTO.PresupuestoDTO"%>
@@ -20,7 +21,7 @@
         Gestión de Presupuestos
     </jsp:attribute>
     <jsp:attribute name="subtitle">
-        Actualizar Presupuesto
+        Detalle Presupuesto
     </jsp:attribute>
     <jsp:attribute name="styles">
         <link rel="stylesheet" href="/Lex/assets/bootstraptable/dragtable.css">
@@ -38,107 +39,93 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Nuevo Presupuesto ${solicitud.cliente.nombres}</h3>
+                        <h3 class="box-title">Detalle Presupuesto ${solicitud.cliente.nombres}</h3>
                     </div>
                     <div class="box-body">
-                        <form action="<c:url value = "/presupuestos/modificar"/>" method="POST" >
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>Rut</th>
-                                                <th>Nombre</th>
-                                                <th>Telefono</th>
-                                                <th>Email</th>
-                                            </tr>
-                                            <tr>
-                                                <td>${solicitud.cliente.rut}</td>
-                                                <td>${solicitud.cliente.nombres}${solicitud.cliente.paterno}</td>
-                                                <td>${solicitud.cliente.telefono}</td>
-                                                <td>${solicitud.cliente.email}</td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2" style="width: 30%;">Tipo de Solicitud</th>
-                                                <td>${solicitud.tipoSolicitud.nombre}</td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2">Descripcion</th>
-                                                <td>
-                                                    ${solicitud.descripcion}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2" style="width: 30%;">Técnico</th>
-                                                <td>${solicitud.tecnico.nombres} ${solicitud.tecnico.paterno}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Nombre</th>
+                                            <th>Telefono</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr>
+                                            <td>${solicitud.cliente.rut}</td>
+                                            <td>${solicitud.cliente.nombres}${solicitud.cliente.paterno}</td>
+                                            <td>${solicitud.cliente.telefono}</td>
+                                            <td>${solicitud.cliente.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="width: 30%;">Tipo de Solicitud</th>
+                                            <td>${solicitud.tipoSolicitud.nombre}</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">Descripcion</th>
+                                            <td>
+                                                ${solicitud.descripcion}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="width: 30%;">Técnico</th>
+                                            <td>${solicitud.tecnico.nombres} ${solicitud.tecnico.paterno}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Plan de pago</label>
+                                    <select required="" disabled="" class="form-control" name="plan_pago" id="">
+                                        <c:forEach  var="planPago" items="${planPagos}">
+                                            <option ${presupuesto.id_plan_pago == planPago.getId_Plan_Pago() ? 'selected':''}   value="${planPago.getId_Plan_Pago()}"> ${planPago.getNombre()}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Plan de pago</label>
-                                        <select required="" class="form-control" name="plan_pago" id="">
-                                            <c:forEach  var="planPago" items="${planPagos}">
-                                                <option ${presupuesto.id_plan_pago == planPago.getId_Plan_Pago() ? 'selected':''}   value="${planPago.getId_Plan_Pago()}"> ${planPago.getNombre()}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Estado</label>
-                                        <select required class="form-control" name="estado" id="">
-                                            <c:forEach var="estado" items="${estadosPresupuestos}">
-                                                <option ${presupuesto.id_estado_presupuesto == estado.id_estado_presupuesto ? 'selected':''} ${estado.id_estado_presupuesto == 1 ? 'disabled':''}    value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Estado</label>
+                                    <select disabled="" required class="form-control" name="estado" id="">
+                                        <c:forEach var="estado" items="${estadosPresupuestos}">
+                                            <option ${presupuesto.id_estado_presupuesto == estado.id_estado_presupuesto ? 'selected':''} ${estado.id_estado_presupuesto == 1 ? 'disabled':''}    value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-12" id="servicios">
+                        </div>
+                        <div class="col-md-12" id="servicios">
 
-                                <c:forEach var="detalle" items="${detalles}" >
-
-                                    <div id="" class="row" ${(cont = cont+1)} >
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Servicio</label>
-                                                <input required type="text" value="${detalle.servicio}" class="form-control" name="servicio${cont}" id="servicio">
-                                            </div>
-                                        </div>   
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">Monto</label>
-                                                <input required type="number" value="${detalle.monto}" class="form-control" name="monto${cont}" id="monto">   
-                                            </div>
+                            <c:forEach var="detalle" items="${detalles}" >
+                                <div id="" class="row" ${(cont = cont+1)} >
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Servicio</label>
+                                            <input disabled="" required type="text" value="${detalle.servicio}" class="form-control" name="servicio${cont}" id="servicio">
                                         </div>
-                                        <input type="hidden" name="detalleService${cont}" value="${detalle.id_detalle_presupuesto}"  />
+                                    </div>   
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Monto</label>
+                                            <input disabled="" required type="number" value="${detalle.monto}" class="form-control" name="monto${cont}" id="monto">   
+                                        </div>
                                     </div>
-                                </c:forEach>
-                                <input value="${cont}" name="catidadDetalles"  type="hidden" />
-                            </div>
+                                    <input type="hidden" name="detalleService${cont}" value="${detalle.id_detalle_presupuesto}"  />
+                                </div>
+                            </c:forEach>
+                            <input value="${cont}" name="catidadDetalles"  type="hidden" />
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <button class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <a class="btn btn-primary" href="/Lex/presupuestos" > Volver</a>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a class="btn btn-primary right" href="/Lex/presupuestos" > Volver</a>
                             </div>
+                        </div>
 
-                            <input type="hidden" id="cantidad" value="0"  name="cantidadDetalle" />
-                            <input type="hidden"  value="${solicitud.id_solicitud}" name="idSolicitud" />
-                            <input type="hidden" value="${presupuesto.id_presupuesto}" name="idPresupuesto">
-                            <input type="hidden"  value="${solicitud.tecnico.id}" name="idTecnico" />
-                            <input type="hidden" id="cantidadDetalleAgregar" value="0"  name="cantidadDetalleAgregar" />
-                        </form>
                     </div>
                 </div>
             </div>
@@ -237,7 +224,7 @@
     <script src="/Lex/assets/custom/rut.js"></script>
 
     <script type="text/javascript" >
-                                     var cont = 0;
+        var cont = 0;
     </script>
     <script>
 

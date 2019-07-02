@@ -137,115 +137,115 @@
                     <!-- AQUI VA EL MENÚ-->
 
 
-                          <ul class="sidebar-menu" data-widget="tree">
-                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
-                               <li class="header">Gestión de Usuarios</li>
-                        <!-- Menus-->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                            <li class="header">Gestión de Usuarios</li>
+                            <!-- Menus-->
 
-                        <li><a href="<c:url value = "/modulo/usuarios/index"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
+                            <li><a href="<c:url value = "/modulo/usuarios/index"/>"><i class="fa fa-users"></i><span>Usuarios</span></a></li>
 
-                        <li><a href="<c:url value = "/modulo/clientes/index"/>"><i class="fa fa-users"></i><span>Clientes</span></a></li>
-                    </c:if>
-                  
-                        
-                        
-                        
-                        
+                            <li><a href="<c:url value = "/modulo/clientes/index"/>"><i class="fa fa-users"></i><span>Clientes</span></a></li>
+                                    </c:if>
+
+
+
+
+
                         <li class="header">Gestión de Notarias </li>
-                        
+
                         <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
-                               <li><a href="<c:url value = "/modulo/notarias/index"/>"><i class="fa fa-university"></i><span>Notarias</span></a></li>
-                         </c:if>
-                               
-                         
-                               <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
-                        <li class="treeview">
-                            <a href="<c:url value = "/citas"/>"><i class="fa fa-calendar"></i> <span>Citas</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                                </c:if>
+                            <li><a href="<c:url value = "/modulo/notarias/index"/>"><i class="fa fa-university"></i><span>Notarias</span></a></li>
+                                    </c:if>
+
+
+                        <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                            <li class="treeview">
+                                <a href="<c:url value = "/citas"/>"><i class="fa fa-calendar"></i> <span>Citas</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                            </c:if>
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value = "/citas"/>">Ver Citas</a></li>
-                          <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 4}">
-                               <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
-                         </c:if>
-                                
-                            </ul>
-                        </li>
-                        
-                        
-                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
-                               <li class="header">Gestión de Contratos </li>
+                                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 4}">
+                                    <li><a href="<c:url value = "/citas/crear"/>">Crear cita</a></li>
+                                    </c:if>
 
-                        <li class="treeview">
-                            <a href="<c:url value = "/contratos"/>"><i class="fa fa-book"></i> <span>Contratos</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<c:url value = "/contratos"/>">Ver Contratos</a></li>
-                                <!--<li><a href="">Modificar contrato</a></li>-->
                             </ul>
                         </li>
-                         </c:if>
-                        
-                        
-                        
-                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
-                              <li class="treeview">
-                            <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-list-ul"></i> <span>Solicitudes</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3    }">
-                                <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
-                                </c:if>
-                                <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
-                                <c:if test="${usuarioDTO.id_rol == 5}">
-                                 <li><a href="<c:url value = "/solicitudes/listarcliente"/>">Mis solicitudes</a></li>
-                                </c:if>
-                            </ul>
-                        </li>
-                         </c:if>
-                        
-                        
-                        
-                        <c:if test="${usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
-                              <li class="header">Gestión de Presupuestos y Pagos </li>
 
-                        <li class="treeview">
-                            <a href="<c:url value = "/presupuestos"/>"><i class="fa fa-dollar"></i> <span>Presupuestos</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-    
-                                <li><a href="<c:url value = "/presupuestos"/>">Ver Presupuestos</a></li>
-                            </ul>
-                        </li>
+
+                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
+                            <li class="header">Gestión de Contratos </li>
+
+                            <li class="treeview">
+                                <a href="<c:url value = "/contratos"/>"><i class="fa fa-book"></i> <span>Contratos</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="<c:url value = "/contratos"/>">Ver Contratos</a></li>
+                                    <!--<li><a href="">Modificar contrato</a></li>-->
+                                </ul>
+                            </li>
                         </c:if>
-                        <li class="treeview">
-                            <a href="<c:url value = "/pagos"/>"><i class="fa fa-dollar"></i> <span>Pagos</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
 
-                                <li><a href="<c:url value = "/pagos"/>">Ver Pagos</a></li>
-                            </ul>
-                        </li>
+
+
+                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
+                            <li class="treeview">
+                                <a href="<c:url value = "/tipos-solicitud"/>"><i class="fa fa-list-ul"></i> <span>Solicitudes</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3    }">
+                                        <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
+                                        </c:if>
+                                    <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
+                                        <c:if test="${usuarioDTO.id_rol == 5}">
+                                        <li><a href="<c:url value = "/solicitudes/listarcliente"/>">Mis solicitudes</a></li>
+                                        </c:if>
+                                </ul>
+                            </li>
+                        </c:if>
+
+
+
+                        <c:if test="${usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
+                            <li class="header">Gestión de Presupuestos y Pagos </li>
+                            <li class="treeview">
+                                <a href="<c:url value = "/presupuestos"/>"><i class="fa fa-dollar"></i> <span>Presupuestos</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="<c:url value = "/presupuestos"/>">Ver Presupuestos</a></li>
+                                </ul>
+                            </li>
+                        </c:if>
+                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
+                            <li class="treeview">
+                                <a href="<c:url value = "/pagos"/>"><i class="fa fa-dollar"></i> <span>Pagos</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+
+                                    <li><a href="<c:url value = "/pagos"/>">Ver Pagos</a></li>
+                                </ul>
+                            </li>
+                        </c:if>
                     </ul>
-                         
-                        
-                        
-                        
+
+
+
+
 
 
 
@@ -268,17 +268,17 @@
 
                     </ol>
                     <ol class="breadcrumb">
-                        
+
                         <li>
                             <form action="<%=request.getContextPath()%>/SesionServlet" method="post">
-                                   
+
                                 <a href="/Lex/">
-                                <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
-                                  <i class="fa fa-times"></i>
-                               </button>
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
+                                        <i class="fa fa-times"></i>
+                                    </button>
                                 </a>
                             </form>
-                            
+
                             <a href="/Lex/indexSesion.jsp"><i class="fa fa-dashboard"></i> Cerrar Sesión</a></li>
 
                     </ol>

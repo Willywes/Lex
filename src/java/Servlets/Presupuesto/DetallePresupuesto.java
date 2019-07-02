@@ -14,11 +14,9 @@ import Models.DTO.PlanPagoDTO;
 import Models.DTO.PresupuestoDTO;
 import Models.DTO.PresupuestoDetalleDTO;
 import Models.DTO.PresupuestoEstadoDTO;
-import Models.DTO.PresupuestoTransaction;
 import Models.DTO.SolicitudDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,8 +28,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Funny
  */
-@WebServlet(name = "ModificarPresupuesto", urlPatterns = {"/presupuestos/modificar"})
-public class ModificarPresupuesto extends HttpServlet {
+@WebServlet(name = "DetallePresupuesto", urlPatterns = {"/presupuesto/detalle"})
+public class DetallePresupuesto extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private final SolicitudDAO SolicitudTipoDAO = new SolicitudDAO();
@@ -61,10 +59,10 @@ public class ModificarPresupuesto extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModificarPresupuesto</title>");
+            out.println("<title>Servlet DetallePresupuesto</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModificarPresupuesto at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DetallePresupuesto at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,7 +80,6 @@ public class ModificarPresupuesto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         int id_presupuesto = Integer.parseInt(request.getParameter("idPresupuesto"));
         int idSolicitud = Integer.parseInt(request.getParameter("idSolicitud"));
 
@@ -115,7 +112,7 @@ public class ModificarPresupuesto extends HttpServlet {
         List<PresupuestoDetalleDTO> detalles = this.presupuestoDetalle.getDetallesByIdPresupuesto(id_presupuesto);
 
         request.setAttribute("detalles", detalles);
-        request.getRequestDispatcher("/modules/presupuestos/editpresupuesto.jsp").forward(request, response);
+        request.getRequestDispatcher("/modules/presupuestos/detallepresupuesto.jsp").forward(request, response);
     }
 
     /**
@@ -129,91 +126,7 @@ public class ModificarPresupuesto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        boolean exito = true;
-
-        String dateString = "";
-
-        try {
-
-            int idPresupuesto = Integer.parseInt(request.getParameter("idPresupuesto"));
-
-            int estado = Integer.parseInt(request.getParameter("estado"));
-
-            int idPlanPago = Integer.parseInt(request.getParameter("plan_pago"));
-
-            PresupuestoDTO presu = new PresupuestoDTO();
-
-            presu.setId_presupuesto(idPresupuesto);
-//                presu.setFecha(sqlDate);
-            presu.setId_estado_presupuesto(estado);
-            presu.setId_plan_pago(idPlanPago);
-
-            int idFilaInsertada = this.presupuesto.updateParcial(presu);
-
-            //1 puede ser resultado exito ???? 
-            if (idFilaInsertada == 0) {
-
-                exito = false;
-
-            }
-
-            int cantidadDetalles = 0;
-
-            String g = request.getParameter("catidadDetalles");
-
-            try {
-                cantidadDetalles = Integer.parseInt(request.getParameter("catidadDetalles"));
-            } catch (Exception ex) {
-                cantidadDetalles = 0;
-            }
-
-            if (cantidadDetalles != 0) {
-                int cont = 1;
-                for (int i = 0; i < cantidadDetalles; i++) {
-                    String servicio = request.getParameter("servicio" + cont);
-                    int monto = Integer.parseInt(request.getParameter("monto" + cont));
-                    int idDetalle = Integer.parseInt(request.getParameter("detalleService" + cont));
-                    PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
-                    detalle.setId_detalle_presupuesto(idDetalle);
-                    detalle.setMonto(monto);
-                    detalle.setServicio(servicio);
-                    detalle.setId_presupuesto(idPresupuesto);
-                    this.presupuestoDetalle.update(detalle);
-                    cont++;
-                }
-            }
-
-            //agregamos los detalles 
-            int cantidadDetalleAgregar = Integer.parseInt(request.getParameter("cantidadDetalleAgregar"));
-
-            if (cantidadDetalleAgregar != 0) {
-                int contt = 1;
-                for (int i = 0; i < cantidadDetalleAgregar; i++) {
-                    String servicio = request.getParameter("servicioAgregar" + contt);
-                    int monto = Integer.parseInt(request.getParameter("montoAgregar" + contt));
-                    PresupuestoDetalleDTO detalle = new PresupuestoDetalleDTO();
-                    detalle.setMonto(monto);
-                    detalle.setServicio(servicio);
-                    detalle.setId_presupuesto(idPresupuesto);
-                    this.presupuestoDetalle.create(detalle);
-                    contt++;
-                }
-            }
-
-//            } else {
-//                exito = false;
-//            }
-        } catch (Exception ex) {
-            exito = false;
-        }
-
-        List<PresupuestoTransaction> presupuestos = presupuesto.getAllPresupuestoDetalle();
-        request.setAttribute("presupuestos", presupuestos);
-        request.setAttribute("mensaje", "get");
-        request.getRequestDispatcher("/modules/presupuestos/index.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**

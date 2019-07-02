@@ -40,6 +40,7 @@ public class PresupuestoDAO {
     private final String GET_ALL_TRANSACCION = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_TRANSACCION(?)}";
     private final String READ_PRESUPUESTOS_DETAIL = "{call PKG_PRESUPUESTOS.READ_PRESUPUESTOS_DETAIL(?)}";
     private final String UPDATE_PRESUPUESTOS_PARCIAL = "{call PKG_PRESUPUESTOS.UPDATE_PRESUPUESTOS_PARCIAL(?,?,?,?)}";
+    private final String READ_CANTIDAD_PRESUPUESTO = "{call PKG_CONTRATOS.READ_CANTIDAD_PRESUPUESTO(?,?)}";
 
     Conexion con = new Conexion();
 
@@ -123,7 +124,6 @@ public class PresupuestoDAO {
             Connection cn = con.open();
             CallableStatement cs = cn.prepareCall(CREATE);
 
-            
             cs.setInt(1, presupuesto.getId_estado_presupuesto());
             cs.setInt(2, presupuesto.getId_solicitud());
             cs.setInt(3, presupuesto.getId_tecnico());
@@ -198,8 +198,7 @@ public class PresupuestoDAO {
 
         return resultadoOperacion;
     }
-    
-    
+
     public int updateParcial(PresupuestoDTO presupuesto) {
         int resultadoOperacion = 0;
         try {
@@ -209,8 +208,6 @@ public class PresupuestoDAO {
             cs.setInt(1, presupuesto.getId_presupuesto());
             cs.setInt(2, presupuesto.getId_estado_presupuesto());
             cs.setInt(3, presupuesto.getId_plan_pago());
-            
-            
 
             cs.registerOutParameter(4, Types.INTEGER);// salida de parametro 5
             cs.execute();
@@ -267,21 +264,20 @@ public class PresupuestoDAO {
 
                 //PLAN PAGO 
                 PlanPago.setNombre(rs.getString("NOMBRE_PAGO"));
-                
+
                 //usuario 
                 usuario.setRut(rs.getString("RUT"));
-                usuario.setNombres(rs.getString("NOMBRE_USUARIO")); 
+                usuario.setNombres(rs.getString("NOMBRE_USUARIO"));
                 usuario.setPaterno(rs.getString("APELLIDO_USUARIO"));
                 usuario.setTelefono(rs.getInt("TELEFONO"));
                 usuario.setEmail(rs.getString("EMAIL"));
 
-                
                 presupuestoTransaccion.setPresupuestoDTO(presupuesto);
                 presupuestoTransaccion.setPresupuestoDetalle(detalle);
                 presupuestoTransaccion.setPresupuestoEstado(estado);
                 presupuestoTransaccion.setPresupuestoPlanPago(PlanPago);
                 presupuestoTransaccion.setSolicitud(solicitud);
-                presupuestoTransaccion.setUsuario(usuario); 
+                presupuestoTransaccion.setUsuario(usuario);
 
                 list.add(presupuestoTransaccion);
             }
@@ -294,9 +290,7 @@ public class PresupuestoDAO {
 
         return list;
     }
-    
-    
-    
+
     public List<PresupuestoTransaction> getAllPresupuestoDetalle() {
 
         List<PresupuestoTransaction> list = new ArrayList<>();
@@ -327,42 +321,38 @@ public class PresupuestoDAO {
                 presupuesto.setFecha(rs.getDate("FECHA"));
                 presupuesto.setCreado(rs.getDate("CREADO"));
                 presupuesto.setModificado(rs.getDate("MODIFICADO"));
-                
-                 //estado 
+
+                //estado 
                 estado.setNombre(rs.getString("ESTADO_PRESUPUESTO"));
 
-
-                 //cliente
+                //cliente
                 usuario.setRut(rs.getString("RUT"));
-                usuario.setNombres(rs.getString("NOMBRE_USUARIO")); 
+                usuario.setNombres(rs.getString("NOMBRE_USUARIO"));
                 usuario.setPaterno(rs.getString("APELLIDO_USUARIO"));
                 usuario.setTelefono(rs.getInt("TELEFONO"));
                 usuario.setEmail(rs.getString("CORREO_USUARIO"));
-                
+
                 //tipo de solicitud 
-                tiposSolicitud.setNombre(rs.getString("NOMBRE_SOLICITUD_TIPO")); 
-                 
-            
+                tiposSolicitud.setNombre(rs.getString("NOMBRE_SOLICITUD_TIPO"));
+
                 //SOLICITUD  
                 solicitud.setId_solicitud(rs.getInt("ID_SOLICITUD"));
                 solicitud.setDescripcion(rs.getString("DESCRIPCION_SOLICITUD"));
 
                 //PLAN PAGO 
                 PlanPago.setNombre(rs.getString("NOMBRE_PAGO"));
-                
 
                 //tecnico
-                tecnico.setNombres(rs.getString("NOMBRE_TECNICO")); 
-                
-                
+                tecnico.setNombres(rs.getString("NOMBRE_TECNICO"));
+
                 presupuestoTransaccion.setPresupuestoDTO(presupuesto);
                 presupuestoTransaccion.setPresupuestoEstado(estado);
                 presupuestoTransaccion.setPresupuestoPlanPago(PlanPago);
                 presupuestoTransaccion.setSolicitud(solicitud);
-                presupuestoTransaccion.setUsuario(usuario); 
-                presupuestoTransaccion.setTipoSolicitud(tiposSolicitud); 
-                presupuestoTransaccion.setTecnico(tecnico); 
-                
+                presupuestoTransaccion.setUsuario(usuario);
+                presupuestoTransaccion.setTipoSolicitud(tiposSolicitud);
+                presupuestoTransaccion.setTecnico(tecnico);
+
                 list.add(presupuestoTransaccion);
             }
 
@@ -373,6 +363,30 @@ public class PresupuestoDAO {
         }
 
         return list;
+    }
+
+    public int get_count_contratos_presupuesto(int idPresupuesto) {
+        int resultadoOperacion = 0;
+
+        try {
+            Connection cn = con.open();
+            CallableStatement cs = cn.prepareCall(READ_CANTIDAD_PRESUPUESTO);
+
+            cs.setInt(1, idPresupuesto);
+
+            cs.registerOutParameter(2, Types.INTEGER);// salida de parametro 9
+
+            cs.execute();
+
+            resultadoOperacion = cs.getInt(2);
+
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(SolicitudTiposDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            con.close();
+        }
+
+        return resultadoOperacion;
     }
 
 }

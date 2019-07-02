@@ -53,44 +53,76 @@
                                     <th style="width:1%;white-space: nowrap;">Fecha</th>
                                     <th style="width:1%;white-space: nowrap;">Monto</th>
                                     <th style="width:1%;white-space: nowrap;">N° Contrato</th> 
-                                    <c:if test="${usuarioDTO.id_rol == 3}">
-                                        <th style="width:1%;white-space: nowrap;"></th>
-                                    </c:if>
+                                        <c:if test="${usuarioDTO.id_rol == 3}">
+                                        <th style="width:1%;white-space: nowrap;">Acciones</th>
+                                        </c:if>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <c:forEach var="pago" items="${pagos}">
 
-                                    <tr>
-                                        <td>${pago.pago.id_pago}</td>
-                                        <td>${pago.cliente.nombres} ${pago.cliente.paterno}</td>
-                                        <td>${pago.cliente.email}</td>
-                                        <td>${pago.pago.fecha_hora}</td> 
-                                        <td>$ ${pago.pago.monto}</td>
-                                        <td>${pago.pago.id_contrato}</td>
+                                    <c:if test="${usuarioDTO.id_rol == 5 && pago.cliente.rut == usuarioDTO.rut}">
+                                        <tr>
+                                            <td>${pago.pago.id_pago}</td>
+                                            <td>${pago.cliente.nombres} ${pago.cliente.paterno}</td>
+                                            <td>${pago.cliente.email}</td>
+                                            <td>${pago.pago.fecha_hora}</td> 
+                                            <td>$ ${pago.pago.monto}</td>
+                                            <td>${pago.pago.id_contrato}</td>
 
-                                        <c:if test="${usuarioDTO.id_rol == 3}">
-                                            <td style="width:1%;white-space: nowrap;">
-                                                <div id="main-box"class="col-md-3">
-                                                    <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
-                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                    </form>
+                                            <c:if test="${usuarioDTO.id_rol == 3}">
+                                                <td style="width:1%;white-space: nowrap;">
+                                                    <div id="main-box"class="col-md-3">
+                                                        <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                            <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                        </form>
 
-                                                    <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
-                                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                        <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </c:if>
+                                                        <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
+                                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </c:if>
+                                        </tr>
+                                    </c:if>
 
-                                    </tr>
+                                    <c:if test="${usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2}">
+                                        <tr>
+                                            <td>${pago.pago.id_pago}</td>
+                                            <td>${pago.cliente.nombres} ${pago.cliente.paterno}</td>
+                                            <td>${pago.cliente.email}</td>
+                                            <td>${pago.pago.fecha_hora}</td> 
+                                            <td>$ ${pago.pago.monto}</td>
+                                            <td>${pago.pago.id_contrato} </td>
+
+                                            <c:if test="${usuarioDTO.id_rol == 3}">
+                                                <td style="width:1%;white-space: nowrap;">
+                                                    <div id="main-box"class="col-md-3">
+                                                        <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                            <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                        </form>
+
+                                                        <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
+                                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </c:if>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                             </tbody>
 

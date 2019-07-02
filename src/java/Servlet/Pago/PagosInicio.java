@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author jean
+ * @author Funny
  */
 @WebServlet(name = "PagosInicio", urlPatterns = {"/pagos"})
 public class PagosInicio extends HttpServlet {
@@ -66,7 +66,7 @@ public class PagosInicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         List<PagosContratoClienteDTO> pagos = PagoDAO.getPagosUsuario();
 //        try {
 //            String contrato = request.getParameter("idContrato");
@@ -100,7 +100,7 @@ public class PagosInicio extends HttpServlet {
 
         }
 
-        List<PagoClienteDTO> pagos = PagoDAO.getAll();
+        List<PagosContratoClienteDTO> pagos = PagoDAO.getPagosUsuario();
         request.setAttribute("mensaje", "get");
         request.setAttribute("pagos", pagos);
         request.getRequestDispatcher("/modules/pagos/index.jsp").forward(request, response);
