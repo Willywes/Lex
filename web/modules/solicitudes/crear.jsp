@@ -34,14 +34,23 @@
                                 <div class="col-md-12">
                                     <table class="table table table-bordered">
                                         <tbody>
-                                        <label>Seleccione Cliente</label>
-                                                <td> <select id="selectCliente" name="selectCliente" class="form-control" required>
+                                            
+                                             <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tipo">Seleccione Cliente</label>
+
+                                        <select id="selectCliente" name="selectCliente" class="form-control" required>
                                             <option selected>Seleccione...</option>                                                
                                             <c:forEach var="clientes" items="${clientes}">
                                                 <option value="${clientes.getId()}">${clientes.getNombres()} ${clientes.paterno}</option>
                                             </c:forEach>
-                                                
-                                        </select></td>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                                            
                                         
                                         <c:forEach var="clientes" items="${clientes}">
                                             
