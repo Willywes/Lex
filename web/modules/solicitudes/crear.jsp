@@ -34,6 +34,18 @@
                                 <div class="col-md-12">
                                     <table class="table table table-bordered">
                                         <tbody>
+                                        <label>Seleccione Cliente</label>
+                                                <td> <select id="selectCliente" name="selectCliente" class="form-control" required>
+                                            <option selected>Seleccione...</option>                                                
+                                            <c:forEach var="clientes" items="${clientes}">
+                                                <option value="${clientes.getId()}">${clientes.getNombres()} ${clientes.paterno}</option>
+                                            </c:forEach>
+                                                
+                                        </select></td>
+                                        
+                                        <c:forEach var="clientes" items="${clientes}">
+                                            
+                                            <c:if test="${clientes.getId()==selectCliente}">
                                             <tr>
                                                 <th>Rut</th>
                                                 <th>Nombre</th>
@@ -41,11 +53,14 @@
                                                 <th>Email</th>
                                             </tr>
                                             <tr>
-                                                <td>${clientes.rut}</td>
-                                                <td>${clientes.nombres} ${clientes.paterno}</td>
+                                                <td>${clientes.rut} Id ${selectCliente}</td>
+                                            
+                                   <td>${clientes.getNombres()} ${clientes.paterno}</td>
                                                 <td>${clientes.celular}</td>
                                                 <td>${clientes.email}</td>
                                             </tr>
+                                           </c:if>
+                                            </c:forEach>  
                                         </tbody>
                                     </table>
                                 </div>

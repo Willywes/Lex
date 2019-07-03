@@ -70,11 +70,12 @@ public class SolicitudesCrear extends HttpServlet {
     request.setAttribute("estadoSolicitudes", estadoSolicitudes);
     
     
-    UsuarioDTO clientes = new UsuarioDTO();
+   // UsuarioDTO clientes = new UsuarioDTO();
     
-    int id=usuarioDTO.getId();
-    //id recuperado de  Inicio de sesion 
-    clientes = usuarioDAO.findById(id);
+   // int id=usuarioDTO.getId();
+       //id recuperado de  Inicio de sesion 
+   // clientes = usuarioDAO.findById(id);
+    List <UsuarioDTO> clientes= usuarioDAO.getAllClients();
     
   
     request.setAttribute("clientes", clientes);
@@ -102,6 +103,9 @@ public class SolicitudesCrear extends HttpServlet {
     java.sql.Date fechaHora = new java.sql.Date(utilDate.getTime());
     String descripcion =request.getParameter("textDescripcion");//listo
     int id_tipo_solicitud = Integer.parseInt(request.getParameter("selectTipoSolicitud"));//listo
+    int id_cliente = Integer.parseInt(request.getParameter("selectCliente"));//
+    UsuarioDTO cliente = usuarioDAO.findById(id_cliente);
+    
     int id_estado_solicitud = 2;// 2 es en espera
     Date creado = fechaHora;
 
@@ -120,6 +124,8 @@ public class SolicitudesCrear extends HttpServlet {
    // solicitud.setId_solicitud(10);//test
     solicitud.setFecha_hora(fechaHora);
     solicitud.setDescripcion(descripcion);
+    
+    
     
     solicitud.setId_tipo_solicitud(id_tipo_solicitud);
     SolicitudTiposDTO solicitudTiposDTO = solicitudTiposDAO.findById(id_tipo_solicitud);//listo
@@ -143,16 +149,18 @@ public class SolicitudesCrear extends HttpServlet {
      //     }
      
              
-    int id_cliente=101;
-    UsuarioDTO cliente = new UsuarioDTO();
+    //int id_cliente=101;
+   // UsuarioDTO cliente = new UsuarioDTO();
+   
+   // datos el cliente
     cliente = usuarioDAO.findById(id_cliente);
     solicitud.setCliente(cliente);
     solicitud.setId_cliente(cliente.getId());
     
 
-    solicitud.setCliente(cliente);
+  
     
-      System.out.println(" solicitud "+solicitud);
+      System.out.println("Id Clinete "+id_cliente+ "Solicitud "+solicitud );
    
     
    //Tecnico null
