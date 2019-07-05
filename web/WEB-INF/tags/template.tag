@@ -263,21 +263,11 @@
                         <jsp:invoke fragment="title"/>
                         <small><jsp:invoke fragment="subtitle"/></small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="/Lex"><i class="fa fa-dashboard"></i> Inicio</a></li>
-
-                    </ol>
+                    
                     <ol class="breadcrumb">
 
                         <li>
-                            <form action="<%=request.getContextPath()%>/SesionServlet" method="post">
-
-                                <a href="/Lex/">
-                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </a>
-                            </form>
+                            
 
                             <a href="/Lex/indexSesion.jsp"><i class="fa fa-dashboard"></i> Cerrar Sesión</a></li>
 

@@ -142,12 +142,12 @@
                                                     <div class="row">
                                                         <div class="form-group text-left">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" readonly="readonly" type="checkbox" name="AprobadoCliente" id="AprobadoCliente" ${contrato.getAprobado_cliente() == '1' ? 'checked' : ''}>
+                                                                <input class="form-check-input" readonly type="checkbox" name="AprobadoCliente" id="AprobadoCliente" ${contrato.getAprobado_cliente() == '1' ? 'checked' : ''}>
                                                                 <label class="form-check-label" for="ACliente" >
                                                                     Aprobado por Cliente
                                                                 </label>
                                                                 <br>
-                                                                <input class="form-check-input" readonly="readonly" type="checkbox" name="AprobadoAbogado" id="AprobadoAbogado" ${contrato.getAprobado_abogado() == '1' ? 'checked' : ''}>
+                                                                <input class="form-check-input" readonly type="checkbox" name="AprobadoAbogado" id="AprobadoAbogado" ${contrato.getAprobado_abogado() == '1' ? 'checked' : ''}>
                                                                 <label class="form-check-label" for="AAbogado">
                                                                     Aprobado por Abogado
                                                                 </label>
