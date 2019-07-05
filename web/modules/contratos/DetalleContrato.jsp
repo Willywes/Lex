@@ -36,13 +36,15 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-4 text-left">
                                                             <label for="FechaInicio">Fecha de Inicio: </label>
-                                                            ${contrato.getFecha_inicio()}
+                                                            <input class="form-control" type="date" value="${contrato.getFecha_inicio()}" readonly></input>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-4 text-left">
                                                             <label for="FechaTermino">Fecha de Término: </label>
-                                                            ${contrato.getFecha_termino()}
+                                                            <input class="form-control" type="date" value="${contrato.getFecha_termino()}" readonly></input>
+                                                            
                                                         </div>
                                                     </div>
                                                    
@@ -51,7 +53,8 @@
                                                         <div class="form-group col-md-4 text-left">
                                                             <label>Servicios/Monto: </label>
                                                             <c:forEach var="pdetalle" items="${pdetalles}">
-                                                            ${pdetalle.servicio}  -  $${pdetalle.monto} </br>
+                                                                <input class="form-control" type="text" value="${pdetalle.servicio}  -  $${pdetalle.monto}" readonly></input>
+                                                             </br>
                                                         </c:forEach>
                                                         </div>
                                                     </div>
@@ -61,7 +64,8 @@
 
                                                             <c:forEach var="estado" items="${estados}">
                                                                 <c:if test="${estado.id_contrato_estado == contrato.getId_contrato_estado()}">
-                                                                    ${estado.nombre}
+                                                                    <input class="form-control" type="text" value="${estado.nombre}" readonly></input>
+                                                                    
 
                                                                 </c:if>
 
@@ -72,8 +76,8 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6 text-left">
                                                             <label for="rol_causa">Rol Causa: </label>
-
-                                                            ${contrato.getRol_causa()}
+                                                            <input class="form-control" type="text" value="${contrato.getRol_causa()}" readonly></input>
+                                                            
 
                                                         </div>
                                                     </div>
@@ -82,7 +86,8 @@
                                                             <label for="Presupuesto">N° Presupuesto Asociado: </label>
                                                             <c:forEach var="presupuesto" items="${presupuestos}">
                                                                 <c:if test="${contrato.getId_presupuesto() == presupuesto.idPresupuesto}">
-                                                                    ${presupuesto.idPresupuesto}
+                                                                    <input class="form-control" type="number" value="${presupuesto.idPresupuesto}" readonly></input>
+                                                                    
                                                                 </c:if>
 
                                                             </c:forEach>
@@ -96,7 +101,8 @@
                                                             <c:forEach var="usuario" items="${usuarios}">
                                                                 <c:if test="${usuario.id_rol == 1 or usuario.id_rol == 2}">
                                                                     <c:if test="${contrato.getId_abogado() == usuario.id}">
-                                                                        ${usuario.nombres} ${usuario.paterno}
+                                                                        <input class="form-control" type="text" value="${usuario.nombres} ${usuario.paterno}" readonly></input>
+                                                                        
                                                                     </c:if>
 
                                                                 </c:if>
@@ -108,7 +114,8 @@
                                                             <label for="Plan">Plan de Pago: </label>
                                                             <c:forEach var="ppago" items="${ppagos}">  
                                                                 <c:if test="${contrato.getId_plan_pago() == ppago.id_Plan_Pago}">
-                                                                    ${ppago.nombre}
+                                                                    <input class="form-control" type="text" value="${ppago.nombre}" readonly></input>
+                                                                    
                                                                 </c:if>
 
                                                             </c:forEach>
@@ -118,13 +125,16 @@
                                                         <div class="form-group col-md-6 text-left">
                                                             <label for="FPago">Forma de Pago: </label>
                                                             <c:if test="${contrato.getId_forma_pago() == '1'}">
-                                                                Efectivo
+                                                                <input class="form-control" type="text" value="Efectivo" readonly></input>
+                                                                
                                                             </c:if>
                                                             <c:if test="${contrato.getId_forma_pago() == '2'}">
-                                                                Cheque
+                                                                <input class="form-control" type="text" value="Cheque" readonly></input>
+                                                                
                                                             </c:if>
                                                             <c:if test="${contrato.getId_forma_pago() == '3'}">
-                                                                Crédito
+                                                                <input class="form-control" type="text" value="Crédito" readonly></input>
+                                                                
                                                             </c:if>
 
                                                         </div>
