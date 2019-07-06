@@ -38,9 +38,7 @@
                         <div class="alert alert-success">
                             El Presupuesto ha sido eliminado con éxito.
                             <a class="btn btn-success" onClick="location.href = '/Lex/presupuestos'">Volver Atrás</a>
-
                         </div>
-
                     </div>
                 </div>
             </div>

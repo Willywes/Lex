@@ -43,7 +43,7 @@
                                             </tr>
                                             <tr>
                                                 <td>${solicitud.cliente.rut}</td>
-                                                <td>${solicitud.cliente.nombres}${solicitud.cliente.paterno}</td>
+                                                <td>${solicitud.cliente.nombres} ${solicitud.cliente.paterno}</td>
                                                 <td>${solicitud.cliente.telefono}</td>
                                                 <td>${solicitud.cliente.email}</td>
                                             </tr>
@@ -77,17 +77,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!--<div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Estado</label>
-                                        <select class="form-control" name="estado" id="">
-                                            <option value="">Seleccione estado</option>
-                                            <c:forEach var="estado" items="${estadosPresupuestos}">
-                                                <option ${estado.nombre == 'pendiente' ? 'selected':''}   value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>-->
                             </div>
                             <div class="col-md-12" id="servicios">
                             </div>
@@ -99,7 +88,7 @@
                                     <button type="button" onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>
                                 </div>
                             </div>
-                                            <input value="1" name="estado" type="hidden" />
+                            <input value="1" name="estado" type="hidden" />
                             <input type="hidden" id="cantidad" value="0"  name="cantidadDetalle" />
                             <input type="hidden"  value="${solicitud.id_solicitud}" name="idSolicitud" />
                             <input type="hidden"  value="${solicitud.tecnico.id}" name="idTecnico" />
@@ -110,81 +99,8 @@
             </div>
         </div>
 
-        <!--div id="main-box"class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-body">
-                    <div class="<c:out value="${ mensaje == 'get' ? '' : 'alert alert-success'  }" />" >
-                        <p> <c:out value="${ mensaje == 'get' ? '' : 'Agregado con Exito'  }" /> </p>
-                    </div>
-                    <form action="crear" method="POST" name="form" >
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="fecha">Fecha (*)</label>
-                                    <input required type="date" class="form-control " id="fecha" name="fecha" placeholder="Ingrese Fecha">
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="solicitud">Solicitud (*)</label>
-                                    <select required name="solicitud" disabled="true" class="form-control">
-        <c:forEach  var="solicitud" items="${solicitudes}">
-            <option ${ idSolicitud == solicitud.getId_solicitud() ? 'selected' : '' } value="${solicitud.getId_solicitud()}"> ${solicitud.getDescripcion()}</option>
-        </c:forEach>
-    </select>
-    </div>
-    </div>
-    <div class="col-md-6">
-    <div class="form-group">
-    <label for="servicio">Servicio (*)</label>
-    <input required type="text" class="form-control" name="servicio" placeholder="Ingrese descripción de Servicio">                        
-    </div>
-    </div>
-    
-    <div class="col-md-12"><hr></div>
-    </div>
-    <div class="row">
-    <div class="col-md-4">
-    <div class="form-group">
-    <label for="estado">Estado (*)</label>
-    <select required name="estado" class="form-control">
-        <option value="">Seleccione una Opción</option>
-        <c:forEach var="estado" items="${estadosPresupuestos}">
-            <option  value="${estado.id_estado_presupuesto}"> ${estado.nombre}</option>
-        </c:forEach>
-    </select>                                    
-    </div>
-    </div>
-    <div class="col-md-4">
-    <div class="form-group">
-    <label for="plan_pago">Plan Pago (*)</label>
-    <select required name="plan_pago" class="form-control">
-        <option value="" >Seleccione una Opción</option>
-        <c:forEach var="planPago" items="${planPagos}">
-            <option value="${planPago.getId_Plan_Pago()}"> ${planPago.getNombre()}</option>
-        </c:forEach>
-    </select>                                    
-    </div>
-    </div>
-    <div class="col-md-4">
-    <div class="form-group">
-    <label for="monto">Monto (*)</label>
-    <input required type="number" class="form-control" name="monto" placeholder="Ingrese Monto">
-    </div>
-    </div>
-    <div class="col-md-12"><hr></div>
-    </div>
-    <button type="submit" class="btn bt-primary">Crear Presupuesto</button>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
     </jsp:attribute>
-    
+
     <jsp:attribute name="scripts">
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>

@@ -7,7 +7,7 @@ package Models.DTO;
 
 /**
  *
- * @author jean
+ * @author Funny
  */
 public class PagosContratoClienteDTO {
     

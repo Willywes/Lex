@@ -38,38 +38,13 @@
                     <div class="box-body">
                         <form action="<c:url value = "/pagos/modificar"/>" method="POST">
                             <input type="hidden" value="${pago.id_pago}" name="idPago">
-                            
+
 
                             <div class="row">
-                                
-                                 <!--
-                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="fecha">Fecha (*)</label>
-                                        <input required type="text" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha"
-                                                value="<c:out value="${inputs['fecha'] ? inputs['fecha'] : pago.fecha_hora}"/>" >
-                                    </div>
-                                </div>
-                                 -->
-                                
+
                                 <input required type="hidden" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha"
-                                                value="<c:out value="${inputs['fecha'] ? inputs['fecha'] : pago.fecha_hora}"/>" >
-                                    
-                                <!--
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="contrato">Contrato (*)</label>
-                                        <select required name="contrato" class="form-control">
-                                            <option value="" >Seleccione una Opción</option>
-                                            <c:forEach var="contrato" items="${contratos}">
-                                                <option ${pago.id_contrato == contrato.id_contrato ? 'selected':''} value="${contrato.id_contrato}"> ${contrato.id_contrato}</option>
-                                            </c:forEach>
-                                        </select>                                    
-                                    </div>
-                                </div>
-                                -->
-                                
-                               
+                                       value="<c:out value="${inputs['fecha'] ? inputs['fecha'] : pago.fecha_hora}"/>" >
+
                                 <div class="col-md-12">
                                     <div class="box box-warning">
                                         <div class="box-header with-border">
@@ -89,8 +64,8 @@
                                     </div>
                                     <!-- /.box -->
                                 </div>
-                           
-                                    
+
+
                                 <input name="contrato" value="${pago.id_contrato}" type="hidden" />
 
                                 <div class="col-md-4">
@@ -102,10 +77,13 @@
                                 </div>
 
                             </div>
-                           
+
                             <div class="row">
-                                <div class="col-md-12"><hr>
+                                <div class="col-md-1">
                                     <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                                <div class="col-md-1">
+                                    <a class="btn btn-primary" href="/Lex/pagos" > Volver</a>
                                 </div>
                             </div>
                         </form>
