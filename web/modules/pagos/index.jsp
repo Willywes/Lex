@@ -5,7 +5,6 @@
 --%>
 
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -32,19 +31,27 @@
                 </div>
 
                 <div class="box box-primary">
+                    <!--
+                    <form action="/Lex/pagos" method="get" class="mt-4 ml-4 mr-4 mb-4"  >
+                        &nbsp; Contrato: <input  type="number" name="idContrato"  />
+                        <button type="submit" class="btn btn-info btn-sm" title="Buscar"  >
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                    -->
                     <div class="box-body mt-">
 
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th style="width:1%;white-space: nowrap;">N° Pago</th>
-                                    <th style="width:1%;white-space: nowrap;">Nombre Cliente</th> 
-                                    <th style="width:1%;white-space: nowrap;">Correo Cliente</th> 
-                                    <th style="width:1%;white-space: nowrap;">Fecha</th>
-                                    <th style="width:1%;white-space: nowrap;">Monto</th>
-                                    <th style="width:1%;white-space: nowrap;">N° Contrato</th> 
+                                    <th >N° Pago</th>
+                                    <th >Nombre Cliente</th> 
+                                    <th >Correo Cliente</th> 
+                                    <th >Fecha</th>
+                                    <th >Monto</th>
+                                    <th >N° Contrato</th> 
                                         <c:if test="${usuarioDTO.id_rol == 3}">
-                                        <th style="width:1%;white-space: nowrap;">Acciones</th>
+                                        <th >Acciones</th>
                                         </c:if>
                                 </tr>
                             </thead>
@@ -62,22 +69,19 @@
                                             <td>${pago.pago.id_contrato}</td>
 
                                             <c:if test="${usuarioDTO.id_rol == 3}">
-                                                <td style="width:1%;white-space: nowrap;">
-                                                    <div id="main-box"class="col-md-3">
-                                                        <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
-                                                            <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
-                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                        </form>
+                                                <td>
+                                                    <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                    </form>
 
-                                                        <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
-                                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
-                                                                <i class="fa fa-trash"></i>
-                                                            </button>
-                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                        </form>
-                                                    </div>
+                                                    <form action="/Lex/presupuesto/detalle" method="GET" style="float: left; margin: 1px 1px 1px auto;" >
+                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-danger-${pago.pago.id_pago}" >
+                                                            <i class="fa fa-trash"></i> 
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </c:if>
                                         </tr>
@@ -93,30 +97,53 @@
                                             <td>${pago.pago.id_contrato} </td>
 
                                             <c:if test="${usuarioDTO.id_rol == 3}">
-                                                <td style="width:1%;white-space: nowrap;">
-                                                    <div id="main-box"class="col-md-3">
-                                                        <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
-                                                            <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
-                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                        </form>
+                                                <td>
+                                                    <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                                    </form>
 
-                                                        <form action="/Lex/pagos" method="post" style="float: left; margin: 1px 1px 1px auto;">
-                                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"  >
-                                                                <i class="fa fa-trash"></i>
-                                                            </button>
-                                                            <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
-                                                        </form>
-                                                    </div>
+                                                    <form action="/Lex/presupuesto/detalle" method="GET" style="float: left; margin: 1px 1px 1px auto;" >
+                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-danger-${pago.pago.id_pago}" >
+                                                            <i class="fa fa-trash"></i> 
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </c:if>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
                             </tbody>
-
                         </table>
+
+                        <c:forEach var="pago" items="${pagos}">
+                            <c:if test="${usuarioDTO.id_rol == 3}">
+                                <div class="modal modal-danger fade" id="modal-danger-${pago.pago.id_pago}" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title">Eliminar El Pago Numero: ${pago.pago.id_pago} </h4>
+                                            </div>
+                                            <form action="/Lex/pagos" method="post">
+                                                <div class="modal-body">
+                                                    ¿Seguro que deseas eliminar el Pago?, Los datos serán irrecuperables una vez eliminado el pago. 
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-outline">Eliminar Pago</button>
+                                                </div>
+                                                <input type="hidden" name="idPago" value="${pago.pago.id_pago}"  />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

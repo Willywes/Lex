@@ -24,7 +24,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Nuevo Presupuesto ${solicitud.cliente.nombres}</h3>
+                        <h3 class="box-title">Nuevo Presupuesto para: ${solicitud.cliente.nombres} ${solicitud.cliente.paterno}</h3>
                     </div>
                     <div class="box-body">
                         <div class="<c:out value="${ mensaje == 'get' ? '' : 'alert alert-success'  }" />" >
@@ -82,7 +82,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
-                                    <button class="btn btn-primary right" type="submit" ><i class="fa fa-save"></i> Guardar</button>
+                                    <button class="btn btn-primary right" type="submit" ><i class="fa fa-save"></i> Crear</button>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" onclick="addServicio()" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo Servicio</button>

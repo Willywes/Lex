@@ -24,7 +24,18 @@
     <jsp:attribute name="content">
         <div class="row">
             <div id="main-box"class="col-md-12">
-                <div class="box box-primary">
+                <div class="box">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h4> Crear Pago para el Contrato N° ${pago.contrato.id_contrato}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="box-body">
                         <div class="<c:out value="${ mensaje == 'exito' ? 'alert alert-success' : ''  }" />" >
                             <p> <c:out value="${ mensaje == 'exito' ? 'Agregado con Exito' : ''  }" /> </p>
@@ -33,98 +44,47 @@
                             <p> <c:out value="${ mensaje == 'get' ? 'Error desconocido' : ''  }" /> </p>
                         </div>
 
-
                         <form action="crear" method="POST" name="form" >
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="box box-warning">
-                                        <div class="box-header with-border">
-                                            <h3 class="box-title">Contrato</h3>
 
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <!-- /.box-tools -->
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <div class="box-body">
-                                            <h4> Crear Pago para el Contrato N° ${pago.contrato.id_contrato}</h4>
-                                        </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                    <!-- /.box -->
-                                </div>
-                            </div>
                             <div class="row" >
                                 <div class="col-md-6">
-                                    <div class="box box-success box-solid">
+                                    <div class="box box-info box-solid">
                                         <div class="box-header with-border">
                                             <h3 class="box-title">Cliente</h3>
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                            </div>
-                                            <!-- /.box-tools -->
                                         </div>
-                                        <!-- /.box-header -->
                                         <div class="box-body">
                                             <dl>
                                                 <dt>Nombre Cliente</dt>
-                                                <dd>${pago.cliente.nombres}</dd>
+                                                <dd>${pago.cliente.nombres} ${pago.cliente.paterno}</dd>
                                                 <dt>Email</dt>
                                                 <dd>${pago.cliente.email}</dd>
                                                 <dt>Telefono</dt>
                                                 <dd>${pago.cliente.telefono}</dd>
                                             </dl>
                                         </div>
-                                        <!-- /.box-body -->
                                     </div>
-                                    <!-- /.box -->
                                 </div>
                             </div>
                             <div class="row" >
                                 <div class="col-md-6">
-                                    <div class="box box-danger">
-                                        <div class="box-header with-border">
-                                            <h3 class="box-title">Crear Pago</h3>
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Crear Pago</h3>
+                                    </div>
+                                    <div class="box-body">
 
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <!-- /.box-tools -->
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <div class="box-body">
-
-                                            <div class="row" >
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="monto">Monto (*)</label>
-                                                        <input required type="number" class="form-control" name="monto" placeholder="Ingrese Monto">
-                                                    </div>
+                                        <div class="row" >
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="monto">Monto (*)</label>
+                                                    <input required type="number" class="form-control" name="monto" placeholder="Ingrese Monto">
                                                 </div>
                                             </div>
-
-
-                                            <input type="hidden" name="contrato" value="${pago.contrato.id_contrato}" />
-
-                                            <button type="submit" class="btn bt-primary">Crear Pago</button>
-
                                         </div>
-
-                                        <!-- /.box-body -->
+                                        <input type="hidden" name="contrato" value="${pago.contrato.id_contrato}" />
+                                        <button class="btn btn-primary right" type="submit" ><i class="fa fa-save"></i> Crear</button>
                                     </div>
-                                    <!-- /.box -->
                                 </div>
-
                             </div>
-
-
-
-
-
-
                         </form>
                     </div>
                 </div>

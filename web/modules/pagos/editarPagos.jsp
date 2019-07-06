@@ -39,32 +39,15 @@
                         <form action="<c:url value = "/pagos/modificar"/>" method="POST">
                             <input type="hidden" value="${pago.id_pago}" name="idPago">
 
-
                             <div class="row">
-
                                 <input required type="hidden" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha"
                                        value="<c:out value="${inputs['fecha'] ? inputs['fecha'] : pago.fecha_hora}"/>" >
 
                                 <div class="col-md-12">
-                                    <div class="box box-warning">
-                                        <div class="box-header with-border">
-                                            <h3 class="box-title">Contrato</h3>
-
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <!-- /.box-tools -->
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <div class="box-body">
-                                            <h4> Editar Pago para el Contrato N° ${pago.id_contrato} con fecha <c:out value="${inputs['fecha'] ? inputs['fecha'] : pago.fecha_hora}"/>  </h4>
-                                        </div>
-                                        <!-- /.box-body -->
+                                    <div class="box-body">
+                                        <h4> Editar Pago para el Contrato N° ${pago.id_contrato} con fecha <c:out value="${inputs['fecha'] ? inputs['fecha'] : pago.fecha_hora}"/>  </h4>
                                     </div>
-                                    <!-- /.box -->
                                 </div>
-
 
                                 <input name="contrato" value="${pago.id_contrato}" type="hidden" />
 
@@ -75,12 +58,11 @@
                                                value="<c:out value="${pago.monto}"/>" > 
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="row">
                                 <div class="col-md-1">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
                                 </div>
                                 <div class="col-md-1">
                                     <a class="btn btn-primary" href="/Lex/pagos" > Volver</a>

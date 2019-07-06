@@ -39,7 +39,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Detalle Presupuesto ${solicitud.cliente.nombres}</h3>
+                        <h3 class="box-title">Detalle Presupuesto para: ${solicitud.cliente.nombres} ${solicitud.cliente.paterno}</h3>
                     </div>
                     <div class="box-body">
                         <div class="row">
