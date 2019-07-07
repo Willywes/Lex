@@ -204,9 +204,11 @@
                                 <ul class="treeview-menu">
                                     <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3    }">
                                         <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
+                                         <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
                                         </c:if>
-                                    <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
+                                   
                                         <c:if test="${usuarioDTO.id_rol == 5}">
+                                        <li><a href="<c:url value = "/solicitudes/crearusuario"/>">Crear solicitud</a></li>
                                         <li><a href="<c:url value = "/solicitudes/listarcliente"/>">Mis solicitudes</a></li>
                                         </c:if>
                                 </ul>
