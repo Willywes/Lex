@@ -43,7 +43,7 @@
                                         <select id="selectCliente" name="selectCliente" class="form-control" required>
                                             <option selected>Seleccione...</option>                                                
                                             <c:forEach var="clientes" items="${clientes}">
-                                                <option value="${clientes.getId()}">${clientes.getNombres()} ${clientes.paterno}</option>
+                                                <option value="${clientes.getId()}">${clientes.getNombres()} ${clientes.paterno} Rut: ${clientes.rut} </option>
                                             </c:forEach>
                                         </select>
 
