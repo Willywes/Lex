@@ -73,7 +73,13 @@ public class CrearCita extends HttpServlet {
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
         dia= dia+1;
         mes =mes+1;
-        String fechaHoy=año+"-0"+mes+"-"+dia;
+        String fechaHoy;
+        if (dia >=1 & dia <=9) {
+           fechaHoy=año+"-0"+mes+"-"+"0"+dia;
+        }else{
+           fechaHoy=año+"-0"+mes+"-"+dia;  
+        }
+        
        
         System.out.println("Fecha Actual: "+fechaHoy);
         request.setAttribute("fechaHoy", fechaHoy);

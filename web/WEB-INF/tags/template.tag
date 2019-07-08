@@ -153,7 +153,7 @@
 
                         <li class="header">Gestión de Notarias </li>
 
-                        <c:if test="${usuarioDTO.id_rol == 4 || usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                        <c:if test="${usuarioDTO.id_rol == 1|| usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
                             <li><a href="<c:url value = "/modulo/notarias/index"/>"><i class="fa fa-university"></i><span>Notarias</span></a></li>
                                     </c:if>
 

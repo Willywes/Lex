@@ -14,7 +14,7 @@
 <t:template>
 
     <jsp:attribute name="title">
-        Gestión de Notarias
+        Gestión de Citas
     </jsp:attribute>
     <jsp:attribute name="subtitle">
         Crear Cita
@@ -45,7 +45,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtfechaHora">Fecha </label>
-                                                    <input type="date" required name="txtfechaHora"  min="${fechaHoy}"  class="form-control">
+                                                    <%--    <input type="date" required name="txtfechaHora"  min="${fechaHoy}2019-07-08 "  class="form-control">  --%>
+                                                 <input type="date" required name="txtfechaHora"  min="${fechaHoy}"  class="form-control">
                                                 </div>
 
                                             </div>
