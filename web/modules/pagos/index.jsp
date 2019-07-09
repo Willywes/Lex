@@ -50,7 +50,7 @@
                                     <th >Fecha</th>
                                     <th >Monto</th>
                                     <th >N° Contrato</th> 
-                                        <c:if test="${usuarioDTO.id_rol == 3}">
+                                        <c:if test="${usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 1}">
                                         <th >Acciones</th>
                                         </c:if>
                                 </tr>
@@ -68,7 +68,7 @@
                                             <td>$ ${pago.pago.monto}</td>
                                             <td>${pago.pago.id_contrato}</td>
 
-                                            <c:if test="${usuarioDTO.id_rol == 3}">
+                                            <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 3}">
                                                 <td>
                                                     <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
                                                         <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
@@ -96,7 +96,7 @@
                                             <td>$ ${pago.pago.monto}</td>
                                             <td>${pago.pago.id_contrato} </td>
 
-                                            <c:if test="${usuarioDTO.id_rol == 3}">
+                                            <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 3}">
                                                 <td>
                                                     <form action="/Lex/pagos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
                                                         <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
@@ -119,7 +119,7 @@
                         </table>
 
                         <c:forEach var="pago" items="${pagos}">
-                            <c:if test="${usuarioDTO.id_rol == 3}">
+                            <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 3}">
                                 <div class="modal modal-danger fade" id="modal-danger-${pago.pago.id_pago}" style="display: none;">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

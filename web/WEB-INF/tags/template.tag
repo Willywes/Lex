@@ -151,9 +151,10 @@
 
 
 
-                        <li class="header">Gestión de Notarias </li>
+
 
                         <c:if test="${usuarioDTO.id_rol == 1|| usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                            <li class="header">Gestión de Notarias </li>
                             <li><a href="<c:url value = "/modulo/notarias/index"/>"><i class="fa fa-university"></i><span>Notarias</span></a></li>
                                     </c:if>
 
@@ -204,10 +205,10 @@
                                 <ul class="treeview-menu">
                                     <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3    }">
                                         <li><a href="<c:url value = "/solicitudes/listar"/>">Ver solicitudes</a></li>
-                                         <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
+                                        <li><a href="<c:url value = "/solicitudes/crear"/>">Crear solicitud</a></li>
                                         </c:if>
-                                   
-                                        <c:if test="${usuarioDTO.id_rol == 5}">
+
+                                    <c:if test="${usuarioDTO.id_rol == 5}">
                                         <li><a href="<c:url value = "/solicitudes/crearusuario"/>">Crear solicitud</a></li>
                                         <li><a href="<c:url value = "/solicitudes/listarcliente"/>">Mis solicitudes</a></li>
                                         </c:if>
@@ -217,7 +218,7 @@
 
 
 
-                        <c:if test="${usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
+                        <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3 || usuarioDTO.id_rol == 5}">
                             <li class="header">Gestión de Presupuestos y Pagos </li>
                             <li class="treeview">
                                 <a href="<c:url value = "/presupuestos"/>"><i class="fa fa-dollar"></i> <span>Presupuestos</span>
@@ -265,11 +266,11 @@
                         <jsp:invoke fragment="title"/>
                         <small><jsp:invoke fragment="subtitle"/></small>
                     </h1>
-                    
+
                     <ol class="breadcrumb">
 
                         <li>
-                            
+
 
                             <a href="/Lex/indexSesion.jsp"><i class="fa fa-dashboard"></i> Cerrar Sesión</a></li>
 

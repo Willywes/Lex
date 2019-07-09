@@ -67,7 +67,7 @@
                                                                         <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
                                                                         <input type="hidden" name="idPresupuesto" value="${presupuesto.presupuestoDTO.id_presupuesto}"  />
                                                                     </form>
-                                                                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
+                                                                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 3}">
                                                                         <form action="/Lex/presupuestos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
                                                                             <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
                                                                             <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
@@ -87,7 +87,7 @@
                                                         </c:if>
                                                     </c:if>
 
-                                                    <c:if test="${usuarioDTO.id_rol == 3}">
+                                                    <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 2 || usuarioDTO.id_rol == 3}">
                                                         <tr>
                                                             <td>${presupuesto.presupuestoDTO.id_presupuesto}</td>
                                                             <td>${presupuesto.presupuestoDTO.fecha}</td>
@@ -100,19 +100,21 @@
                                                                     <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
                                                                     <input type="hidden" name="idPresupuesto" value="${presupuesto.presupuestoDTO.id_presupuesto}"  />
                                                                 </form>
-                                                                <form action="/Lex/presupuestos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
-                                                                    <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
-                                                                    <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
-                                                                        <i class="fa fa-edit"></i>
-                                                                    </button>
-                                                                    <input type="hidden" name="idPresupuesto" value="${presupuesto.presupuestoDTO.id_presupuesto}"  />
-                                                                </form>
-
-                                                                <c:if test="${presupuesto.cantidadPresupuesto== 0}">
-                                                                    <form action="/Lex/contratos/crear" method="GET" style="float: left; margin: 1px 1px 1px auto;" >
-                                                                        <input type="hidden" name="id" value="${presupuesto.presupuestoDTO.id_presupuesto}" />
-                                                                        <button type="submit" class="btn btn-sm btn-success">Crear Contrato</button>
+                                                                <c:if test="${usuarioDTO.id_rol == 1 || usuarioDTO.id_rol == 3}">
+                                                                    <form action="/Lex/presupuestos/modificar" method="get" style="float: left; margin: 1px 1px 1px auto;" >
+                                                                        <input type="hidden" name="idSolicitud" value="${presupuesto.solicitud.id_solicitud}" />
+                                                                        <button type="submit" class="btn btn-warning btn-sm" title="Editar"  >
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button>
+                                                                        <input type="hidden" name="idPresupuesto" value="${presupuesto.presupuestoDTO.id_presupuesto}"  />
                                                                     </form>
+
+                                                                    <c:if test="${presupuesto.cantidadPresupuesto== 0}">
+                                                                        <form action="/Lex/contratos/crear" method="GET" style="float: left; margin: 1px 1px 1px auto;" >
+                                                                            <input type="hidden" name="id" value="${presupuesto.presupuestoDTO.id_presupuesto}" />
+                                                                            <button type="submit" class="btn btn-sm btn-success">Crear Contrato</button>
+                                                                        </form>
+                                                                    </c:if>
                                                                 </c:if>
                                                             </td>
                                                         </tr>
