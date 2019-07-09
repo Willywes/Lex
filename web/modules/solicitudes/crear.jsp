@@ -18,139 +18,140 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <form id="rechaza" action="/Lex/solicitudes/crear" method="POST" class="form-horizontal" role="form">
-        <!-- Main content -->
-        <section class="content container-fluid">
+        <form id="rechaza" action="/Lex/solicitudes/crear" method="POST"  role="form">
+            <!-- Main content -->
+            <section class="content container-fluid">
 
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Nueva Solicitud</h3>
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table table-bordered">
-                                        <tbody>
-                                            
-                                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="tipo">Seleccione Cliente</label>
+                <div class="row" style="">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Nueva Solicitud</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table table-bordered">
+                                                <tbody>
 
-                                        <select id="selectCliente" name="selectCliente" class="form-control" required>
-                                            <option selected>Seleccione...</option>                                                
-                                            <c:forEach var="clientes" items="${clientes}">
-                                                <option value="${clientes.getId()}">${clientes.getNombres()} ${clientes.paterno} Rut: ${clientes.rut} </option>
-                                            </c:forEach>
-                                        </select>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="tipo">Seleccione Cliente</label>
 
+                                                            <select id="selectCliente" name="selectCliente" class="form-control" required>
+                                                                <option selected>Seleccione...</option>                                                
+                                                                <c:forEach var="clientes" items="${clientes}">
+                                                                    <option value="${clientes.getId()}">${clientes.getNombres()} ${clientes.paterno} Rut: ${clientes.rut} </option>
+                                                                </c:forEach>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <c:forEach var="clientes" items="${clientes}">
+
+                                                    <c:if test="${clientes.getId()==selectCliente}">
+                                                        <tr>
+                                                            <th>Rut</th>
+                                                            <th>Nombre</th>
+                                                            <th>Teléfono</th>
+                                                            <th>Email</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>${clientes.rut} Id ${selectCliente}</td>
+
+                                                            <td>${clientes.getNombres()} ${clientes.paterno}</td>
+                                                            <td>${clientes.celular}</td>
+                                                            <td>${clientes.email}</td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>  
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                                            
-                                        
-                                        <c:forEach var="clientes" items="${clientes}">
-                                            
-                                            <c:if test="${clientes.getId()==selectCliente}">
-                                            <tr>
-                                                <th>Rut</th>
-                                                <th>Nombre</th>
-                                                <th>Teléfono</th>
-                                                <th>Email</th>
-                                            </tr>
-                                            <tr>
-                                                <td>${clientes.rut} Id ${selectCliente}</td>
-                                            
-                                   <td>${clientes.getNombres()} ${clientes.paterno}</td>
-                                                <td>${clientes.celular}</td>
-                                                <td>${clientes.email}</td>
-                                            </tr>
-                                           </c:if>
-                                            </c:forEach>  
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="tipo">Tipo Solicitud</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="tipo">Tipo Solicitud</label>
 
-                                        <select id="selectTipoSolicitud" name="selectTipoSolicitud" class="form-control" required>
-                                            <option selected>Seleccione...</option>                                                
-                                            <c:forEach var="tipoDeSolicitudes" items="${tipoDeSolicitudes}">
-                                                <option value="${tipoDeSolicitudes.getId()}">${tipoDeSolicitudes.nombre}</option>
-                                            </c:forEach>
-                                        </select>
+                                                <select id="selectTipoSolicitud" name="selectTipoSolicitud" class="form-control" required>
+                                                    <option selected>Seleccione...</option>                                                
+                                                    <c:forEach var="tipoDeSolicitudes" items="${tipoDeSolicitudes}">
+                                                        <option value="${tipoDeSolicitudes.getId()}">${tipoDeSolicitudes.nombre}</option>
+                                                    </c:forEach>
+                                                </select>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Describa lo que desea solicitar</label>
-                                        <textarea class="form-control" name="textDescripcion" id="textDescripcion" cols="30" rows="10" required></textarea>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Describa lo que desea solicitar</label>
+                                                <textarea class="form-control" name="textDescripcion" id="textDescripcion" cols="30" rows="10" required></textarea>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    
-                                    <button  type="button" class="btn btn-primary right" name="accion" onclick="guardarSolicitud()"><i class="fa fa-save"></i> Guardar</button>
-                                    <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <button  type="button" class="btn btn-primary right" name="accion" onclick="guardarSolicitud()"><i class="fa fa-save"></i> Guardar</button>
+                                            <input type="button" class="btn btn-danger" name="Cancelar" value="Cancelar" onClick="location.href = '/Lex/solicitudes/listar'">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>      
 
-            </div>
-
-        </section>
-        <!-- /.content -->
-</form>
+            </section>
+            <!-- /.content -->
+        </form>
     </jsp:attribute>
 
-  <jsp:attribute name="scripts">
+    <jsp:attribute name="scripts">
         <!-- DataTables -->
         <script src="/Lex/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="/Lex/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <script src="/Lex/assets/plugins/sweet-alert/sweetalert2.min.js"></script>
 
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>        
-        
-     <script>
-           
-            
-            function guardarSolicitud(){
-        
-                swal({
-                    title: 'Aviso',
-                    text: "Su solcitud a sido Creada",
-                    type: 'warning',
-                    showCancelButton: false,
-                    confirmButtonColor: '#43a047',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar!',
-                    cancelButtonText: 'No, cancelar!'
-                }).then(function (result) {
-                    if (result.value) {
-                      $('#rechaza').submit();
-                    }
-                });
-                
-           }
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>        
+
+        <script>
+
+
+                                                function guardarSolicitud() {
+
+                                                    swal({
+                                                        title: 'Aviso',
+                                                        text: "Su solcitud a sido Creada",
+                                                        type: 'warning',
+                                                        showCancelButton: false,
+                                                        confirmButtonColor: '#43a047',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Aceptar!',
+                                                        cancelButtonText: 'No, cancelar!'
+                                                    }).then(function (result) {
+                                                        if (result.value) {
+                                                            $('#rechaza').submit();
+                                                        }
+                                                    });
+
+                                                }
         </script>
     </jsp:attribute>
 </t:template>
