@@ -18,7 +18,7 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <form id="rechaza" action="/Lex/solicitudes/crear" method="POST" class="form-horizontal" role="form">
+        <form id="rechaza" action="/Lex/solicitudes/crear" method="POST"  role="form">
         <!-- Main content -->
         <section class="content container-fluid">
 
